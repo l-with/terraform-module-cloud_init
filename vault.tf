@@ -20,7 +20,7 @@ locals {
   cloud_init_vault_runcmd = join(
     "\n",
     [
-      templatefile("${local.cloud_init_vault_runcmd_prefix}.tpl", { vault_version = var.vault_version })
+      templatefile("${local.cloud_init_vault_runcmd_prefix}.tpl", {})
     ]
   )
 }

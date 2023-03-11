@@ -1,4 +1,5 @@
 locals {
+  cloud_init_runcmd_end_template = "${path.module}/templates/cloudinit.yml.runcmd_end.tpl"
   cloud_init_parts_keys_sorted = [
     "cloud_init_start",
     "cloud_init_package_update",
@@ -18,7 +19,8 @@ locals {
     "cloud_init_runcmd_vault",
     "cloud_init_runcmd_fail2ban",
     "cloud_init_runcmd_rke2_master_1st",
-    "cloud_init_runcmd_rke2_master_other"
+    "cloud_init_runcmd_rke2_master_other",
+    "cloud_init_runcmd_end"
   ]
   cloud_init_parts = {
     cloud_init_start                      = "#cloud-config"
@@ -40,6 +42,7 @@ locals {
     cloud_init_runcmd_fail2ban            = var.fail2ban ? local.cloud_init_fail2ban_runcmd : ""
     cloud_init_runcmd_rke2_master_1st     = var.rke2_master_1st ? local.cloud_init_runcmd_rke2_master_1st : ""
     cloud_init_runcmd_rke2_master_other   = var.rke2_master_other ? local.cloud_init_runcmd_rke2_master_other : ""
+    cloud_init_runcmd_end                 = templatefile(local.cloud_init_runcmd_end_template, {}),
   }
   cloud_init_parts_sorted = [
     for key in local.cloud_init_parts_keys_sorted : local.cloud_init_parts[key]

@@ -1,7 +1,6 @@
-  - export VAULT_PACKAGE=vault_${vault_version}_linux_$(uname -m).zip
   - >
-    curl --remote-name https://releases.hashicorp.com/vault/${vault_version}/$VAULT_PACKAGE
-  - unzip $VAULT_PACKAGE
-  - chmod + x vault
-  - mv vault /usr/local/bin
-  - rm $VAULT_PACKAGE
+    wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  - >
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  - apt-get update -y
+  - apt-get install -y vault
