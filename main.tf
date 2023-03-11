@@ -5,6 +5,7 @@ locals {
     "cloud_init_write_files_fail2ban",
     "cloud_init_packages",
     "cloud_init_packages_fail2ban",
+    "cloud_init_packages_gettext_base",
     "cloud_init_runcmd",
     "cloud_init_runcmd_croc",
     "cloud_init_runcmd_fail2ban",
@@ -17,6 +18,7 @@ locals {
     cloud_init_write_files_fail2ban     = var.fail2ban ? local.cloud_init_fail2ban_write_files : ""
     cloud_init_packages                 = "packages:"
     cloud_init_packages_fail2ban        = var.fail2ban ? local.cloud_init_fail2ban_package : ""
+    cloud_init_packages_gettext_base    = local.gettext_base ? local.cloud_init_gettext_base_packages : ""
     cloud_init_runcmd                   = "runcmd:"
     cloud_init_runcmd_croc              = var.croc ? local.cloud_init_croc_runcmd : ""
     cloud_init_runcmd_fail2ban          = var.fail2ban ? local.cloud_init_fail2ban_runcmd : ""
