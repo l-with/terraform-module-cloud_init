@@ -1,11 +1,11 @@
 variable "rke2_master_1st" {
-  description = "if cloud-init user data for the rke2 1st masters should generated"
+  description = "if cloud-init user data for the rke2 1st masters should be generated"
   type        = bool
   default     = false
 }
 
 variable "rke2_master_other" {
-  description = "if cloud-init user data for the rke2 other masters should generated"
+  description = "if cloud-init user data for the rke2 other masters should be generated"
   type        = bool
   default     = false
 }

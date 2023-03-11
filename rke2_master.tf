@@ -1,5 +1,5 @@
 locals {
-  cloud_init_runcmd_rke2_prefix = "${path.module}/template/rke2/cloudinit.yml.runcmd"
+  cloud_init_runcmd_rke2_prefix = "${path.module}/templates/rke2/cloudinit.yml.runcmd"
 
   cloud_init_runcmd_rke2_master_begin_template             = "${local.cloud_init_runcmd_rke2_prefix}_begin.tpl"
   cloud_init_runcmd_rke2_master_1st_manifests_template     = "${local.cloud_init_runcmd_rke2_prefix}_manifests.tpl"
