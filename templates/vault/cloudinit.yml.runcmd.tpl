@@ -1,6 +1,7 @@
+  - export VAULT_PACKAGE=vault_${vault_version}_linux_$(uname -m).zip
   - >
-    curl --remote-name https://releases.hashicorp.com/vault/${vault_version}/vault_${vault_version}_linux_amd64.zip
-  - unzip vault_${vault_version}_linux_amd64.zip
+    curl --remote-name https://releases.hashicorp.com/vault/${vault_version}/$VAULT_PACKAGE
+  - unzip $VAULT_PACKAGE
   - chmod + x vault
   - mv vault /usr/local/bin
-  - rm vault_${vault_version}_linux_amd64.zip
+  - rm $VAULT_PACKAGE
