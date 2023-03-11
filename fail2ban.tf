@@ -4,7 +4,7 @@ locals {
   cloud_init_fail2ban_package = join(
     "\n",
     [
-      templatefile("${local.cloud_init_fail2ban_package_prefix}_fail2ban.tpl", {})
+      templatefile("${local.cloud_init_fail2ban_package_prefix}.tpl", {})
     ]
   )
 }
