@@ -1,15 +1,27 @@
 locals {
   cloud_init_parts_keys_sorted = [
     "cloud_init_start",
+    "cloud_init_write_files",
+    "cloud_init_write_files_fail2ban",
+    "cloud_init_packages",
+    "cloud_init_packages_fail2ban",
     "cloud_init_runcmd",
-    "rke2_master1",
-    "rke2_master"
+    "cloud_init_runcmd_croc",
+    "cloud_init_runcmd_fail2ban",
+    "cloud_init_runcmd_rke2_master_1st",
+    "cloud_init_runcmd_rke2_master_other"
   ]
   cloud_init_parts = {
-    cloud_init_start  = "#cloud-config"
-    cloud_init_runcmd = "runcmd:"
-    rke2_master1      = var.rke2_master_1st ? local.cloud_init_runcmd_rke2_master_1st : ""
-    rke2_master       = var.rke2_master_other ? local.cloud_init_runcmd_rke2_master_other : ""
+    cloud_init_start                    = "#cloud-config"
+    cloud_init_write_files              = "write_files:"
+    cloud_init_write_files_fail2ban     = var.fail2ban ? local.cloud_init_fail2ban_write_files : ""
+    cloud_init_packages                 = "packages:"
+    cloud_init_packages_fail2ban        = var.fail2ban ? local.cloud_init_fail2ban_package : ""
+    cloud_init_runcmd                   = "runcmd:"
+    cloud_init_runcmd_croc              = var.croc ? local.cloud_init_croc_runcmd : ""
+    cloud_init_runcmd_fail2ban          = var.fail2ban ? local.cloud_init_fail2ban_runcmd : ""
+    cloud_init_runcmd_rke2_master_1st   = var.rke2_master_1st ? local.cloud_init_runcmd_rke2_master_1st : ""
+    cloud_init_runcmd_rke2_master_other = var.rke2_master_other ? local.cloud_init_runcmd_rke2_master_other : ""
   }
   cloud_init_parts_sorted = [
     for key in local.cloud_init_parts_keys_sorted : local.cloud_init_parts[key]
