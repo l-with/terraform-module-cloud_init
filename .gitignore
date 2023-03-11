@@ -1,0 +1,6 @@
+# IntelliJ
+.idea/
+
+# Terraform
+.terraform/
+.terraform.lock.hcl

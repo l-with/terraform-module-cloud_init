@@ -1,0 +1,46 @@
+formatter: "markdown table" # this is required
+
+version: ""
+
+header-from: main.tf
+footer-from: ""
+
+recursive:
+  enabled: false
+  path: modules
+
+sections:
+  sections:
+    hide: []
+    show: []
+
+output:
+  file: "README.md"
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS_cluster -->
+    {{ .Content }}
+    <!-- END_TF_DOCS_cluster -->
+
+output-values:
+  enabled: false
+  from: ""
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: false
+  html: true
+  indent: 4
+  lockfile: true
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true
