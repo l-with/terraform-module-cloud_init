@@ -26,6 +26,7 @@ variable "rke2_master_vars" {
     rke2_cert_package_secret    = ""
     rke2_pre_shared_secret      = ""
   }
+  sensitive = true
 }
 
 variable "rke2_master_1st_vars" {
@@ -38,6 +39,7 @@ variable "rke2_master_1st_vars" {
     rke2_role_id   = ""
     rke2_secret_id = ""
   }
+  sensitive = true
 }
 
 variable "rke2_master_other_vars" {
