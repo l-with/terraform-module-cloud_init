@@ -1,0 +1,2 @@
+  - systemctl enable fail2ban.service
+  - systemctl start fail2ban.service
