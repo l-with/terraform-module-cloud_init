@@ -9,6 +9,7 @@ locals {
     "cloud_init_packages_fail2ban",
     "cloud_init_runcmd",
     "cloud_init_runcmd_croc",
+    "cloud_init_runcmd_vault",
     "cloud_init_runcmd_fail2ban",
     "cloud_init_runcmd_rke2_master_1st",
     "cloud_init_runcmd_rke2_master_other"
@@ -23,6 +24,7 @@ locals {
     cloud_init_packages_fail2ban        = var.fail2ban ? local.cloud_init_fail2ban_package : ""
     cloud_init_runcmd                   = "runcmd:"
     cloud_init_runcmd_croc              = var.croc ? local.cloud_init_croc_runcmd : ""
+    cloud_init_runcmd_vault             = local.vault ? local.cloud_init_vault_runcmd : ""
     cloud_init_runcmd_fail2ban          = var.fail2ban ? local.cloud_init_fail2ban_runcmd : ""
     cloud_init_runcmd_rke2_master_1st   = var.rke2_master_1st ? local.cloud_init_runcmd_rke2_master_1st : ""
     cloud_init_runcmd_rke2_master_other = var.rke2_master_other ? local.cloud_init_runcmd_rke2_master_other : ""
