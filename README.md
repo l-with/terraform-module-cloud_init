@@ -71,7 +71,13 @@ is pre-installed as manifest in the 1st master.
 
 input variables:
 - [rke2_master_1st](#input_rke2_master_1st)
-- [rke2_master_1st_vars](#input_rke2_master_1st_vars)
+- [rke2_master_1st_cert_manager_crd_version](#input_rke2_master_1st_cert_manager_crd_version)
+- [rke2_master_1st_rke2_role_id](#input_rke2_master_1st_rke2_role_id)
+- [rke2_master_1st_rke2_secret_id](#input_rke2_master_1st_rke2_secret_id)
+- [rke2_master_1st_vault_addr](#input_rke2_master_1st_vault_addr)
+- [rke2_master_1st_vault_field](#input_rke2_master_1st_vault_field)
+- [rke2_master_1st_vault_mount](#input_rke2_master_1st_vault_mount)
+- [rke2_master_1st_vault_path](#input_rke2_master_1st_vault_path)
 - [rke2_master_other](#input_rke2_rke2_master_other)
 - [rke2_master_other_vars](#input_rke2_rke2_master_other_vars)
 - [rke2_master_vars](#input_rke2_rke2_master_vars)
