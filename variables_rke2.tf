@@ -34,10 +34,12 @@ variable "rke2_master_1st_vars" {
   type = object({
     rke2_role_id   = string
     rke2_secret_id = string
+    vault_addr     = string
   })
   default = {
     rke2_role_id   = ""
     rke2_secret_id = ""
+    vault_addr     = ""
   }
   sensitive = true
 }
