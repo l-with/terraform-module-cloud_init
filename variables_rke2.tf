@@ -31,9 +31,10 @@ variable "rke2_node_1st_rke2_role_id" {
   description = "the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault"
   type        = string
   validation {
-    condition     = var.rke2_node_1st_rke2_role_id != ""
-    error_message = "the `rke2_node_1st_cert_manager_rke2_role_id` must not be empty"
+    condition     = !(var.rke2_node_1st && var.rke2_node_1st_rke2_role_id != "")
+    error_message = "if `rke2_node_1st` the `rke2_node_1st_rke2_role_id` must not be empty"
   }
+  default   = ""
   sensitive = true
 }
 
@@ -41,9 +42,10 @@ variable "rke2_node_1st_rke2_secret_id" {
   description = "the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault"
   type        = string
   validation {
-    condition     = var.rke2_node_1st_rke2_secret_id != ""
-    error_message = "the `rke2_node_1st_cert_manager_rke2_secret_id` must not be empty"
+    condition     = !(var.rke2_node_1st && var.rke2_node_1st_rke2_secret_id != "")
+    error_message = "if `rke2_node_1st` the `rke2_node_1st_rke2_secret_id` must not be empty"
   }
+  default   = ""
   sensitive = true
 }
 
@@ -80,4 +82,9 @@ variable "rke2_node_1st_vault_field" {
 variable "rke2_node_other_node_1st_ip" {
   description = "the ip of the 1st node for cloud-init user data for rke2 other nodes"
   type        = string
+  validation {
+    condition     = !(var.rke2_node_other && var.rke2_node_other_node_1st_ip != "")
+    error_message = "if `rke2_node_other` the `rke2_node_other_node_1st_ip` must not be empty"
+  }
+  default = ""
 }
