@@ -75,7 +75,7 @@ is pre-installed as manifest in the 1st master.
 
 
 input variables:
-- [rke2_master_1st](#input_rke2_master_1st)
+- [rke2_node_1st](#input_rke2_master_1st)
 - [rke2_master_1st_cert_manager_crd_version](#input_rke2_master_1st_cert_manager_crd_version)
 - [rke2_master_1st_rke2_role_id](#input_rke2_master_1st_rke2_role_id)
 - [rke2_master_1st_rke2_secret_id](#input_rke2_master_1st_rke2_secret_id)

@@ -41,7 +41,7 @@ locals {
     cloud_init_runcmd_vault               = local.vault ? local.cloud_init_vault_runcmd : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? local.cloud_init_fail2ban_runcmd : ""
     cloud_init_runcmd_rke2_node_1st       = var.rke2_node_1st ? local.cloud_init_runcmd_rke2_node_1st : ""
-    cloud_init_runcmd_rke2_node_other     = var.rke2_node_other ? local.cloud_init_runcmd_rke2_master_other : ""
+    cloud_init_runcmd_rke2_node_other     = var.rke2_node_other ? local.cloud_init_runcmd_rke2_node_other : ""
     cloud_init_runcmd_end                 = templatefile(local.cloud_init_runcmd_end_template, {}),
   }
   cloud_init_parts_sorted = [

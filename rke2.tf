@@ -35,7 +35,7 @@ locals {
       })
     ]
   )
-  cloud_init_runcmd_rke2_master_other = join(
+  cloud_init_runcmd_rke2_node_other = join(
     "\n", [
       templatefile(local.cloud_init_runcmd_rke2_node_begin_template, {
         rke2_cert_package_url        = var.rke2_node_vars.rke2_cert_package_url
