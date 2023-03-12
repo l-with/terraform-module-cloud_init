@@ -8,42 +8,48 @@ Terraform module to template cloud-init user data
 
 s. [croc](https://github.com/schollz/croc#install)
 
-- [input croc](#input\_croc)
+input variables:
+- [croc](#input\_croc)
 
 ### docker
 
 s. [docker](https://docs.docker.com/engine/install/ubuntu/)
 
-- [input docker](#input\_docker)
-- [input docker_vars](#input\_docker\_vars)
+input variables:
+- [docker](#input\_docker)
+- [docker_vars](#input\_docker\_vars)
 
 ### fail2ban
 
 s. [fail2ban](https://www.fail2ban.org/wiki/index.php/Downloads)
 
-- [input fail2ban](#input\_fail2ban)
-- [input fail2ban_recidive](#input\_fail2ban\_recidive)
-- [input fail2ban_sshd](#input\_fail2ban\_sshd)
+input variables:
+- [fail2ban](#input\_fail2ban)
+- [fail2ban_recidive](#input\_fail2ban\_recidive)
+- [fail2ban_sshd](#input\_fail2ban\_sshd)
 
 ### gettext_base
 
 s. [gettext-base](https://packages.ubuntu.com/search?suite=default&section=all&arch=any&keywords=gettext-base&searchon=names)
 
-- [input gettext_base](#input\_gettext\_base)
+input variables:
+- [gettext_base](#input\_gettext\_base)
 
 ### jq
 
 s. [jq](https://stedolan.github.io/jq/)
 
-- [input jq](#input\_jq)
+input variables:
+- [jq](#input\_jq)
 
 ### package
 
 s. [package](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#package-update-upgrade-install)
 
-- [input package_reboot_if_required](#input\_package\_reboot\_if\_required)
-- [input package_update](#input\_package\_update)
-- [input package_upgrade](#input\_package\_upgrade)
+input variables:
+- [package_reboot_if_required](#input\_package\_reboot\_if\_required)
+- [package_update](#input\_package\_update)
+- [package_upgrade](#input\_package\_upgrade)
 
 ## terraform
 
