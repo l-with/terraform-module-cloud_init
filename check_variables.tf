@@ -3,7 +3,7 @@ module "either_rke2_node_1st_or_rke2_node_other" {
   version = "~> 1.3.0"
 
   assert        = !(var.rke2_node_1st && var.rke2_node_other)
-  error_message = "error: rke2_master_1st and rke2_master_other can not be used together"
+  error_message = "error: rke2_node_1st and rke2_node_other can not be used together"
 }
 
 module "rke2_node_1st_needs_rke2_secred_id" {
@@ -11,7 +11,7 @@ module "rke2_node_1st_needs_rke2_secred_id" {
   version = "~> 1.3.0"
 
   assert        = !(var.rke2_node_1st && var.rke2_node_1st_rke2_secret_id == "")
-  error_message = "error: rke2_master_1st needs rke2_secret_id"
+  error_message = "error: rke2_node_1st needs rke2_secret_id"
 }
 
 locals {
@@ -32,5 +32,5 @@ module "rke2_node_needs_rke2_node_vars" {
   version = "~> 1.3.0"
 
   assert        = !((var.rke2_node_1st || var.rke2_node_other) && length(local._rke2_node_vars_non_epmty) < local.num_rke2_node_vars)
-  error_message = "error: rke2_master needs ${local.num_rke2_node_vars} rke2_master_vars (is ${local.num_rke2_node_vars_non_empty})"
+  error_message = "error: rke2_node needs ${local.num_rke2_node_vars} rke2_node_vars (is ${local.num_rke2_node_vars_non_empty})"
 }
