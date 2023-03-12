@@ -31,6 +31,12 @@ s. [gettext-base](https://packages.ubuntu.com/search?suite=default&section=all&a
 
 - [input gettext_base](#input\_gettext\_base)
 
+### jq
+
+s. [jq](https://stedolan.github.io/jq/)
+
+- [input jq](#input\_jq)
+
 ## terraform
 
 <!-- BEGIN_TF_DOCS -->
