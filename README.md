@@ -37,6 +37,14 @@ s. [jq](https://stedolan.github.io/jq/)
 
 - [input jq](#input\_jq)
 
+### package
+
+s. [package](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#package-update-upgrade-install)
+
+- [input package_reboot_if_required](#input\_package\_reboot\_if\_required)
+- [input package_update](#input\_package\_update)
+- [input package_upgrade](#input\_package\_upgrade)
+
 ## terraform
 
 <!-- BEGIN_TF_DOCS -->
