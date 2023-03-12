@@ -83,6 +83,6 @@ variable "rke2_node_other_vars" {
     rke2_node_1st_ip = string
   })
   default = {
-    rke2node_1st_ip = ""
+    rke2_node_1st_ip = ""
   }
 }
