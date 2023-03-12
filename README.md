@@ -90,7 +90,7 @@ input variables:
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 0.15 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.4.0 |
 
 #### Providers
 
@@ -102,6 +102,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_either_rke2_master_1st_or_rke2_master_other"></a> [either\_rke2\_master\_1st\_or\_rke2\_master\_other](#module\_either\_rke2\_master\_1st\_or\_rke2\_master\_other) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_master_1st_needs_rke2_secred_id"></a> [rke2\_master\_1st\_needs\_rke2\_secred\_id](#module\_rke2\_master\_1st\_needs\_rke2\_secred\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_rke2_master_1st_needs_vault_addr"></a> [rke2\_master\_1st\_needs\_vault\_addr](#module\_rke2\_master\_1st\_needs\_vault\_addr) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_master_needs_rke2_master_vars"></a> [rke2\_master\_needs\_rke2\_master\_vars](#module\_rke2\_master\_needs\_rke2\_master\_vars) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 
 #### Resources

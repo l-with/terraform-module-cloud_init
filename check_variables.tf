@@ -28,3 +28,11 @@ module "rke2_master_needs_rke2_master_vars" {
   assert        = !((var.rke2_master_1st || var.rke2_master_other) && length(local.rke2_master_vars) < 5)
   error_message = "error: rke2_master needs 5 rke2_master_vars"
 }
+
+module "rke2_master_1st_needs_vault_addr" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  assert        = !(var.rke2_master_1st && local.vault_addr == "")
+  error_message = "error: rke2_master_1st needs vault_addr"
+}
