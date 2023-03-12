@@ -9,61 +9,61 @@ Terraform module to template cloud-init user data
 s. [croc](https://github.com/schollz/croc#install)
 
 input variables:
-- [croc](#input\_croc)
+- [croc](#input_croc)
 
 ### docker
 
 s. [docker](https://docs.docker.com/engine/install/ubuntu/)
 
 input variables:
-- [docker](#input\_docker)
-- [docker_vars](#input\_docker\_vars)
+- [docker](#input_docker)
+- [docker_vars](#input_docker_vars)
 
 ### fail2ban
 
 s. [fail2ban](https://www.fail2ban.org/wiki/index.php/Downloads)
 
 input variables:
-- [fail2ban](#input\_fail2ban)
-- [fail2ban_recidive](#input\_fail2ban\_recidive)
-- [fail2ban_sshd](#input\_fail2ban\_sshd)
+- [fail2ban](#input_fail2ban)
+- [fail2ban_recidive](#input_fail2ban_recidive)
+- [fail2ban_sshd](#input_fail2ban_sshd)
 
 ### gettext_base
 
 s. [gettext-base](https://packages.ubuntu.com/search?suite=default&section=all&arch=any&keywords=gettext-base&searchon=names)
 
 input variables:
-- [gettext_base](#input\_gettext\_base)
+- [gettext_base](#input_gettext_base)
 
 ### jq
 
 s. [jq](https://stedolan.github.io/jq/)
 
 input variables:
-- [jq](#input\_jq)
+- [jq](#input_jq)
 
 ### package
 
 s. [package](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#package-update-upgrade-install)
 
 input variables:
-- [package_reboot_if_required](#input\_package\_reboot\_if\_required)
-- [package_update](#input\_package\_update)
-- [package_upgrade](#input\_package\_upgrade)
+- [package_reboot_if_required](#input_package_reboot_if_required)
+- [package_update](#input_package_update)
+- [package_upgrade](#input_package_upgrade)
 
 ### rke2
 
 s. [rke2](https://docs.rke2.io/install/ha)
 
 input variables:
-- [rke2_master_1st](#input\_rke2_master_1st)
+- [rke2_master_1st](#input_rke2_master_1st)
 
 ### vault
 
 s. [vault](https://developer.hashicorp.com/vault/downloads)
 
 input variables:
-- [vault](#input\_vault)
+- [vault](#input_vault)
 
 ## terraform
 
