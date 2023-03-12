@@ -2,6 +2,21 @@
 
 Terraform module to template cloud-init user data
 
+## Features
+
+### croc
+
+[croc](https://github.com/schollz/croc#install)
+
+- [input croc](#input\_croc)
+
+### docker
+
+[docker](https://docs.docker.com/engine/install/ubuntu/)
+
+- [input docker](#input\_docker)
+- [input docker_vars](#input\_docker\_vars)
+
 ## terraform 
 
 <!-- BEGIN_TF_DOCS -->
