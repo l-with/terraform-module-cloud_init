@@ -17,6 +17,14 @@ Terraform module to template cloud-init user data
 - [input docker](#input\_docker)
 - [input docker_vars](#input\_docker\_vars)
 
+### fail2ban
+
+[fail2ban](https://www.fail2ban.org/wiki/index.php/Downloads)
+
+- [input fail2ban](#input\_fail2ban)
+- [input fail2ban_recidive](#input\_fail2ban\_recidive)
+- [input fail2ban_sshd](#input\_fail2ban\_sshd)
+
 ## terraform 
 
 <!-- BEGIN_TF_DOCS -->
