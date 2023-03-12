@@ -13,18 +13,16 @@ variable "rke2_master_other" {
 variable "rke2_master_vars" {
   description = "the variables for cloud-init user data for rke2 1st and other masters"
   type = object({
-    rke2_cert_package_url       = string
-    rke2_cert_artifact          = string
-    rke2_cert_package_api_token = string
-    rke2_cert_package_secret    = string
-    rke2_pre_shared_secret      = string
+    rke2_cert_package_url        = string
+    rke2_cert_package_api_header = string
+    rke2_cert_package_secret     = string
+    rke2_pre_shared_secret       = string
   })
   default = {
-    rke2_cert_package_url       = ""
-    rke2_cert_artifact          = ""
-    rke2_cert_package_api_token = ""
-    rke2_cert_package_secret    = ""
-    rke2_pre_shared_secret      = ""
+    rke2_cert_package_url        = "" // the url to get the cert-package from
+    rke2_cert_package_api_header = "" // the header to authorize getting the cert-package
+    rke2_cert_package_secret     = "" // the secret to decrypt the cert package (`openssl enc -aes-256-cbc -pbkdf2`)
+    rke2_pre_shared_secret       = ""
   }
   sensitive = true
 }
