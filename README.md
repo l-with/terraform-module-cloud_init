@@ -60,18 +60,18 @@ input variables:
 s. [rke2](https://docs.rke2.io/install/ha)
 
 Two different cloud-init userdata can be generated
-- for the 1st master
-- for the other masters
+- for the 1st node
+- for the other nodes
 
 The certificates for RKE2 are fetched from a package registry 
 and decrypted with openssl and thus have to pre pre-built.
 The package also has to contain templates for `/etc/rancher/rke2/config.yaml`:
 
 - `/root/config.yaml.master1.envtpl` for the first master
-- `/root/config.yaml.envtpl` for the other masters
+- `/root/config.yaml.envtpl` for the other nodes
 
 The [cert-manager](https://github.com/cert-manager/cert-manager) `cert-manager.crds.yaml` 
-is pre-installed as manifest in the 1st master.
+is pre-installed as manifest in the 1st node.
 
 
 input variables:
@@ -129,7 +129,6 @@ No resources.
 | <a name="input_fail2ban"></a> [fail2ban](#input\_fail2ban) | if cloud-init user data for installing fail2ban should be generated | `bool` | `false` | no |
 | <a name="input_fail2ban_recidive"></a> [fail2ban\_recidive](#input\_fail2ban\_recidive) | if recidive jail install should be generated | `bool` | `true` | no |
 | <a name="input_fail2ban_sshd"></a> [fail2ban\_sshd](#input\_fail2ban\_sshd) | if sshd jail install should be generated | `bool` | `true` | no |
-| <a name="input_fail2ban_vars"></a> [fail2ban\_vars](#input\_fail2ban\_vars) | the variables for cloud-init user data for rke2 1st and other masters | <pre>object({<br>    rke2_cert_package_url       = string<br>    rke2_cert_artifact          = string<br>    rke2_cert_package_api_token = string<br>    rke2_cert_package_secret    = string<br>    rke2_pre_shared_secret      = string<br>  })</pre> | <pre>{<br>  "rke2_cert_artifact": "",<br>  "rke2_cert_package_api_token": "",<br>  "rke2_cert_package_secret": "",<br>  "rke2_cert_package_url": "",<br>  "rke2_pre_shared_secret": ""<br>}</pre> | no |
 | <a name="input_gettext_base"></a> [gettext\_base](#input\_gettext\_base) | if cloud-init user data for installing gettext-base should be generated | `bool` | `false` | no |
 | <a name="input_jq"></a> [jq](#input\_jq) | if cloud-init user data for installing jq should be generated | `bool` | `false` | no |
 | <a name="input_package_reboot_if_required"></a> [package\_reboot\_if\_required](#input\_package\_reboot\_if\_required) | if cloud-init user data for package\_reboot\_if\_required should be generated | `bool` | `false` | no |
