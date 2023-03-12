@@ -6,20 +6,20 @@ Terraform module to template cloud-init user data
 
 ### croc
 
-[croc](https://github.com/schollz/croc#install)
+s. [croc](https://github.com/schollz/croc#install)
 
 - [input croc](#input\_croc)
 
 ### docker
 
-[docker](https://docs.docker.com/engine/install/ubuntu/)
+s. [docker](https://docs.docker.com/engine/install/ubuntu/)
 
 - [input docker](#input\_docker)
 - [input docker_vars](#input\_docker\_vars)
 
 ### fail2ban
 
-[fail2ban](https://www.fail2ban.org/wiki/index.php/Downloads)
+s. [fail2ban](https://www.fail2ban.org/wiki/index.php/Downloads)
 
 - [input fail2ban](#input\_fail2ban)
 - [input fail2ban_recidive](#input\_fail2ban\_recidive)
