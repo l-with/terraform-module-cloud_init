@@ -51,6 +51,13 @@ input variables:
 - [package_update](#input\_package\_update)
 - [package_upgrade](#input\_package\_upgrade)
 
+### vault
+
+s. [vault](https://developer.hashicorp.com/vault/downloads)
+
+input variables:
+- [vault](#input\_vault)
+
 ## terraform
 
 <!-- BEGIN_TF_DOCS -->
