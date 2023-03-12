@@ -18,9 +18,9 @@ output:
   file: "README.md"
   mode: inject
   template: |-
-    <!-- BEGIN_TF_DOCS_cluster -->
+    <!-- BEGIN_TF_DOCS -->
     {{ .Content }}
-    <!-- END_TF_DOCS_cluster -->
+    <!-- END_TF_DOCS -->
 
 output-values:
   enabled: false
