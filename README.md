@@ -2,6 +2,10 @@
 
 Terraform module to template cloud-init user data
 
+## Disclaimer
+
+currently only tested with Ubuntu focal
+
 ## Features
 
 ### croc
