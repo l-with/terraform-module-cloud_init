@@ -57,6 +57,10 @@ s. [rke2](https://docs.rke2.io/install/ha)
 
 input variables:
 - [rke2_master_1st](#input_rke2_master_1st)
+- [rke2_master_1st_vars](#input_rke2_master_1st_vars)
+- [rke2_master_other](#input_rke2_rke2_master_other)
+- [rke2_master_other_vars](#input_rke2_rke2_master_other_vars)
+- [rke2_master_vars](#input_rke2_rke2_master_vars)
 
 ### vault
 
