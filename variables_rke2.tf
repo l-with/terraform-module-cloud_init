@@ -1,17 +1,17 @@
 variable "rke2_node_1st" {
-  description = "if cloud-init user data for the rke2 1st masters should be generated"
+  description = "if cloud-init user data for the rke2 1st node should be generated"
   type        = bool
   default     = false
 }
 
 variable "rke2_node_other" {
-  description = "if cloud-init user data for the rke2 other masters should be generated"
+  description = "if cloud-init user data for the rke2 other nodes should be generated"
   type        = bool
   default     = false
 }
 
 variable "rke2_node_vars" {
-  description = "the variables for cloud-init user data for rke2 1st and other masters"
+  description = "the variables for cloud-init user data for rke2 1st and other nodes"
   type = object({
     rke2_cert_package_url        = string
     rke2_cert_package_api_header = string
