@@ -25,7 +25,13 @@ s. [fail2ban](https://www.fail2ban.org/wiki/index.php/Downloads)
 - [input fail2ban_recidive](#input\_fail2ban\_recidive)
 - [input fail2ban_sshd](#input\_fail2ban\_sshd)
 
-## terraform 
+### gettext_base
+
+s. [gettext-base](https://packages.ubuntu.com/search?suite=default&section=all&arch=any&keywords=gettext-base&searchon=names)
+
+- [input gettext_base](#input\_gettext\_base)
+
+## terraform
 
 <!-- BEGIN_TF_DOCS -->
 #### Requirements
