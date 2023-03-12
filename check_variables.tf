@@ -2,6 +2,7 @@ module "either_rke2_node_1st_or_rke2_node_other" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
+  use_jq        = true
   assert        = !(var.rke2_node_1st && var.rke2_node_other)
   error_message = "error: rke2_node_1st and rke2_node_other can not be used together"
 }
@@ -10,6 +11,7 @@ module "rke2_node_1st_needs_rke2_secred_id" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
+  use_jq        = true
   assert        = !(var.rke2_node_1st && var.rke2_node_1st_rke2_secret_id == "")
   error_message = "error: rke2_node_1st needs rke2_secret_id"
 }
