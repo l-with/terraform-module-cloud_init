@@ -1,4 +1,4 @@
-# Terraform Modul cloud-init
+# Terraform Modul cloud_init
 
 Terraform module to template cloud-init user data
 
@@ -69,6 +69,10 @@ The package also has to contain templates for `/etc/rancher/rke2/config.yaml`:
 
 - `/root/config.yaml.node_1st.envtpl` for the first node
 - `/root/config.yaml.node_other.envtpl` for the other nodes
+
+The Cloud-init for the 1st node waits for all nodes to become ready
+and then puts the created `rke2.yaml` modified 
+(substitute 127.0.0.1 with the ipv4-address of the 1st node) into Hashicorp Vault.
 
 The [cert-manager](https://github.com/cert-manager/cert-manager) `cert-manager.crds.yaml` 
 is pre-installed as manifest in the 1st node.
