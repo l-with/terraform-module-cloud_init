@@ -1,5 +1,5 @@
 locals {
-  vault = var.vault || var.rke2_master_1st
+  vault = var.vault || var.rke2_node_1st
 }
 
 locals {

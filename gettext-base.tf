@@ -1,5 +1,5 @@
 locals {
-  gettext_base = var.gettext_base || var.rke2_master_1st || var.rke2_master_other
+  gettext_base = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
 }
 
 locals {
