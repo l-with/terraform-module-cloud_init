@@ -80,6 +80,11 @@ is pre-installed as manifest in the 1st node.
 
 input variables:
 - [rke2_node_1st](#input_rke2_node_1st)
+- [rke2_node_other](#input_rke2_rke2_node_other)
+- [rke2_node_cert_package_url](#input_rke2_node_cert_package_url)
+- [rke2_node_cert_package_api_header](#input_rke2_node_cert_package_api_header)
+- [rke2_node_cert_package_secret](#input_rke2_node_cert_package_secret)
+- [rke2_node_pre_shared_secret](#input_rke2_node_pre_shared_secret)
 - [rke2_node_1st_cert_manager_crd_version](#input_rke2_node_1st_cert_manager_crd_version)
 - [rke2_node_1st_rke2_role_id](#input_rke2_node_1st_rke2_role_id)
 - [rke2_node_1st_rke2_secret_id](#input_rke2_node_1st_rke2_secret_id)
@@ -87,9 +92,7 @@ input variables:
 - [rke2_node_1st_vault_field](#input_rke2_node_1st_vault_field)
 - [rke2_node_1st_vault_mount](#input_rke2_node_1st_vault_mount)
 - [rke2_node_1st_vault_path](#input_rke2_node_1st_vault_path)
-- [rke2_node_other](#input_rke2_rke2_node_other)
 - [rke2_node_other_vars](#input_rke2_rke2_node_other_vars)
-- [rke2_node_vars](#input_rke2_rke2_node_vars)
 
 ### vault
 
@@ -116,8 +119,10 @@ No providers.
 | <a name="module_either_rke2_node_1st_or_rke2_node_other"></a> [either\_rke2\_node\_1st\_or\_rke2\_node\_other](#module\_either\_rke2\_node\_1st\_or\_rke2\_node\_other) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_rke2_node_1st_rke2_role_id"></a> [rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_role\_id](#module\_rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_role\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_rke2_node_1st_rke2_secret_id"></a> [rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_secret\_id](#module\_rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_secret\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
-| <a name="module_rke2_node_1st_needs_rke2_secred_id"></a> [rke2\_node\_1st\_needs\_rke2\_secred\_id](#module\_rke2\_node\_1st\_needs\_rke2\_secred\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
-| <a name="module_rke2_node_needs_rke2_node_vars"></a> [rke2\_node\_needs\_rke2\_node\_vars](#module\_rke2\_node\_needs\_rke2\_node\_vars) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_rke2_node_needs_rke2_node_cert_package_api_header"></a> [rke2\_node\_needs\_rke2\_node\_cert\_package\_api\_header](#module\_rke2\_node\_needs\_rke2\_node\_cert\_package\_api\_header) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_rke2_node_needs_rke2_node_cert_package_url"></a> [rke2\_node\_needs\_rke2\_node\_cert\_package\_url](#module\_rke2\_node\_needs\_rke2\_node\_cert\_package\_url) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_rke2_node_needs_rke2_node_pre_shared_secret"></a> [rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret](#module\_rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_rke2_node_needs_rke2_node_rke2_node_cert_package_secret"></a> [rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret](#module\_rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 
 #### Resources
@@ -147,9 +152,12 @@ No resources.
 | <a name="input_rke2_node_1st_vault_field"></a> [rke2\_node\_1st\_vault\_field](#input\_rke2\_node\_1st\_vault\_field) | the vault field used to put the `rke2.yaml` as kv into vault | `string` | `"rke2_yaml"` | no |
 | <a name="input_rke2_node_1st_vault_mount"></a> [rke2\_node\_1st\_vault\_mount](#input\_rke2\_node\_1st\_vault\_mount) | the vault mount used to put the `rke2.yaml` as kv into vault | `string` | `"gitlab"` | no |
 | <a name="input_rke2_node_1st_vault_path"></a> [rke2\_node\_1st\_vault\_path](#input\_rke2\_node\_1st\_vault\_path) | the vault path used to put the `rke2.yaml` as kv into vault | `string` | `"rancher/kubeconfig"` | no |
+| <a name="input_rke2_node_cert_package_api_header"></a> [rke2\_node\_cert\_package\_api\_header](#input\_rke2\_node\_cert\_package\_api\_header) | the header to authorize getting the cert-package | `string` | `""` | no |
+| <a name="input_rke2_node_cert_package_secret"></a> [rke2\_node\_cert\_package\_secret](#input\_rke2\_node\_cert\_package\_secret) | the secret to decrypt the cert package (`openssl enc -aes-256-cbc -pbkdf2)` | `string` | `""` | no |
+| <a name="input_rke2_node_cert_package_url"></a> [rke2\_node\_cert\_package\_url](#input\_rke2\_node\_cert\_package\_url) | the url to get the cert-package from | `string` | `""` | no |
 | <a name="input_rke2_node_other"></a> [rke2\_node\_other](#input\_rke2\_node\_other) | if cloud-init user data for the rke2 other nodes should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `""` | no |
-| <a name="input_rke2_node_vars"></a> [rke2\_node\_vars](#input\_rke2\_node\_vars) | the variables for cloud-init user data for rke2 1st and other nodes | <pre>object({<br>    rke2_cert_package_url        = string<br>    rke2_cert_package_api_header = string<br>    rke2_cert_package_secret     = string<br>    rke2_pre_shared_secret       = string<br>  })</pre> | <pre>{<br>  "rke2_cert_package_api_header": "",<br>  "rke2_cert_package_secret": "",<br>  "rke2_cert_package_url": "",<br>  "rke2_pre_shared_secret": ""<br>}</pre> | no |
+| <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `""` | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
 | <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `""` | no |
 
