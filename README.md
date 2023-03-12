@@ -51,6 +51,13 @@ input variables:
 - [package_update](#input\_package\_update)
 - [package_upgrade](#input\_package\_upgrade)
 
+### rke2
+
+s. [rke2](https://docs.rke2.io/install/ha)
+
+input variables:
+- [rke2_master_1st](#input\_rke2_master_1st)
+
 ### vault
 
 s. [vault](https://developer.hashicorp.com/vault/downloads)
