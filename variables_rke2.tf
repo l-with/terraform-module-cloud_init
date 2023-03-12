@@ -32,14 +32,22 @@ variable "rke2_master_vars" {
 variable "rke2_master_1st_vars" {
   description = "the variables for cloud-init user data for rke2 1st master"
   type = object({
-    rke2_role_id   = string
-    rke2_secret_id = string
-    vault_addr     = string
+    rke2_role_id             = string // the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault
+    rke2_secret_id           = string // the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault
+    cert_manager_crd_version = string // the version of cert-manager CRDs to be installed
+    vault_addr               = string // the vault address
+    vault_mount              = string // the vault mount used to put the `rke2.yaml` as kv into vault
+    vault_path               = string // the vault path used to put the `rke2.yaml` as kv into vault
+    vault_field              = string // the vault field used to put the `rke2.yaml` as kv into vault
   })
   default = {
-    rke2_role_id   = ""
-    rke2_secret_id = ""
-    vault_addr     = ""
+    rke2_role_id             = ""
+    rke2_secret_id           = ""
+    cert_manager_crd_version = "1.11.0"
+    vault_addr               = "" // var.vault_addr (implemented in rke2.tf)
+    vault_mount              = "gitlab"
+    vault_path               = "rancher/kubeconfig"
+    vault_field              = "rke2_yaml"
   }
   sensitive = true
 }

@@ -55,6 +55,16 @@ input variables:
 
 s. [rke2](https://docs.rke2.io/install/ha)
 
+Two different cloud-init userdata can be generated
+- for the 1st master
+- for the other masters
+
+The certificates for RKE2 are fetched from a package registry 
+and decrypted with openssl and thus have to pre pre-built.
+The [cert-manager](https://github.com/cert-manager/cert-manager) `cert-manager.crds.yaml` 
+is pre-installed as manifest in the 1st master.
+
+
 input variables:
 - [rke2_master_1st](#input_rke2_master_1st)
 - [rke2_master_1st_vars](#input_rke2_master_1st_vars)
@@ -111,11 +121,12 @@ No resources.
 | <a name="input_package_update"></a> [package\_update](#input\_package\_update) | if cloud-init user data for package\_update should be generated | `bool` | `true` | no |
 | <a name="input_package_upgrade"></a> [package\_upgrade](#input\_package\_upgrade) | if cloud-init user data for package\_upgrade should be generated | `bool` | `true` | no |
 | <a name="input_rke2_master_1st"></a> [rke2\_master\_1st](#input\_rke2\_master\_1st) | if cloud-init user data for the rke2 1st masters should be generated | `bool` | `false` | no |
-| <a name="input_rke2_master_1st_vars"></a> [rke2\_master\_1st\_vars](#input\_rke2\_master\_1st\_vars) | the variables for cloud-init user data for rke2 1st master | <pre>object({<br>    rke2_role_id   = string<br>    rke2_secret_id = string<br>    vault_addr     = string<br>  })</pre> | <pre>{<br>  "rke2_role_id": "",<br>  "rke2_secret_id": "",<br>  "vault_addr": ""<br>}</pre> | no |
+| <a name="input_rke2_master_1st_vars"></a> [rke2\_master\_1st\_vars](#input\_rke2\_master\_1st\_vars) | the variables for cloud-init user data for rke2 1st master | <pre>object({<br>    rke2_role_id             = string // the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault<br>    rke2_secret_id           = string // the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault<br>    cert_manager_crd_version = string // the version of cert-manager CRDs to be installed<br>    vault_addr               = string // the vault address<br>    vault_mount              = string // the vault mount used to put the `rke2.yaml` as kv into vault<br>    vault_path               = string // the vault path used to put the `rke2.yaml` as kv into vault<br>    vault_field              = string // the vault field used to put the `rke2.yaml` as kv into vault<br>  })</pre> | <pre>{<br>  "cert_manager_crd_version": "1.11.0",<br>  "rke2_role_id": "",<br>  "rke2_secret_id": "",<br>  "vault_addr": "",<br>  "vault_field": "rke2_yaml",<br>  "vault_mount": "gitlab",<br>  "vault_path": "rancher/kubeconfig"<br>}</pre> | no |
 | <a name="input_rke2_master_other"></a> [rke2\_master\_other](#input\_rke2\_master\_other) | if cloud-init user data for the rke2 other masters should be generated | `bool` | `false` | no |
 | <a name="input_rke2_master_other_vars"></a> [rke2\_master\_other\_vars](#input\_rke2\_master\_other\_vars) | the variables for cloud-init user data for rke2 other masters | <pre>object({<br>    rke2_master1_ip = string<br>  })</pre> | <pre>{<br>  "rke2_master1_ip": ""<br>}</pre> | no |
 | <a name="input_rke2_master_vars"></a> [rke2\_master\_vars](#input\_rke2\_master\_vars) | the variables for cloud-init user data for rke2 1st and other masters | <pre>object({<br>    rke2_cert_package_url       = string<br>    rke2_cert_artifact          = string<br>    rke2_cert_package_api_token = string<br>    rke2_cert_package_secret    = string<br>    rke2_pre_shared_secret      = string<br>  })</pre> | <pre>{<br>  "rke2_cert_artifact": "",<br>  "rke2_cert_package_api_token": "",<br>  "rke2_cert_package_secret": "",<br>  "rke2_cert_package_url": "",<br>  "rke2_pre_shared_secret": ""<br>}</pre> | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
+| <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | n/a | yes |
 
 #### Outputs
 

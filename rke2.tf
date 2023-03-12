@@ -1,4 +1,8 @@
 locals {
+  vault_addr = var.rke2_master_1st_vars.vault_addr != "" ? var.rke2_master_1st_vars.vault_addr : var.vault_addr
+}
+
+locals {
   cloud_init_runcmd_rke2_prefix = "${path.module}/templates/rke2/cloudinit.yml.runcmd"
 
   cloud_init_runcmd_rke2_master_begin_template             = "${local.cloud_init_runcmd_rke2_prefix}_begin.tpl"
@@ -20,9 +24,13 @@ locals {
       templatefile(local.cloud_init_runcmd_rke2_master_1st_manifests_template, {}),
       templatefile(local.cloud_init_runcmd_rke2_server_template, {}),
       templatefile(local.cloud_init_runcmd_rke2_master_1st_kubectl2vault_template, {
-        rke2_role_id   = var.rke2_master_1st_vars.rke2_role_id
-        rke2_secret_id = var.rke2_master_1st_vars.rke2_secret_id
-        vault_addr     = var.rke2_master_1st_vars.vault_addr
+        rke2_role_id             = var.rke2_master_1st_vars.rke2_role_id
+        rke2_secret_id           = var.rke2_master_1st_vars.rke2_secret_id
+        cert_manager_crd_version = var.rke2_master_1st_vars.cert_manager_crd_version
+        vault_addr               = local.vault_addr
+        vault_mount              = var.rke2_master_1st_vars.vault_mount
+        vault_path               = var.rke2_master_1st_vars.vault_path
+        vault_field              = var.rke2_master_1st_vars.vault_field
       })
     ]
   )
