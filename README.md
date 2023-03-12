@@ -75,17 +75,17 @@ is pre-installed as manifest in the 1st master.
 
 
 input variables:
-- [rke2_node_1st](#input_rke2_master_1st)
-- [rke2_master_1st_cert_manager_crd_version](#input_rke2_master_1st_cert_manager_crd_version)
-- [rke2_master_1st_rke2_role_id](#input_rke2_master_1st_rke2_role_id)
-- [rke2_master_1st_rke2_secret_id](#input_rke2_master_1st_rke2_secret_id)
-- [rke2_master_1st_vault_addr](#input_rke2_master_1st_vault_addr)
-- [rke2_master_1st_vault_field](#input_rke2_master_1st_vault_field)
-- [rke2_master_1st_vault_mount](#input_rke2_master_1st_vault_mount)
-- [rke2_master_1st_vault_path](#input_rke2_master_1st_vault_path)
-- [rke2_master_other](#input_rke2_rke2_master_other)
-- [rke2_master_other_vars](#input_rke2_rke2_master_other_vars)
-- [rke2_master_vars](#input_rke2_rke2_master_vars)
+- [rke2_node_1st](#input_rke2_node_1st)
+- [rke2_node_1st_cert_manager_crd_version](#input_rke2_node_1st_cert_manager_crd_version)
+- [rke2_node_1st_rke2_role_id](#input_rke2_node_1st_rke2_role_id)
+- [rke2_node_1st_rke2_secret_id](#input_rke2_node_1st_rke2_secret_id)
+- [rke2_node_1st_vault_addr](#input_rke2_node_1st_vault_addr)
+- [rke2_node_1st_vault_field](#input_rke2_node_1st_vault_field)
+- [rke2_node_1st_vault_mount](#input_rke2_node_1st_vault_mount)
+- [rke2_node_1st_vault_path](#input_rke2_node_1st_vault_path)
+- [rke2_node_other](#input_rke2_rke2_node_other)
+- [rke2_node_other_vars](#input_rke2_rke2_node_other_vars)
+- [rke2_node_vars](#input_rke2_rke2_node_vars)
 
 ### vault
 
@@ -144,7 +144,7 @@ No resources.
 | <a name="input_rke2_node_1st_vault_mount"></a> [rke2\_node\_1st\_vault\_mount](#input\_rke2\_node\_1st\_vault\_mount) | the vault mount used to put the `rke2.yaml` as kv into vault | `string` | `"gitlab"` | no |
 | <a name="input_rke2_node_1st_vault_path"></a> [rke2\_node\_1st\_vault\_path](#input\_rke2\_node\_1st\_vault\_path) | the vault path used to put the `rke2.yaml` as kv into vault | `string` | `"rancher/kubeconfig"` | no |
 | <a name="input_rke2_node_other"></a> [rke2\_node\_other](#input\_rke2\_node\_other) | if cloud-init user data for the rke2 other masters should be generated | `bool` | `false` | no |
-| <a name="input_rke2_node_other_vars"></a> [rke2\_node\_other\_vars](#input\_rke2\_node\_other\_vars) | the variables for cloud-init user data for rke2 other masters | <pre>object({<br>    rke2_master1_ip = string<br>  })</pre> | <pre>{<br>  "rke2_master1_ip": ""<br>}</pre> | no |
+| <a name="input_rke2_node_other_vars"></a> [rke2\_node\_other\_vars](#input\_rke2\_node\_other\_vars) | the variables for cloud-init user data for rke2 other masters | <pre>object({<br>    rke2_node_1st_ip = string<br>  })</pre> | <pre>{<br>  "rke2node_1st_ip": ""<br>}</pre> | no |
 | <a name="input_rke2_node_vars"></a> [rke2\_node\_vars](#input\_rke2\_node\_vars) | the variables for cloud-init user data for rke2 1st and other masters | <pre>object({<br>    rke2_cert_package_url        = string<br>    rke2_cert_package_api_header = string<br>    rke2_cert_package_secret     = string<br>    rke2_pre_shared_secret       = string<br>  })</pre> | <pre>{<br>  "rke2_cert_package_api_header": "",<br>  "rke2_cert_package_secret": "",<br>  "rke2_cert_package_url": "",<br>  "rke2_pre_shared_secret": ""<br>}</pre> | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
 | <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `""` | no |

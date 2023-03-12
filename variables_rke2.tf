@@ -32,7 +32,7 @@ variable "rke2_node_1st_rke2_role_id" {
   type        = string
   validation {
     condition     = var.rke2_node_1st_rke2_role_id != ""
-    error_message = "the `rke2_master_1st_cert_manager_rke2_role_id` must not be empty"
+    error_message = "the `rke2_node_1st_cert_manager_rke2_role_id` must not be empty"
   }
   sensitive = true
 }
@@ -42,7 +42,7 @@ variable "rke2_node_1st_rke2_secret_id" {
   type        = string
   validation {
     condition     = var.rke2_node_1st_rke2_secret_id != ""
-    error_message = "the `rke2_master_1st_cert_manager_rke2_secret_id` must not be empty"
+    error_message = "the `rke2_node_1st_cert_manager_rke2_secret_id` must not be empty"
   }
   sensitive = true
 }
@@ -80,9 +80,9 @@ variable "rke2_node_1st_vault_field" {
 variable "rke2_node_other_vars" {
   description = "the variables for cloud-init user data for rke2 other masters"
   type = object({
-    rke2_master1_ip = string
+    rke2_node_1st_ip = string
   })
   default = {
-    rke2_master1_ip = ""
+    rke2node_1st_ip = ""
   }
 }
