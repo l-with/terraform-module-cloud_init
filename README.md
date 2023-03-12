@@ -67,8 +67,8 @@ The certificates for RKE2 are fetched from a package registry
 and decrypted with openssl and thus have to pre pre-built.
 The package also has to contain templates for `/etc/rancher/rke2/config.yaml`:
 
-- `/root/config.yaml.master1.envtpl` for the first master // TODO should be named node_1st
-- `/root/config.yaml.envtpl` for the other nodes
+- `/root/config.yaml.node_1st.envtpl` for the first node
+- `/root/config.yaml.node_other.envtpl` for the other nodes
 
 The [cert-manager](https://github.com/cert-manager/cert-manager) `cert-manager.crds.yaml` 
 is pre-installed as manifest in the 1st node.
