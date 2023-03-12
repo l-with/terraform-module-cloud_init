@@ -17,7 +17,7 @@ locals {
         rke2_cert_package_api_header = var.rke2_node_vars.rke2_cert_package_api_header
         rke2_cert_package_secret     = var.rke2_node_vars.rke2_cert_package_secret
         rke2_pre_shared_secret       = var.rke2_node_vars.rke2_pre_shared_secret
-        rke2_config_template         = "/root/config.yaml.master1.envtpl"
+        rke2_config_template         = "/root/config.yaml.master1.envtpl" // TODO should be named node_st1
         rke2_node_1st_ip             = ""
       }),
       templatefile(local.cloud_init_runcmd_rke2_node_1st_manifests_template, {
