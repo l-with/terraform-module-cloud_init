@@ -61,6 +61,15 @@ module "rke2_node_1st_needs_rke2_node_1st_rke2_secret_id" {
   error_message = "error: rke2_node_1st needs rke2_node_1st_rke2_secret_id"
 }
 
+module "rke2_node_1st_needs_vault_addr" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.rke2_node_1st && local.vault_addr == "")
+  error_message = "error: rke2_node_1st needs *_vault_addr"
+}
+
 module "rke2_node_other_needs_rke2_node_other_node_1st_ip" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"

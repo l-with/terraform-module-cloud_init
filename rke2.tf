@@ -1,5 +1,5 @@
 locals {
-  vault_addr = coalesce(var.rke2_node_1st_vault_addr, var.vault_addr)
+  vault_addr = var.rke2_node_1st_vault_addr != "" ? var.rke2_node_1st_vault_addr : var.vault_addr
 }
 
 locals {
