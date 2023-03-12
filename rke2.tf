@@ -1,5 +1,5 @@
 locals {
-  vault_addr = var.rke2_master_1st_vars.vault_addr != "" ? var.rke2_master_1st_vars.vault_addr : var.vault_addr
+  vault_addr = coalesce(var.rke2_master_1st_vault_addr, var.vault_addr)
 }
 
 locals {
@@ -20,16 +20,18 @@ locals {
         rke2_config_template         = "/root/config.yaml.master1.envtpl"
         rke2_master1_ip              = ""
       }),
-      templatefile(local.cloud_init_runcmd_rke2_master_1st_manifests_template, {}),
+      templatefile(local.cloud_init_runcmd_rke2_master_1st_manifests_template, {
+        cert_manager_crd_version = var.rke2_master_1st_cert_manager_crd_version
+      }),
       templatefile(local.cloud_init_runcmd_rke2_server_template, {}),
       templatefile(local.cloud_init_runcmd_rke2_master_1st_kubectl2vault_template, {
-        rke2_role_id             = var.rke2_master_1st_vars.rke2_role_id
-        rke2_secret_id           = var.rke2_master_1st_vars.rke2_secret_id
-        cert_manager_crd_version = var.rke2_master_1st_vars.cert_manager_crd_version
-        vault_addr               = local.vault_addr
-        vault_mount              = var.rke2_master_1st_vars.vault_mount
-        vault_path               = var.rke2_master_1st_vars.vault_path
-        vault_field              = var.rke2_master_1st_vars.vault_field
+        rke2_role_id             = var.rke2_master_1st_rke2_role_id
+        rke2_secret_id           = var.rke2_master_1st_rke2_secret_id
+        cert_manager_crd_version = var.rke2_master_1st_cert_manager_crd_version
+        vault_addr               = var.rke2_master_1st_vault_addr
+        vault_mount              = var.rke2_master_1st_vault_mount
+        vault_path               = var.rke2_master_1st_vault_path
+        vault_field              = var.rke2_master_1st_vault_field
       })
     ]
   )
