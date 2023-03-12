@@ -43,7 +43,7 @@ locals {
         rke2_cert_package_secret     = var.rke2_node_vars.rke2_cert_package_secret
         rke2_pre_shared_secret       = var.rke2_node_vars.rke2_pre_shared_secret
         rke2_config_template         = "/root/config.yaml.envtpl"
-        rke2_node_1st_ip             = var.rke2_node_other_vars.rke2_node_1st_ip
+        rke2_node_1st_ip             = var.rke2_node_other_node_1st_ip
       }),
       templatefile(local.cloud_init_runcmd_rke2_node_server_template, {})
     ]

@@ -77,12 +77,7 @@ variable "rke2_node_1st_vault_field" {
   default     = "rke2_yaml"
 }
 
-variable "rke2_node_other_vars" {
-  description = "the variables for cloud-init user data for rke2 other masters"
-  type = object({
-    rke2_node_1st_ip = string
-  })
-  default = {
-    rke2_node_1st_ip = ""
-  }
+variable "rke2_node_other_node_1st_ip" {
+  description = "the ip of the 1st node for cloud-init user data for rke2 other nodes"
+  type        = string
 }
