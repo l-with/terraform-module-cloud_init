@@ -134,6 +134,8 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_certbot"></a> [certbot](#input\_certbot) | if cloud-init user data for installing certbot should be generated | `bool` | `false` | no |
+| <a name="input_certbot_dns_hetzner"></a> [certbot\_dns\_hetzner](#input\_certbot\_dns\_hetzner) | if cloud-init user data for installing with certbot-dns-hetzner should be generated | `bool` | `false` | no |
 | <a name="input_croc"></a> [croc](#input\_croc) | if cloud-init user data for installing croc should be generated | `bool` | `false` | no |
 | <a name="input_docker"></a> [docker](#input\_docker) | if cloud-init user data for installing docker should be generated | `bool` | `false` | no |
 | <a name="input_docker_vars"></a> [docker\_vars](#input\_docker\_vars) | the variables for cloud-init user data for docker | <pre>object({<br>    docker_manipulate_iptables = bool<br>  })</pre> | <pre>{<br>  "docker_manipulate_iptables": true<br>}</pre> | no |

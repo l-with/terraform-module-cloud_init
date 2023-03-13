@@ -13,11 +13,13 @@ locals {
     "cloud_init_packages_jq",
     "cloud_init_packages_vault",
     "cloud_init_packages_fail2ban",
+    "cloud_init_packages_certbot",
     "cloud_init_runcmd",
     "cloud_init_runcmd_croc",
     "cloud_init_runcmd_docker",
     "cloud_init_runcmd_vault",
     "cloud_init_runcmd_fail2ban",
+    "cloud_init_runcmd_certbot",
     "cloud_init_runcmd_rke2_node_1st",
     "cloud_init_runcmd_rke2_node_other",
     "cloud_init_runcmd_end"
@@ -35,10 +37,12 @@ locals {
     cloud_init_packages_jq                = var.jq ? local.cloud_init_jq_package : ""
     cloud_init_packages_vault             = local.vault ? local.cloud_init_vault_package : ""
     cloud_init_packages_fail2ban          = var.fail2ban ? local.cloud_init_fail2ban_package : ""
+    cloud_init_packages_certbot           = var.certbot ? local.cloud_init_certbot_package : ""
     cloud_init_runcmd                     = "runcmd:"
     cloud_init_runcmd_croc                = var.croc ? local.cloud_init_croc_runcmd : ""
     cloud_init_runcmd_docker              = var.docker ? local.cloud_init_docker_runcmd : ""
     cloud_init_runcmd_vault               = local.vault ? local.cloud_init_vault_runcmd : ""
+    cloud_init_runcmd_certbot             = var.certbot ? local.cloud_init_certbot_runcmd : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? local.cloud_init_fail2ban_runcmd : ""
     cloud_init_runcmd_rke2_node_1st       = var.rke2_node_1st ? local.cloud_init_runcmd_rke2_node_1st : ""
     cloud_init_runcmd_rke2_node_other     = var.rke2_node_other ? local.cloud_init_runcmd_rke2_node_other : ""
