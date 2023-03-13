@@ -8,6 +8,14 @@ currently only tested with Ubuntu focal
 
 ## Features
 
+### certbot
+
+s. [certbot](https://eff-certbot.readthedocs.io/en/stable/install.html#installation)
+
+input variables:
+- [certbot](#input_certbot)
+- [certbot_dns_hetzner](#input_certbot_dns_hetzner)
+
 ### croc
 
 s. [croc](https://github.com/schollz/croc#install)
