@@ -29,9 +29,9 @@ locals {
   ]
   cloud_init_parts = {
     cloud_init_start                      = "#cloud-config"
-    cloud_init_package_update             = var.package_update ? "package_update: true" : ""
-    cloud_init_package_upgrade            = var.package_upgrade ? "package_upgrade: true" : ""
-    cloud_init_package_reboot_if_required = var.package_reboot_if_required ? "package_reboot_if_required: true" : ""
+    cloud_init_package_update             = var.package && var.package_update ? "package_update: true" : ""
+    cloud_init_package_upgrade            = var.package && var.package_upgrade ? "package_upgrade: true" : ""
+    cloud_init_package_reboot_if_required = var.package && var.package_reboot_if_required ? "package_reboot_if_required: true" : ""
     cloud_init_write_files                = "write_files:"
     cloud_init_write_files_docker         = local.cloud_init_docker_write_files
     cloud_init_write_files_fail2ban       = var.fail2ban ? local.cloud_init_fail2ban_write_files : ""
@@ -50,8 +50,8 @@ locals {
     cloud_init_runcmd_certbot             = var.certbot ? local.cloud_init_certbot_runcmd : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? local.cloud_init_fail2ban_runcmd : ""
     cloud_init_runcmd_nginx               = var.nginx ? local.cloud_init_nginx_runcmd : ""
-    cloud_init_runcmd_rke2_node_1st       = var.rke2_node_1st ? local.cloud_init_runcmd_rke2_node_1st : ""
-    cloud_init_runcmd_rke2_node_other     = var.rke2_node_other ? local.cloud_init_runcmd_rke2_node_other : ""
+    cloud_init_runcmd_rke2_node_1st       = var.rke2 && var.rke2_node_1st ? local.cloud_init_runcmd_rke2_node_1st : ""
+    cloud_init_runcmd_rke2_node_other     = var.rke2 && var.rke2_node_other ? local.cloud_init_runcmd_rke2_node_other : ""
     cloud_init_runcmd_end                 = templatefile(local.cloud_init_runcmd_end_template, {}),
   }
   cloud_init_parts_sorted = [

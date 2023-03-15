@@ -1,3 +1,9 @@
+variable "package" {
+  description = "if cloud-init user data for package should be generated"
+  type        = bool
+  default     = true
+}
+
 variable "package_update" {
   description = "if cloud-init user data for package_update should be generated"
   type        = bool

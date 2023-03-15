@@ -32,7 +32,13 @@ variable "nginx_confs" {
     port        = number // the port for `listen`
     server_name = string // the server_name for `server_name`
     fqdn        = string // the FQDN used for include Let's Encrypt certificates: `/etc/letsencrypt/live/{{ nginx_conf.FQDN }}/...`
-    nginx_conf  = string // the configuration to be included in the `sever` stanza
+    conf        = string // the configuration to be included in the `sever` stanza
   }))
   default = []
+}
+
+variable "nginx_https_map" {
+  description = "the map stanza configuration for nginx https configuration for cloud-init user data for nginx"
+  type        = string
+  default     = ""
 }

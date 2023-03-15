@@ -12,56 +12,49 @@ currently only tested with Ubuntu focal
 
 s. [certbot](https://eff-certbot.readthedocs.io/en/stable/install.html#installation)
 
-input variables:
-- [certbot](#input_certbot)
-- [certbot_dns_hetzner](#input_certbot_dns_hetzner)
+For input variables: s. [certbot](#input_certbot).
 
 ### croc
 
 s. [croc](https://github.com/schollz/croc#install)
 
-input variables:
-- [croc](#input_croc)
+For input variables: s. [croc](#input_croc).
 
 ### docker
 
 s. [docker](https://docs.docker.com/engine/install/ubuntu/)
 
-input variables:
-- [docker](#input_docker)
-- [docker_vars](#input_docker_vars)
+For input variables: s. [docker](#input_docker).
 
 ### fail2ban
 
 s. [fail2ban](https://www.fail2ban.org/wiki/index.php/Downloads)
 
-input variables:
-- [fail2ban](#input_fail2ban)
-- [fail2ban_recidive](#input_fail2ban_recidive)
-- [fail2ban_sshd](#input_fail2ban_sshd)
+For input variables: s. [fail2ban](#input_fail2ban).
 
 ### gettext_base
 
 s. [gettext-base](https://packages.ubuntu.com/search?suite=default&section=all&arch=any&keywords=gettext-base&searchon=names)
 
-input variables:
-- [gettext_base](#input_gettext_base)
+For input variables: s. [gettext_base](#input_gettext_base).
 
 ### jq
 
 s. [jq](https://stedolan.github.io/jq/)
 
-input variables:
-- [jq](#input_jq)
+For input variables: s. [jq](#input_jq).
+
+### nginx
+
+s. [nginx](https://nginx.org)
+
+For input variables: s. [nginx](#input_nginx).
 
 ### package
 
 s. [package](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#package-update-upgrade-install)
 
-input variables:
-- [package_reboot_if_required](#input_package_reboot_if_required)
-- [package_update](#input_package_update)
-- [package_upgrade](#input_package_upgrade)
+For input variables: s. [package](#input_package).
 
 ### rke2
 
@@ -86,28 +79,13 @@ The [cert-manager](https://github.com/cert-manager/cert-manager) `cert-manager.c
 is pre-installed as manifest in the 1st node.
 
 
-input variables:
-- [rke2_node_1st](#input_rke2_node_1st)
-- [rke2_node_other](#input_rke2_rke2_node_other)
-- [rke2_node_cert_package_url](#input_rke2_node_cert_package_url)
-- [rke2_node_cert_package_api_header](#input_rke2_node_cert_package_api_header)
-- [rke2_node_cert_package_secret](#input_rke2_node_cert_package_secret)
-- [rke2_node_pre_shared_secret](#input_rke2_node_pre_shared_secret)
-- [rke2_node_1st_cert_manager_crd_version](#input_rke2_node_1st_cert_manager_crd_version)
-- [rke2_node_1st_rke2_role_id](#input_rke2_node_1st_rke2_role_id)
-- [rke2_node_1st_rke2_secret_id](#input_rke2_node_1st_rke2_secret_id)
-- [rke2_node_1st_vault_addr](#input_rke2_node_1st_vault_addr)
-- [rke2_node_1st_vault_field](#input_rke2_node_1st_vault_field)
-- [rke2_node_1st_vault_mount](#input_rke2_node_1st_vault_mount)
-- [rke2_node_1st_vault_path](#input_rke2_node_1st_vault_path)
-- [rke2_node_other_vars](#input_rke2_rke2_node_other_vars)
+For input variables: s. [rke2](#input_rke2).
 
 ### vault
 
 s. [vault](https://developer.hashicorp.com/vault/downloads)
 
-input variables:
-- [vault](#input_vault)
+For input variables: s. [vault](#input_vault).
 
 ## terraform
 
@@ -154,13 +132,16 @@ No resources.
 | <a name="input_jq"></a> [jq](#input\_jq) | if cloud-init user data for installing jq should be generated | `bool` | `false` | no |
 | <a name="input_nginx"></a> [nginx](#input\_nginx) | if cloud-init user data for installing nginx should be generated | `bool` | `false` | no |
 | <a name="input_nginx_configuration_home"></a> [nginx\_configuration\_home](#input\_nginx\_configuration\_home) | the nginx configuration home for cloud-init user data for nginx | `string` | `"/etc/nginx"` | no |
-| <a name="input_nginx_confs"></a> [nginx\_confs](#input\_nginx\_confs) | the extra configurations for nginx for cloud-init user data for nginx | <pre>list(object({<br>    port        = number // the port for `listen`<br>    server_name = string // the server_name for `server_name`<br>    fqdn        = string // the FQDN used for include Let's Encrypt certificates: `/etc/letsencrypt/live/{{ nginx_conf.FQDN }}/...`<br>    nginx_conf  = string // the configuration to be included in the `sever` stanza<br>  }))</pre> | `[]` | no |
+| <a name="input_nginx_confs"></a> [nginx\_confs](#input\_nginx\_confs) | the extra configurations for nginx for cloud-init user data for nginx | <pre>list(object({<br>    port        = number // the port for `listen`<br>    server_name = string // the server_name for `server_name`<br>    fqdn        = string // the FQDN used for include Let's Encrypt certificates: `/etc/letsencrypt/live/{{ nginx_conf.FQDN }}/...`<br>    conf        = string // the configuration to be included in the `sever` stanza<br>  }))</pre> | `[]` | no |
 | <a name="input_nginx_gnu"></a> [nginx\_gnu](#input\_nginx\_gnu) | if the [GNU Terry Pratchett](http://www.gnuterrypratchett.com) header should be inserted for cloud-init user data for nginx | `bool` | `true` | no |
 | <a name="input_nginx_https_conf"></a> [nginx\_https\_conf](#input\_nginx\_https\_conf) | the nginx https configuration after `server_name` for cloud-init user data for nginx | `string` | n/a | yes |
+| <a name="input_nginx_https_map"></a> [nginx\_https\_map](#input\_nginx\_https\_map) | the map stanza configuration for nginx https configuration for cloud-init user data for nginx | `string` | `""` | no |
 | <a name="input_nginx_server_fqdn"></a> [nginx\_server\_fqdn](#input\_nginx\_server\_fqdn) | the FQDN of the server for nginx server\_name and Let's Encrypt certificates for cloud-init user data for nginx | `string` | n/a | yes |
+| <a name="input_package"></a> [package](#input\_package) | if cloud-init user data for package should be generated | `bool` | `true` | no |
 | <a name="input_package_reboot_if_required"></a> [package\_reboot\_if\_required](#input\_package\_reboot\_if\_required) | if cloud-init user data for package\_reboot\_if\_required should be generated | `bool` | `false` | no |
 | <a name="input_package_update"></a> [package\_update](#input\_package\_update) | if cloud-init user data for package\_update should be generated | `bool` | `true` | no |
 | <a name="input_package_upgrade"></a> [package\_upgrade](#input\_package\_upgrade) | if cloud-init user data for package\_upgrade should be generated | `bool` | `true` | no |
+| <a name="input_rke2"></a> [rke2](#input\_rke2) | if cloud-init user data for the rke2 should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_1st"></a> [rke2\_node\_1st](#input\_rke2\_node\_1st) | if cloud-init user data for the rke2 1st node should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_1st_cert_manager_crd_version"></a> [rke2\_node\_1st\_cert\_manager\_crd\_version](#input\_rke2\_node\_1st\_cert\_manager\_crd\_version) | the version of cert-manager CRDs to be installed | `string` | `"1.11.0"` | no |
 | <a name="input_rke2_node_1st_rke2_role_id"></a> [rke2\_node\_1st\_rke2\_role\_id](#input\_rke2\_node\_1st\_rke2\_role\_id) | the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault | `string` | `""` | no |

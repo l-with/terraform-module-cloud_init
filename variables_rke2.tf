@@ -1,3 +1,9 @@
+variable "rke2" {
+  description = "if cloud-init user data for the rke2 should be generated"
+  type        = bool
+  default     = false
+}
+
 variable "rke2_node_1st" {
   description = "if cloud-init user data for the rke2 1st node should be generated"
   type        = bool
