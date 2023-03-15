@@ -16,24 +16,6 @@ variable "rke2_node_other" {
   default     = false
 }
 
-variable "rke2_node_cert_package_url" {
-  description = "the url to get the cert-package from"
-  type        = string
-  default     = ""
-}
-
-variable "rke2_node_cert_package_api_header" {
-  description = "the header to authorize getting the cert-package"
-  type        = string
-  default     = ""
-}
-
-variable "rke2_node_cert_package_secret" {
-  description = "the secret to decrypt the cert package (`openssl enc -aes-256-cbc -pbkdf2`)"
-  type        = string
-  default     = ""
-}
-
 variable "rke2_node_pre_shared_secret" {
   description = "the pre shared secret for `/etc/rancher/rke2/config.yaml`"
   type        = string

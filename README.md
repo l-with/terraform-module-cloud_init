@@ -26,6 +26,10 @@ s. [docker](https://docs.docker.com/engine/install/ubuntu/)
 
 For input variables: s. [docker](#input_docker).
 
+### encrypted packages
+
+For input variables: s. [encrypted_packages](#input_encrypted_packages).
+
 ### fail2ban
 
 s. [fail2ban](https://www.fail2ban.org/wiki/index.php/Downloads)
@@ -151,9 +155,6 @@ No resources.
 | <a name="input_rke2_node_1st_vault_field"></a> [rke2\_node\_1st\_vault\_field](#input\_rke2\_node\_1st\_vault\_field) | the vault field used to put the `rke2.yaml` as kv into vault | `string` | `"rke2_yaml"` | no |
 | <a name="input_rke2_node_1st_vault_mount"></a> [rke2\_node\_1st\_vault\_mount](#input\_rke2\_node\_1st\_vault\_mount) | the vault mount used to put the `rke2.yaml` as kv into vault | `string` | `"gitlab"` | no |
 | <a name="input_rke2_node_1st_vault_path"></a> [rke2\_node\_1st\_vault\_path](#input\_rke2\_node\_1st\_vault\_path) | the vault path used to put the `rke2.yaml` as kv into vault | `string` | `"rancher/kubeconfig"` | no |
-| <a name="input_rke2_node_cert_package_api_header"></a> [rke2\_node\_cert\_package\_api\_header](#input\_rke2\_node\_cert\_package\_api\_header) | the header to authorize getting the cert-package | `string` | `""` | no |
-| <a name="input_rke2_node_cert_package_secret"></a> [rke2\_node\_cert\_package\_secret](#input\_rke2\_node\_cert\_package\_secret) | the secret to decrypt the cert package (`openssl enc -aes-256-cbc -pbkdf2`) | `string` | `""` | no |
-| <a name="input_rke2_node_cert_package_url"></a> [rke2\_node\_cert\_package\_url](#input\_rke2\_node\_cert\_package\_url) | the url to get the cert-package from | `string` | `""` | no |
 | <a name="input_rke2_node_other"></a> [rke2\_node\_other](#input\_rke2\_node\_other) | if cloud-init user data for the rke2 other nodes should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `""` | no |
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `""` | no |
