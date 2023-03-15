@@ -10,3 +10,4 @@
         # Redirect all non-https requests
         rewrite ^ https://$host$request_uri? permanent;
     }
+  permissions: 0644
