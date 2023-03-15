@@ -48,6 +48,7 @@ locals {
         "${local.cloud_init_nginx_runcmd_prefix}.tpl",
         {
           configuration_home = var.nginx_configuration_home
+          server_fqdn        = var.nginx_server_fqdn,
         }
       )
     ]
