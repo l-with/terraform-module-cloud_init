@@ -4,12 +4,8 @@ variable "docker" {
   default     = false
 }
 
-variable "docker_vars" {
-  description = "the variables for cloud-init user data for docker"
-  type = object({
-    docker_manipulate_iptables = bool
-  })
-  default = {
-    docker_manipulate_iptables = true
-  }
+variable "docker_manipulate_iptables" {
+  description = "if docker manipulate ip-tables should _not_ be generated for cloud-init user data for docker"
+  type        = bool
+  default     = true
 }
