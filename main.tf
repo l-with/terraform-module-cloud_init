@@ -21,6 +21,7 @@ locals {
     "cloud_init_runcmd_docker",
     "cloud_init_runcmd_vault",
     "cloud_init_runcmd_fail2ban",
+    "cloud_init_runcmd_encryped_packages",
     "cloud_init_runcmd_nginx",
     "cloud_init_runcmd_certbot",
     "cloud_init_runcmd_rke2_node_1st",
@@ -41,6 +42,7 @@ locals {
     cloud_init_packages_jq                = var.jq ? local.cloud_init_jq_package : ""
     cloud_init_packages_vault             = local.vault ? local.cloud_init_vault_package : ""
     cloud_init_packages_fail2ban          = var.fail2ban ? local.cloud_init_fail2ban_package : ""
+    cloud_init_runcmd_encryped_packages   = local.cloud_init_runcmd_encrypted_packages
     cloud_init_packages_nginx             = var.nginx ? local.cloud_init_nginx_package : ""
     cloud_init_packages_certbot           = var.certbot ? local.cloud_init_certbot_package : ""
     cloud_init_runcmd                     = "runcmd:"

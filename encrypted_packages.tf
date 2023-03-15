@@ -13,6 +13,7 @@ locals {
           url        = package.url
           api_header = package.api_header
           secret     = package.secret
+          post_cmd   = package.post_cmd
         }
       )
     ]
