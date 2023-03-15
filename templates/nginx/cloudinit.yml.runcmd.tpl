@@ -1,1 +1,2 @@
   - rm -r ${configuration_home}/sites-enabled/default
+  - ln -s ${configuration_home}/sites-available/${server_fqdn}_http.conf ${configuration_home}/sites-enabled/${server_fqdn}_http.conf
