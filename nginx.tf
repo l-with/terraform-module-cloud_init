@@ -24,6 +24,12 @@ locals {
       local.cloud_init_nginx_comment,
       [
         templatefile(
+          "${local.cloud_init_nginx_write_files_prefix}_ssl_ecdh_curve.tpl",
+          {
+            configuration_home = var.nginx_configuration_home
+          }
+        ),
+        templatefile(
           "${local.cloud_init_nginx_write_files_prefix}_http_conf.tpl",
           {
             configuration_home   = var.nginx_configuration_home
