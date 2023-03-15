@@ -29,7 +29,7 @@ variable "rke2_node_cert_package_api_header" {
 }
 
 variable "rke2_node_cert_package_secret" {
-  description = "the secret to decrypt the cert package (`openssl enc -aes-256-cbc -pbkdf2)"
+  description = "the secret to decrypt the cert package (`openssl enc -aes-256-cbc -pbkdf2`)"
   type        = string
   default     = ""
 }

@@ -5,29 +5,29 @@ variable "nginx" {
 }
 
 variable "nginx_configuration_home" {
-  description = "the nginx configuration home for cloud-init user data for nginx"
+  description = "the nginx configuration home"
   type        = string
   default     = "/etc/nginx"
 }
 
 variable "nginx_server_fqdn" {
-  description = "the FQDN of the server for nginx server_name and Let's Encrypt certificates for cloud-init user data for nginx"
+  description = "the FQDN of the server for nginx server_name and Let's Encrypt certificates"
   type        = string
 }
 
 variable "nginx_gnu" {
-  description = "if the [GNU Terry Pratchett](http://www.gnuterrypratchett.com) header should be inserted for cloud-init user data for nginx"
+  description = "if the [GNU Terry Pratchett](http://www.gnuterrypratchett.com) header should be inserted"
   type        = bool
   default     = true
 }
 
 variable "nginx_https_conf" {
-  description = "the nginx https configuration after `server_name` for cloud-init user data for nginx"
+  description = "the nginx https configuration after `server_name`"
   type        = string
 }
 
 variable "nginx_confs" {
-  description = "the extra configurations for nginx for cloud-init user data for nginx"
+  description = "the extra configurations for nginx"
   type = list(object({
     port        = number // the port for `listen`
     server_name = string // the server_name for `server_name`
@@ -38,7 +38,7 @@ variable "nginx_confs" {
 }
 
 variable "nginx_https_map" {
-  description = "the map stanza configuration for nginx https configuration for cloud-init user data for nginx"
+  description = "the map stanza configuration for nginx https configuration"
   type        = string
   default     = ""
 }
