@@ -18,6 +18,7 @@ variable "nginx_server_fqdn" {
 variable "nginx_gnu" {
   description = "if the [GNU Terry Pratchett](http://www.gnuterrypratchett.com) header should be inserted for cloud-init user data for nginx"
   type        = bool
+  default     = true
 }
 
 variable "nginx_https_conf" {
@@ -33,4 +34,5 @@ variable "nginx_confs" {
     fqdn        = string // the FQDN used for include Let's Encrypt certificates: `/etc/letsencrypt/live/{{ nginx_conf.FQDN }}/...`
     nginx_conf  = string // the configuration to be included in the `sever` stanza
   }))
+  default = []
 }

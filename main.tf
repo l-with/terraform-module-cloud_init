@@ -8,11 +8,13 @@ locals {
     "cloud_init_write_files",
     "cloud_init_write_files_docker",
     "cloud_init_write_files_fail2ban",
+    "cloud_init_write_files_nginx",
     "cloud_init_packages",
     "cloud_init_packages_gettext_base",
     "cloud_init_packages_jq",
     "cloud_init_packages_vault",
     "cloud_init_packages_fail2ban",
+    "cloud_init_packages_nginx",
     "cloud_init_packages_certbot",
     "cloud_init_runcmd",
     "cloud_init_runcmd_croc",
@@ -32,11 +34,13 @@ locals {
     cloud_init_write_files                = "write_files:"
     cloud_init_write_files_docker         = local.cloud_init_docker_write_files
     cloud_init_write_files_fail2ban       = var.fail2ban ? local.cloud_init_fail2ban_write_files : ""
+    cloud_init_write_files_nginx          = var.nginx ? local.cloud_init_nginx_write_files : ""
     cloud_init_packages                   = "packages:"
     cloud_init_packages_gettext_base      = local.gettext_base ? local.cloud_init_gettext_base_packages : ""
     cloud_init_packages_jq                = var.jq ? local.cloud_init_jq_package : ""
     cloud_init_packages_vault             = local.vault ? local.cloud_init_vault_package : ""
     cloud_init_packages_fail2ban          = var.fail2ban ? local.cloud_init_fail2ban_package : ""
+    cloud_init_packages_nginx             = var.nginx ? local.cloud_init_nginx_package : ""
     cloud_init_packages_certbot           = var.certbot ? local.cloud_init_certbot_package : ""
     cloud_init_runcmd                     = "runcmd:"
     cloud_init_runcmd_croc                = var.croc ? local.cloud_init_croc_runcmd : ""

@@ -1,0 +1,1 @@
+  - rm -r ${configuration_home}/sites-enabled/default

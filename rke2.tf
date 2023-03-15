@@ -3,6 +3,7 @@ locals {
 }
 
 locals {
+  cloud_init_rke2_comment       = ["# rke2"]
   cloud_init_runcmd_rke2_prefix = "${path.module}/templates/rke2/cloudinit.yml.runcmd"
 
   cloud_init_runcmd_rke2_node_begin_template             = "${local.cloud_init_runcmd_rke2_prefix}_begin.tpl"
@@ -11,7 +12,9 @@ locals {
   cloud_init_runcmd_rke2_node_1st_kubectl2vault_template = "${local.cloud_init_runcmd_rke2_prefix}_kubeconfig2vault.tpl"
 
   cloud_init_runcmd_rke2_node_1st = join(
-    "\n", [
+    "\n",
+    local.cloud_init_rke2_comment,
+    [
       templatefile(local.cloud_init_runcmd_rke2_node_begin_template, {
         rke2_cert_package_url        = var.rke2_node_cert_package_url
         rke2_cert_package_api_header = var.rke2_node_cert_package_api_header
@@ -36,7 +39,9 @@ locals {
     ]
   )
   cloud_init_runcmd_rke2_node_other = join(
-    "\n", [
+    "\n",
+    local.cloud_init_rke2_comment,
+    [
       templatefile(local.cloud_init_runcmd_rke2_node_begin_template, {
         rke2_cert_package_url        = var.rke2_node_cert_package_url
         rke2_cert_package_api_header = var.rke2_node_cert_package_api_header

@@ -3,10 +3,12 @@ locals {
 }
 
 locals {
+  cloud_init_gettext_base_comment         = ["# gettext-base"]
   cloud_init_gettext_base_packages_prefix = "${path.module}/templates/gettext-base/cloudinit.yml.packages"
 
   cloud_init_gettext_base_packages = join(
     "\n",
+    local.cloud_init_gettext_base_comment,
     [
       templatefile("${local.cloud_init_gettext_base_packages_prefix}.tpl", {})
     ]
