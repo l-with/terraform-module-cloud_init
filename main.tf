@@ -21,6 +21,7 @@ locals {
     "cloud_init_runcmd_docker",
     "cloud_init_runcmd_vault",
     "cloud_init_runcmd_fail2ban",
+    "cloud_init_runcmd_nginx",
     "cloud_init_runcmd_certbot",
     "cloud_init_runcmd_rke2_node_1st",
     "cloud_init_runcmd_rke2_node_other",
@@ -48,6 +49,7 @@ locals {
     cloud_init_runcmd_vault               = local.vault ? local.cloud_init_vault_runcmd : ""
     cloud_init_runcmd_certbot             = var.certbot ? local.cloud_init_certbot_runcmd : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? local.cloud_init_fail2ban_runcmd : ""
+    cloud_init_runcmd_nginx               = var.nginx ? local.cloud_init_nginx_runcmd : ""
     cloud_init_runcmd_rke2_node_1st       = var.rke2_node_1st ? local.cloud_init_runcmd_rke2_node_1st : ""
     cloud_init_runcmd_rke2_node_other     = var.rke2_node_other ? local.cloud_init_runcmd_rke2_node_other : ""
     cloud_init_runcmd_end                 = templatefile(local.cloud_init_runcmd_end_template, {}),
