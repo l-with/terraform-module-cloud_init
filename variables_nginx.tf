@@ -13,6 +13,7 @@ variable "nginx_configuration_home" {
 variable "nginx_server_fqdn" {
   description = "the FQDN of the server for nginx server_name and Let's Encrypt certificates"
   type        = string
+  default     = ""
 }
 
 variable "nginx_gnu" {
@@ -24,6 +25,7 @@ variable "nginx_gnu" {
 variable "nginx_https_conf" {
   description = "the nginx https configuration after `server_name`"
   type        = string
+  default     = ""
 }
 
 variable "nginx_confs" {
