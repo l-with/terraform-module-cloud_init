@@ -1,12 +1,12 @@
 locals {
-  cloud_init_nginx_comment        = ["# nginx"]
-  cloud_init_nginx_package_prefix = "${path.module}/templates/nginx/cloudinit.yml.packages"
+  cloud_init_comment_nginx        = ["# nginx"]
+  cloud_init_package_nginx_prefix = "${path.module}/templates/nginx/cloudinit.yml.packages"
 
-  cloud_init_nginx_package = join(
+  cloud_init_package_nginx = join(
     "\n",
-    local.cloud_init_nginx_comment,
+    local.cloud_init_comment_nginx,
     [
-      templatefile("${local.cloud_init_nginx_package_prefix}.tpl", {})
+      templatefile("${local.cloud_init_package_nginx_prefix}.tpl", {})
     ]
   )
 }
@@ -17,21 +17,21 @@ locals {
 }
 
 locals {
-  cloud_init_nginx_write_files_prefix = "${path.module}/templates/nginx/cloudinit.yml.write_files"
+  cloud_init_write_files_nginx_prefix = "${path.module}/templates/nginx/cloudinit.yml.write_files"
 
-  cloud_init_nginx_write_files = join(
+  cloud_init_write_files_nginx = join(
     "\n",
     concat(
-      local.cloud_init_nginx_comment,
+      local.cloud_init_comment_nginx,
       [
         templatefile(
-          "${local.cloud_init_nginx_write_files_prefix}_ssl_ecdh_curve.tpl",
+          "${local.cloud_init_write_files_nginx_prefix}_ssl_ecdh_curve.tpl",
           {
             configuration_home = var.nginx_configuration_home
           }
         ),
         templatefile(
-          "${local.cloud_init_nginx_write_files_prefix}_http_conf.tpl",
+          "${local.cloud_init_write_files_nginx_prefix}_http_conf.tpl",
           {
             configuration_home = var.nginx_configuration_home,
             server_name        = var.nginx_server_fqdn,
@@ -40,7 +40,7 @@ locals {
           }
         ),
         templatefile(
-          "${local.cloud_init_nginx_write_files_prefix}_https_conf.tpl",
+          "${local.cloud_init_write_files_nginx_prefix}_https_conf.tpl",
           {
             configuration_home = var.nginx_configuration_home,
             server_name        = var.nginx_server_fqdn,
@@ -48,14 +48,14 @@ locals {
             https_map          = var.nginx_https_map,
             https_conf         = local.cloud_init_nginx_https_conf,
             gnu_add_header     = local.cloud_init_nginx_gnu_add_header,
-            ssl_part           = templatefile("${local.cloud_init_nginx_write_files_prefix}_ssl_part.tpl", { fqdn = var.nginx_server_fqdn, port = 443 })
+            ssl_part           = templatefile("${local.cloud_init_write_files_nginx_prefix}_ssl_part.tpl", { fqdn = var.nginx_server_fqdn, port = 443 })
           }
         )
       ],
       [
         for conf in var.nginx_confs :
         templatefile(
-          "${local.cloud_init_nginx_write_files_prefix}_https_conf.tpl",
+          "${local.cloud_init_write_files_nginx_prefix}_https_conf.tpl",
           {
             configuration_home = var.nginx_configuration_home,
             server_name        = conf.server_name,
@@ -63,7 +63,7 @@ locals {
             https_map          = "",
             https_conf         = join("\n      ", split("\n", conf.conf)),
             gnu_add_header     = local.cloud_init_nginx_gnu_add_header,
-            ssl_part           = templatefile("${local.cloud_init_nginx_write_files_prefix}_ssl_part.tpl", { fqdn = conf.fqdn, port = conf.port })
+            ssl_part           = templatefile("${local.cloud_init_write_files_nginx_prefix}_ssl_part.tpl", { fqdn = conf.fqdn, port = conf.port })
           }
         )
       ]
@@ -72,14 +72,14 @@ locals {
 }
 
 locals {
-  cloud_init_nginx_runcmd_prefix = "${path.module}/templates/nginx/cloudinit.yml.runcmd"
+  cloud_init_runcmd_nginx_prefix = "${path.module}/templates/nginx/cloudinit.yml.runcmd"
 
-  cloud_init_nginx_runcmd = join(
+  cloud_init_runcmd_nginx = join(
     "\n",
-    local.cloud_init_nginx_comment,
+    local.cloud_init_comment_nginx,
     [
       templatefile(
-        "${local.cloud_init_nginx_runcmd_prefix}.tpl",
+        "${local.cloud_init_runcmd_nginx_prefix}.tpl",
         {
           configuration_home = var.nginx_configuration_home
           server_fqdn        = var.nginx_server_fqdn,

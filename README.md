@@ -91,6 +91,12 @@ s. [vault](https://developer.hashicorp.com/vault/downloads)
 
 For input variables: s. [vault](#input_vault).
 
+### wait_until
+
+s. [wait_until](https://github.com/l-with/wait-until)
+
+For input variables: s. [wait_until](#wait_until).
+
 ## terraform
 
 <!-- BEGIN_TF_DOCS -->
@@ -160,6 +166,7 @@ No resources.
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `""` | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
 | <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `""` | no |
+| <a name="input_wait_until"></a> [wait\_until](#input\_wait\_until) | if cloud-init user data for installing wait\_until should be generated | `bool` | `false` | no |
 
 #### Outputs
 

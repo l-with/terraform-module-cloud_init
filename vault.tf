@@ -3,27 +3,27 @@ locals {
 }
 
 locals {
-  cloud_init_vault_comment        = ["# vault"]
-  cloud_init_vault_package_prefix = "${path.module}/templates/vault/cloudinit.yml.packages"
+  cloud_init_comment_vault        = ["# vault"]
+  cloud_init_package_vault_prefix = "${path.module}/templates/vault/cloudinit.yml.packages"
 
-  cloud_init_vault_package = join(
+  cloud_init_package_vault = join(
     "\n",
-    local.cloud_init_vault_comment,
+    local.cloud_init_comment_vault,
     [
-      templatefile("${local.cloud_init_vault_package_prefix}.tpl", {})
+      templatefile("${local.cloud_init_package_vault_prefix}.tpl", {})
     ]
   )
 }
 
 
 locals {
-  cloud_init_vault_runcmd_prefix = "${path.module}/templates/vault/cloudinit.yml.runcmd"
+  cloud_init_runcmd_vault_prefix = "${path.module}/templates/vault/cloudinit.yml.runcmd"
 
-  cloud_init_vault_runcmd = join(
+  cloud_init_runcmd_vault = join(
     "\n",
-    local.cloud_init_vault_comment,
+    local.cloud_init_comment_vault,
     [
-      templatefile("${local.cloud_init_vault_runcmd_prefix}.tpl", {})
+      templatefile("${local.cloud_init_runcmd_vault_prefix}.tpl", {})
     ]
   )
 }

@@ -1,12 +1,12 @@
 locals {
-  cloud_init_jq_comment        = ["# jq"]
-  cloud_init_jq_package_prefix = "${path.module}/templates/jq/cloudinit.yml.packages"
+  cloud_comment_init_jq        = ["# jq"]
+  cloud_init_package_jq_prefix = "${path.module}/templates/jq/cloudinit.yml.packages"
 
-  cloud_init_jq_package = join(
+  cloud_init_package_jq = join(
     "\n",
-    local.cloud_init_fail2ban_comment,
+    local.cloud_init_comment_fail2ban,
     [
-      templatefile("${local.cloud_init_jq_package_prefix}.tpl", {})
+      templatefile("${local.cloud_init_package_jq_prefix}.tpl", {})
     ]
   )
 }

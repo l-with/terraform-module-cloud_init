@@ -3,7 +3,7 @@ locals {
 }
 
 locals {
-  cloud_init_rke2_comment       = ["# rke2"]
+  cloud_init_comment_rke2       = ["# rke2"]
   cloud_init_runcmd_rke2_prefix = "${path.module}/templates/rke2/cloudinit.yml.runcmd"
 
   cloud_init_runcmd_rke2_node_begin_template             = "${local.cloud_init_runcmd_rke2_prefix}_begin.tpl"
@@ -13,7 +13,7 @@ locals {
 
   cloud_init_runcmd_rke2_node_1st = join(
     "\n",
-    local.cloud_init_rke2_comment,
+    local.cloud_init_comment_rke2,
     [
       templatefile(
         "${local.cloud_init_runcmd_encrypted_packages_prefix}.tpl",
@@ -46,7 +46,7 @@ locals {
   )
   cloud_init_runcmd_rke2_node_other = join(
     "\n",
-    local.cloud_init_rke2_comment,
+    local.cloud_init_comment_rke2,
     [
       templatefile(local.cloud_init_runcmd_rke2_node_begin_template, {
         rke2_cert_package_url        = var.rke2_node_cert_package_url
