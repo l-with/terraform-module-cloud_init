@@ -7,6 +7,33 @@ module "either_rke2_node_1st_or_rke2_node_other" {
   error_message = "error: rke2_node_1st and rke2_node_other can not be used together"
 }
 
+module "rke2_node_needs_rke2_node_cert_package_url" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_url == "")
+  error_message = "error: rke2_node needs rke2_node_cert_package_url"
+}
+
+module "rke2_node_needs_encrypted_package_api_header" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_api_header == "")
+  error_message = "error: rke2_node needs rke2_node_cert_package_api_header"
+}
+
+module "rke2_node_needs_rke2_node_rke2_node_cert_package_secret" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_secret == "")
+  error_message = "error: rke2_node needs rke2_node_cert_package_secret"
+}
+
 module "rke2_node_needs_rke2_node_pre_shared_secret" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
