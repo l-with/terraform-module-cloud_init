@@ -1,4 +1,9 @@
 locals {
+  vault      = var.vault || var.rke2_node_1st
+  wait_until = var.wait_until || var.rke2_node_1st
+}
+
+locals {
   cloud_init_runcmd_end_template = "${path.module}/templates/cloudinit.yml.runcmd_end.tpl"
   cloud_init_parts_keys_sorted = [
     "cloud_init_start",

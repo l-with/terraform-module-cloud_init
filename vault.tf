@@ -1,8 +1,4 @@
 locals {
-  vault = var.vault || var.rke2_node_1st
-}
-
-locals {
   cloud_init_comment_vault        = ["# vault"]
   cloud_init_package_vault_prefix = "${path.module}/templates/vault/cloudinit.yml.packages"
 
