@@ -15,15 +15,6 @@ locals {
     "\n",
     local.cloud_init_comment_rke2,
     [
-      templatefile(
-        "${local.cloud_init_runcmd_encrypted_packages_prefix}.tpl",
-        {
-          url        = var.rke2_node_cert_package_url
-          api_header = var.rke2_node_cert_package_api_header
-          secret     = var.rke2_node_cert_package_secret
-          post_cmd   = ""
-        }
-      ),
       templatefile(local.cloud_init_runcmd_rke2_node_begin_template, {
         rke2_pre_shared_secret = var.rke2_node_pre_shared_secret
         rke2_config_template   = "/root/config.yaml.node_1st.envtpl"
@@ -49,12 +40,9 @@ locals {
     local.cloud_init_comment_rke2,
     [
       templatefile(local.cloud_init_runcmd_rke2_node_begin_template, {
-        rke2_cert_package_url        = var.rke2_node_cert_package_url
-        rke2_cert_package_api_header = var.rke2_node_cert_package_api_header
-        rke2_cert_package_secret     = var.rke2_node_cert_package_secret
-        rke2_pre_shared_secret       = var.rke2_node_pre_shared_secret
-        rke2_config_template         = "/root/config.yaml.node_other.envtpl"
-        rke2_node_1st_ip             = var.rke2_node_other_node_1st_ip
+        rke2_pre_shared_secret = var.rke2_node_pre_shared_secret
+        rke2_config_template   = "/root/config.yaml.node_other.envtpl"
+        rke2_node_1st_ip       = var.rke2_node_other_node_1st_ip
       }),
       templatefile(local.cloud_init_runcmd_rke2_node_server_template, {})
     ]
