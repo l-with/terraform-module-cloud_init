@@ -1,5 +1,5 @@
 module "croc" {
-  count = var.croc ? 1 : 0
+  count = local.parts_active["croc"] ? 1 : 0
 
   source = "./modules/cloud_init_parts"
 
