@@ -1,5 +1,6 @@
 locals {
   parts_active = {
+    certbot            = var.certbot
     encrypted_packages = length(var.encrypted_packages) >= 0
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
     vault              = var.vault || var.rke2_node_1st
@@ -54,13 +55,13 @@ locals {
     cloud_init_packages_fail2ban          = var.fail2ban ? module.fail2ban[0].packages : ""
     cloud_init_runcmd_encryped_packages   = local.parts_active["encrypted_packages"] ? module.encrypted_packages[0].runcmd : ""
     cloud_init_packages_nginx             = var.nginx ? module.nginx[0].packages : "" // local.cloud_init_package_nginx : ""
-    cloud_init_packages_certbot           = var.certbot ? module.certbot[0].packages : ""
+    cloud_init_packages_certbot           = local.parts_active["certbot"] ? module.certbot[0].packages : ""
     cloud_init_runcmd                     = "runcmd:"
     cloud_init_runcmd_croc                = var.croc ? module.croc[0].runcmd : ""
     cloud_init_runcmd_wait_until          = local.parts_active["wait_until"] ? module.wait_until[0].runcmd : ""
     cloud_init_runcmd_docker              = var.docker ? module.docker[0].runcmd : ""
     cloud_init_runcmd_vault               = local.parts_active["vault"] ? module.vault[0].runcmd : ""
-    cloud_init_runcmd_certbot             = var.certbot ? module.certbot[0].runcmd : ""
+    cloud_init_runcmd_certbot             = local.parts_active["certbot"] ? module.certbot[0].runcmd : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? module.fail2ban[0].runcmd : ""
     cloud_init_runcmd_nginx               = var.nginx ? module.nginx[0].runcmd : ""
     cloud_init_runcmd_rke2_node_1st       = var.rke2 && var.rke2_node_1st ? module.rke2_node_1st[0].runcmd : ""
