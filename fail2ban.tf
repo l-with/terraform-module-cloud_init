@@ -8,10 +8,6 @@ module "fail2ban" {
     template = "${path.module}/templates/fail2ban/${local.yml_packages}.tpl",
     vars     = {}
   }]
-  runcmd = [{
-    template = "${path.module}/templates/fail2ban/${local.yml_runcmd}.tpl",
-    vars     = {}
-  }]
   write_files = concat(
     [
       {
@@ -34,4 +30,8 @@ module "fail2ban" {
     ]
     : []
   )
+  runcmd = [{
+    template = "${path.module}/templates/fail2ban/${local.yml_runcmd}.tpl",
+    vars     = {}
+  }]
 }
