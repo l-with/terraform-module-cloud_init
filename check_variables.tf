@@ -66,7 +66,7 @@ module "rke2_node_1st_needs_vault_addr" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.rke2_node_1st && local.vault_addr == "")
+  assert        = !(var.rke2_node_1st && local.rke2_node_1st_vault_addr == "")
   error_message = "error: rke2_node_1st needs *_vault_addr"
 }
 

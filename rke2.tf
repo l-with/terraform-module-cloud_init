@@ -1,5 +1,5 @@
 locals {
-  vault_addr = var.rke2_node_1st_vault_addr != "" ? var.rke2_node_1st_vault_addr : var.vault_addr
+  rke2_node_1st_vault_addr = var.rke2_node_1st_vault_addr != "" ? var.rke2_node_1st_vault_addr : var.vault_addr
 }
 
 module "rke2_node_1st" {
@@ -42,7 +42,7 @@ module "rke2_node_1st" {
         rke2_role_id             = var.rke2_node_1st_rke2_role_id
         rke2_secret_id           = var.rke2_node_1st_rke2_secret_id
         cert_manager_crd_version = var.rke2_node_1st_cert_manager_crd_version
-        vault_addr               = local.vault_addr
+        vault_addr               = local.rke2_node_1st_vault_addr
         vault_mount              = var.rke2_node_1st_vault_mount
         vault_path               = var.rke2_node_1st_vault_path
         vault_field              = var.rke2_node_1st_vault_field
