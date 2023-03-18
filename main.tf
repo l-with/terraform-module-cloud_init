@@ -44,7 +44,7 @@ locals {
     cloud_init_write_files_fail2ban       = var.fail2ban ? module.fail2ban[0].write_files : ""
     cloud_init_write_files_nginx          = var.nginx ? local.cloud_init_write_files_nginx : ""
     cloud_init_packages                   = "packages:"
-    cloud_init_packages_gettext_base      = local.gettext_base ? local.cloud_init_packages_gettext_base : ""
+    cloud_init_packages_gettext_base      = local.gettext_base ? module.gettext_base[0].packages : ""
     cloud_init_packages_jq                = var.jq ? module.jq[0].packages : ""
     cloud_init_packages_vault             = local.vault ? module.vault[0].packages : ""
     cloud_init_packages_fail2ban          = var.fail2ban ? module.fail2ban[0].packages : ""
