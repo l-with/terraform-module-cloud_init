@@ -1,7 +1,8 @@
 locals {
-  vault        = var.vault || var.rke2_node_1st
-  wait_until   = var.wait_until || var.rke2_node_1st
-  gettext_base = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
+  encrypted_packages = length(var.encrypted_packages) >= 0
+  gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
+  vault              = var.vault || var.rke2_node_1st
+  wait_until         = var.wait_until || var.rke2_node_1st
 }
 
 locals {
