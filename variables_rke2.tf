@@ -38,6 +38,7 @@ variable "rke2_node_pre_shared_secret" {
   description = "the pre shared secret for `/etc/rancher/rke2/config.yaml`"
   type        = string
   default     = ""
+  sensitive   = true
 }
 
 variable "rke2_node_1st_rke2_role_id" {

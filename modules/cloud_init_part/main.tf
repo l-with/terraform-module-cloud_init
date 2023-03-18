@@ -1,7 +1,7 @@
 locals {
   comment = ["# ${var.part}"]
 
-  packages = join(
+  packages = length(var.packages) == 0 ? "" : join(
     "\n",
     local.comment,
     [
@@ -14,7 +14,8 @@ locals {
       )
     ]
   )
-  write_files = join(
+
+  write_files = length(var.write_files) == 0 ? "" : join(
     "\n",
     local.comment,
     [
@@ -27,7 +28,8 @@ locals {
       )
     ]
   )
-  rundcmd = join(
+
+  rundcmd = length(var.runcmd) == 0 ? "" : join(
     "\n",
     local.comment,
     [
