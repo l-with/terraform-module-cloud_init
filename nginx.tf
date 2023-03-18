@@ -63,11 +63,30 @@ module "nginx" {
       }
     ]
   )
-  runcmd = [{
-    template = "${path.module}/templates/nginx/${local.yml_runcmd}.tpl",
-    vars = {
-      configuration_home = var.nginx_configuration_home
-      server_fqdn        = var.nginx_server_fqdn,
-    }
-  }]
+  runcmd = concat(
+    [{
+      template = "${path.module}/templates/nginx/${local.yml_runcmd}_https_conf.tpl",
+      vars = {
+        configuration_home = var.nginx_configuration_home
+        server_fqdn        = var.nginx_server_fqdn,
+      }
+    }],
+    [
+      for conf in var.nginx_confs :
+      {
+        template = "${path.module}/templates/nginx/${local.yml_runcmd}_https_conf.tpl",
+        vars = {
+          configuration_home = var.nginx_configuration_home,
+          server_fqdn        = conf.fqdn,
+        }
+      }
+    ],
+    [{
+      template = "${path.module}/templates/nginx/${local.yml_runcmd}.tpl",
+      vars = {
+        configuration_home = var.nginx_configuration_home
+        server_fqdn        = var.nginx_server_fqdn,
+      }
+    }],
+  )
 }
