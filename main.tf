@@ -22,6 +22,8 @@ locals {
     rke2_node_1st      = local.rke2_node_1st
     rke2_node_other    = local.rke2_node_other
     vault              = local.vault
+    wait_until         = local.wait_until
+
   }
   active_parts_inputs = {
     for part in local.parts :
@@ -34,19 +36,6 @@ locals {
 
 locals {
   parts = [
-    "certbot",
-    "croc",
-    "docker",
-    "encrypted_packages",
-    "fail2ban",
-    "gettext_base",
-    "jq",
-    "nginx",
-    "rke2_node_1st",
-    "rke2_node_other",
-    "vault",
-  ]
-  parts_all = [
     "certbot",
     "croc",
     "docker",
@@ -74,9 +63,6 @@ locals {
     vault              = var.vault || var.rke2_node_1st
     wait_until         = var.wait_until || var.rke2_node_1st
   }
-  parts_write_files = [
-    for part in local.parts_all : part if local.parts_active[part]
-  ]
 }
 
 locals {
@@ -135,7 +121,7 @@ locals {
     cloud_init_runcmd = "runcmd:"
 
     cloud_init_runcmd_croc            = local.parts_active["croc"] ? module.cloud_init_part["croc"].runcmd : ""
-    cloud_init_runcmd_wait_until      = local.parts_active["wait_until"] ? module.wait_until[0].runcmd : ""
+    cloud_init_runcmd_wait_until      = local.parts_active["wait_until"] ? module.cloud_init_part["wait_until"].runcmd : ""
     cloud_init_runcmd_docker          = local.parts_active["docker"] ? module.cloud_init_part["docker"].runcmd : ""
     cloud_init_runcmd_vault           = local.parts_active["vault"] ? module.cloud_init_part["vault"].runcmd : ""
     cloud_init_runcmd_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].runcmd : ""
