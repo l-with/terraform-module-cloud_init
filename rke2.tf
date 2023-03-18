@@ -2,38 +2,43 @@ locals {
   vault_addr = var.rke2_node_1st_vault_addr != "" ? var.rke2_node_1st_vault_addr : var.vault_addr
 }
 
-locals {
-  cloud_init_comment_rke2       = ["# rke2"]
-  cloud_init_runcmd_rke2_prefix = "${path.module}/templates/rke2/cloudinit.yml.runcmd"
+module "rke2_node_1st" {
+  count = var.rke2 && var.rke2_node_1st ? 1 : 0
 
-  cloud_init_runcmd_rke2_node_begin_template             = "${local.cloud_init_runcmd_rke2_prefix}_begin.tpl"
-  cloud_init_runcmd_rke2_node_1st_manifests_template     = "${local.cloud_init_runcmd_rke2_prefix}_manifests.tpl"
-  cloud_init_runcmd_rke2_node_server_template            = "${local.cloud_init_runcmd_rke2_prefix}_rke2-server.tpl"
-  cloud_init_runcmd_rke2_node_1st_kubectl2vault_template = "${local.cloud_init_runcmd_rke2_prefix}_kubeconfig2vault.tpl"
+  source = "./modules/cloud_init_parts"
 
-  cloud_init_runcmd_rke2_node_1st = join(
-    "\n",
-    local.cloud_init_comment_rke2,
-    [
-      templatefile(
-        "${local.cloud_init_runcmd_encrypted_packages_prefix}.tpl",
-        {
-          url        = var.rke2_node_cert_package_url
-          api_header = var.rke2_node_cert_package_api_header
-          secret     = var.rke2_node_cert_package_secret
-          post_cmd   = ""
-        }
-      ),
-      templatefile(local.cloud_init_runcmd_rke2_node_begin_template, {
+  part = "rke2_node_1st"
+  runcmd = [
+    {
+      template = "${path.module}/templates/encrypted_packages/${local.yml_runcmd}.tpl",
+      vars = {
+        url        = var.rke2_node_cert_package_url
+        api_header = var.rke2_node_cert_package_api_header
+        secret     = var.rke2_node_cert_package_secret
+        post_cmd   = ""
+      }
+    },
+    {
+      template = "${path.module}/templates/rke2/${local.yml_runcmd}_begin.tpl",
+      vars = {
         rke2_pre_shared_secret = var.rke2_node_pre_shared_secret
         rke2_config_template   = "/root/config.yaml.node_1st.envtpl"
         rke2_node_1st_ip       = ""
-      }),
-      templatefile(local.cloud_init_runcmd_rke2_node_1st_manifests_template, {
+      }
+    },
+    {
+      template = "${path.module}/templates/rke2/${local.yml_runcmd}_manifests.tpl",
+      vars = {
         cert_manager_crd_version = var.rke2_node_1st_cert_manager_crd_version
-      }),
-      templatefile(local.cloud_init_runcmd_rke2_node_server_template, {}),
-      templatefile(local.cloud_init_runcmd_rke2_node_1st_kubectl2vault_template, {
+      }
+    },
+    {
+      template = "${path.module}/templates/rke2/${local.yml_runcmd}_rke2-server.tpl",
+      vars     = {}
+    },
+    {
+      template = "${path.module}/templates/rke2/${local.yml_runcmd}_kubeconfig2vault.tpl",
+      vars = {
         rke2_role_id             = var.rke2_node_1st_rke2_role_id
         rke2_secret_id           = var.rke2_node_1st_rke2_secret_id
         cert_manager_crd_version = var.rke2_node_1st_cert_manager_crd_version
@@ -41,28 +46,38 @@ locals {
         vault_mount              = var.rke2_node_1st_vault_mount
         vault_path               = var.rke2_node_1st_vault_path
         vault_field              = var.rke2_node_1st_vault_field
-      })
-    ]
-  )
-  cloud_init_runcmd_rke2_node_other = join(
-    "\n",
-    local.cloud_init_comment_rke2,
-    [
-      templatefile(
-        "${local.cloud_init_runcmd_encrypted_packages_prefix}.tpl",
-        {
-          url        = var.rke2_node_cert_package_url
-          api_header = var.rke2_node_cert_package_api_header
-          secret     = var.rke2_node_cert_package_secret
-          post_cmd   = ""
-        }
-      ),
-      templatefile(local.cloud_init_runcmd_rke2_node_begin_template, {
+      }
+    },
+  ]
+}
+
+module "rke2_node_other" {
+  count = var.rke2 && var.rke2_node_other ? 1 : 0
+
+  source = "./modules/cloud_init_parts"
+
+  part = "rke2_node_other"
+  runcmd = [
+    {
+      template = "${path.module}/templates/encrypted_packages/${local.yml_runcmd}.tpl",
+      vars = {
+        url        = var.rke2_node_cert_package_url
+        api_header = var.rke2_node_cert_package_api_header
+        secret     = var.rke2_node_cert_package_secret
+        post_cmd   = ""
+      }
+    },
+    {
+      template = "${path.module}/templates/rke2/${local.yml_runcmd}_begin.tpl",
+      vars = {
         rke2_pre_shared_secret = var.rke2_node_pre_shared_secret
         rke2_config_template   = "/root/config.yaml.node_other.envtpl"
         rke2_node_1st_ip       = var.rke2_node_other_node_1st_ip
-      }),
-      templatefile(local.cloud_init_runcmd_rke2_node_server_template, {})
-    ]
-  )
+      }
+    },
+    {
+      template = "${path.module}/templates/rke2/${local.yml_runcmd}_rke2-server.tpl",
+      vars     = {}
+    },
+  ]
 }

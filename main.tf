@@ -59,8 +59,8 @@ locals {
     cloud_init_runcmd_certbot             = var.certbot ? local.cloud_init_runcmd_certbot : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? module.fail2ban[0].runcmd : ""
     cloud_init_runcmd_nginx               = var.nginx ? local.cloud_init_runcmd_nginx : ""
-    cloud_init_runcmd_rke2_node_1st       = var.rke2 && var.rke2_node_1st ? local.cloud_init_runcmd_rke2_node_1st : ""
-    cloud_init_runcmd_rke2_node_other     = var.rke2 && var.rke2_node_other ? local.cloud_init_runcmd_rke2_node_other : ""
+    cloud_init_runcmd_rke2_node_1st       = var.rke2 && var.rke2_node_1st ? module.rke2_node_1st[0].runcmd : ""
+    cloud_init_runcmd_rke2_node_other     = var.rke2 && var.rke2_node_other ? module.rke2_node_other[0].runcmd : ""
     cloud_init_runcmd_end                 = templatefile(local.cloud_init_runcmd_end_template, {}),
   }
   cloud_init_parts_sorted = [
