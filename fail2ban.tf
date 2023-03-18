@@ -1,43 +1,37 @@
-locals {
-  cloud_init_comment_fail2ban        = ["# fail2ban"]
-  cloud_init_package_fail2ban_prefix = "${path.module}/templates/fail2ban/cloudinit.yml.packages"
+module "fail2ban" {
+  count = var.fail2ban ? 1 : 0
 
-  cloud_init_package_fail2ban = join(
-    "\n",
-    local.cloud_init_comment_fail2ban,
+  source = "./modules/cloud_init_parts"
+
+  part = "fail2ban"
+  packages = [{
+    template = "${path.module}/templates/fail2ban/${local.yml_packages}.tpl",
+    vars     = {}
+  }]
+  runcmd = [{
+    template = "${path.module}/templates/fail2ban/${local.yml_runcmd}.tpl",
+    vars     = {}
+  }]
+  write_files = concat(
     [
-      templatefile("${local.cloud_init_package_fail2ban_prefix}.tpl", {})
+      {
+        template = "${path.module}/templates/fail2ban/${local.yml_write_files}_jail_local.tpl",
+        vars     = {}
+      }
+    ],
+    var.fail2ban_sshd ? [
+      {
+        template = "${path.module}/templates/fail2ban/${local.yml_write_files}_jail.tpl",
+        vars     = { jail = "sshd" }
+      }
     ]
-  )
-}
-
-locals {
-  cloud_init_write_files_fail2ban_prefix = "${path.module}/templates/fail2ban/cloudinit.yml.write_files"
-
-  cloud_init_write_files_fail2ban_sshd     = var.fail2ban_sshd ? [templatefile("${local.cloud_init_write_files_fail2ban_prefix}_jail.tpl", { jail = "sshd" })] : []
-  cloud_init_write_files_fail2ban_recidive = var.fail2ban_recidive ? [templatefile("${local.cloud_init_write_files_fail2ban_prefix}_jail.tpl", { jail = "recidive" })] : []
-
-  cloud_init_write_files_fail2ban = join(
-    "\n",
-    concat(
-      local.cloud_init_comment_fail2ban,
-      [
-        templatefile("${local.cloud_init_write_files_fail2ban_prefix}_jail_local.tpl", {})
-      ],
-      local.cloud_init_write_files_fail2ban_sshd,
-      local.cloud_init_write_files_fail2ban_recidive
-    )
-  )
-}
-
-locals {
-  cloud_init_runcmd_fail2ban_prefix = "${path.module}/templates/fail2ban/cloudinit.yml.runcmd"
-
-  cloud_init_runcmd_fail2ban = join(
-    "\n",
-    local.cloud_init_comment_fail2ban,
-    [
-      templatefile("${local.cloud_init_runcmd_fail2ban_prefix}.tpl", {})
+    : [],
+    var.fail2ban_recidive ? [
+      {
+        template = "${path.module}/templates/fail2ban/${local.yml_write_files}_jail.tpl",
+        vars     = { jail = "recidive" }
+      }
     ]
+    : []
   )
 }
