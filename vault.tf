@@ -1,25 +1,15 @@
-locals {
-  cloud_init_comment_vault        = ["# vault"]
-  cloud_init_package_vault_prefix = "${path.module}/templates/vault/cloudinit.yml.packages"
+module "vault" {
+  count = local.vault ? 1 : 0
 
-  cloud_init_package_vault = join(
-    "\n",
-    local.cloud_init_comment_vault,
-    [
-      templatefile("${local.cloud_init_package_vault_prefix}.tpl", {})
-    ]
-  )
-}
+  source = "./modules/cloud_init_parts"
 
-
-locals {
-  cloud_init_runcmd_vault_prefix = "${path.module}/templates/vault/cloudinit.yml.runcmd"
-
-  cloud_init_runcmd_vault = join(
-    "\n",
-    local.cloud_init_comment_vault,
-    [
-      templatefile("${local.cloud_init_runcmd_vault_prefix}.tpl", {})
-    ]
-  )
+  part = "vault"
+  packages = [{
+    template = "${path.module}/templates/vault/${local.yml_packages}.tpl",
+    vars     = {}
+  }]
+  runcmd = [{
+    template = "${path.module}/templates/vault/${local.yml_runcmd}.tpl",
+    vars     = {}
+  }]
 }

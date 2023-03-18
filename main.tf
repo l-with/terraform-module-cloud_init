@@ -46,7 +46,7 @@ locals {
     cloud_init_packages                   = "packages:"
     cloud_init_packages_gettext_base      = local.gettext_base ? local.cloud_init_packages_gettext_base : ""
     cloud_init_packages_jq                = var.jq ? module.jq[0].packages : ""
-    cloud_init_packages_vault             = local.vault ? local.cloud_init_package_vault : ""
+    cloud_init_packages_vault             = local.vault ? module.vault[0].packages : ""
     cloud_init_packages_fail2ban          = var.fail2ban ? module.fail2ban[0].packages : ""
     cloud_init_runcmd_encryped_packages   = local.cloud_init_runcmd_encrypted_packages
     cloud_init_packages_nginx             = var.nginx ? local.cloud_init_package_nginx : ""
@@ -55,7 +55,7 @@ locals {
     cloud_init_runcmd_croc                = var.croc ? module.croc[0].runcmd : ""
     cloud_init_runcmd_wait_until          = local.wait_until ? local.cloud_init_runcmd_wait_until : ""
     cloud_init_runcmd_docker              = var.docker ? local.cloud_init_runcmd_docker : ""
-    cloud_init_runcmd_vault               = local.vault ? local.cloud_init_runcmd_vault : ""
+    cloud_init_runcmd_vault               = local.vault ? module.vault[0].runcmd : ""
     cloud_init_runcmd_certbot             = var.certbot ? local.cloud_init_runcmd_certbot : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? module.fail2ban[0].runcmd : ""
     cloud_init_runcmd_nginx               = var.nginx ? local.cloud_init_runcmd_nginx : ""

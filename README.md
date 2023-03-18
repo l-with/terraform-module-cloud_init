@@ -126,7 +126,7 @@ No providers.
 | <a name="module_rke2_node_needs_rke2_node_rke2_node_cert_package_secret"></a> [rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret](#module\_rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_other"></a> [rke2\_node\_other](#module\_rke2\_node\_other) | ./modules/cloud_init_parts | n/a |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
-| <a name="module_test"></a> [test](#module\_test) | ./modules/cloud_init_parts | n/a |
+| <a name="module_vault"></a> [vault](#module\_vault) | ./modules/cloud_init_parts | n/a |
 
 #### Resources
 
@@ -173,7 +173,6 @@ No resources.
 | <a name="input_rke2_node_other"></a> [rke2\_node\_other](#input\_rke2\_node\_other) | if cloud-init user data for the rke2 other nodes should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `""` | no |
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `""` | no |
-| <a name="input_test"></a> [test](#input\_test) | if cloud-init user data for test installing should be generated | `bool` | `false` | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
 | <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `""` | no |
 | <a name="input_wait_until"></a> [wait\_until](#input\_wait\_until) | if cloud-init user data for installing wait\_until should be generated | `bool` | `false` | no |
