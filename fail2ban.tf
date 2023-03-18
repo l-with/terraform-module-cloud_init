@@ -1,5 +1,5 @@
 module "fail2ban" {
-  count = var.fail2ban ? 1 : 0
+  count = local.parts_active["fail2ban"] ? 1 : 0
 
   source = "./modules/cloud_init_parts"
 
