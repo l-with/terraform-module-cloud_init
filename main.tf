@@ -61,7 +61,7 @@ locals {
     cloud_init_packages_vault             = local.parts_active["vault"] ? module.vault[0].packages : ""
     cloud_init_packages_fail2ban          = local.parts_active["fail2ban"] ? module.fail2ban[0].packages : ""
     cloud_init_runcmd_encryped_packages   = local.parts_active["encrypted_packages"] ? module.encrypted_packages[0].runcmd : ""
-    cloud_init_packages_nginx             = local.parts_active["nginx"] ? module.nginx[0].packages : "" // local.cloud_init_package_nginx : ""
+    cloud_init_packages_nginx             = local.parts_active["nginx"] ? module.nginx[0].packages : ""
     cloud_init_packages_certbot           = local.parts_active["certbot"] ? module.certbot[0].packages : ""
     cloud_init_runcmd                     = "runcmd:"
     cloud_init_runcmd_croc                = local.parts_active["croc"] ? module.croc[0].runcmd : ""
