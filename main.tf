@@ -1,5 +1,5 @@
 module "cloud_init_part" {
-  for_each = local.modules
+  for_each = local.active_parts_inputs
 
   source = "./modules/cloud_init_part"
 
@@ -8,17 +8,20 @@ module "cloud_init_part" {
 }
 
 locals {
-  modules = merge(local.parts_active["jq"] ?
-    {
-      jq = local.jq
-    }
-    :
-    {}
-  )
+  parts_inputs = {
+    jq = local.jq
+  }
+  active_parts_inputs = {
+    for part in local.parts :
+    part => local.parts_inputs[part] if local.parts_active[part]
+  }
 }
 
 locals {
   parts = [
+    "jq",
+  ]
+  parts_all = [
     "certbot",
     "croc",
     "docker",
@@ -47,7 +50,7 @@ locals {
     wait_until         = var.wait_until || var.rke2_node_1st
   }
   parts_write_files = [
-    for part in local.parts : part if local.parts_active[part]
+    for part in local.parts_all : part if local.parts_active[part]
   ]
 }
 
