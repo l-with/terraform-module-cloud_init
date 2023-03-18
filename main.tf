@@ -47,7 +47,7 @@ locals {
     certbot            = var.certbot
     croc               = var.croc
     docker             = var.docker
-    encrypted_packages = length(var.encrypted_packages) >= 0
+    encrypted_packages = var.encrypted_packages
     fail2ban           = var.fail2ban
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
     jq                 = var.jq

@@ -1,7 +1,7 @@
 locals {
   encrypted_packages = {
     runcmd = [
-      for package in var.encrypted_packages :
+      for package in var.encrypted_packages_list :
       {
         template = "${path.module}/templates/encrypted_packages/${local.yml_runcmd}.tpl",
         vars = {
