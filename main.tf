@@ -5,11 +5,13 @@ module "cloud_init_part" {
 
   part     = each.key
   packages = each.value.packages
+  runcmd   = each.value.runcmd
 }
 
 locals {
   parts_inputs = {
-    jq = local.jq
+    croc = local.croc,
+    jq   = local.jq
   }
   active_parts_inputs = {
     for part in local.parts :
@@ -22,6 +24,7 @@ locals {
 
 locals {
   parts = [
+    "croc",
     "jq",
   ]
   parts_all = [
@@ -113,7 +116,7 @@ locals {
 
     cloud_init_runcmd = "runcmd:"
 
-    cloud_init_runcmd_croc            = local.parts_active["croc"] ? module.croc[0].runcmd : ""
+    cloud_init_runcmd_croc            = local.parts_active["croc"] ? module.cloud_init_part["croc"].runcmd : ""
     cloud_init_runcmd_wait_until      = local.parts_active["wait_until"] ? module.wait_until[0].runcmd : ""
     cloud_init_runcmd_docker          = local.parts_active["docker"] ? module.docker[0].runcmd : ""
     cloud_init_runcmd_vault           = local.parts_active["vault"] ? module.vault[0].runcmd : ""

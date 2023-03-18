@@ -1,11 +1,8 @@
-module "croc" {
-  count = local.parts_active["croc"] ? 1 : 0
-
-  source = "./modules/cloud_init_part"
-
-  part = "croc"
-  runcmd = [{
-    template = "${path.module}/templates/croc/${local.yml_runcmd}.tpl",
-    vars     = {}
-  }]
+locals {
+  croc = {
+    runcmd = [{
+      template = "${path.module}/templates/croc/${local.yml_runcmd}.tpl",
+      vars     = {}
+    }]
+  }
 }
