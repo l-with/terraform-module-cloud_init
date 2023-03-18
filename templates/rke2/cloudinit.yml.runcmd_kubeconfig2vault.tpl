@@ -1,6 +1,5 @@
   - >
     wait_until --verbose --delay 10 --retries 42 --check 'grep "Active: active (running)" | wc -l | grep 1' 'systemctl status rke2-server --no-pager'
-  # - while [ $(systemctl status rke2-server --no-pager | grep "Active: active (running)" | wc -l) != "1" ]; do sleep 5; done
   - export VAULT_ADDR=${vault_addr}
   - export VAULT_APP_TOKEN=$(vault write -format=json auth/approle/login role_id=${rke2_role_id} secret_id=${rke2_secret_id} | jq -r ".auth.client_token")
   - export IPV4=$(hostname -I | cut -d ' ' -f 1)
