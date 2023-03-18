@@ -4,7 +4,7 @@ locals {
 }
 
 module "nginx" {
-  count = var.nginx ? 1 : 0
+  count = local.parts_active["nginx"] ? 1 : 0
 
   source = "./modules/cloud_init_parts"
 
