@@ -13,6 +13,7 @@ locals {
   parts_inputs = {
     certbot = local.certbot
     croc    = local.croc,
+    docker  = local.docker
     jq      = local.jq
   }
   active_parts_inputs = {
@@ -28,6 +29,7 @@ locals {
   parts = [
     "certbot",
     "croc",
+    "docker",
     "jq",
   ]
   parts_all = [
@@ -103,7 +105,7 @@ locals {
 
     cloud_init_write_files = "write_files:"
 
-    cloud_init_write_files_docker   = local.parts_active["docker"] ? module.docker[0].write_files : ""
+    cloud_init_write_files_docker   = local.parts_active["docker"] ? module.cloud_init_part["docker"].write_files : ""
     cloud_init_write_files_fail2ban = local.parts_active["fail2ban"] ? module.fail2ban[0].write_files : ""
     cloud_init_write_files_nginx    = local.parts_active["nginx"] ? module.nginx[0].write_files : ""
 
@@ -121,7 +123,7 @@ locals {
 
     cloud_init_runcmd_croc            = local.parts_active["croc"] ? module.cloud_init_part["croc"].runcmd : ""
     cloud_init_runcmd_wait_until      = local.parts_active["wait_until"] ? module.wait_until[0].runcmd : ""
-    cloud_init_runcmd_docker          = local.parts_active["docker"] ? module.docker[0].runcmd : ""
+    cloud_init_runcmd_docker          = local.parts_active["docker"] ? module.cloud_init_part["docker"].runcmd : ""
     cloud_init_runcmd_vault           = local.parts_active["vault"] ? module.vault[0].runcmd : ""
     cloud_init_runcmd_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].runcmd : ""
     cloud_init_runcmd_fail2ban        = local.parts_active["fail2ban"] ? module.fail2ban[0].runcmd : ""
