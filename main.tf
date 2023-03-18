@@ -13,7 +13,10 @@ locals {
   }
   active_parts_inputs = {
     for part in local.parts :
-    part => local.parts_inputs[part] if local.parts_active[part]
+    part => merge(
+      { packages = [], write_files = [], runcmd = [] },
+      local.parts_inputs[part]
+    ) if local.parts_active[part]
   }
 }
 
