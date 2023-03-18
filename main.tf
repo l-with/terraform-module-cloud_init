@@ -19,6 +19,8 @@ locals {
     gettext_base       = local.gettext_base
     jq                 = local.jq
     nginx              = local.nginx
+    rke2_node_1st      = local.rke2_node_1st
+    rke2_node_other    = local.rke2_node_other
   }
   active_parts_inputs = {
     for part in local.parts :
@@ -39,6 +41,8 @@ locals {
     "gettext_base",
     "jq",
     "nginx",
+    "rke2_node_1st",
+    "rke2_node_other",
   ]
   parts_all = [
     "certbot",
@@ -135,8 +139,8 @@ locals {
     cloud_init_runcmd_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].runcmd : ""
     cloud_init_runcmd_fail2ban        = local.parts_active["fail2ban"] ? module.cloud_init_part["fail2ban"].runcmd : ""
     cloud_init_runcmd_nginx           = local.parts_active["nginx"] ? module.cloud_init_part["nginx"].runcmd : ""
-    cloud_init_runcmd_rke2_node_1st   = local.parts_active["rke2_node_1st"] ? module.rke2_node_1st[0].runcmd : ""
-    cloud_init_runcmd_rke2_node_other = local.parts_active["rke2_node_other"] ? module.rke2_node_other[0].runcmd : ""
+    cloud_init_runcmd_rke2_node_1st   = local.parts_active["rke2_node_1st"] ? module.cloud_init_part["rke2_node_1st"].runcmd : ""
+    cloud_init_runcmd_rke2_node_other = local.parts_active["rke2_node_other"] ? module.cloud_init_part["rke2_node_other"].runcmd : ""
     cloud_init_runcmd_end             = templatefile(local.cloud_init_runcmd_end_template, {}),
   }
   cloud_init_parts_sorted = [

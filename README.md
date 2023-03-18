@@ -114,7 +114,6 @@ No providers.
 |------|--------|---------|
 | <a name="module_cloud_init_part"></a> [cloud\_init\_part](#module\_cloud\_init\_part) | ./modules/cloud_init_part | n/a |
 | <a name="module_either_rke2_node_1st_or_rke2_node_other"></a> [either\_rke2\_node\_1st\_or\_rke2\_node\_other](#module\_either\_rke2\_node\_1st\_or\_rke2\_node\_other) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
-| <a name="module_rke2_node_1st"></a> [rke2\_node\_1st](#module\_rke2\_node\_1st) | ./modules/cloud_init_part | n/a |
 | <a name="module_rke2_node_1st_needs_rke2_node_1st_rke2_role_id"></a> [rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_role\_id](#module\_rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_role\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_rke2_node_1st_rke2_secret_id"></a> [rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_secret\_id](#module\_rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_secret\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_vault_addr"></a> [rke2\_node\_1st\_needs\_vault\_addr](#module\_rke2\_node\_1st\_needs\_vault\_addr) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
@@ -122,7 +121,6 @@ No providers.
 | <a name="module_rke2_node_needs_rke2_node_cert_package_url"></a> [rke2\_node\_needs\_rke2\_node\_cert\_package\_url](#module\_rke2\_node\_needs\_rke2\_node\_cert\_package\_url) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_needs_rke2_node_pre_shared_secret"></a> [rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret](#module\_rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_needs_rke2_node_rke2_node_cert_package_secret"></a> [rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret](#module\_rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
-| <a name="module_rke2_node_other"></a> [rke2\_node\_other](#module\_rke2\_node\_other) | ./modules/cloud_init_part | n/a |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault"></a> [vault](#module\_vault) | ./modules/cloud_init_part | n/a |
 | <a name="module_wait_until"></a> [wait\_until](#module\_wait\_until) | ./modules/cloud_init_part | n/a |
