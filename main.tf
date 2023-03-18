@@ -1,4 +1,37 @@
+module "cloud_init_part" {
+  for_each = local.modules
+
+  source = "./modules/cloud_init_part"
+
+  part     = each.key
+  packages = each.value.packages
+}
+
 locals {
+  modules = merge(local.parts_active["jq"] ?
+    {
+      jq = local.jq
+    }
+    :
+    {}
+  )
+}
+
+locals {
+  parts = [
+    "certbot",
+    "croc",
+    "docker",
+    "encrypted_packages",
+    "fail2ban",
+    "gettext_base",
+    "jq",
+    "nginx",
+    "rke2_node_1st",
+    "rke2_node_other",
+    "vault",
+    "wait_until",
+  ]
   parts_active = {
     certbot            = var.certbot
     croc               = var.croc
@@ -13,6 +46,9 @@ locals {
     vault              = var.vault || var.rke2_node_1st
     wait_until         = var.wait_until || var.rke2_node_1st
   }
+  parts_write_files = [
+    for part in local.parts : part if local.parts_active[part]
+  ]
 }
 
 locals {
@@ -62,7 +98,7 @@ locals {
     cloud_init_packages = "packages:"
 
     cloud_init_packages_gettext_base    = local.parts_active["gettext_base"] ? module.gettext_base[0].packages : ""
-    cloud_init_packages_jq              = local.parts_active["jq"] ? module.jq[0].packages : ""
+    cloud_init_packages_jq              = local.parts_active["jq"] ? module.cloud_init_part["jq"].packages : ""
     cloud_init_packages_vault           = local.parts_active["vault"] ? module.vault[0].packages : ""
     cloud_init_packages_fail2ban        = local.parts_active["fail2ban"] ? module.fail2ban[0].packages : ""
     cloud_init_runcmd_encryped_packages = local.parts_active["encrypted_packages"] ? module.encrypted_packages[0].runcmd : ""

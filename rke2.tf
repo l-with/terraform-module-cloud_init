@@ -5,7 +5,7 @@ locals {
 module "rke2_node_1st" {
   count = local.parts_active["rke2_node_1st"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "rke2_node_1st"
   runcmd = [
@@ -54,7 +54,7 @@ module "rke2_node_1st" {
 module "rke2_node_other" {
   count = local.parts_active["rke2_node_other"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "rke2_node_other"
   runcmd = [

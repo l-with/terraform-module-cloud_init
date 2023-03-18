@@ -1,7 +1,7 @@
 module "wait_until" {
   count = local.parts_active["wait_until"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "wait_until"
   runcmd = [{

@@ -1,7 +1,7 @@
 module "certbot" {
   count = local.parts_active["certbot"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "certbot"
   packages = concat(

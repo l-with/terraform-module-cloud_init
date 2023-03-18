@@ -1,7 +1,7 @@
 module "gettext_base" {
   count = local.parts_active["gettext_base"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "gettext-base"
   packages = [{

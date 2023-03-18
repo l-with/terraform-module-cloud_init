@@ -1,7 +1,7 @@
 module "fail2ban" {
   count = local.parts_active["fail2ban"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "fail2ban"
   packages = [{

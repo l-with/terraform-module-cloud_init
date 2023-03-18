@@ -1,7 +1,7 @@
 module "croc" {
   count = local.parts_active["croc"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "croc"
   runcmd = [{

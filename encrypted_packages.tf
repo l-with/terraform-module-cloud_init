@@ -1,7 +1,7 @@
 module "encrypted_packages" {
   count = local.parts_active["encrypted_packages"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "encrypted_packages"
   runcmd = [

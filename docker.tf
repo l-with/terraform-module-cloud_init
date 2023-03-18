@@ -1,7 +1,7 @@
 module "docker" {
   count = local.parts_active["docker"] ? 1 : 0
 
-  source = "./modules/cloud_init_parts"
+  source = "./modules/cloud_init_part"
 
   part = "docker"
   runcmd = [{
