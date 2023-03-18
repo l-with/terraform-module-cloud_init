@@ -45,7 +45,7 @@ locals {
     cloud_init_write_files_nginx          = var.nginx ? local.cloud_init_write_files_nginx : ""
     cloud_init_packages                   = "packages:"
     cloud_init_packages_gettext_base      = local.gettext_base ? local.cloud_init_packages_gettext_base : ""
-    cloud_init_packages_jq                = var.jq ? local.cloud_init_package_jq : ""
+    cloud_init_packages_jq                = var.jq ? module.jq[0].packages : ""
     cloud_init_packages_vault             = local.vault ? local.cloud_init_package_vault : ""
     cloud_init_packages_fail2ban          = var.fail2ban ? local.cloud_init_package_fail2ban : ""
     cloud_init_runcmd_encryped_packages   = local.cloud_init_runcmd_encrypted_packages

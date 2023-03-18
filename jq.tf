@@ -1,12 +1,11 @@
-locals {
-  cloud_comment_init_jq        = ["# jq"]
-  cloud_init_package_jq_prefix = "${path.module}/templates/jq/cloudinit.yml.packages"
+module "jq" {
+  count = var.jq ? 1 : 0
 
-  cloud_init_package_jq = join(
-    "\n",
-    local.cloud_init_comment_fail2ban,
-    [
-      templatefile("${local.cloud_init_package_jq_prefix}.tpl", {})
-    ]
-  )
+  source = "./modules/cloud_init_parts"
+
+  part = "jq"
+  packages = [{
+    template = "${path.module}/templates/jq/${local.yml_packages}.tpl",
+    vars     = {}
+  }]
 }
