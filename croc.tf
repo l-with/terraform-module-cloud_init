@@ -1,12 +1,11 @@
-locals {
-  cloud_init_comment_croc       = ["# croc"]
-  cloud_init_runcmd_croc_prefix = "${path.module}/templates/croc/cloudinit.yml.runcmd"
+module "croc" {
+  count = var.croc ? 1 : 0
 
-  cloud_init_runcmd_croc = join(
-    "\n",
-    local.cloud_init_comment_croc,
-    [
-      templatefile("${local.cloud_init_runcmd_croc_prefix}.tpl", {})
-    ]
-  )
+  source = "./modules/cloud_init_parts"
+
+  part = "croc"
+  runcmd = [{
+    template = "${path.module}/templates/croc/${local.yml_runcmd}.tpl",
+    vars     = {}
+  }]
 }
