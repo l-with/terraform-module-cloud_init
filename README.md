@@ -114,6 +114,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_certbot"></a> [certbot](#module\_certbot) | ./modules/cloud_init_parts | n/a |
 | <a name="module_croc"></a> [croc](#module\_croc) | ./modules/cloud_init_parts | n/a |
+| <a name="module_docker"></a> [docker](#module\_docker) | ./modules/cloud_init_parts | n/a |
 | <a name="module_either_rke2_node_1st_or_rke2_node_other"></a> [either\_rke2\_node\_1st\_or\_rke2\_node\_other](#module\_either\_rke2\_node\_1st\_or\_rke2\_node\_other) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_fail2ban"></a> [fail2ban](#module\_fail2ban) | ./modules/cloud_init_parts | n/a |
 | <a name="module_jq"></a> [jq](#module\_jq) | ./modules/cloud_init_parts | n/a |

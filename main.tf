@@ -40,7 +40,7 @@ locals {
     cloud_init_package_upgrade            = var.package && var.package_upgrade ? "package_upgrade: true" : ""
     cloud_init_package_reboot_if_required = var.package && var.package_reboot_if_required ? "package_reboot_if_required: true" : ""
     cloud_init_write_files                = "write_files:"
-    cloud_init_write_files_docker         = local.cloud_init_docker_write_files
+    cloud_init_write_files_docker         = var.docker ? module.docker[0].write_files : ""
     cloud_init_write_files_fail2ban       = var.fail2ban ? module.fail2ban[0].write_files : ""
     cloud_init_write_files_nginx          = var.nginx ? local.cloud_init_write_files_nginx : ""
     cloud_init_packages                   = "packages:"
@@ -54,7 +54,7 @@ locals {
     cloud_init_runcmd                     = "runcmd:"
     cloud_init_runcmd_croc                = var.croc ? module.croc[0].runcmd : ""
     cloud_init_runcmd_wait_until          = local.wait_until ? local.cloud_init_runcmd_wait_until : ""
-    cloud_init_runcmd_docker              = var.docker ? local.cloud_init_runcmd_docker : ""
+    cloud_init_runcmd_docker              = var.docker ? module.docker[0].runcmd : ""
     cloud_init_runcmd_vault               = local.vault ? module.vault[0].runcmd : ""
     cloud_init_runcmd_certbot             = var.certbot ? module.certbot[0].runcmd : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? module.fail2ban[0].runcmd : ""
