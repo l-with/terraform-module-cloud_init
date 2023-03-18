@@ -2,6 +2,7 @@ locals {
   parts_active = {
     certbot            = var.certbot
     croc               = var.croc
+    docker             = var.docker
     encrypted_packages = length(var.encrypted_packages) >= 0
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
     vault              = var.vault || var.rke2_node_1st
@@ -46,7 +47,7 @@ locals {
     cloud_init_package_upgrade            = var.package && var.package_upgrade ? "package_upgrade: true" : ""
     cloud_init_package_reboot_if_required = var.package && var.package_reboot_if_required ? "package_reboot_if_required: true" : ""
     cloud_init_write_files                = "write_files:"
-    cloud_init_write_files_docker         = var.docker ? module.docker[0].write_files : ""
+    cloud_init_write_files_docker         = local.parts_active["docker"] ? module.docker[0].write_files : ""
     cloud_init_write_files_fail2ban       = var.fail2ban ? module.fail2ban[0].write_files : ""
     cloud_init_write_files_nginx          = var.nginx ? module.nginx[0].write_files : ""
     cloud_init_packages                   = "packages:"
@@ -60,7 +61,7 @@ locals {
     cloud_init_runcmd                     = "runcmd:"
     cloud_init_runcmd_croc                = local.parts_active["croc"] ? module.croc[0].runcmd : ""
     cloud_init_runcmd_wait_until          = local.parts_active["wait_until"] ? module.wait_until[0].runcmd : ""
-    cloud_init_runcmd_docker              = var.docker ? module.docker[0].runcmd : ""
+    cloud_init_runcmd_docker              = local.parts_active["docker"] ? module.docker[0].runcmd : ""
     cloud_init_runcmd_vault               = local.parts_active["vault"] ? module.vault[0].runcmd : ""
     cloud_init_runcmd_certbot             = local.parts_active["certbot"] ? module.certbot[0].runcmd : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? module.fail2ban[0].runcmd : ""

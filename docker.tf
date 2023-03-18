@@ -1,5 +1,5 @@
 module "docker" {
-  count = var.docker ? 1 : 0
+  count = local.parts_active["docker"] ? 1 : 0
 
   source = "./modules/cloud_init_parts"
 
