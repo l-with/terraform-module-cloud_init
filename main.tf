@@ -1,6 +1,7 @@
 locals {
-  vault      = var.vault || var.rke2_node_1st
-  wait_until = var.wait_until || var.rke2_node_1st
+  vault        = var.vault || var.rke2_node_1st
+  wait_until   = var.wait_until || var.rke2_node_1st
+  gettext_base = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
 }
 
 locals {
@@ -53,7 +54,7 @@ locals {
     cloud_init_packages_certbot           = var.certbot ? module.certbot[0].packages : ""
     cloud_init_runcmd                     = "runcmd:"
     cloud_init_runcmd_croc                = var.croc ? module.croc[0].runcmd : ""
-    cloud_init_runcmd_wait_until          = local.wait_until ? local.cloud_init_runcmd_wait_until : ""
+    cloud_init_runcmd_wait_until          = local.wait_until ? module.wait_until[0].runcmd : "" // local.cloud_init_runcmd_wait_until : ""
     cloud_init_runcmd_docker              = var.docker ? module.docker[0].runcmd : ""
     cloud_init_runcmd_vault               = local.vault ? module.vault[0].runcmd : ""
     cloud_init_runcmd_certbot             = var.certbot ? module.certbot[0].runcmd : ""

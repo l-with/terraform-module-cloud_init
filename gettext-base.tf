@@ -1,7 +1,3 @@
-locals {
-  gettext_base = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
-}
-
 module "gettext_base" {
   count = local.gettext_base ? 1 : 0
 

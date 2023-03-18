@@ -131,6 +131,7 @@ No providers.
 | <a name="module_rke2_node_other"></a> [rke2\_node\_other](#module\_rke2\_node\_other) | ./modules/cloud_init_parts | n/a |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault"></a> [vault](#module\_vault) | ./modules/cloud_init_parts | n/a |
+| <a name="module_wait_until"></a> [wait\_until](#module\_wait\_until) | ./modules/cloud_init_parts | n/a |
 
 #### Resources
 
