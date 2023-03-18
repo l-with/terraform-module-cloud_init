@@ -48,7 +48,7 @@ locals {
     cloud_init_packages_jq                = var.jq ? module.jq[0].packages : ""
     cloud_init_packages_vault             = local.vault ? module.vault[0].packages : ""
     cloud_init_packages_fail2ban          = var.fail2ban ? module.fail2ban[0].packages : ""
-    cloud_init_runcmd_encryped_packages   = local.cloud_init_runcmd_encrypted_packages
+    cloud_init_runcmd_encryped_packages   = local.encrypted_packages ? module.encrypted_packages[0].runcmd : ""
     cloud_init_packages_nginx             = var.nginx ? local.cloud_init_package_nginx : ""
     cloud_init_packages_certbot           = var.certbot ? module.certbot[0].packages : ""
     cloud_init_runcmd                     = "runcmd:"
