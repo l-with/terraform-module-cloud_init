@@ -15,6 +15,7 @@ locals {
     croc               = local.croc,
     docker             = local.docker
     encrypted_packages = local.encrypted_packages
+    fail2ban           = local.fail2ban
     jq                 = local.jq
   }
   active_parts_inputs = {
@@ -32,6 +33,7 @@ locals {
     "croc",
     "docker",
     "encrypted_packages",
+    "fail2ban",
     "jq",
   ]
   parts_all = [
@@ -108,7 +110,7 @@ locals {
     cloud_init_write_files = "write_files:"
 
     cloud_init_write_files_docker   = local.parts_active["docker"] ? module.cloud_init_part["docker"].write_files : ""
-    cloud_init_write_files_fail2ban = local.parts_active["fail2ban"] ? module.fail2ban[0].write_files : ""
+    cloud_init_write_files_fail2ban = local.parts_active["fail2ban"] ? module.cloud_init_part["fail2ban"].write_files : ""
     cloud_init_write_files_nginx    = local.parts_active["nginx"] ? module.nginx[0].write_files : ""
 
     cloud_init_packages = "packages:"
@@ -116,7 +118,7 @@ locals {
     cloud_init_packages_gettext_base    = local.parts_active["gettext_base"] ? module.gettext_base[0].packages : ""
     cloud_init_packages_jq              = local.parts_active["jq"] ? module.cloud_init_part["jq"].packages : ""
     cloud_init_packages_vault           = local.parts_active["vault"] ? module.vault[0].packages : ""
-    cloud_init_packages_fail2ban        = local.parts_active["fail2ban"] ? module.fail2ban[0].packages : ""
+    cloud_init_packages_fail2ban        = local.parts_active["fail2ban"] ? module.cloud_init_part["fail2ban"].packages : ""
     cloud_init_runcmd_encryped_packages = local.parts_active["encrypted_packages"] ? module.cloud_init_part["encrypted_packages"].runcmd : ""
     cloud_init_packages_nginx           = local.parts_active["nginx"] ? module.nginx[0].packages : ""
     cloud_init_packages_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].packages : ""
@@ -128,7 +130,7 @@ locals {
     cloud_init_runcmd_docker          = local.parts_active["docker"] ? module.cloud_init_part["docker"].runcmd : ""
     cloud_init_runcmd_vault           = local.parts_active["vault"] ? module.vault[0].runcmd : ""
     cloud_init_runcmd_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].runcmd : ""
-    cloud_init_runcmd_fail2ban        = local.parts_active["fail2ban"] ? module.fail2ban[0].runcmd : ""
+    cloud_init_runcmd_fail2ban        = local.parts_active["fail2ban"] ? module.cloud_init_part["fail2ban"].runcmd : ""
     cloud_init_runcmd_nginx           = local.parts_active["nginx"] ? module.nginx[0].runcmd : ""
     cloud_init_runcmd_rke2_node_1st   = local.parts_active["rke2_node_1st"] ? module.rke2_node_1st[0].runcmd : ""
     cloud_init_runcmd_rke2_node_other = local.parts_active["rke2_node_other"] ? module.rke2_node_other[0].runcmd : ""
