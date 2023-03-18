@@ -3,7 +3,7 @@ locals {
 }
 
 module "rke2_node_1st" {
-  count = var.rke2 && var.rke2_node_1st ? 1 : 0
+  count = local.parts_active["rke2_node_1st"] ? 1 : 0
 
   source = "./modules/cloud_init_parts"
 
@@ -52,7 +52,7 @@ module "rke2_node_1st" {
 }
 
 module "rke2_node_other" {
-  count = var.rke2 && var.rke2_node_other ? 1 : 0
+  count = local.parts_active["rke2_node_other"] ? 1 : 0
 
   source = "./modules/cloud_init_parts"
 
