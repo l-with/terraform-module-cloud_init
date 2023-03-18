@@ -6,6 +6,7 @@ locals {
     encrypted_packages = length(var.encrypted_packages) >= 0
     fail2ban           = var.fail2ban
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
+    jq                 = var.jq
     vault              = var.vault || var.rke2_node_1st
     wait_until         = var.wait_until || var.rke2_node_1st
   }
@@ -53,7 +54,7 @@ locals {
     cloud_init_write_files_nginx          = var.nginx ? module.nginx[0].write_files : ""
     cloud_init_packages                   = "packages:"
     cloud_init_packages_gettext_base      = local.parts_active["gettext_base"] ? module.gettext_base[0].packages : ""
-    cloud_init_packages_jq                = var.jq ? module.jq[0].packages : ""
+    cloud_init_packages_jq                = local.parts_active["jq"] ? module.jq[0].packages : ""
     cloud_init_packages_vault             = local.parts_active["vault"] ? module.vault[0].packages : ""
     cloud_init_packages_fail2ban          = local.parts_active["fail2ban"] ? module.fail2ban[0].packages : ""
     cloud_init_runcmd_encryped_packages   = local.parts_active["encrypted_packages"] ? module.encrypted_packages[0].runcmd : ""
