@@ -1,5 +1,5 @@
 module "vault" {
-  count = local.vault ? 1 : 0
+  count = local.parts_active["vault"] ? 1 : 0
 
   source = "./modules/cloud_init_parts"
 

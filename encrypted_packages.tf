@@ -1,5 +1,5 @@
 module "encrypted_packages" {
-  count = local.encrypted_packages ? 1 : 0
+  count = local.parts_active["encrypted_packages"] ? 1 : 0
 
   source = "./modules/cloud_init_parts"
 

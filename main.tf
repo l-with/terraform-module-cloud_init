@@ -1,8 +1,10 @@
 locals {
-  encrypted_packages = length(var.encrypted_packages) >= 0
-  gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
-  vault              = var.vault || var.rke2_node_1st
-  wait_until         = var.wait_until || var.rke2_node_1st
+  parts_active = {
+    encrypted_packages = length(var.encrypted_packages) >= 0
+    gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
+    vault              = var.vault || var.rke2_node_1st
+    wait_until         = var.wait_until || var.rke2_node_1st
+  }
 }
 
 locals {
@@ -46,18 +48,18 @@ locals {
     cloud_init_write_files_fail2ban       = var.fail2ban ? module.fail2ban[0].write_files : ""
     cloud_init_write_files_nginx          = var.nginx ? module.nginx[0].write_files : ""
     cloud_init_packages                   = "packages:"
-    cloud_init_packages_gettext_base      = local.gettext_base ? module.gettext_base[0].packages : ""
+    cloud_init_packages_gettext_base      = local.parts_active["gettext_base"] ? module.gettext_base[0].packages : ""
     cloud_init_packages_jq                = var.jq ? module.jq[0].packages : ""
-    cloud_init_packages_vault             = local.vault ? module.vault[0].packages : ""
+    cloud_init_packages_vault             = local.parts_active["vault"] ? module.vault[0].packages : ""
     cloud_init_packages_fail2ban          = var.fail2ban ? module.fail2ban[0].packages : ""
-    cloud_init_runcmd_encryped_packages   = local.encrypted_packages ? module.encrypted_packages[0].runcmd : ""
+    cloud_init_runcmd_encryped_packages   = local.parts_active["encrypted_packages"] ? module.encrypted_packages[0].runcmd : ""
     cloud_init_packages_nginx             = var.nginx ? module.nginx[0].packages : "" // local.cloud_init_package_nginx : ""
     cloud_init_packages_certbot           = var.certbot ? module.certbot[0].packages : ""
     cloud_init_runcmd                     = "runcmd:"
     cloud_init_runcmd_croc                = var.croc ? module.croc[0].runcmd : ""
-    cloud_init_runcmd_wait_until          = local.wait_until ? module.wait_until[0].runcmd : ""
+    cloud_init_runcmd_wait_until          = local.parts_active["wait_until"] ? module.wait_until[0].runcmd : ""
     cloud_init_runcmd_docker              = var.docker ? module.docker[0].runcmd : ""
-    cloud_init_runcmd_vault               = local.vault ? module.vault[0].runcmd : ""
+    cloud_init_runcmd_vault               = local.parts_active["vault"] ? module.vault[0].runcmd : ""
     cloud_init_runcmd_certbot             = var.certbot ? module.certbot[0].runcmd : ""
     cloud_init_runcmd_fail2ban            = var.fail2ban ? module.fail2ban[0].runcmd : ""
     cloud_init_runcmd_nginx               = var.nginx ? module.nginx[0].runcmd : ""
