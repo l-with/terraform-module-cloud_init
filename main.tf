@@ -3,15 +3,17 @@ module "cloud_init_part" {
 
   source = "./modules/cloud_init_part"
 
-  part     = each.key
-  packages = each.value.packages
-  runcmd   = each.value.runcmd
+  part        = each.key
+  packages    = each.value.packages
+  write_files = each.value.write_files
+  runcmd      = each.value.runcmd
 }
 
 locals {
   parts_inputs = {
-    croc = local.croc,
-    jq   = local.jq
+    certbot = local.certbot
+    croc    = local.croc,
+    jq      = local.jq
   }
   active_parts_inputs = {
     for part in local.parts :
@@ -24,6 +26,7 @@ locals {
 
 locals {
   parts = [
+    "certbot",
     "croc",
     "jq",
   ]
@@ -112,7 +115,7 @@ locals {
     cloud_init_packages_fail2ban        = local.parts_active["fail2ban"] ? module.fail2ban[0].packages : ""
     cloud_init_runcmd_encryped_packages = local.parts_active["encrypted_packages"] ? module.encrypted_packages[0].runcmd : ""
     cloud_init_packages_nginx           = local.parts_active["nginx"] ? module.nginx[0].packages : ""
-    cloud_init_packages_certbot         = local.parts_active["certbot"] ? module.certbot[0].packages : ""
+    cloud_init_packages_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].packages : ""
 
     cloud_init_runcmd = "runcmd:"
 
@@ -120,7 +123,7 @@ locals {
     cloud_init_runcmd_wait_until      = local.parts_active["wait_until"] ? module.wait_until[0].runcmd : ""
     cloud_init_runcmd_docker          = local.parts_active["docker"] ? module.docker[0].runcmd : ""
     cloud_init_runcmd_vault           = local.parts_active["vault"] ? module.vault[0].runcmd : ""
-    cloud_init_runcmd_certbot         = local.parts_active["certbot"] ? module.certbot[0].runcmd : ""
+    cloud_init_runcmd_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].runcmd : ""
     cloud_init_runcmd_fail2ban        = local.parts_active["fail2ban"] ? module.fail2ban[0].runcmd : ""
     cloud_init_runcmd_nginx           = local.parts_active["nginx"] ? module.nginx[0].runcmd : ""
     cloud_init_runcmd_rke2_node_1st   = local.parts_active["rke2_node_1st"] ? module.rke2_node_1st[0].runcmd : ""
