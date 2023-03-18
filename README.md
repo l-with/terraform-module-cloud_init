@@ -122,7 +122,6 @@ No providers.
 | <a name="module_rke2_node_needs_rke2_node_pre_shared_secret"></a> [rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret](#module\_rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_needs_rke2_node_rke2_node_cert_package_secret"></a> [rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret](#module\_rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
-| <a name="module_vault"></a> [vault](#module\_vault) | ./modules/cloud_init_part | n/a |
 | <a name="module_wait_until"></a> [wait\_until](#module\_wait\_until) | ./modules/cloud_init_part | n/a |
 
 #### Resources

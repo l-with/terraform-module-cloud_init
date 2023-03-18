@@ -21,6 +21,7 @@ locals {
     nginx              = local.nginx
     rke2_node_1st      = local.rke2_node_1st
     rke2_node_other    = local.rke2_node_other
+    vault              = local.vault
   }
   active_parts_inputs = {
     for part in local.parts :
@@ -43,6 +44,7 @@ locals {
     "nginx",
     "rke2_node_1st",
     "rke2_node_other",
+    "vault",
   ]
   parts_all = [
     "certbot",
@@ -124,7 +126,7 @@ locals {
 
     cloud_init_packages_gettext_base    = local.parts_active["gettext_base"] ? module.cloud_init_part["gettext_base"].packages : ""
     cloud_init_packages_jq              = local.parts_active["jq"] ? module.cloud_init_part["jq"].packages : ""
-    cloud_init_packages_vault           = local.parts_active["vault"] ? module.vault[0].packages : ""
+    cloud_init_packages_vault           = local.parts_active["vault"] ? module.cloud_init_part["vault"].packages : ""
     cloud_init_packages_fail2ban        = local.parts_active["fail2ban"] ? module.cloud_init_part["fail2ban"].packages : ""
     cloud_init_runcmd_encryped_packages = local.parts_active["encrypted_packages"] ? module.cloud_init_part["encrypted_packages"].runcmd : ""
     cloud_init_packages_nginx           = local.parts_active["nginx"] ? module.cloud_init_part["nginx"].packages : ""
@@ -135,7 +137,7 @@ locals {
     cloud_init_runcmd_croc            = local.parts_active["croc"] ? module.cloud_init_part["croc"].runcmd : ""
     cloud_init_runcmd_wait_until      = local.parts_active["wait_until"] ? module.wait_until[0].runcmd : ""
     cloud_init_runcmd_docker          = local.parts_active["docker"] ? module.cloud_init_part["docker"].runcmd : ""
-    cloud_init_runcmd_vault           = local.parts_active["vault"] ? module.vault[0].runcmd : ""
+    cloud_init_runcmd_vault           = local.parts_active["vault"] ? module.cloud_init_part["vault"].runcmd : ""
     cloud_init_runcmd_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].runcmd : ""
     cloud_init_runcmd_fail2ban        = local.parts_active["fail2ban"] ? module.cloud_init_part["fail2ban"].runcmd : ""
     cloud_init_runcmd_nginx           = local.parts_active["nginx"] ? module.cloud_init_part["nginx"].runcmd : ""
