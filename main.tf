@@ -11,10 +11,11 @@ module "cloud_init_part" {
 
 locals {
   parts_inputs = {
-    certbot = local.certbot
-    croc    = local.croc,
-    docker  = local.docker
-    jq      = local.jq
+    certbot            = local.certbot
+    croc               = local.croc,
+    docker             = local.docker
+    encrypted_packages = local.encrypted_packages
+    jq                 = local.jq
   }
   active_parts_inputs = {
     for part in local.parts :
@@ -30,6 +31,7 @@ locals {
     "certbot",
     "croc",
     "docker",
+    "encrypted_packages",
     "jq",
   ]
   parts_all = [
@@ -115,7 +117,7 @@ locals {
     cloud_init_packages_jq              = local.parts_active["jq"] ? module.cloud_init_part["jq"].packages : ""
     cloud_init_packages_vault           = local.parts_active["vault"] ? module.vault[0].packages : ""
     cloud_init_packages_fail2ban        = local.parts_active["fail2ban"] ? module.fail2ban[0].packages : ""
-    cloud_init_runcmd_encryped_packages = local.parts_active["encrypted_packages"] ? module.encrypted_packages[0].runcmd : ""
+    cloud_init_runcmd_encryped_packages = local.parts_active["encrypted_packages"] ? module.cloud_init_part["encrypted_packages"].runcmd : ""
     cloud_init_packages_nginx           = local.parts_active["nginx"] ? module.nginx[0].packages : ""
     cloud_init_packages_certbot         = local.parts_active["certbot"] ? module.cloud_init_part["certbot"].packages : ""
 
