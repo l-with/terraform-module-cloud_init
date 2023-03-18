@@ -52,7 +52,7 @@ locals {
     cloud_init_packages_nginx             = var.nginx ? local.cloud_init_package_nginx : ""
     cloud_init_packages_certbot           = var.certbot ? local.cloud_init_package_certbot : ""
     cloud_init_runcmd                     = "runcmd:"
-    cloud_init_runcmd_croc                = var.croc ? local.cloud_init_runcmd_croc : ""
+    cloud_init_runcmd_croc                = var.croc ? module.croc[0].runcmd : ""
     cloud_init_runcmd_wait_until          = local.wait_until ? local.cloud_init_runcmd_wait_until : ""
     cloud_init_runcmd_docker              = var.docker ? local.cloud_init_runcmd_docker : ""
     cloud_init_runcmd_vault               = local.vault ? local.cloud_init_runcmd_vault : ""
