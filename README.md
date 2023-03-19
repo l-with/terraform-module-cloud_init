@@ -8,7 +8,6 @@ currently only tested with Ubuntu focal
 
 ## Features
 
-The module always adds as last `runcmd` touching `
 ### certbot
 
 s. [certbot](https://eff-certbot.readthedocs.io/en/stable/install.html#installation)
