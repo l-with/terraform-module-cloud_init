@@ -1,3 +1,21 @@
+locals {
+  parts_active = {
+    certbot            = var.certbot
+    croc               = var.croc
+    docker             = var.docker || var.docker_container
+    docker_container   = var.docker_container
+    encrypted_packages = var.encrypted_packages
+    fail2ban           = var.fail2ban
+    gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
+    jq                 = var.jq
+    nginx              = var.nginx
+    rke2_node_1st      = var.rke2 && var.rke2_node_1st
+    rke2_node_other    = var.rke2 && var.rke2_node_other
+    vault              = var.vault || var.rke2_node_1st
+    wait_until         = var.wait_until || var.rke2_node_1st
+  }
+}
+
 module "cloud_init_part" {
   for_each = local.active_parts_inputs
 
@@ -14,6 +32,7 @@ locals {
     certbot            = local.certbot
     croc               = local.croc,
     docker             = local.docker
+    docker_container   = local.docker_container
     encrypted_packages = local.encrypted_packages
     fail2ban           = local.fail2ban
     gettext_base       = local.gettext_base
@@ -32,6 +51,7 @@ locals {
   parts_sorted = [
     "croc",
     "docker",
+    "docker_container",
     "encrypted_packages",
     "fail2ban",
     "gettext_base",
@@ -43,20 +63,6 @@ locals {
     "rke2_node_1st",
     "rke2_node_other",
   ]
-  parts_active = {
-    certbot            = var.certbot
-    croc               = var.croc
-    docker             = var.docker
-    encrypted_packages = var.encrypted_packages
-    fail2ban           = var.fail2ban
-    gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
-    jq                 = var.jq
-    nginx              = var.nginx
-    rke2_node_1st      = var.rke2 && var.rke2_node_1st
-    rke2_node_other    = var.rke2 && var.rke2_node_other
-    vault              = var.vault || var.rke2_node_1st
-    wait_until         = var.wait_until || var.rke2_node_1st
-  }
 }
 
 locals {

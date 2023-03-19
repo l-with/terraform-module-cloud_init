@@ -8,6 +8,7 @@ currently only tested with Ubuntu focal
 
 ## Features
 
+The module always adds as last `runcmd` touching `
 ### certbot
 
 s. [certbot](https://eff-certbot.readthedocs.io/en/stable/install.html#installation)
@@ -25,6 +26,12 @@ For input variables: s. [croc](#input_croc).
 s. [docker](https://docs.docker.com/engine/install/ubuntu/)
 
 For input variables: s. [docker](#input_docker).
+
+### docker_container
+
+s. [docker](https://docs.docker.com/engine/reference/run/)
+
+For input variables: s. [docker_container](#input_docker_container).
 
 ### encrypted packages
 
@@ -135,6 +142,8 @@ No resources.
 | <a name="input_certbot_dns_hetzner"></a> [certbot\_dns\_hetzner](#input\_certbot\_dns\_hetzner) | if cloud-init user data for installing with certbot-dns-hetzner should be generated | `bool` | `false` | no |
 | <a name="input_croc"></a> [croc](#input\_croc) | if cloud-init user data for installing croc should be generated | `bool` | `false` | no |
 | <a name="input_docker"></a> [docker](#input\_docker) | if cloud-init user data for installing docker should be generated | `bool` | `false` | no |
+| <a name="input_docker_container"></a> [docker\_container](#input\_docker\_container) | if cloud-init user data for installing docker containers should be generated | `bool` | `false` | no |
+| <a name="input_docker_container_list"></a> [docker\_container\_list](#input\_docker\_container\_list) | the docker containers the cloud-init user data should be generated for | <pre>list(object({<br>    name           = string // --name<br>    image          = string<br>    ports          = string // --publish<br>    command        = string<br>    restart_policy = string // --restart<br>  }))</pre> | `[]` | no |
 | <a name="input_docker_manipulate_iptables"></a> [docker\_manipulate\_iptables](#input\_docker\_manipulate\_iptables) | if docker manipulate ip-tables should _not_ be generated for cloud-init user data for docker | `bool` | `true` | no |
 | <a name="input_encrypted_packages"></a> [encrypted\_packages](#input\_encrypted\_packages) | if cloud-init user data for the encrypted packages should be generated | `bool` | `false` | no |
 | <a name="input_encrypted_packages_list"></a> [encrypted\_packages\_list](#input\_encrypted\_packages\_list) | the encrypted packages the cloud-init user data should be generated for | <pre>list(object({<br>    url        = string // the url to get the package from<br>    api_header = string // the header to authorize getting the package<br>    secret     = string // the secret to decrypt the package (`openssl enc -aes-256-cbc -pbkdf2`)"<br>    post_cmd   = string // the command to be executed after the installing the package<br>  }))</pre> | `[]` | no |

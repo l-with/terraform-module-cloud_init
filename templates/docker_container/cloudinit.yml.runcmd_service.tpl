@@ -1,0 +1,2 @@
+  - systemctl enable docker-${name}.service
+  - systemctl start docker-${name}.service
