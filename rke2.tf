@@ -17,9 +17,10 @@ locals {
       {
         template = "${path.module}/templates/rke2/${local.yml_runcmd}_begin.tpl",
         vars = {
-          rke2_pre_shared_secret = var.rke2_node_pre_shared_secret
-          rke2_config_template   = "/root/config.yaml.node_1st.envtpl"
-          rke2_node_1st_ip       = ""
+          rke2_pre_shared_secret    = var.rke2_node_pre_shared_secret
+          rke2_config_template      = "/root/config.yaml.node_1st.envtpl"
+          rke2_node_1st_ip          = ""
+          rke2_node_config_addendum = var.rke2_node_config_addendum
         }
       },
       {
@@ -63,9 +64,10 @@ locals {
       {
         template = "${path.module}/templates/rke2/${local.yml_runcmd}_begin.tpl",
         vars = {
-          rke2_pre_shared_secret = var.rke2_node_pre_shared_secret
-          rke2_config_template   = "/root/config.yaml.node_other.envtpl"
-          rke2_node_1st_ip       = var.rke2_node_other_node_1st_ip
+          rke2_pre_shared_secret    = var.rke2_node_pre_shared_secret
+          rke2_config_template      = "/root/config.yaml.node_other.envtpl"
+          rke2_node_1st_ip          = var.rke2_node_other_node_1st_ip
+          rke2_node_config_addendum = var.rke2_node_config_addendum
         }
       },
       {

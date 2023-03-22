@@ -41,6 +41,13 @@ variable "rke2_node_pre_shared_secret" {
   sensitive   = true
 }
 
+variable "rke2_node_config_addendum" {
+  description = "the addendum to the rke2 config after the lines 'token: ...' and optional 'server: ...'"
+  type        = string
+  default     = "cni: cilium"
+  sensitive   = true
+}
+
 variable "rke2_node_1st_rke2_role_id" {
   description = "the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault"
   type        = string

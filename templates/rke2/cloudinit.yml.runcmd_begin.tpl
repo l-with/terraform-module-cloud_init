@@ -5,4 +5,4 @@
   - export RKE2_PRE_SHARED_SECRET=${rke2_pre_shared_secret}
   - envsubst < ${rke2_config_template} > $RKE2_CONFIG
   - >
-    echo "cni: cilium" >>$RKE2_CONFIG
+    echo ${rke2_node_config_addendum} >>$RKE2_CONFIG
