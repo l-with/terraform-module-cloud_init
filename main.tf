@@ -8,11 +8,12 @@ locals {
     fail2ban           = var.fail2ban
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
     jq                 = var.jq
-    nginx              = var.nginx
-    rke2_node_1st      = var.rke2 && var.rke2_node_1st
-    rke2_node_other    = var.rke2 && var.rke2_node_other
-    vault              = var.vault || var.rke2_node_1st
-    wait_until         = var.wait_until || var.rke2_node_1st
+    // mailcow            = var.mailcow
+    nginx           = var.nginx
+    rke2_node_1st   = var.rke2 && var.rke2_node_1st
+    rke2_node_other = var.rke2 && var.rke2_node_other
+    vault           = var.vault || var.rke2_node_1st
+    wait_until      = var.wait_until || var.rke2_node_1st
   }
 }
 
@@ -37,16 +38,16 @@ locals {
     fail2ban           = local.fail2ban
     gettext_base       = local.gettext_base
     jq                 = local.jq
-    nginx              = local.nginx
-    rke2_node_1st      = local.rke2_node_1st
-    rke2_node_other    = local.rke2_node_other
-    vault              = local.vault
-    wait_until         = local.wait_until
+    // mailcow            = local.mailcow
+    nginx           = local.nginx
+    rke2_node_1st   = local.rke2_node_1st
+    rke2_node_other = local.rke2_node_other
+    vault           = local.vault
+    wait_until      = local.wait_until
   }
   active_parts_inputs = {
-    for part in local.parts_sorted :
+    for part in keys(local.parts_active) :
     part => merge({ write_files = tolist([]), packages = tolist([]), runcmd = tolist([]) }, local.parts_inputs[part])
-    if local.parts_active[part]
   }
   parts_sorted = [
     "croc",
@@ -56,6 +57,7 @@ locals {
     "fail2ban",
     "gettext_base",
     "jq",
+    // "mailcow",
     "nginx",
     "certbot",
     "vault",
@@ -69,7 +71,7 @@ locals {
   cloud_init_packages = join(
     "\n",
     [
-      for part in keys(local.active_parts_inputs) :
+      for part in local.parts_sorted :
       module.cloud_init_part[part].packages
       if module.cloud_init_part[part].packages != ""
     ]
@@ -77,7 +79,7 @@ locals {
   cloud_init_write_files = join(
     "\n",
     [
-      for part in keys(local.active_parts_inputs) :
+      for part in local.parts_sorted :
       module.cloud_init_part[part].write_files
       if module.cloud_init_part[part].write_files != ""
     ]
@@ -85,7 +87,7 @@ locals {
   cloud_init_runcmd = join(
     "\n",
     [
-      for part in keys(local.active_parts_inputs) :
+      for part in local.parts_sorted :
       module.cloud_init_part[part].runcmd
       if module.cloud_init_part[part].runcmd != ""
     ]
