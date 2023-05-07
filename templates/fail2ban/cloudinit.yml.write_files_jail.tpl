@@ -2,4 +2,4 @@
   content: |
     [${jail}]
     enabled = true
-  permissions: 0644
+  permissions: '0644'

@@ -5,4 +5,4 @@
     bantime = 10m
     findtime = 10m
     maxretry = 6
-  permissions: 0644
+  permissions: '0644'
