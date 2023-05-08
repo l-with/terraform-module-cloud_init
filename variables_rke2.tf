@@ -19,25 +19,25 @@ variable "rke2_node_other" {
 variable "rke2_node_cert_package_url" {
   description = "the url to get the cert-package from"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "rke2_node_cert_package_api_header" {
   description = "the header to authorize getting the cert-package"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "rke2_node_cert_package_secret" {
   description = "the secret to decrypt the cert package (`openssl enc -aes-256-cbc -pbkdf2`)"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "rke2_node_pre_shared_secret" {
   description = "the pre shared secret for `/etc/rancher/rke2/config.yaml`"
   type        = string
-  default     = ""
+  default     = null
   sensitive   = true
 }
 
@@ -51,14 +51,14 @@ variable "rke2_node_config_addendum" {
 variable "rke2_node_1st_rke2_role_id" {
   description = "the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault"
   type        = string
-  default     = ""
+  default     = null
   sensitive   = true
 }
 
 variable "rke2_node_1st_rke2_secret_id" {
   description = "the role id for the app role in vault to login and get the token to put the `rke2.yaml` as kv into vault"
   type        = string
-  default     = ""
+  default     = null
   sensitive   = true
 }
 
@@ -71,7 +71,7 @@ variable "rke2_node_1st_cert_manager_crd_version" {
 variable "rke2_node_1st_vault_addr" {
   description = "the vault address to put the `ke2.yml`  as kv into"
   type        = string
-  default     = "" // `var.vault_addr` (implemented in rke2.tf)
+  default     = null // `var.vault_addr` (implemented in rke2.tf)
 }
 
 variable "rke2_node_1st_vault_mount" {
@@ -95,5 +95,5 @@ variable "rke2_node_1st_vault_field" {
 variable "rke2_node_other_node_1st_ip" {
   description = "the ip of the 1st node for cloud-init user data for rke2 other nodes"
   type        = string
-  default     = ""
+  default     = null
 }

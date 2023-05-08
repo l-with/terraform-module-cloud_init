@@ -12,7 +12,7 @@ module "rke2_node_needs_rke2_node_cert_package_url" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_url == "")
+  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_url == null)
   error_message = "error: rke2_node needs rke2_node_cert_package_url"
 }
 
@@ -21,7 +21,7 @@ module "rke2_node_needs_encrypted_package_api_header" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_api_header == "")
+  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_api_header == null)
   error_message = "error: rke2_node needs rke2_node_cert_package_api_header"
 }
 
@@ -30,7 +30,7 @@ module "rke2_node_needs_rke2_node_rke2_node_cert_package_secret" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_secret == "")
+  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_cert_package_secret == null)
   error_message = "error: rke2_node needs rke2_node_cert_package_secret"
 }
 
@@ -39,7 +39,7 @@ module "rke2_node_needs_rke2_node_pre_shared_secret" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_pre_shared_secret == "")
+  assert        = !((var.rke2_node_1st || var.rke2_node_other) && var.rke2_node_pre_shared_secret == null)
   error_message = "error: rke2_node needs rke2_node_pre_shared_secret"
 }
 
@@ -48,7 +48,7 @@ module "rke2_node_1st_needs_rke2_node_1st_rke2_role_id" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.rke2_node_1st && var.rke2_node_1st_rke2_role_id == "")
+  assert        = !(var.rke2_node_1st && var.rke2_node_1st_rke2_role_id == null)
   error_message = "error: rke2_node_1st needs rke2_node_1st_rke2_role_id"
 }
 
@@ -57,7 +57,7 @@ module "rke2_node_1st_needs_rke2_node_1st_rke2_secret_id" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.rke2_node_1st && var.rke2_node_1st_rke2_secret_id == "")
+  assert        = !(var.rke2_node_1st && var.rke2_node_1st_rke2_secret_id == null)
   error_message = "error: rke2_node_1st needs rke2_node_1st_rke2_secret_id"
 }
 
@@ -66,7 +66,7 @@ module "rke2_node_1st_needs_vault_addr" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.rke2_node_1st && local.rke2_node_1st_vault_addr == "")
+  assert        = !(var.rke2_node_1st && local.rke2_node_1st_vault_addr == null)
   error_message = "error: rke2_node_1st needs *_vault_addr"
 }
 
@@ -75,6 +75,6 @@ module "rke2_node_other_needs_rke2_node_other_node_1st_ip" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.rke2_node_other && var.rke2_node_other_node_1st_ip == "")
+  assert        = !(var.rke2_node_other && var.rke2_node_other_node_1st_ip == null)
   error_message = "error: rke2_node_other needs rke2_node_other_node_1st_ip"
 }

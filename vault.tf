@@ -27,7 +27,7 @@ locals {
         }
       ]
     },
-    var.vault_start ? {
+    !var.vault_start ? {} : {
       write_files = concat(
         [
           {
@@ -53,6 +53,5 @@ locals {
         ],
       )
     }
-    : {}
   )
 }
