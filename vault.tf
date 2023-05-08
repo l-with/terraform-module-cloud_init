@@ -30,6 +30,14 @@ locals {
           vars     = {}
         },
         {
+          template = "${path.module}/templates/vault/${local.yml_runcmd}_raft.tpl",
+          vars     = {}
+        },
+        {
+          template = "${path.module}/templates/vault/${local.yml_runcmd}_lets_encrypt.tpl",
+          vars     = {}
+        },
+        {
           template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
           vars     = {}
         },
