@@ -1,10 +1,9 @@
 locals {
   cloud_init_nginx_gnu_add_header = var.nginx_gnu ? "add_header X-Clacks-Overhead \"GNU Terry Pratchett\";" : ""
-  cloud_init_nginx_https_conf     = join("\n      ", split("\n", var.nginx_https_conf))
 }
 
 locals {
-  nginx = {
+  nginx = !var.nginx ? {} : {
     packages = [{
       template = "${path.module}/templates/nginx/${local.yml_packages}.tpl",
       vars     = {}
@@ -37,7 +36,7 @@ locals {
             server_name        = var.nginx_server_fqdn,
             server_fqdn        = var.nginx_server_fqdn,
             https_map          = var.nginx_https_map,
-            https_conf         = local.cloud_init_nginx_https_conf,
+            https_conf         = join("\n      ", split("\n", var.nginx_https_conf)),
             gnu_add_header     = local.cloud_init_nginx_gnu_add_header,
             ssl_part           = templatefile("${path.module}/templates/nginx/${local.yml_write_files}_ssl_part.tpl", { fqdn = var.nginx_server_fqdn, port = 443 })
           }

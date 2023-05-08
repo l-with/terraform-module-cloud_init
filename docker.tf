@@ -1,5 +1,5 @@
 locals {
-  docker = {
+  docker = !var.docker ? {} : {
     runcmd = [{
       template = "${path.module}/templates/docker/${local.yml_runcmd}.tpl",
       vars     = {}

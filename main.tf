@@ -73,7 +73,7 @@ locals {
     [
       for part in local.parts_sorted :
       module.cloud_init_part[part].packages
-      if module.cloud_init_part[part].packages != ""
+      if(local.parts_active[part] && module.cloud_init_part[part].packages != "")
     ]
   )
   cloud_init_write_files = join(
@@ -81,7 +81,7 @@ locals {
     [
       for part in local.parts_sorted :
       module.cloud_init_part[part].write_files
-      if module.cloud_init_part[part].write_files != ""
+      if(local.parts_active[part] && module.cloud_init_part[part].write_files != "")
     ]
   )
   cloud_init_runcmd = join(
@@ -89,7 +89,7 @@ locals {
     [
       for part in local.parts_sorted :
       module.cloud_init_part[part].runcmd
-      if module.cloud_init_part[part].runcmd != ""
+      if(local.parts_active[part] && module.cloud_init_part[part].runcmd != "")
     ]
   )
   cloud_init_start = "#cloud-config"

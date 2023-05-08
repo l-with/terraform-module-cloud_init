@@ -1,5 +1,5 @@
 locals {
-  certbot = {
+  certbot = !var.certbot ? {} : {
     packages = concat(
       [
         {
