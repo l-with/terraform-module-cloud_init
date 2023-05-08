@@ -16,7 +16,7 @@ variable "write_files" {
   description = "the parameters for write_file"
   type = list(object({
     template = string,
-    vars     = any
+    vars     = map(string)
   }))
   default = []
 }

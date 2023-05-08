@@ -5,7 +5,7 @@
     api_addr = "${vault_api_addr}"
     cluster_addr = "${vault_cluster_addr}"
 
-    %{ for vault_listener in vault_listeners }
+    %{ for vault_listener in jsondecode(vault_listeners) }
     listener "tcp" {
         address = "${vault_listener.address}"
     %{ if vault_listener.cluster_address != null }
@@ -25,7 +25,7 @@
     storage "raft" {
         path    = "${vault_storage_raft_path}"
         node_id = "${vault_storage_raft_node_id}"
-    %{ for vault_instance in vault_storage_raft_cluster_members }
+    %{ for vault_instance in jsondecode(vault_storage_raft_cluster_members) }
         retry_join {
             leader_api_addr         = "https://${vault_instance}:${vault_storage_raft_retry_join_api_port}"
             leader_ca_cert_file     = "${vault_storage_raft_leader_ca_cert_file}"

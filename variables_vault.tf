@@ -4,6 +4,16 @@ variable "vault" {
   default     = false
 }
 
+variable "vault_install_method" {
+  description = "the install method, supported methods are 'apt'"
+  type        = string
+  default     = "apt"
+  validation {
+    condition     = contains(["apt"], var.vault_install_method)
+    error_message = "Supported values are 'apt'."
+  }
+}
+
 variable "vault_start" {
   description = "if vault should be started "
   type        = bool
