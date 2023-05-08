@@ -184,7 +184,7 @@ No resources.
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `null` | no |
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `null` | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
-| <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `""` | no |
+| <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `null` | no |
 | <a name="input_vault_api_addr"></a> [vault\_api\_addr](#input\_vault\_api\_addr) | the [api\_addr](https://www.vaultproject.io/docs/configuration#api_addr) | `string` | `"http://127.0.0.1:8200"` | no |
 | <a name="input_vault_api_port"></a> [vault\_api\_port](#input\_vault\_api\_port) | the vault api port (for [api\_addr](https://www.vaultproject.io/docs/configuration#api_addr) and [address](https://www.vaultproject.io/docs/configuration/listener/tcp#address)) | `number` | `8200` | no |
 | <a name="input_vault_cluster_addr"></a> [vault\_cluster\_addr](#input\_vault\_cluster\_addr) | the [cluster\_addr](https://www.vaultproject.io/docs/configuration#cluster_addr) | `string` | `"http://127.0.0.1:8201"` | no |

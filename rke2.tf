@@ -1,5 +1,5 @@
 locals {
-  rke2_node_1st_vault_addr = var.rke2_node_1st_vault_addr != "" ? var.rke2_node_1st_vault_addr : var.vault_addr
+  rke2_node_1st_vault_addr = var.rke2_node_1st_vault_addr != null ? var.rke2_node_1st_vault_addr : var.vault_addr
 }
 
 locals {
