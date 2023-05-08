@@ -31,7 +31,9 @@ locals {
         },
         {
           template = "${path.module}/templates/vault/${local.yml_runcmd}_raft.tpl",
-          vars     = {}
+          vars = {
+            vault_storage_raft_path = var.vault_storage_raft_path
+          }
         },
         {
           template = "${path.module}/templates/vault/${local.yml_runcmd}_lets_encrypt.tpl",
