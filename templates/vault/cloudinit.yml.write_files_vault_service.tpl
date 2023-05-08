@@ -1,4 +1,4 @@
-- path: ${vault_config_path}/vault.hcl
+- path: /etc/systemd/system/vault.service
   content: |
     [Unit]
     Description="HashiCorp Vault - A tool for managing secrets"

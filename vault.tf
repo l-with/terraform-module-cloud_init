@@ -22,13 +22,17 @@ locals {
         {
           template = "${path.module}/templates/vault/${local.yml_packages}.tpl",
           vars     = {}
-        }
+        },
       ]
       runcmd = [
         {
           template = "${path.module}/templates/vault/${local.yml_runcmd}_${var.vault_install_method}_install.tpl",
           vars     = {}
-        }
+        },
+        {
+          template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
+          vars     = {}
+        },
       ]
     },
     !var.vault_start ? {} : {
