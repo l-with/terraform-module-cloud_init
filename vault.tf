@@ -16,6 +16,7 @@ locals {
       tls_client_ca_file = listener.tls_client_ca_file != null ? listener.tls_client_ca_file : local.vault_tls_client_ca_file,
     }
   ]
+  vault_hcl_template_path = "/root"
   vault = merge(
     {
       packages = [
@@ -33,6 +34,13 @@ locals {
           template = "${path.module}/templates/vault/${local.yml_runcmd}_raft.tpl",
           vars = {
             vault_storage_raft_path = var.vault_storage_raft_path
+          }
+        },
+        {
+          template = "${path.module}/templates/vault/${local.yml_runcmd}_vault_hcl.tpl",
+          vars = {
+            vault_hcl_template_path = local.vault_hcl_template_path
+            vault_config_path       = var.vault_config_path
           }
         },
         {
@@ -57,7 +65,7 @@ locals {
         {
           template = "${path.module}/templates/vault/${local.yml_write_files}_vault_hcl.tpl",
           vars = {
-            vault_config_path                          = var.vault_config_path,
+            vault_hcl_template_path                    = local.vault_hcl_template_path,
             vault_ui                                   = var.vault_ui,
             vault_log_level                            = var.vault_log_level,
             vault_api_addr                             = var.vault_api_addr,

@@ -1,4 +1,4 @@
-- path: ${vault_config_path}/vault.hcl
+- path: ${vault_hcl_template_path}/vault.hcl
   content: |
     ui = ${vault_ui}
     log_level = "${vault_log_level}"

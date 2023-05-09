@@ -55,9 +55,12 @@ variable "vault_api_port" {
 }
 
 variable "vault_api_addr" {
-  description = "the [api_addr](https://www.vaultproject.io/docs/configuration#api_addr)"
+  description = <<EOT
+    the [api_addr](https://www.vaultproject.io/docs/configuration#api_addr)
+    the string '$ipv4_address' can be used as placeholder for the server ipv4-address
+  EOT
   type        = string
-  default     = "http://127.0.0.1:8200"
+  default     = "http://$ipv4_address:8200"
 }
 
 variable "vault_cluster_port" {
@@ -67,9 +70,12 @@ variable "vault_cluster_port" {
 }
 
 variable "vault_cluster_addr" {
-  description = "the [cluster_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)"
+  description = <<EOT
+    the [cluster_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)
+    the string '$ipv4_address' can be used as placeholder for the server ipv4-address
+  EOT
   type        = string
-  default     = "http://127.0.0.1:8201"
+  default     = "http://$ipv4_address:8201"
 }
 
 variable "vault_listeners" {
