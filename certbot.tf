@@ -7,17 +7,16 @@ locals {
           vars     = {}
         }
       ],
-      var.certbot_dns_hetzner ? [
+      !var.certbot_dns_hetzner ? [] : [
         {
           template = "${path.module}/templates/certbot/${local.yml_packages}_certbot_dns_hetzner.tpl",
           vars     = {}
         }
       ]
-      : []
     )
-    runcmd = var.certbot_dns_hetzner ? [{
+    runcmd = !var.certbot_dns_hetzner ? [] : [{
       template = "${path.module}/templates/certbot/${local.yml_runcmd}.tpl",
       vars     = {}
-    }] : []
+    }]
   }
 }
