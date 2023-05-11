@@ -7,13 +7,13 @@ locals {
     encrypted_packages = var.encrypted_packages
     fail2ban           = var.fail2ban
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other
-    jq                 = var.jq
+    jq                 = var.jq || (var.vault && var.vault_start && var.vault_init)
     // mailcow            = var.mailcow
     nginx           = var.nginx
     rke2_node_1st   = var.rke2 && var.rke2_node_1st
     rke2_node_other = var.rke2 && var.rke2_node_other
     vault           = var.vault || var.rke2_node_1st
-    wait_until      = var.wait_until || var.rke2_node_1st
+    wait_until      = var.wait_until || var.rke2_node_1st || (var.vault && var.vault_start && var.vault_init)
   }
 }
 
@@ -60,8 +60,8 @@ locals {
     // "mailcow",
     "nginx",
     "certbot",
-    "vault",
     "wait_until",
+    "vault",
     "rke2_node_1st",
     "rke2_node_other",
   ]
