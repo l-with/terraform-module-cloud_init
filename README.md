@@ -8,6 +8,12 @@ currently only tested with Ubuntu focal
 
 ## Features
 
+### b2
+
+s. [B2 Command Line Tool](https://github.com/Backblaze/B2_Command_Line_Tool/releases)
+
+For input variables: s. [b2](#input_b2).
+
 ### certbot
 
 s. [certbot](https://eff-certbot.readthedocs.io/en/stable/install.html#installation)
@@ -139,6 +145,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_b2"></a> [b2](#input\_b2) | if cloud-init user data for installing the [BlackBlaze CLI](https://www.backblaze.com/b2/docs/quick_command_line.html should be generated) | `bool` | `false` | no |
 | <a name="input_certbot"></a> [certbot](#input\_certbot) | if cloud-init user data for installing certbot should be generated | `bool` | `false` | no |
 | <a name="input_certbot_dns_hetzner"></a> [certbot\_dns\_hetzner](#input\_certbot\_dns\_hetzner) | if cloud-init user data for installing with certbot-dns-hetzner should be generated | `bool` | `false` | no |
 | <a name="input_croc"></a> [croc](#input\_croc) | if cloud-init user data for installing croc should be generated | `bool` | `false` | no |
