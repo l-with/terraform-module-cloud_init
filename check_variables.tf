@@ -78,3 +78,12 @@ module "rke2_node_other_needs_rke2_node_other_node_1st_ip" {
   assert        = !(var.rke2_node_other && var.rke2_node_other_node_1st_ip == null)
   error_message = "error: rke2_node_other needs rke2_node_other_node_1st_ip"
 }
+
+module "vault_init_needs_vault_init_addr" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_init && var.vault_init_addr == null)
+  error_message = "error: vault_init needs vault_init_addr"
+}

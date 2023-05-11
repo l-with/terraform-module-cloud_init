@@ -25,33 +25,49 @@ locals {
           vars     = {}
         },
       ]
-      runcmd = [
-        {
-          template = "${path.module}/templates/vault/${local.yml_runcmd}_${var.vault_install_method}_install.tpl",
-          vars     = {}
-        },
-        {
-          template = "${path.module}/templates/vault/${local.yml_runcmd}_raft.tpl",
-          vars = {
-            vault_storage_raft_path = var.vault_storage_raft_path
-          }
-        },
-        {
-          template = "${path.module}/templates/vault/${local.yml_runcmd}_vault_hcl.tpl",
-          vars = {
-            vault_hcl_template_path = local.vault_hcl_template_path
-            vault_config_path       = var.vault_config_path
-          }
-        },
-        {
-          template = "${path.module}/templates/vault/${local.yml_runcmd}_lets_encrypt.tpl",
-          vars     = {}
-        },
-        {
-          template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
-          vars     = {}
-        },
-      ]
+      runcmd = concat(
+        [
+          {
+            template = "${path.module}/templates/vault/${local.yml_runcmd}_${var.vault_install_method}_install.tpl",
+            vars     = {}
+          },
+          {
+            template = "${path.module}/templates/vault/${local.yml_runcmd}_raft.tpl",
+            vars = {
+              vault_storage_raft_path = var.vault_storage_raft_path
+            }
+          },
+        ],
+        !var.vault_start ? [] : concat(
+          [
+            {
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_vault_hcl.tpl",
+              vars = {
+                vault_hcl_template_path = local.vault_hcl_template_path
+                vault_config_path       = var.vault_config_path
+              }
+            },
+            {
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_lets_encrypt.tpl",
+              vars     = {}
+            },
+            {
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
+              vars     = {}
+            },
+          ],
+          !var.vault_init ? [] : [
+            {
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_init.tpl",
+              vars = {
+                vault_init_addr     = var.vault_init_addr
+                vault_key_shares    = var.vault_key_shares
+                vault_key_threshold = var.vault_key_threshold
+              }
+            },
+          ],
+        )
+      )
     },
     !var.vault_start ? {} : {
       write_files = [

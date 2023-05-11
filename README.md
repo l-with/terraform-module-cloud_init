@@ -136,6 +136,7 @@ No providers.
 | <a name="module_rke2_node_needs_rke2_node_pre_shared_secret"></a> [rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret](#module\_rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_needs_rke2_node_rke2_node_cert_package_secret"></a> [rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret](#module\_rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_vault_init_needs_vault_init_addr"></a> [vault\_init\_needs\_vault\_init\_addr](#module\_vault\_init\_needs\_vault\_init\_addr) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 
 #### Resources
 
@@ -199,7 +200,11 @@ No resources.
 | <a name="input_vault_config_path"></a> [vault\_config\_path](#input\_vault\_config\_path) | the path for the vault configuration files | `string` | `"/etc/vault.d"` | no |
 | <a name="input_vault_disable_mlock"></a> [vault\_disable\_mlock](#input\_vault\_disable\_mlock) | the value for [disable\_mlock](https://www.vaultproject.io/docs/configuration#disable_mlock) | `bool` | `true` | no |
 | <a name="input_vault_home_path"></a> [vault\_home\_path](#input\_vault\_home\_path) | the home of the vault specific files and folders | `string` | `"/srv/vault"` | no |
+| <a name="input_vault_init"></a> [vault\_init](#input\_vault\_init) | if vault should be initialized | `bool` | `true` | no |
+| <a name="input_vault_init_addr"></a> [vault\_init\_addr](#input\_vault\_init\_addr) | the vault address used for `vault init` during cloud init | `string` | `null` | no |
 | <a name="input_vault_install_method"></a> [vault\_install\_method](#input\_vault\_install\_method) | the install method, supported methods are 'apt' | `string` | `"apt"` | no |
+| <a name="input_vault_key_shares"></a> [vault\_key\_shares](#input\_vault\_key\_shares) | the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares) | `number` | `1` | no |
+| <a name="input_vault_key_threshold"></a> [vault\_key\_threshold](#input\_vault\_key\_threshold) | the number of key shares required to reconstruct the root key (s. https://developer.hashicorp.com/vault/docs/commands/operator/init#key-threshold) | `number` | `1` | no |
 | <a name="input_vault_listeners"></a> [vault\_listeners](#input\_vault\_listeners) | the list of [listener](https://www.vaultproject.io/docs/configuration/listener/tcp)s<br>    the default for each (coded in terraform)<br>      - tls\_cert\_file is [vault\_tls\_cert\_file](#input\_vault\_tls\_cert\_file)<br>      - tls\_key\_file is [vault\_tls\_key\_file](#input\_vault\_tls\_key\_file)<br>      - tls\_client\_ca\_file [vault\_tls\_client\_ca\_file](#input\_vault\_tls\_client\_ca\_file) | <pre>list(object({<br>    address            = string,<br>    cluster_address    = optional(string, null),<br>    tls_disable        = optional(bool, true),<br>    tls_cert_file      = optional(string, null),<br>    tls_key_file       = optional(string, null),<br>    tls_client_ca_file = optional(string, null),<br>  }))</pre> | `[]` | no |
 | <a name="input_vault_log_level"></a> [vault\_log\_level](#input\_vault\_log\_level) | the [vault log level](https://www.vaultproject.io/docs/configuration#log_level) | `string` | `"info"` | no |
 | <a name="input_vault_raft_leader_tls_servername"></a> [vault\_raft\_leader\_tls\_servername](#input\_vault\_raft\_leader\_tls\_servername) | the [leader\_tls\_servername](https://www.vaultproject.io/docs/configuration/storage/raft#leader_tls_servername) | `string` | `null` | no |

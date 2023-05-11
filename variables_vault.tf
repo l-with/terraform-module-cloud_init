@@ -97,6 +97,30 @@ variable "vault_listeners" {
   default = []
 }
 
+variable "vault_init" {
+  description = "if vault should be initialized"
+  type        = bool
+  default     = true
+}
+
+variable "vault_init_addr" {
+  description = "the vault address used for `vault init` during cloud init"
+  type        = string
+  default     = null
+}
+
+variable "vault_key_shares" {
+  description = "the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares)"
+  type        = number
+  default     = 1
+}
+
+variable "vault_key_threshold" {
+  description = "the number of key shares required to reconstruct the root key (s. https://developer.hashicorp.com/vault/docs/commands/operator/init#key-threshold)"
+  type        = number
+  default     = 1
+}
+
 variable "vault_disable_mlock" {
   description = "the value for [disable_mlock](https://www.vaultproject.io/docs/configuration#disable_mlock)"
   type        = bool
