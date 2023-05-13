@@ -12,10 +12,12 @@
       vault operator init -key-shares ${vault_key_shares} -key-threshold ${vault_key_threshold} -format=json >/root/vault_init.json
       wait until --verbose --delay 10 --retries 42 \
         --check 'grep true' 'vault status -format=json | jq .initialized'
-      for (( i=0; i < ${vault_key_threshold}; ++i ))
+      i=0
+      while [ $i -lt ${vault_key_threshold} ]
       do
         export VAULT_UNSEAL_KEY=$(cat /root/vault_init.json | jq .unseal_keys_b64[$i] --raw-output)
         vault operator unseal $VAULT_UNSEAL_KEY
+        i=$((i+1))
       done
       wait until --verbose --delay 10 --retries 42 \
         --check 'grep false' 'vault status -format=json | jq .sealed'
