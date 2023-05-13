@@ -14,7 +14,7 @@
         --check 'grep true' 'vault status -format=json | jq .initialized'
       for (( i=0; i < ${vault_key_threshold}; ++i ))
       do
-        export VAULT_UNSEAL_KEY=$(cat /root/vault_status.json | jq .unseal_keys_b64[$i])
+        export VAULT_UNSEAL_KEY=$(cat /root/vault_init.json | jq .unseal_keys_b64[$i] --raw-output)
         vault operator unseal $VAULT_UNSEAL_KEY
       done
       wait until --verbose --delay 10 --retries 42 \
