@@ -10,6 +10,8 @@
   - |
     if [ "$VAULT_INITIALIZED" = "false" ]; then
       vault operator init -key-shares ${vault_key_shares} -key-threshold ${vault_key_threshold} -format=json >/root/vault_init.json
+      wait until --verbose --delay 10 --retries 42 \
+        --check 'grep true' 'vault status -format=json | jq .initialized'
       export VAULT_TOKEN=$(cat /root/vault_init.json | jq .root_token)
       vault token revoke $VAULT_TOKEN
       export VAULT_ENCRYPT_SECRET=${vault_encrypt_secret}
