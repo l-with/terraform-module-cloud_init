@@ -97,6 +97,12 @@ is pre-installed as manifest in the 1st node.
 
 For input variables: s. [rke2](#input_rke2).
 
+### s3cmd
+
+s. [S3cmd](https://github.com/s3tools/s3cmd)
+
+For input variables: s. [s3cmd](#input_s3cmd).
+
 ### vault
 
 s. [vault](https://developer.hashicorp.com/vault/downloads)
@@ -137,6 +143,8 @@ No providers.
 | <a name="module_rke2_node_needs_rke2_node_rke2_node_cert_package_secret"></a> [rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret](#module\_rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_vault_init_addr"></a> [vault\_init\_needs\_vault\_init\_addr](#module\_vault\_init\_needs\_vault\_init\_addr) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_vault_init_needs_vault_init_s3cfg"></a> [vault\_init\_needs\_vault\_init\_s3cfg](#module\_vault\_init\_needs\_vault\_init\_s3cfg) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_vault_init_needs_vault_vault_init_encrypt_secret"></a> [vault\_init\_needs\_vault\_vault\_init\_encrypt\_secret](#module\_vault\_init\_needs\_vault\_vault\_init\_encrypt\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 
 #### Resources
 
@@ -146,7 +154,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_b2"></a> [b2](#input\_b2) | if cloud-init user data for installing the [BlackBlaze CLI](https://www.backblaze.com/b2/docs/quick_command_line.html should be generated) | `bool` | `false` | no |
+| <a name="input_b2"></a> [b2](#input\_b2) | if cloud-init user data for installing the [BlackBlaze CLI](https://www.backblaze.com/b2/docs/quick_command_line.html) should be generated | `bool` | `false` | no |
 | <a name="input_certbot"></a> [certbot](#input\_certbot) | if cloud-init user data for installing certbot should be generated | `bool` | `false` | no |
 | <a name="input_certbot_dns_hetzner"></a> [certbot\_dns\_hetzner](#input\_certbot\_dns\_hetzner) | if cloud-init user data for installing with certbot-dns-hetzner should be generated | `bool` | `false` | no |
 | <a name="input_croc"></a> [croc](#input\_croc) | if cloud-init user data for installing croc should be generated | `bool` | `false` | no |
@@ -175,6 +183,7 @@ No resources.
 | <a name="input_package_reboot_if_required"></a> [package\_reboot\_if\_required](#input\_package\_reboot\_if\_required) | if cloud-init user data for package\_reboot\_if\_required should be generated | `bool` | `false` | no |
 | <a name="input_package_update"></a> [package\_update](#input\_package\_update) | if cloud-init user data for package\_update should be generated | `bool` | `true` | no |
 | <a name="input_package_upgrade"></a> [package\_upgrade](#input\_package\_upgrade) | if cloud-init user data for package\_upgrade should be generated | `bool` | `true` | no |
+| <a name="input_python3_pip"></a> [python3\_pip](#input\_python3\_pip) | if cloud-init user data for installing python3-pip should be generated | `bool` | `false` | no |
 | <a name="input_rke2"></a> [rke2](#input\_rke2) | if cloud-init user data for the rke2 should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_1st"></a> [rke2\_node\_1st](#input\_rke2\_node\_1st) | if cloud-init user data for the rke2 1st node should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_1st_cert_manager_crd_version"></a> [rke2\_node\_1st\_cert\_manager\_crd\_version](#input\_rke2\_node\_1st\_cert\_manager\_crd\_version) | the version of cert-manager CRDs to be installed | `string` | `"1.11.0"` | no |
@@ -191,6 +200,7 @@ No resources.
 | <a name="input_rke2_node_other"></a> [rke2\_node\_other](#input\_rke2\_node\_other) | if cloud-init user data for the rke2 other nodes should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `null` | no |
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `null` | no |
+| <a name="input_s3cmd"></a> [s3cmd](#input\_s3cmd) | if cloud-init user data for installing the [S3cmd](https://github.com/s3tools/s3cmd) should be generated | `bool` | `false` | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
 | <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `null` | no |
 | <a name="input_vault_api_addr"></a> [vault\_api\_addr](#input\_vault\_api\_addr) | the [api\_addr](https://www.vaultproject.io/docs/configuration#api_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address | `string` | `"http://$ipv4_address:8200"` | no |
@@ -202,6 +212,9 @@ No resources.
 | <a name="input_vault_home_path"></a> [vault\_home\_path](#input\_vault\_home\_path) | the home of the vault specific files and folders | `string` | `"/srv/vault"` | no |
 | <a name="input_vault_init"></a> [vault\_init](#input\_vault\_init) | if vault should be initialized | `bool` | `true` | no |
 | <a name="input_vault_init_addr"></a> [vault\_init\_addr](#input\_vault\_init\_addr) | the vault address used for `vault init` during cloud init | `string` | `null` | no |
+| <a name="input_vault_init_artifact"></a> [vault\_init\_artifact](#input\_vault\_init\_artifact) | the filename for the openssl encrypted output from `vault init` | `string` | `"vault_init.tgz.enc"` | no |
+| <a name="input_vault_init_encrypt_secret"></a> [vault\_init\_encrypt\_secret](#input\_vault\_init\_encrypt\_secret) | the secret the output of the vault initialization is encoded with<br /> <span style="color:red">ATTENTION: Keep this confidential! This is the root of the secret management in vault.</span> | `string` | `null` | no |
+| <a name="input_vault_init_s3cfg"></a> [vault\_init\_s3cfg](#input\_vault\_init\_s3cfg) | the values for the [S3cmd](https://s3tools.org/usage)<br>        s3cmd --access\_key=<access\_key> --secret\_key=<secret\_key>} \<br>        --host=https://<host\_base> '--host-bucket=\%(bucket)s.<host\_base>' \<br>        put FILE s3://<bucket>\%\{if prefix != null\}/<prefix>\%\{ endif \} | <pre>object({<br>    access_key = string,<br>    secret_key = string,<br>    host_base  = string,<br>    bucket     = string,<br>    prefix     = optional(string, null),<br>  })</pre> | `null` | no |
 | <a name="input_vault_install_method"></a> [vault\_install\_method](#input\_vault\_install\_method) | the install method, supported methods are 'apt' | `string` | `"apt"` | no |
 | <a name="input_vault_key_shares"></a> [vault\_key\_shares](#input\_vault\_key\_shares) | the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares) | `number` | `1` | no |
 | <a name="input_vault_key_threshold"></a> [vault\_key\_threshold](#input\_vault\_key\_threshold) | the number of key shares required to reconstruct the root key (s. https://developer.hashicorp.com/vault/docs/commands/operator/init#key-threshold) | `number` | `1` | no |

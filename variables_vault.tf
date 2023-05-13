@@ -109,6 +109,36 @@ variable "vault_init_addr" {
   default     = null
 }
 
+variable "vault_init_artifact" {
+  description = "the filename for the openssl encrypted output from `vault init`"
+  type        = string
+  default     = "vault_init.tgz.enc"
+}
+
+variable "vault_init_s3cfg" {
+  description = <<EOT
+    the values for the [S3cmd](https://s3tools.org/usage)
+        s3cmd --access_key=<access_key> --secret_key=<secret_key>} \
+        --host=https://<host_base> '--host-bucket=\%(bucket)s.<host_base>' \
+        put FILE s3://<bucket>\%\{if prefix != null\}/<prefix>\%\{ endif \}
+  EOT
+  type = object({
+    access_key = string,
+    secret_key = string,
+    host_base  = string,
+    bucket     = string,
+    prefix     = optional(string, null),
+  })
+  default = null
+}
+
+variable "vault_init_encrypt_secret" {
+  description = "the secret the output of the vault initialization is encoded with<br /> <span style=\"color:red\">ATTENTION: Keep this confidential! This is the root of the secret management in vault.</span>"
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
 variable "vault_key_shares" {
   description = "the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares)"
   type        = number

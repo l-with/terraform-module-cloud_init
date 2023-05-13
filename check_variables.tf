@@ -87,3 +87,21 @@ module "vault_init_needs_vault_init_addr" {
   assert        = !(var.vault_init && var.vault_init_addr == null)
   error_message = "error: vault_init needs vault_init_addr"
 }
+
+module "vault_init_needs_vault_vault_init_encrypt_secret" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_init && var.vault_init_encrypt_secret == null)
+  error_message = "error: vault_init needs vault_init_encrypt_secret"
+}
+
+module "vault_init_needs_vault_init_s3cfg" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_init && var.vault_init_s3cfg == null)
+  error_message = "error: vault_init needs vault_init_s3cfg"
+}
