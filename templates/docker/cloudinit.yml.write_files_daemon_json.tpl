@@ -3,4 +3,4 @@
     {
         "iptables": false
     }
-  permissions: 0644
+  permissions: '0644'

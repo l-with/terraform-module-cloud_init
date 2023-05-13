@@ -39,4 +39,4 @@
     }
 
     disable_mlock = ${vault_disable_mlock}
-  permissions: 0644
+  permissions: '0644'

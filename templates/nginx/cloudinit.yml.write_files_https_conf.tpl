@@ -12,4 +12,4 @@ ${ssl_part}
       ${https_conf}
 
     }
-  permissions: 0644
+  permissions: '0644'

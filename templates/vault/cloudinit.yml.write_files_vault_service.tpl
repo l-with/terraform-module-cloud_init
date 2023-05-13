@@ -33,4 +33,4 @@
 
     [Install]
     WantedBy=multi-user.target
-  permissions: 0644
+  permissions: '0644'
