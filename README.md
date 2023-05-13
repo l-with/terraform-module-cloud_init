@@ -145,6 +145,7 @@ No providers.
 | <a name="module_vault_init_needs_vault_init_addr"></a> [vault\_init\_needs\_vault\_init\_addr](#module\_vault\_init\_needs\_vault\_init\_addr) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_vault_init_s3cfg"></a> [vault\_init\_needs\_vault\_init\_s3cfg](#module\_vault\_init\_needs\_vault\_init\_s3cfg) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_vault_vault_init_encrypt_secret"></a> [vault\_init\_needs\_vault\_vault\_init\_encrypt\_secret](#module\_vault\_init\_needs\_vault\_vault\_init\_encrypt\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares"></a> [vault\_init\_vault\_key\_threshold\_less\_than\_or\_equal\_vault\_key\_shares](#module\_vault\_init\_vault\_key\_threshold\_less\_than\_or\_equal\_vault\_key\_shares) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 
 #### Resources
 
