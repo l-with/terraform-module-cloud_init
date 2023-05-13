@@ -27,5 +27,8 @@
       tar -zc /root/vault_init.json | openssl enc -aes-256-cbc -pbkdf2 -out /root/${vault_init_artifact} -pass env:VAULT_ENCRYPT_SECRET
       s3cmd --access_key=${vault_s3_access_key} --secret_key=${vault_s3_secret_key} \
         --host=https://${vault_s3_host_base} '--host-bucket=%(bucket)s.${vault_s3_host_base}' \
+        del /root/${vault_init_artifact} s3://${vault_s3_bucket}%{ if vault_s3_prefix != null }/${vault_s3_prefix}%{ endif }
+      s3cmd --access_key=${vault_s3_access_key} --secret_key=${vault_s3_secret_key} \
+        --host=https://${vault_s3_host_base} '--host-bucket=%(bucket)s.${vault_s3_host_base}' \
         put /root/${vault_init_artifact} s3://${vault_s3_bucket}%{ if vault_s3_prefix != null }/${vault_s3_prefix}%{ endif }
     fi
