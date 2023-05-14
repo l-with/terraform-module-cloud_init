@@ -112,7 +112,7 @@ variable "vault_init_addr" {
 variable "vault_init_artifact" {
   description = "the filename for the openssl encrypted output from `vault init`"
   type        = string
-  default     = "vault_init.tgz.enc"
+  default     = "vault_init_json.tgz.enc"
 }
 
 variable "vault_init_s3cfg" {
@@ -132,11 +132,10 @@ variable "vault_init_s3cfg" {
   default = null
 }
 
-variable "vault_init_encrypt_secret" {
-  description = "the secret the output of the vault initialization is encoded with<br /> <span style=\"color:red\">ATTENTION: Keep this confidential! This is the root of the secret management in vault.</span>"
+variable "vault_init_public_key" {
+  description = "the public RSA key the output of the vault initialization is encoded with (to be decryptable by the corresponding private key with [rsadecrypt](https://developer.hashicorp.com/terraform/language/functions/rsadecrypt)"
   type        = string
   default     = null
-  sensitive   = true
 }
 
 variable "vault_key_shares" {

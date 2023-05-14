@@ -88,13 +88,13 @@ module "vault_init_needs_vault_init_addr" {
   error_message = "error: vault_init needs vault_init_addr"
 }
 
-module "vault_init_needs_vault_vault_init_encrypt_secret" {
+module "vault_init_needs_vault_init_public_key" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.vault_init && var.vault_init_encrypt_secret == null)
-  error_message = "error: vault_init needs vault_init_encrypt_secret"
+  assert        = !(var.vault_init && var.vault_init_public_key == null)
+  error_message = "error: vault_init needs vault_init_public_key"
 }
 
 module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {

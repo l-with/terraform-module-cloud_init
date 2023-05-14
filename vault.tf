@@ -3,9 +3,10 @@ locals {
     apt    = "/usr/bin",
     binary = "/usr/local/bin"
   }
-  vault_tls_cert_file      = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : var.vault_storage_raft_leader_client_cert_file
-  vault_tls_key_file       = var.vault_tls_key_file != null ? var.vault_tls_key_file : var.vault_storage_raft_leader_client_key_file
-  vault_tls_client_ca_file = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : var.vault_storage_raft_leader_ca_cert_file
+  vault_init_public_key_full_path = "/root/vault_init_public.key"
+  vault_tls_cert_file             = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : var.vault_storage_raft_leader_client_cert_file
+  vault_tls_key_file              = var.vault_tls_key_file != null ? var.vault_tls_key_file : var.vault_storage_raft_leader_client_key_file
+  vault_tls_client_ca_file        = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : var.vault_storage_raft_leader_ca_cert_file
   vault_listeners = [
     for listener in var.vault_listeners : {
       address            = listener.address,
@@ -60,16 +61,16 @@ locals {
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_init.tpl",
               vars = {
-                vault_init_addr      = var.vault_init_addr
-                vault_key_shares     = var.vault_key_shares
-                vault_key_threshold  = var.vault_key_threshold
-                vault_encrypt_secret = var.vault_init_encrypt_secret
-                vault_init_artifact  = var.vault_init_artifact
-                vault_s3_access_key  = var.vault_init_s3cfg.access_key,
-                vault_s3_secret_key  = var.vault_init_s3cfg.secret_key,
-                vault_s3_host_base   = var.vault_init_s3cfg.host_base,
-                vault_s3_bucket      = var.vault_init_s3cfg.bucket,
-                vault_s3_prefix      = var.vault_init_s3cfg.prefix,
+                vault_init_addr                 = var.vault_init_addr
+                vault_key_shares                = var.vault_key_shares
+                vault_key_threshold             = var.vault_key_threshold
+                vault_init_artifact             = var.vault_init_artifact
+                vault_init_public_key_full_path = local.vault_init_public_key_full_path
+                vault_s3_access_key             = var.vault_init_s3cfg.access_key,
+                vault_s3_secret_key             = var.vault_init_s3cfg.secret_key,
+                vault_s3_host_base              = var.vault_init_s3cfg.host_base,
+                vault_s3_bucket                 = var.vault_init_s3cfg.bucket,
+                vault_s3_prefix                 = var.vault_init_s3cfg.prefix,
               }
             },
           ],
@@ -107,6 +108,15 @@ locals {
             }
           },
         ],
+        !var.vault_init ? [] : [
+          {
+            template = "${path.module}/templates/vault/${local.yml_write_files}_vault_init_public_key.tpl",
+            vars = {
+              vault_init_public_key_full_path = local.vault_init_public_key_full_path
+              vault_init_public_key           = base64encode(var.vault_init_public_key)
+            }
+          }
+        ]
       ),
     }
   )
