@@ -12,7 +12,7 @@
   - |
     if [ "$VAULT_INITIALIZED" = "false" ]; then
       vault operator init -key-shares ${vault_key_shares} -key-threshold ${vault_key_threshold} -format=json >$VAULT_INIT_JSON
-      wait until --verbose --delay 10 --retries 42 \
+      wait_until --verbose --delay 10 --retries 42 \
         --check 'grep true' 'vault status -format=json | jq .initialized'
       i=0
       while [ $i -lt ${vault_key_threshold} ]
@@ -21,7 +21,7 @@
         vault operator unseal $VAULT_UNSEAL_KEY
         i=$((i+1))
       done
-      wait until --verbose --delay 10 --retries 42 \
+      wait_until --verbose --delay 10 --retries 42 \
         --check 'grep false' 'vault status -format=json | jq .sealed'
       export VAULT_TOKEN=$(cat $VAULT_INIT_JSON | jq .root_token)
       vault token revoke $VAULT_TOKEN
