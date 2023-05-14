@@ -67,11 +67,6 @@ locals {
                 vault_init_artifact             = var.vault_init_artifact
                 vault_init_public_key_full_path = local.vault_init_public_key_full_path
                 vault_remove_vault_init_json    = var.vault_remove_vault_init_json ? "true" : null,
-                vault_s3_access_key             = var.vault_init_s3cfg.access_key,
-                vault_s3_secret_key             = var.vault_init_s3cfg.secret_key,
-                vault_s3_host_base              = var.vault_init_s3cfg.host_base,
-                vault_s3_bucket                 = var.vault_init_s3cfg.bucket,
-                vault_s3_prefix                 = var.vault_init_s3cfg.prefix,
               }
             },
           ],

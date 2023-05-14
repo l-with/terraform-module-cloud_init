@@ -105,12 +105,3 @@ module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {
   assert        = var.vault_key_threshold <= var.vault_key_shares
   error_message = "error: vault_key_threshold <= vault_key_shares"
 }
-
-module "vault_init_needs_vault_init_s3cfg" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
-
-  use_jq        = true
-  assert        = !(var.vault_init && var.vault_init_s3cfg == null)
-  error_message = "error: vault_init needs vault_init_s3cfg"
-}

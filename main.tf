@@ -11,10 +11,10 @@ locals {
     jq                 = var.jq || (var.vault && var.vault_start && var.vault_init),
     // mailcow            = var.mailcow,
     nginx           = var.nginx,
-    python3_pip     = var.python3_pip || var.s3cmd || (var.vault && var.vault_start && var.vault_init),
+    python3_pip     = var.python3_pip || var.s3cmd,
     rke2_node_1st   = var.rke2 && var.rke2_node_1st,
     rke2_node_other = var.rke2 && var.rke2_node_other,
-    s3cmd           = var.s3cmd || (var.vault && var.vault_start && var.vault_init),
+    s3cmd           = var.s3cmd,
     vault           = var.vault || var.rke2_node_1st,
     wait_until      = var.wait_until || var.rke2_node_1st || (var.vault && var.vault_start && var.vault_init),
   }

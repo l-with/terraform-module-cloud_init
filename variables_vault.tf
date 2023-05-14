@@ -115,23 +115,6 @@ variable "vault_init_artifact" {
   default     = "vault_init_json.tgz.enc"
 }
 
-variable "vault_init_s3cfg" {
-  description = <<EOT
-    the values for the [S3cmd](https://s3tools.org/usage)
-        s3cmd --access_key=<access_key> --secret_key=<secret_key>} \
-        --host=https://<host_base> '--host-bucket=\%(bucket)s.<host_base>' \
-        put FILE s3://<bucket>\%\{if prefix != null\}/<prefix>\%\{ endif \}
-  EOT
-  type = object({
-    access_key = string,
-    secret_key = string,
-    host_base  = string,
-    bucket     = string,
-    prefix     = optional(string, null),
-  })
-  default = null
-}
-
 variable "vault_init_public_key" {
   description = "the public RSA key the output of the vault initialization is encoded with (to be decryptable by the corresponding private key with [rsadecrypt](https://developer.hashicorp.com/terraform/language/functions/rsadecrypt)"
   type        = string
