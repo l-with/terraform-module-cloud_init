@@ -7,9 +7,9 @@ output "cloud_init" {
 output "vault" {
   description = "the relevant results from vault install and init"
   value = {
-    vault_key_shares                         = var.vault_key_shares
-    vault_key_threshold                      = var.vault_key_threshold
-    vault_init_json_tgz_enc_full_path        = local.vault_init_json_tgz_enc_full_path,
-    vault_init_json_tgz_enc_base64_full_path = local.vault_init_json_tgz_enc_base64_full_path,
+    vault_key_shares                     = var.vault_key_shares
+    vault_key_threshold                  = var.vault_key_threshold
+    vault_init_json_enc_full_path        = local.vault_init_json_enc_full_path,
+    vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path,
   }
 }

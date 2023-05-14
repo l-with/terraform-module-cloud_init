@@ -3,12 +3,12 @@ locals {
     apt    = "/usr/bin",
     binary = "/usr/local/bin"
   }
-  vault_init_public_key_full_path          = "${var.vault_bootstrap_files_path}/vault_init_public.key"
-  vault_init_json_tgz_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.tgz.enc"
-  vault_init_json_tgz_enc_base64_full_path = "${local.vault_init_json_tgz_enc_full_path}.base64"
-  vault_tls_cert_file                      = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : var.vault_storage_raft_leader_client_cert_file
-  vault_tls_key_file                       = var.vault_tls_key_file != null ? var.vault_tls_key_file : var.vault_storage_raft_leader_client_key_file
-  vault_tls_client_ca_file                 = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : var.vault_storage_raft_leader_ca_cert_file
+  vault_init_public_key_full_path      = "${var.vault_bootstrap_files_path}/vault_init_public.key"
+  vault_init_json_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.enc"
+  vault_init_json_enc_base64_full_path = "${local.vault_init_json_enc_full_path}.base64"
+  vault_tls_cert_file                  = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : var.vault_storage_raft_leader_client_cert_file
+  vault_tls_key_file                   = var.vault_tls_key_file != null ? var.vault_tls_key_file : var.vault_storage_raft_leader_client_key_file
+  vault_tls_client_ca_file             = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : var.vault_storage_raft_leader_ca_cert_file
   vault_listeners = [
     for listener in var.vault_listeners : {
       address            = listener.address,
@@ -68,14 +68,14 @@ locals {
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_init.tpl",
               vars = {
-                vault_init_addr                          = var.vault_init_addr,
-                vault_key_shares                         = var.vault_key_shares,
-                vault_key_threshold                      = var.vault_key_threshold,
-                vault_bootstrap_files_path               = var.vault_bootstrap_files_path,
-                vault_init_public_key_full_path          = local.vault_init_public_key_full_path,
-                vault_init_json_tgz_enc_full_path        = local.vault_init_json_tgz_enc_full_path,
-                vault_init_json_tgz_enc_base64_full_path = local.vault_init_json_tgz_enc_base64_full_path
-                vault_remove_vault_init_json             = var.vault_remove_vault_init_json ? "true" : null,
+                vault_init_addr                      = var.vault_init_addr,
+                vault_key_shares                     = var.vault_key_shares,
+                vault_key_threshold                  = var.vault_key_threshold,
+                vault_bootstrap_files_path           = var.vault_bootstrap_files_path,
+                vault_init_public_key_full_path      = local.vault_init_public_key_full_path,
+                vault_init_json_enc_full_path        = local.vault_init_json_enc_full_path,
+                vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path
+                vault_remove_vault_init_json         = var.vault_remove_vault_init_json ? "true" : null,
               }
             },
           ],
