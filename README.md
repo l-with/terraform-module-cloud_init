@@ -242,5 +242,5 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_cloud_init"></a> [cloud\_init](#output\_cloud\_init) | the cloud-init user data |
-| <a name="output_vault"></a> [vault](#output\_vault) | the relevant results form vault install and init |
+| <a name="output_vault"></a> [vault](#output\_vault) | the relevant results from vault install and init |
 <!-- END_TF_DOCS -->

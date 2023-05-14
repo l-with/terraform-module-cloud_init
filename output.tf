@@ -5,7 +5,7 @@ output "cloud_init" {
 }
 
 output "vault" {
-  description = "the relevant results form vault install and init"
+  description = "the relevant results from vault install and init"
   value = {
     vault_key_shares                         = var.vault_key_shares
     vault_key_threshold                      = var.vault_key_threshold
