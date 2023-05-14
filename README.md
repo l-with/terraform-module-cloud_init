@@ -123,6 +123,7 @@ For input variables: s. [wait_until](#wait_until).
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_external"></a> [external](#requirement\_external) | ~> 2.3.1 |
 
 #### Providers
 
