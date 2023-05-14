@@ -66,6 +66,7 @@ locals {
                 vault_key_threshold             = var.vault_key_threshold
                 vault_init_artifact             = var.vault_init_artifact
                 vault_init_public_key_full_path = local.vault_init_public_key_full_path
+                vault_remove_vault_init_json    = var.vault_remove_vault_init_json ? "true" : null,
                 vault_s3_access_key             = var.vault_init_s3cfg.access_key,
                 vault_s3_secret_key             = var.vault_init_s3cfg.secret_key,
                 vault_s3_host_base              = var.vault_init_s3cfg.host_base,
@@ -112,8 +113,8 @@ locals {
           {
             template = "${path.module}/templates/vault/${local.yml_write_files}_vault_init_public_key.tpl",
             vars = {
-              vault_init_public_key_full_path = local.vault_init_public_key_full_path
-              vault_init_public_key           = base64encode(var.vault_init_public_key)
+              vault_init_public_key_full_path = local.vault_init_public_key_full_path,
+              vault_init_public_key           = base64encode(var.vault_init_public_key),
             }
           }
         ]

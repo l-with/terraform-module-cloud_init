@@ -138,6 +138,15 @@ variable "vault_init_public_key" {
   default     = null
 }
 
+variable "vault_remove_vault_init_json" {
+  description = <<EOT
+    if the output of the vault initialization should removed
+    <span style=\"color:red\">ATTENTION: The output of the vault initialization is highly confidential! It is the root of the secret management in vault!</span>"
+  EOT
+  type        = bool
+  default     = true
+}
+
 variable "vault_key_shares" {
   description = "the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares)"
   type        = number
