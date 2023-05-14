@@ -27,6 +27,7 @@
       vault token revoke $VAULT_TOKEN
       tar --gzip --create --file $VAULT_INIT_JSON.tgz $VAULT_INIT_JSON
       openssl pkeyutl -encrypt -pubin -inkey ${vault_init_public_key_full_path} -in $VAULT_INIT_JSON.tgz -out /root/${vault_init_artifact}
+      rm -rf $VAULT_INIT_JSON.tgz
       s3cmd --access_key=${vault_s3_access_key} --secret_key=${vault_s3_secret_key} \
         --host=https://${vault_s3_host_base} '--host-bucket=%(bucket)s.${vault_s3_host_base}' \
         del /root/${vault_init_artifact} s3://${vault_s3_bucket}%{ if vault_s3_prefix != null }/${vault_s3_prefix}%{ endif }
