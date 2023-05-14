@@ -5,10 +5,10 @@
     wait_until --verbose --delay 10 --retries 42 \
         --check 'grep --invert-match 0' 'vault status >/dev/null; echo $?'
   - export VAULT_ADDR=${vault_init_addr}
-  - export VAULT_STATUS_JSON=/root/vault_status.json
+  - export VAULT_STATUS_JSON=${vault_bootstrap_files_path}/vault_status.json
   - vault status -format=json | tee $VAULT_STATUS_JSON
   - export VAULT_INITIALIZED=$(cat $VAULT_STATUS_JSON | jq .initialized)
-  - export VAULT_INIT_JSON=/root/vault_init.json
+  - export VAULT_INIT_JSON=${vault_bootstrap_files_path}/vault_init.json
   - |
     if [ "$VAULT_INITIALIZED" = "false" ]; then
       vault operator init -key-shares ${vault_key_shares} -key-threshold ${vault_key_threshold} -format=json >$VAULT_INIT_JSON
@@ -26,7 +26,7 @@
       export VAULT_TOKEN=$(cat $VAULT_INIT_JSON | jq .root_token --raw-output)
       vault token revoke $VAULT_TOKEN
       tar --gzip --create --file $VAULT_INIT_JSON.tgz $VAULT_INIT_JSON
-      openssl pkeyutl -encrypt -pubin -inkey ${vault_init_public_key_full_path} -in $VAULT_INIT_JSON.tgz -out /root/${vault_init_artifact}
+      openssl pkeyutl -encrypt -pubin -inkey ${vault_init_public_key_full_path} -in $VAULT_INIT_JSON.tgz -out ${vault_init_json_tgz_enc_full_path}
       rm --force $VAULT_INIT_JSON.tgz%{if vault_remove_vault_init_json != null}
       rm --force $VAULT_INIT_JSON%{ endif }
     fi

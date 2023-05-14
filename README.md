@@ -205,6 +205,7 @@ No resources.
 | <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `null` | no |
 | <a name="input_vault_api_addr"></a> [vault\_api\_addr](#input\_vault\_api\_addr) | the [api\_addr](https://www.vaultproject.io/docs/configuration#api_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address | `string` | `"http://$ipv4_address:8200"` | no |
 | <a name="input_vault_api_port"></a> [vault\_api\_port](#input\_vault\_api\_port) | the vault api port (for [api\_addr](https://www.vaultproject.io/docs/configuration#api_addr) and [address](https://www.vaultproject.io/docs/configuration/listener/tcp#address)) | `number` | `8200` | no |
+| <a name="input_vault_bootstrap_files_path"></a> [vault\_bootstrap\_files\_path](#input\_vault\_bootstrap\_files\_path) | the path where files needed for bootstrapping are saved | `string` | `"/root"` | no |
 | <a name="input_vault_cluster_addr"></a> [vault\_cluster\_addr](#input\_vault\_cluster\_addr) | the [cluster\_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address | `string` | `"http://$ipv4_address:8201"` | no |
 | <a name="input_vault_cluster_port"></a> [vault\_cluster\_port](#input\_vault\_cluster\_port) | the vault cluster port (for [cluster\_addr](https://www.vaultproject.io/docs/configuration#cluster_addr) and [cluster\_address](https://www.vaultproject.io/docs/configuration/listener/tcp#cluster_address)) | `number` | `8201` | no |
 | <a name="input_vault_config_path"></a> [vault\_config\_path](#input\_vault\_config\_path) | the path for the vault configuration files | `string` | `"/etc/vault.d"` | no |
@@ -212,7 +213,6 @@ No resources.
 | <a name="input_vault_home_path"></a> [vault\_home\_path](#input\_vault\_home\_path) | the home of the vault specific files and folders | `string` | `"/srv/vault"` | no |
 | <a name="input_vault_init"></a> [vault\_init](#input\_vault\_init) | if vault should be initialized | `bool` | `true` | no |
 | <a name="input_vault_init_addr"></a> [vault\_init\_addr](#input\_vault\_init\_addr) | the vault address used for `vault init` during cloud init | `string` | `null` | no |
-| <a name="input_vault_init_artifact"></a> [vault\_init\_artifact](#input\_vault\_init\_artifact) | the filename for the openssl encrypted output from `vault init` | `string` | `"vault_init_json.tgz.enc"` | no |
 | <a name="input_vault_init_public_key"></a> [vault\_init\_public\_key](#input\_vault\_init\_public\_key) | the public RSA key the output of the vault initialization is encoded with (to be decryptable by the corresponding private key with [rsadecrypt](https://developer.hashicorp.com/terraform/language/functions/rsadecrypt) | `string` | `null` | no |
 | <a name="input_vault_install_method"></a> [vault\_install\_method](#input\_vault\_install\_method) | the install method, supported methods are 'apt' | `string` | `"apt"` | no |
 | <a name="input_vault_key_shares"></a> [vault\_key\_shares](#input\_vault\_key\_shares) | the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares) | `number` | `1` | no |
@@ -241,4 +241,5 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_cloud_init"></a> [cloud\_init](#output\_cloud\_init) | the cloud-init user data |
+| <a name="output_vault_init_json_tgz_enc_full_path"></a> [vault\_init\_json\_tgz\_enc\_full\_path](#output\_vault\_init\_json\_tgz\_enc\_full\_path) | the full path of the encrypted output of vault init |
 <!-- END_TF_DOCS -->

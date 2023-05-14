@@ -109,10 +109,10 @@ variable "vault_init_addr" {
   default     = null
 }
 
-variable "vault_init_artifact" {
-  description = "the filename for the openssl encrypted output from `vault init`"
+variable "vault_bootstrap_files_path" {
+  description = "the path where files needed for bootstrapping are saved"
   type        = string
-  default     = "vault_init_json.tgz.enc"
+  default     = "/root"
 }
 
 variable "vault_init_public_key" {

@@ -1,0 +1,1 @@
+  - mkdir --parent ${vault_bootstrap_files_path}
