@@ -4,12 +4,12 @@ output "cloud_init" {
   sensitive   = true
 }
 
-output "vault_init_json_tgz_enc_full_path" {
-  description = "the full path of the encrypted output of vault init"
-  value       = local.vault_init_json_tgz_enc_full_path
-}
-
-output "vault_init_json_tgz_enc_base64_full_path" {
-  description = "the full path of the encrypted ans base64 encoded output of vault init"
-  value       = local.vault_init_json_tgz_enc_base64_full_path
+output "vault" {
+  description = "the relevant results form vault install and init"
+  value = {
+    vault_key_shares                         = var.vault_key_shares
+    vault_key_threshold                      = var.vault_key_threshold
+    vault_init_json_tgz_enc_full_path        = local.vault_init_json_tgz_enc_full_path,
+    vault_init_json_tgz_enc_base64_full_path = local.vault_init_json_tgz_enc_base64_full_path,
+  }
 }

@@ -242,6 +242,5 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_cloud_init"></a> [cloud\_init](#output\_cloud\_init) | the cloud-init user data |
-| <a name="output_vault_init_json_tgz_enc_base64_full_path"></a> [vault\_init\_json\_tgz\_enc\_base64\_full\_path](#output\_vault\_init\_json\_tgz\_enc\_base64\_full\_path) | the full path of the encrypted ans base64 encoded output of vault init |
-| <a name="output_vault_init_json_tgz_enc_full_path"></a> [vault\_init\_json\_tgz\_enc\_full\_path](#output\_vault\_init\_json\_tgz\_enc\_full\_path) | the full path of the encrypted output of vault init |
+| <a name="output_vault"></a> [vault](#output\_vault) | the relevant results form vault install and init |
 <!-- END_TF_DOCS -->
