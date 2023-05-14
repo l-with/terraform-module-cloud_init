@@ -23,7 +23,7 @@
       done
       wait_until --verbose --delay 10 --retries 42 \
         --check 'grep false' 'vault status -format=json | jq .sealed'
-      export VAULT_TOKEN=$(cat $VAULT_INIT_JSON | jq .root_token)
+      export VAULT_TOKEN=$(cat $VAULT_INIT_JSON | jq .root_token --raw-output)
       vault token revoke $VAULT_TOKEN
       tar --gzip --create --file $VAULT_INIT_JSON.tgz $VAULT_INIT_JSON
       openssl pkeyutl -encrypt -pubin -inkey ${vault_init_public_key_full_path} -in $VAULT_INIT_JSON.tgz -out /root/${vault_init_artifact}
