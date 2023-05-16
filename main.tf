@@ -43,6 +43,7 @@ locals {
     fail2ban           = local.fail2ban,
     gettext_base       = local.gettext_base,
     jq                 = local.jq,
+    lineinfile         = local.lineinfile,
     python3_pip        = local.python3_pip,
     s3cmd              = local.s3cmd,
     // mailcow            = local.mailcow,
