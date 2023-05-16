@@ -1,5 +1,5 @@
 locals {
-  encrypted_packages = !var.encrypted_packages ? {} : {
+  encrypted_packages = !local.parts_active.encrypted_packages ? {} : {
     runcmd = [
       for package in var.encrypted_packages_list :
       {

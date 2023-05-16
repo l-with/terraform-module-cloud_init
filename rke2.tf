@@ -3,7 +3,7 @@ locals {
 }
 
 locals {
-  rke2_node_1st = !var.rke2_node_1st ? {} : {
+  rke2_node_1st = !local.parts_active.rke2_node_1st ? {} : {
     runcmd = [
       {
         template = "${path.module}/templates/encrypted_packages/${local.yml_runcmd}.tpl",
@@ -50,7 +50,7 @@ locals {
 }
 
 locals {
-  rke2_node_other = !var.rke2_node_other ? {} : {
+  rke2_node_other = !local.parts_active.rke2_node_other ? {} : {
     runcmd = [
       {
         template = "${path.module}/templates/encrypted_packages/${local.yml_runcmd}.tpl",

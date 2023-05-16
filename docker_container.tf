@@ -1,5 +1,5 @@
 locals {
-  docker_container = !var.docker_container ? {} : {
+  docker_container = !local.parts_active.docker_container ? {} : {
     write_files = concat(
       [
         for container in var.docker_container_list :

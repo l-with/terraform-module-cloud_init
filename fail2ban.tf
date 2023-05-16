@@ -1,5 +1,5 @@
 locals {
-  fail2ban = !var.fail2ban ? {} : {
+  fail2ban = !local.parts_active.fail2ban ? {} : {
     packages = [{
       template = "${path.module}/templates/fail2ban/${local.yml_packages}.tpl",
       vars     = {}

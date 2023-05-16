@@ -10,6 +10,7 @@ locals {
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other,
     jq                 = var.jq || (var.vault && var.vault_start && var.vault_init),
     // mailcow            = var.mailcow,
+    lineinfile      = var.lineinfile
     nginx           = var.nginx,
     python3_pip     = var.python3_pip || var.s3cmd,
     rke2_node_1st   = var.rke2 && var.rke2_node_1st,

@@ -1,6 +1,6 @@
 locals {
   wait_until = {
-    runcmd = [{
+    runcmd = !local.parts_active.wait_until ? [] : [{
       template = "${path.module}/templates/wait_until/${local.yml_runcmd}.tpl",
       vars     = {}
     }]

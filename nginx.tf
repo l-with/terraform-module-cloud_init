@@ -3,7 +3,7 @@ locals {
 }
 
 locals {
-  nginx = !var.nginx ? {} : {
+  nginx = !local.parts_active.nginx ? {} : {
     packages = [{
       template = "${path.module}/templates/nginx/${local.yml_packages}.tpl",
       vars     = {}

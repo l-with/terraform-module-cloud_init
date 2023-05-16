@@ -60,6 +60,12 @@ s. [jq](https://stedolan.github.io/jq/)
 
 For input variables: s. [jq](#input_jq).
 
+### lineinfile
+
+s. [lineinfile](https://github.com/l-with/lineinfile)
+
+For input variables: s. [lineinfile](#lineinfile).
+
 ### nginx
 
 s. [nginx](https://nginx.org)
@@ -170,6 +176,7 @@ No resources.
 | <a name="input_fail2ban_sshd"></a> [fail2ban\_sshd](#input\_fail2ban\_sshd) | if sshd jail install should be generated | `bool` | `true` | no |
 | <a name="input_gettext_base"></a> [gettext\_base](#input\_gettext\_base) | if cloud-init user data for installing gettext-base should be generated | `bool` | `false` | no |
 | <a name="input_jq"></a> [jq](#input\_jq) | if cloud-init user data for installing jq should be generated | `bool` | `false` | no |
+| <a name="input_lineinfile"></a> [lineinfile](#input\_lineinfile) | if cloud-init user data for installing [lineinfile](https://github.com/l-with/lineinfile) should be generated | `bool` | `false` | no |
 | <a name="input_mailcow"></a> [mailcow](#input\_mailcow) | if cloud-init user data for installing mailcow should be generated | `bool` | `false` | no |
 | <a name="input_mailcow_install_path"></a> [mailcow\_install\_path](#input\_mailcow\_install\_path) | the install path for mailcow | `string` | `"/opt/mailcow-dockerized"` | no |
 | <a name="input_mailcow_version"></a> [mailcow\_version](#input\_mailcow\_version) | the branch value for mailcow (`MAILCOW_BRANCH`) | `string` | `"master"` | no |
@@ -235,7 +242,7 @@ No resources.
 | <a name="input_vault_tls_client_ca_file"></a> [vault\_tls\_client\_ca\_file](#input\_vault\_tls\_client\_ca\_file) | the [tls\_client\_ca\_file](https://www.vaultproject.io/docs/configuration/listener/tcp#tls_client_ca_file)<br>    default is [vault\_storage\_raft\_leader\_ca\_cert\_file](#input\_vault\_storage\_raft\_leader\_ca\_cert\_file) (coded in terraform) | `string` | `null` | no |
 | <a name="input_vault_tls_key_file"></a> [vault\_tls\_key\_file](#input\_vault\_tls\_key\_file) | the path of the private key for the certificate for TLS ([tls\_key\_file](https://www.vaultproject.io/docs/configuration/listener/tcp#tls_key_file))<br>    default is [vault\_storage\_raft\_leader\_client\_key\_file](#input\_vault\_storage\_raft\_leader\_client\_key\_file) (coded in terraform) | `string` | `null` | no |
 | <a name="input_vault_ui"></a> [vault\_ui](#input\_vault\_ui) | if the vault user interface should be activated | `bool` | `false` | no |
-| <a name="input_wait_until"></a> [wait\_until](#input\_wait\_until) | if cloud-init user data for installing wait\_until should be generated | `bool` | `false` | no |
+| <a name="input_wait_until"></a> [wait\_until](#input\_wait\_until) | if cloud-init user data for installing [wait\_until](https://github.com/l-with/wait-until) should be generated | `bool` | `false` | no |
 
 #### Outputs
 

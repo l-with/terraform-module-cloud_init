@@ -1,5 +1,5 @@
 locals {
-  certbot = !var.certbot ? {} : {
+  certbot = !local.parts_active.certbot ? {} : {
     packages = concat(
       [
         {
