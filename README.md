@@ -6,6 +6,23 @@ Terraform module to template cloud-init user data
 
 currently only tested with Ubuntu focal
 
+## Motivation
+
+There is a terraform-provider [cloudinit](https://registry.terraform.io/providers/hashicorp/cloudinit), which can be used to render cloud-init data.
+
+This module is not completely generic like [cloudinit](https://registry.terraform.io/providers/hashicorp/cloudinit). It supports the installation of features.
+Some features are simple package installations or downloads of tools.
+Other features have more functionality.
+
+For instance 
+
+- [docker_container](#docker_container) can be used to configure services that start docker containers.
+- [nginx](#nginx) can be used to configure nginx
+
+If you use [docker_container](#docker_container) then [docker](#docker) is activated automatically.
+
+There are more sophisticated features like `vault_init` in [vault](#vault) that automatically install the needed features for the logic in the `runcmd` for `vault_init`. 
+
 ## Features
 
 ### b2
