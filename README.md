@@ -198,6 +198,8 @@ No resources.
 | <a name="input_fail2ban_recidive"></a> [fail2ban\_recidive](#input\_fail2ban\_recidive) | if recidive jail install should be generated | `bool` | `true` | no |
 | <a name="input_fail2ban_sshd"></a> [fail2ban\_sshd](#input\_fail2ban\_sshd) | if sshd jail install should be generated | `bool` | `true` | no |
 | <a name="input_gettext_base"></a> [gettext\_base](#input\_gettext\_base) | if cloud-init user data for installing gettext-base should be generated | `bool` | `false` | no |
+| <a name="input_haproxy"></a> [haproxy](#input\_haproxy) | if cloud-init user data for installing haproxy should be generated | `bool` | `false` | no |
+| <a name="input_haproxy_configuration"></a> [haproxy\_configuration](#input\_haproxy\_configuration) | the configuration for haproxy | `string` | `null` | no |
 | <a name="input_jq"></a> [jq](#input\_jq) | if cloud-init user data for installing jq should be generated | `bool` | `false` | no |
 | <a name="input_lineinfile"></a> [lineinfile](#input\_lineinfile) | if cloud-init user data for installing [lineinfile](https://github.com/l-with/lineinfile) should be generated | `bool` | `false` | no |
 | <a name="input_mailcow"></a> [mailcow](#input\_mailcow) | if cloud-init user data for installing mailcow should be generated | `bool` | `false` | no |

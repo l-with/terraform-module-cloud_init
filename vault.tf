@@ -19,15 +19,15 @@ locals {
       tls_client_ca_file = listener.tls_client_ca_file != null ? listener.tls_client_ca_file : local.vault_tls_client_ca_file,
     }
   ]
-  vault = merge(
+  vault = !local.parts_active.vault ? {} : merge(
     {
-      packages = !local.parts_active.vault ? [] : [
+      packages = [
         {
           template = "${path.module}/templates/vault/${local.yml_packages}.tpl",
           vars     = {}
         },
       ]
-      runcmd = !local.parts_active.vault ? [] : concat(
+      runcmd = concat(
         [
           {
             template = "${path.module}/templates/vault/${local.yml_runcmd}_bootstrap_files_path.tpl",
@@ -46,7 +46,7 @@ locals {
             }
           },
         ],
-        !(local.parts_active.vault && var.vault_start) ? [] : concat(
+        !var.vault_start ? [] : concat(
           [
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_vault_hcl.tpl",
@@ -82,7 +82,7 @@ locals {
         )
       )
     },
-    !(local.parts_active.vault && var.vault_start) ? {} : {
+    !var.vault_start ? {} : {
       write_files = concat(
         [
           {
