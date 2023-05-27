@@ -11,6 +11,7 @@ locals {
     jq                 = var.jq || (var.vault && var.vault_start && var.vault_init),
     // mailcow            = var.mailcow,
     lineinfile      = var.lineinfile
+    terraform       = var.terraform
     nginx           = var.nginx,
     python3_pip     = var.python3_pip || var.s3cmd,
     rke2_node_1st   = var.rke2 && var.rke2_node_1st,
@@ -44,6 +45,7 @@ locals {
     gettext_base       = local.gettext_base,
     jq                 = local.jq,
     lineinfile         = local.lineinfile,
+    terraform          = local.terraform,
     python3_pip        = local.python3_pip,
     s3cmd              = local.s3cmd,
     // mailcow            = local.mailcow,
@@ -65,6 +67,7 @@ locals {
     "fail2ban",
     "gettext_base",
     "jq",
+    "terraform",
     "python3_pip",
     "s3cmd",
     // "mailcow",

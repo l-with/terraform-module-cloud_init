@@ -226,6 +226,8 @@ No resources.
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `null` | no |
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `null` | no |
 | <a name="input_s3cmd"></a> [s3cmd](#input\_s3cmd) | if cloud-init user data for installing the [S3cmd](https://github.com/s3tools/s3cmd) should be generated | `bool` | `false` | no |
+| <a name="input_terraform"></a> [terraform](#input\_terraform) | if cloud-init user data for installing terraform should be generated | `bool` | `false` | no |
+| <a name="input_terraform_install_method"></a> [terraform\_install\_method](#input\_terraform\_install\_method) | the install method, supported methods are 'apt' | `string` | `"apt"` | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
 | <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `null` | no |
 | <a name="input_vault_api_addr"></a> [vault\_api\_addr](#input\_vault\_api\_addr) | the [api\_addr](https://www.vaultproject.io/docs/configuration#api_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address | `string` | `"http://$ipv4_address:8200"` | no |
