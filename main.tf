@@ -12,6 +12,7 @@ locals {
     // mailcow            = var.mailcow,
     lineinfile      = var.lineinfile
     terraform       = var.terraform
+    haproxy         = var.haproxy
     nginx           = var.nginx,
     python3_pip     = var.python3_pip || var.s3cmd,
     rke2_node_1st   = var.rke2 && var.rke2_node_1st,
@@ -49,6 +50,7 @@ locals {
     python3_pip        = local.python3_pip,
     s3cmd              = local.s3cmd,
     // mailcow            = local.mailcow,
+    haproxy         = local.haproxy,
     nginx           = local.nginx,
     rke2_node_1st   = local.rke2_node_1st,
     rke2_node_other = local.rke2_node_other,
@@ -71,6 +73,7 @@ locals {
     "python3_pip",
     "s3cmd",
     // "mailcow",
+    "haproxy",
     "nginx",
     "certbot",
     "wait_until",
@@ -110,9 +113,9 @@ locals {
   cloud_init_package_update             = var.package && var.package_update ? "package_update: true" : ""
   cloud_init_package_upgrade            = var.package && var.package_upgrade ? "package_upgrade: true" : ""
   cloud_init_package_reboot_if_required = var.package && var.package_reboot_if_required ? "package_reboot_if_required: true" : ""
-  cloud_init_write_files_start          = "write_files:"
-  cloud_init_packages_start             = "packages:"
-  cloud_init_runcmd_start               = "runcmd:"
+  cloud_init_write_files_start          = "\nwrite_files:"
+  cloud_init_packages_start             = "\npackages:"
+  cloud_init_runcmd_start               = "\nruncmd:"
   cloud_init_runcmd_end                 = templatefile("${path.module}/templates/${local.yml_runcmd}_end.tpl", {})
 
   cloud_init = join(

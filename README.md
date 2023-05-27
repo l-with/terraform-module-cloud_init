@@ -71,6 +71,12 @@ s. [gettext-base](https://packages.ubuntu.com/search?suite=default&section=all&a
 
 For input variables: s. [gettext_base](#input_gettext_base).
 
+### haproxy
+
+s. [haproxy](http://docs.haproxy.org)
+
+For input variables: s. [haproxy](#input_haproxy).
+
 ### jq
 
 s. [jq](https://stedolan.github.io/jq/)
