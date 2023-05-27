@@ -84,7 +84,7 @@ module "vault_init_needs_vault_init_addr" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.vault_init && var.vault_init_addr == null)
+  assert        = !(var.vault && var.vault_start && var.vault_init && var.vault_init_addr == null)
   error_message = "error: vault_init needs vault_init_addr"
 }
 
@@ -93,7 +93,7 @@ module "vault_init_needs_vault_init_public_key" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.vault_init && var.vault_init_public_key == null)
+  assert        = !(var.vault && var.vault_start && var.vault_init && var.vault_init_public_key == null)
   error_message = "error: vault_init needs vault_init_public_key"
 }
 
