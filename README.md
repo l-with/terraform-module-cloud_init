@@ -126,6 +126,12 @@ s. [S3cmd](https://github.com/s3tools/s3cmd)
 
 For input variables: s. [s3cmd](#input_s3cmd).
 
+### terraform
+
+s. [terraform](https://developer.hashicorp.com/terraform/downloads)
+
+For input variables: s. [terraform](#input_terraform)
+
 ### vault
 
 s. [vault](https://developer.hashicorp.com/vault/downloads)
