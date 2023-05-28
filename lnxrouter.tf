@@ -3,6 +3,10 @@ locals {
   lnxrouter_service_template_path = "/root"
   lnxrouter = !local.parts_active.lnxrouter ? {} : merge(
     {
+      packages = [{
+        template = "${path.module}/templates/lnxrouter/${local.yml_packages}.tpl",
+        vars     = {}
+      }]
       runcmd = concat(
         [
           {
