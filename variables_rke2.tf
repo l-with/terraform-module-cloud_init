@@ -69,7 +69,7 @@ variable "rke2_node_1st_cert_manager_crd_version" {
 }
 
 variable "rke2_node_1st_vault_addr" {
-  description = "the vault address to put the `ke2.yml`  as kv into"
+  description = "the vault address to put the `rke2.yml` as kv into"
   type        = string
   default     = null // `var.vault_addr` (implemented in rke2.tf)
 }

@@ -10,9 +10,10 @@ locals {
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other,
     jq                 = var.jq || (var.vault && var.vault_start && var.vault_init),
     // mailcow            = var.mailcow,
-    lineinfile      = var.lineinfile
-    terraform       = var.terraform
-    haproxy         = var.haproxy
+    lineinfile      = var.lineinfile,
+    terraform       = var.terraform,
+    haproxy         = var.haproxy,
+    lnxrouter       = var.lnxrouter,
     nginx           = var.nginx,
     python3_pip     = var.python3_pip || var.s3cmd,
     rke2_node_1st   = var.rke2 && var.rke2_node_1st,
@@ -51,6 +52,7 @@ locals {
     s3cmd              = local.s3cmd,
     // mailcow            = local.mailcow,
     haproxy         = local.haproxy,
+    lnxrouter       = local.lnxrouter,
     nginx           = local.nginx,
     rke2_node_1st   = local.rke2_node_1st,
     rke2_node_other = local.rke2_node_other,
@@ -74,6 +76,7 @@ locals {
     "s3cmd",
     // "mailcow",
     "haproxy",
+    "lnxrouter",
     "nginx",
     "certbot",
     "wait_until",

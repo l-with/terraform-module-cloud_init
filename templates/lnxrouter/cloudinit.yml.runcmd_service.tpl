@@ -1,0 +1,3 @@
+  - systemctl daemon-reload
+  - systemctl enable lnxrouter
+  - systemctl start lnxrouter

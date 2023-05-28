@@ -11,7 +11,7 @@ variable "docker_container_list" {
     image          = string
     ports          = string // --publish
     command        = string
-    restart_policy = string // --restart
+    restart_policy = optional(string, "always") // --restart
   }))
   default   = []
   sensitive = true
