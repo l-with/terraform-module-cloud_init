@@ -9,8 +9,6 @@
     StartLimitBurst=3
 
     [Service]
-    User=vault
-    Group=vault
     ProtectSystem=yes
     ProtectHome=read-only
     PrivateTmp=yes
