@@ -10,7 +10,7 @@ locals {
       write_files = [{
         template = "${path.module}/templates/haproxy/${local.yml_write_files}_haproxy_cfg.tpl"
         vars = {
-          haproxy_configuration = var.haproxy_configuration,
+          haproxy_configuration = jsonencode(var.haproxy_configuration),
         }
       }],
     },
@@ -21,4 +21,8 @@ locals {
       }]
     }
   )
+}
+
+output "defaults" {
+  value = "hallo"
 }
