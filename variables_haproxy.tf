@@ -31,8 +31,9 @@ EOT
     ),
     defaults = optional(list(string), [
       <<EOT
-	log	global
+      	log	global
 	mode	http
+	option	httplog
 	option	dontlognull
         timeout connect 5000
         timeout client  50000
