@@ -8,8 +8,11 @@ variable "haproxy_configuration" {
   description = "the configuration for [haproxy](https://www.haproxy.com/documentation/hapee/latest/configuration/config-sections/overview/#haproxy-enterprise-configuration-sections)"
   type = object({
     global = optional(
-      string,
-      <<EOT
+      object({
+        configuration = string
+      }),
+      {
+        configuration = <<EOT
       log /dev/log local0
       log /dev/log local1 notice
       chroot /var/lib/haproxy
@@ -28,11 +31,30 @@ variable "haproxy_configuration" {
       ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
       ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 EOT
+      }
+    )
+    frontend = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
     ),
-    frontend = optional(list(string), []),
-    backend  = optional(list(string), []),
-    defaults = optional(list(string), [
-      <<EOT
+    backend = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    defaults = optional(
+      list(object({
+        configuration = string,
+        })
+      ),
+      [
+        {
+          configuration = <<EOT
       log global
       mode http
       option httplog
@@ -48,19 +70,86 @@ EOT
       errorfile 503 /etc/haproxy/errors/503.http
       errorfile 504 /etc/haproxy/errors/504.http
 EOT
-    ]),
-    listen         = optional(list(string), []),
-    aggregations   = optional(list(string), []),
-    cache          = optional(list(string), []),
+      }]
+    ),
+    listen = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    aggregations = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    cache = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
     dynamic-update = optional(list(string), []),
-    fcgi-app       = optional(list(string), []),
-    http-errors    = optional(list(string), []),
-    mailers        = optional(list(string), []),
-    peers          = optional(list(string), []),
-    program        = optional(list(string), []),
-    resolvers      = optional(list(string), []),
-    ring           = optional(list(string), []),
-    userlist       = optional(list(string), []),
+    fcgi-app = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    http-errors = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    mailers = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    peers = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    program = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    resolvers = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    ring = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
+    userlist = optional(
+      list(object({
+        label         = string,
+        configuration = string,
+      })),
+      []
+    ),
   })
   default = null
 }
