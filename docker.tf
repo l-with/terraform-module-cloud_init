@@ -1,7 +1,7 @@
 locals {
   docker = !local.parts_active.docker ? {} : {
     runcmd = [{
-      template = "${path.module}/templates/docker/${local.yml_runcmd}.tpl",
+      template = "${path.module}/templates/docker/${local.yml_runcmd}_install.tpl",
       vars     = {}
     }]
     write_files = concat(

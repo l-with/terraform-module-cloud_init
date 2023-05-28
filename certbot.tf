@@ -15,7 +15,7 @@ locals {
       ]
     )
     runcmd = !var.certbot_dns_hetzner ? [] : [{
-      template = "${path.module}/templates/certbot/${local.yml_runcmd}.tpl",
+      template = "${path.module}/templates/certbot/${local.yml_runcmd}_install.tpl",
       vars     = {}
     }]
   }

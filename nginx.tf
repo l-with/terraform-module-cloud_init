@@ -60,6 +60,13 @@ locals {
     )
     runcmd = concat(
       [{
+        template = "${path.module}/templates/nginx/${local.yml_runcmd}_prepare.tpl",
+        vars = {
+          configuration_home = var.nginx_configuration_home
+          server_fqdn        = var.nginx_server_fqdn,
+        }
+      }],
+      [{
         template = "${path.module}/templates/nginx/${local.yml_runcmd}_https_conf.tpl",
         vars = {
           configuration_home = var.nginx_configuration_home
@@ -76,13 +83,6 @@ locals {
           }
         }
       ],
-      [{
-        template = "${path.module}/templates/nginx/${local.yml_runcmd}.tpl",
-        vars = {
-          configuration_home = var.nginx_configuration_home
-          server_fqdn        = var.nginx_server_fqdn,
-        }
-      }],
     )
   }
 }

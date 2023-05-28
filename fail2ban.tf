@@ -27,7 +27,7 @@ locals {
       : []
     )
     runcmd = [{
-      template = "${path.module}/templates/fail2ban/${local.yml_runcmd}.tpl",
+      template = "${path.module}/templates/fail2ban/${local.yml_runcmd}_service.tpl",
       vars     = {}
     }]
   }
