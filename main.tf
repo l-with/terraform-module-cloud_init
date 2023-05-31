@@ -1,5 +1,7 @@
 locals {
   parts_active = {
+    runcmd             = var.runcmd,
+    network            = var.network,
     b2                 = var.b2,
     certbot            = var.certbot,
     croc               = var.croc,
@@ -37,8 +39,7 @@ module "cloud_init_part" {
 
 locals {
   parts_inputs = {
-    b2                 = local.b2,
-    certbot            = local.certbot,
+    network            = local.network,
     croc               = local.croc,
     docker             = local.docker,
     docker_container   = local.docker_container,
@@ -46,10 +47,13 @@ locals {
     fail2ban           = local.fail2ban,
     gettext_base       = local.gettext_base,
     jq                 = local.jq,
-    lineinfile         = local.lineinfile,
     terraform          = local.terraform,
     python3_pip        = local.python3_pip,
     s3cmd              = local.s3cmd,
+    b2                 = local.b2,
+    certbot            = local.certbot,
+    runcmd             = local.runcmd,
+    lineinfile         = local.lineinfile,
     // mailcow            = local.mailcow,
     haproxy         = local.haproxy,
     lnxrouter       = local.lnxrouter,
@@ -64,6 +68,7 @@ locals {
     part => merge({ write_files = tolist([]), packages = tolist([]), runcmd = tolist([]) }, local.parts_inputs[part])
   }
   parts_sorted = [
+    "network",
     "croc",
     "docker",
     "docker_container",
@@ -74,12 +79,13 @@ locals {
     "terraform",
     "python3_pip",
     "s3cmd",
+    "wait_until",
+    "certbot",
+    "runcmd",
     // "mailcow",
     "haproxy",
     "lnxrouter",
     "nginx",
-    "certbot",
-    "wait_until",
     "vault",
     "rke2_node_1st",
     "rke2_node_other",

@@ -1,0 +1,3 @@
+  - mkdir -p ${write_file_directory}
+  - echo ${base64encode(write_file_content)} | base64 --decode >${write_file_directory}/${write_file_name}
+  - chmod ${write_file_mode} ${write_file_directory}/${write_file_name}
