@@ -21,7 +21,26 @@ For instance
 
 If you use [docker_container](#docker_container) then [docker](#docker) is activated automatically.
 
-There are more sophisticated features like `vault_init` in [vault](#vault) that automatically install the needed features for the logic in the `runcmd` for `vault_init`. 
+There are more sophisticated features like `vault_init` in [vault](#vault) that automatically install the needed features for the logic in the `runcmd` for `vault_init`.
+
+## Technical aspects
+
+The following cloud-init modules are used
+
+- [Package Update Upgrade Install](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#package-update-upgrade-install)
+- [Runcmd](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#runcmd)
+- [Write Files](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#write-files)
+
+The execution order in cloud-init for these modules is
+
+- init stage
+  - write-files
+- config stage
+  - runcmd 
+- final stage
+  - package-update-upgrade-install
+
+The consequence for the implementation in this module is that tools that are used for configuration are installed by the runcmd module even if there is a package for the tool. 
 
 ## Features
 
@@ -88,6 +107,12 @@ For input variables: s. [jq](#input_jq).
 s. [lineinfile](https://github.com/l-with/lineinfile)
 
 For input variables: s. [lineinfile](#lineinfile).
+
+### network
+
+for network configurations
+
+For input variables: s. [network](#input_network).
 
 ### nginx
 
@@ -207,6 +232,7 @@ No resources.
 | <a name="input_haproxy"></a> [haproxy](#input\_haproxy) | if cloud-init user data for installing haproxy should be generated | `bool` | `false` | no |
 | <a name="input_haproxy_configuration"></a> [haproxy\_configuration](#input\_haproxy\_configuration) | the configuration for [haproxy](https://www.haproxy.com/documentation/hapee/latest/configuration/config-sections/overview/#haproxy-enterprise-configuration-sections) | <pre>object({<br>    global = optional(<br>      object({<br>        configuration = string<br>      }),<br>      {<br>        configuration = <<EOT<br>      log /dev/log local0<br>      log /dev/log local1 notice<br>      chroot /var/lib/haproxy<br>      stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners<br>      stats timeout 30s<br>      user haproxy<br>      group haproxy<br>      daemon<br><br>      # Default SSL material locations<br>      ca-base /etc/ssl/certs<br>      crt-base /etc/ssl/private<br><br>      # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate<br>      ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384<br>      ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256<br>      ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets<br>EOT<br>      }<br>    )<br>    frontend = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    backend = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    defaults = optional(<br>      list(object({<br>        configuration = string,<br>        })<br>      ),<br>      [<br>        {<br>          configuration = <<EOT<br>      log global<br>      mode http<br>      option httplog<br>      option dontlognull<br>      timeout connect 5000<br>      timeout client 50000<br>      timeout server 50000<br>      errorfile 400 /etc/haproxy/errors/400.http<br>      errorfile 403 /etc/haproxy/errors/403.http<br>      errorfile 408 /etc/haproxy/errors/408.http<br>      errorfile 500 /etc/haproxy/errors/500.http<br>      errorfile 502 /etc/haproxy/errors/502.http<br>      errorfile 503 /etc/haproxy/errors/503.http<br>      errorfile 504 /etc/haproxy/errors/504.http<br>EOT<br>      }]<br>    ),<br>    listen = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    aggregations = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    cache = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    dynamic-update = optional(list(string), []),<br>    fcgi-app = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    http-errors = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    mailers = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    peers = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    program = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    resolvers = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    ring = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>    userlist = optional(<br>      list(object({<br>        label         = string,<br>        configuration = string,<br>      })),<br>      []<br>    ),<br>  })</pre> | `null` | no |
 | <a name="input_jq"></a> [jq](#input\_jq) | if cloud-init user data for installing jq should be generated | `bool` | `false` | no |
+| <a name="input_jq_version"></a> [jq\_version](#input\_jq\_version) | the jq version to be installed | `string` | `"1.6"` | no |
 | <a name="input_lineinfile"></a> [lineinfile](#input\_lineinfile) | if cloud-init user data for installing [lineinfile](https://github.com/l-with/lineinfile) should be generated | `bool` | `false` | no |
 | <a name="input_lnxrouter"></a> [lnxrouter](#input\_lnxrouter) | if cloud-init user data for installing lnxrouter should be generated | `bool` | `false` | no |
 | <a name="input_lnxrouter_arguments"></a> [lnxrouter\_arguments](#input\_lnxrouter\_arguments) | - ip\_address: specifies the interface ($interface in arguments)<br>    - arguments: specifies the command line arguments to start lnxrouter with, $interface will be substituted by the name of the interface bound to the ip\_address (`ifconfig | grep --before-context=1 10.0.0.20 | grep --only-matching "^\w*"`) | <pre>object({<br>    ip_address = optional(string, null)<br>    arguments  = string<br>  })</pre> | `null` | no |
@@ -214,6 +240,11 @@ No resources.
 | <a name="input_mailcow"></a> [mailcow](#input\_mailcow) | if cloud-init user data for installing mailcow should be generated | `bool` | `false` | no |
 | <a name="input_mailcow_install_path"></a> [mailcow\_install\_path](#input\_mailcow\_install\_path) | the install path for mailcow | `string` | `"/opt/mailcow-dockerized"` | no |
 | <a name="input_mailcow_version"></a> [mailcow\_version](#input\_mailcow\_version) | the branch value for mailcow (`MAILCOW_BRANCH`) | `string` | `"master"` | no |
+| <a name="input_network"></a> [network](#input\_network) | if the network should be configured | `bool` | `false` | no |
+| <a name="input_network_dispatcher_script_path"></a> [network\_dispatcher\_script\_path](#input\_network\_dispatcher\_script\_path) | the path where network dispatcher scripts should placed | `string` | `"/etc/network-dispatcher"` | no |
+| <a name="input_network_dispatcher_scripts"></a> [network\_dispatcher\_scripts](#input\_network\_dispatcher\_scripts) | the network dispatcher scripts to be placed at network\_dispatcher\_script\_path and executed | <pre>list(object({<br>    script_file_name    = string,<br>    script_file_content = string,<br>  }))</pre> | `[]` | no |
+| <a name="input_network_resolved_conf_path"></a> [network\_resolved\_conf\_path](#input\_network\_resolved\_conf\_path) | the path where network resolved configurations should placed | `string` | `"/etc/systemd/resolved.conf.d/"` | no |
+| <a name="input_network_resolved_confs"></a> [network\_resolved\_confs](#input\_network\_resolved\_confs) | the resolved configuration files to be placed at network\_resolved\_conf\_path<br>  the service systemd-resolved is restarted | <pre>list(object({<br>    conf_file_name    = string,<br>    conf_file_content = string<br>  }))</pre> | `[]` | no |
 | <a name="input_nginx"></a> [nginx](#input\_nginx) | if cloud-init user data for installing nginx should be generated | `bool` | `false` | no |
 | <a name="input_nginx_configuration_home"></a> [nginx\_configuration\_home](#input\_nginx\_configuration\_home) | the nginx configuration home | `string` | `"/etc/nginx"` | no |
 | <a name="input_nginx_confs"></a> [nginx\_confs](#input\_nginx\_confs) | the extra configurations for nginx | <pre>list(object({<br>    port        = number // the port for `listen`<br>    server_name = string // the server_name for `server_name`<br>    fqdn        = string // the FQDN used for include Let's Encrypt certificates: `/etc/letsencrypt/live/{{ nginx_conf.FQDN }}/...`<br>    conf        = string // the configuration to be included in the `sever` stanza<br>  }))</pre> | `[]` | no |
@@ -242,6 +273,8 @@ No resources.
 | <a name="input_rke2_node_other"></a> [rke2\_node\_other](#input\_rke2\_node\_other) | if cloud-init user data for the rke2 other nodes should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `null` | no |
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `null` | no |
+| <a name="input_runcmd"></a> [runcmd](#input\_runcmd) | if runcmd scripts should be configured | `bool` | `false` | no |
+| <a name="input_runcmd_scripts"></a> [runcmd\_scripts](#input\_runcmd\_scripts) | the runcmd scripts to be executed | `list(string)` | n/a | yes |
 | <a name="input_s3cmd"></a> [s3cmd](#input\_s3cmd) | if cloud-init user data for installing the [S3cmd](https://github.com/s3tools/s3cmd) should be generated | `bool` | `false` | no |
 | <a name="input_terraform"></a> [terraform](#input\_terraform) | if cloud-init user data for installing terraform should be generated | `bool` | `false` | no |
 | <a name="input_terraform_install_method"></a> [terraform\_install\_method](#input\_terraform\_install\_method) | the install method, supported methods are 'apt' | `string` | `"apt"` | no |

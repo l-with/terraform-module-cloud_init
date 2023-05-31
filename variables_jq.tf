@@ -3,3 +3,9 @@ variable "jq" {
   type        = bool
   default     = false
 }
+
+variable "jq_version" {
+  description = "the jq version to be installed"
+  type        = string
+  default     = "1.6"
+}
