@@ -4,7 +4,7 @@ locals {
       [
         for index, network_dispatcher_script in var.network_dispatcher_scripts :
         {
-          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          template = "${path.module}/templates/network/${local.yml_runcmd}_write_file.tpl",
           vars = {
             write_file_directory = dirname("${var.network_dispatcher_script_path}/${network_dispatcher_script.script_file_name}")
             write_file_name      = basename("${var.network_dispatcher_script_path}/${network_dispatcher_script.script_file_name}")
