@@ -112,6 +112,8 @@ For input variables: s. [lineinfile](#lineinfile).
 
 for network configurations
 
+This is executed first in the cloud-init runcmd module.
+
 For input variables: s. [network](#input_network).
 
 ### nginx
@@ -150,6 +152,12 @@ is pre-installed as manifest in the 1st node.
 
 
 For input variables: s. [rke2](#input_rke2).
+
+### runcmd
+
+generic gereration of runcmd scripts
+
+For input variables: s. [runcmd](#input_runcmd).
 
 ### s3cmd
 
