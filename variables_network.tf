@@ -14,7 +14,7 @@ variable "network_dispatcher_scripts" {
   description = <<EOT
     the network dispatcher scripts to be placed at network_dispatcher_script_path and executed
     the string '$public_interface' can be used as placeholder for the device for internet access
-    (`ip route get 8.8.8.8 | grep 8.8.8.8 | cut -d ' ' -f 5`)
+    (ip route get 8.8.8.8 | grep 8.8.8.8 | cut -d ' ' -f 5)
 EOT
   type = list(object({
     script_file_name    = string,
