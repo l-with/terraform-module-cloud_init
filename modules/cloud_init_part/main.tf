@@ -1,20 +1,6 @@
 locals {
   comment = ["# ${var.part}"]
 
-  packages = length(var.packages) == 0 ? "" : join(
-    "\n",
-    local.comment,
-    [
-      for packages in var.packages :
-      templatefile(
-        packages.template,
-        {
-          for var, value in packages.vars : var => value
-        }
-      )
-    ]
-  )
-
   write_files = length(var.write_files) == 0 ? "" : join(
     "\n",
     local.comment,
@@ -38,6 +24,20 @@ locals {
         runcmd.template,
         {
           for var, value in runcmd.vars : var => value
+        }
+      )
+    ]
+  )
+
+  packages = length(var.packages) == 0 ? "" : join(
+    "\n",
+    local.comment,
+    [
+      for packages in var.packages :
+      templatefile(
+        packages.template,
+        {
+          for var, value in packages.vars : var => value
         }
       )
     ]
