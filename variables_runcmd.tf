@@ -7,4 +7,5 @@ variable "runcmd" {
 variable "runcmd_scripts" {
   description = "the runcmd scripts to be executed"
   type        = list(string)
+  default     = []
 }

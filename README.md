@@ -282,7 +282,7 @@ No resources.
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `null` | no |
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `null` | no |
 | <a name="input_runcmd"></a> [runcmd](#input\_runcmd) | if runcmd scripts should be configured | `bool` | `false` | no |
-| <a name="input_runcmd_scripts"></a> [runcmd\_scripts](#input\_runcmd\_scripts) | the runcmd scripts to be executed | `list(string)` | n/a | yes |
+| <a name="input_runcmd_scripts"></a> [runcmd\_scripts](#input\_runcmd\_scripts) | the runcmd scripts to be executed | `list(string)` | `[]` | no |
 | <a name="input_s3cmd"></a> [s3cmd](#input\_s3cmd) | if cloud-init user data for installing the [S3cmd](https://github.com/s3tools/s3cmd) should be generated | `bool` | `false` | no |
 | <a name="input_terraform"></a> [terraform](#input\_terraform) | if cloud-init user data for installing terraform should be generated | `bool` | `false` | no |
 | <a name="input_terraform_install_method"></a> [terraform\_install\_method](#input\_terraform\_install\_method) | the install method, supported methods are 'apt' | `string` | `"apt"` | no |
