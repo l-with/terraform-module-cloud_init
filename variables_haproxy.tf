@@ -8,7 +8,7 @@ variable "haproxy_configuration" {
   description = <<EOT
     the configuration for [haproxy](https://www.haproxy.com/documentation/hapee/latest/configuration/config-sections/overview/#haproxy-enterprise-configuration-sections)
     the string '$ipv4_public_address' can be used as placeholder for the public ipv4-address of the server
-    (ip route get 8.8.8.8 | grep 8.8.8.8 | cut -d ' ' -f 3)
+    (ip route get 8.8.8.8 | grep 8.8.8.8 | cut -d ' ' -f 7)
 
 EOT
   type = object({
