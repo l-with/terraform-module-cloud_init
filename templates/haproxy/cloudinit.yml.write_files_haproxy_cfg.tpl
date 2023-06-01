@@ -1,4 +1,4 @@
-- path: /etc/haproxy/haproxy.cfg
+- path: ${haproxy_template_path}/haproxy.cfg
   content: |
     %{ if jsondecode(haproxy_configuration).global != null }global
 ${jsondecode(haproxy_configuration).global.configuration}%{ endif }%{ for frontend in jsondecode(haproxy_configuration).frontend }
