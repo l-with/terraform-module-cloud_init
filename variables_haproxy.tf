@@ -14,7 +14,7 @@ EOT
   type = object({
     global = optional(
       object({
-        configuration = string
+        configuration = string,
       }),
       {
         configuration = <<EOT
@@ -37,6 +37,12 @@ EOT
   ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 EOT
       }
+    ),
+    global_additional = optional(
+      object({
+        configuration = optional(string)
+      }),
+      {}
     )
     frontend = optional(
       list(object({

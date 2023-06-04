@@ -1,5 +1,6 @@
 %{ if haproxy_configuration.global != null }global
-${haproxy_configuration.global.configuration}%{ endif }%{ for frontend in haproxy_configuration.frontend }
+${haproxy_configuration.global.configuration}
+${haproxy_configuration.global_additional.configuration}%{ endif }%{ for frontend in haproxy_configuration.frontend }
 frontend ${frontend.label}
 ${frontend.configuration}%{ endfor }%{ for backend in haproxy_configuration.backend }
 backend ${backend.label}
