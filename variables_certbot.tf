@@ -19,7 +19,7 @@ variable "certbot_automatic_renewal_cron" {
 variable "certbot_automatic_renewal_cronjob" {
   description = "the cron job for certbot renewal"
   type        = string
-  default     = "python3 -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q"
+  default     = "test -x /usr/bin/certbot -a \\! -d /run/systemd/system && perl -e 'sleep int(rand(43200))' && certbot -q renew"
 }
 
 variable "certbot_automatic_renewal_post_hooks" {
