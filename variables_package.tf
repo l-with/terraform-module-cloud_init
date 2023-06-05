@@ -21,3 +21,9 @@ variable "package_reboot_if_required" {
   type        = bool
   default     = false
 }
+
+variable "packages" {
+  description = "the list of packages to be installed"
+  type        = list(string)
+  default     = []
+}

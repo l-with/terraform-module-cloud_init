@@ -1,6 +1,7 @@
 locals {
   parts_active = {
     runcmd             = var.runcmd,
+    packages           = var.packages != []
     network            = var.network,
     b2                 = var.b2,
     certbot            = var.certbot,
@@ -53,6 +54,7 @@ locals {
     b2                 = local.b2,
     certbot            = local.certbot,
     runcmd             = local.runcmd,
+    packages           = local.packages,
     lineinfile         = local.lineinfile,
     // mailcow            = local.mailcow,
     haproxy         = local.haproxy,
@@ -68,6 +70,7 @@ locals {
     part => merge({ write_files = tolist([]), packages = tolist([]), runcmd = tolist([]) }, local.parts_inputs[part])
   }
   parts_sorted = [
+    "packages",
     "network",
     "croc",
     "docker",

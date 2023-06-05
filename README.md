@@ -269,6 +269,7 @@ No resources.
 | <a name="input_package_reboot_if_required"></a> [package\_reboot\_if\_required](#input\_package\_reboot\_if\_required) | if cloud-init user data for package\_reboot\_if\_required should be generated | `bool` | `false` | no |
 | <a name="input_package_update"></a> [package\_update](#input\_package\_update) | if cloud-init user data for package\_update should be generated | `bool` | `true` | no |
 | <a name="input_package_upgrade"></a> [package\_upgrade](#input\_package\_upgrade) | if cloud-init user data for package\_upgrade should be generated | `bool` | `true` | no |
+| <a name="input_packages"></a> [packages](#input\_packages) | the list of packages to be installed | `list(string)` | `[]` | no |
 | <a name="input_python3_pip"></a> [python3\_pip](#input\_python3\_pip) | if cloud-init user data for installing python3-pip should be generated | `bool` | `false` | no |
 | <a name="input_rke2"></a> [rke2](#input\_rke2) | if cloud-init user data for the rke2 should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_1st"></a> [rke2\_node\_1st](#input\_rke2\_node\_1st) | if cloud-init user data for the rke2 1st node should be generated | `bool` | `false` | no |
