@@ -226,7 +226,7 @@ No resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_b2"></a> [b2](#input\_b2) | if cloud-init user data for installing the [BlackBlaze CLI](https://www.backblaze.com/b2/docs/quick_command_line.html) should be generated | `bool` | `false` | no |
 | <a name="input_certbot"></a> [certbot](#input\_certbot) | if cloud-init user data for installing certbot should be generated | `bool` | `false` | no |
-| <a name="input_certbot_automatic_renewal_cron"></a> [certbot\_automatic\_renewal\_cron](#input\_certbot\_automatic\_renewal\_cron) | the cron schedule expression for certbot renewal | `string` | `"0 0,12 * * *"` | no |
+| <a name="input_certbot_automatic_renewal_cron"></a> [certbot\_automatic\_renewal\_cron](#input\_certbot\_automatic\_renewal\_cron) | the cron schedule expression for certbot renewal | `string` | `"0 */12 * * *"` | no |
 | <a name="input_certbot_automatic_renewal_cronjob"></a> [certbot\_automatic\_renewal\_cronjob](#input\_certbot\_automatic\_renewal\_cronjob) | the cron job for certbot renewal | `string` | `"test -x /usr/bin/certbot -a \\! -d /run/systemd/system && perl -e 'sleep int(rand(43200))' && certbot -q renew"` | no |
 | <a name="input_certbot_automatic_renewal_post_hooks"></a> [certbot\_automatic\_renewal\_post\_hooks](#input\_certbot\_automatic\_renewal\_post\_hooks) | the certbot automatic renewal post hook scripts | <pre>list(object({<br>    file_name = string<br>    content   = string<br>  }))</pre> | `[]` | no |
 | <a name="input_certbot_dns_hetzner"></a> [certbot\_dns\_hetzner](#input\_certbot\_dns\_hetzner) | if cloud-init user data for installing with certbot-dns-hetzner should be generated | `bool` | `false` | no |

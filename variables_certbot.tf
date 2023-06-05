@@ -13,7 +13,7 @@ variable "certbot_dns_hetzner" {
 variable "certbot_automatic_renewal_cron" {
   description = "the cron schedule expression for certbot renewal"
   type        = string
-  default     = "0 0,12 * * *"
+  default     = "0 */12 * * *"
 }
 
 variable "certbot_automatic_renewal_cronjob" {
