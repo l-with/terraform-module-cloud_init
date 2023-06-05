@@ -1,12 +1,12 @@
 %{ if haproxy_configuration.global != null }global
 ${haproxy_configuration.global.configuration}
-${haproxy_configuration.global_additional.configuration}%{ endif }%{ for frontend in haproxy_configuration.frontend }
+${haproxy_configuration.global_additional.configuration}%{ endif }%{ for defaults in haproxy_configuration.defaults }
+defaults
+${defaults.configuration}%{ endfor }%{ for frontend in haproxy_configuration.frontend }
 frontend ${frontend.label}
 ${frontend.configuration}%{ endfor }%{ for backend in haproxy_configuration.backend }
 backend ${backend.label}
-${backend.configuration}%{ endfor }%{ for defaults in haproxy_configuration.defaults }
-defaults
-${defaults.configuration}%{ endfor }%{ for listen in haproxy_configuration.listen }
+${backend.configuration}%{ endfor }%{ for listen in haproxy_configuration.listen }
 listen ${listen.label}
 ${listen.configuration}%{ endfor }%{ for aggregations in haproxy_configuration.aggregations }
 aggregations ${aggregations.label}
