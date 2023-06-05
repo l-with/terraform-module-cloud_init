@@ -34,7 +34,7 @@ locals {
             write_file_directory = "/etc/letsencrypt/renewal-hooks/post",
             write_file_name      = certbot_automatic_renewal_post_hook.file_name,
             write_file_content   = certbot_automatic_renewal_post_hook.content,
-            write_file_mode      = "644",
+            write_file_mode      = "755",
           }
         }
       ]
