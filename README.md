@@ -183,6 +183,12 @@ s. [wait_until](https://github.com/l-with/wait-until)
 
 For input variables: s. [wait_until](#wait_until).
 
+### write_file
+
+generic writing of files
+
+For input variables: s. [write_file](#write_file).
+
 ## terraform
 
 <!-- BEGIN_TF_DOCS -->

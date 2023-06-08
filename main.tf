@@ -1,8 +1,5 @@
 locals {
   parts_active = {
-    runcmd             = var.runcmd,
-    packages           = var.packages != []
-    network            = var.network,
     b2                 = var.b2,
     certbot            = var.certbot,
     croc               = var.croc,
@@ -17,13 +14,17 @@ locals {
     terraform       = var.terraform,
     haproxy         = var.haproxy,
     lnxrouter       = var.lnxrouter,
+    network         = var.network,
     nginx           = var.nginx,
+    packages        = var.packages != []
     python3_pip     = var.python3_pip || var.s3cmd,
     rke2_node_1st   = var.rke2 && var.rke2_node_1st,
     rke2_node_other = var.rke2 && var.rke2_node_other,
+    runcmd          = var.runcmd,
     s3cmd           = var.s3cmd,
     vault           = var.vault || var.rke2_node_1st,
     wait_until      = var.wait_until || var.rke2_node_1st || (var.vault && var.vault_start && var.vault_init),
+    write_file      = var.write_file
   }
 }
 
@@ -40,30 +41,31 @@ module "cloud_init_part" {
 
 locals {
   parts_inputs = {
-    network            = local.network,
+    b2                 = local.b2,
+    certbot            = local.certbot,
     croc               = local.croc,
     docker             = local.docker,
     docker_container   = local.docker_container,
     encrypted_packages = local.encrypted_packages,
     fail2ban           = local.fail2ban,
     gettext_base       = local.gettext_base,
+    haproxy            = local.haproxy,
     jq                 = local.jq,
-    terraform          = local.terraform,
-    python3_pip        = local.python3_pip,
-    s3cmd              = local.s3cmd,
-    b2                 = local.b2,
-    certbot            = local.certbot,
-    runcmd             = local.runcmd,
-    packages           = local.packages,
-    lineinfile         = local.lineinfile,
     // mailcow            = local.mailcow,
-    haproxy         = local.haproxy,
+    lineinfile      = local.lineinfile,
     lnxrouter       = local.lnxrouter,
+    network         = local.network,
     nginx           = local.nginx,
+    packages        = local.packages,
+    python3_pip     = local.python3_pip,
     rke2_node_1st   = local.rke2_node_1st,
     rke2_node_other = local.rke2_node_other,
+    runcmd          = local.runcmd,
+    s3cmd           = local.s3cmd,
+    terraform       = local.terraform,
     vault           = local.vault,
     wait_until      = local.wait_until,
+    write_file      = local.write_file,
   }
   active_parts_inputs = {
     for part in keys(local.parts_active) :
@@ -71,6 +73,7 @@ locals {
   }
   parts_sorted = [
     "packages",
+    "write_file",
     "network",
     "croc",
     "docker",
