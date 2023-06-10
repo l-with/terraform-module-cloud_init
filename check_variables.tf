@@ -114,3 +114,12 @@ module "vault_init_needs_jq_install_method_binary" {
   assert        = !(var.vault_init && var.jq_install_method != "binary")
   error_message = "error: vault_init needs jq_install_method 'binary'"
 }
+
+module "vault_install_method_binary_needs_vault_version" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_install_method == "binary" && var.vault_version == null)
+  error_message = "error: vault_install_method 'binary' needs vault_version"
+}

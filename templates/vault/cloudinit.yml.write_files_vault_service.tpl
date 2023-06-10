@@ -1,4 +1,4 @@
-- path: /etc/systemd/system/vault.service
+- path: /etc/systemd/system/multi-user.target.wants/vault.service
   content: |
     [Unit]
     Description="HashiCorp Vault - A tool for managing secrets"

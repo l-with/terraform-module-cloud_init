@@ -5,13 +5,22 @@ variable "vault" {
 }
 
 variable "vault_install_method" {
-  description = "the install method, supported methods are 'apt'"
+  description = <<EOT
+  the install method, supported methods are 'apt', 'binary'
+  - 'binary' uses vault_version
+EOT
   type        = string
   default     = "apt"
   validation {
-    condition     = contains(["apt"], var.vault_install_method)
-    error_message = "Supported values are 'apt'."
+    condition     = contains(["apt", "binary"], var.vault_install_method)
+    error_message = "Supported values are 'apt', 'binary'."
   }
+}
+
+variable "vault_version" {
+  description = "the vault version to be installed"
+  type        = string
+  default     = null
 }
 
 variable "vault_start" {

@@ -25,7 +25,7 @@ locals {
   vault = !local.parts_active.vault ? {} : merge(
     !var.vault_start ? {} : {
       write_files = concat(
-        [
+        !(var.vault_install_method == "binary") ? [] : [
           {
             template = "${path.module}/templates/vault/${local.yml_write_files}_vault_service.tpl",
             vars = {
@@ -33,6 +33,8 @@ locals {
               vault_binary_path = local.vault_binary_paths[var.vault_install_method],
             }
           },
+        ],
+        [
           {
             template = "${path.module}/templates/vault/${local.yml_write_files}_vault_hcl.tpl",
             vars = {
@@ -76,7 +78,9 @@ locals {
           },
           {
             template = "${path.module}/templates/vault/${local.yml_runcmd}_${var.vault_install_method}_install.tpl",
-            vars     = {}
+            vars = {
+              vault_version = var.vault_version, // ignored for vault_install_method 'apt'
+            }
           },
           {
             template = "${path.module}/templates/vault/${local.yml_runcmd}_raft.tpl",
