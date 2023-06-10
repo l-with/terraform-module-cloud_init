@@ -66,12 +66,6 @@ locals {
       ),
     },
     {
-      packages = [
-        {
-          template = "${path.module}/templates/vault/${local.yml_packages}.tpl",
-          vars     = {}
-        },
-      ]
       runcmd = concat(
         [
           {
