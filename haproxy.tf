@@ -2,8 +2,10 @@ locals {
   haproxy = !local.parts_active.haproxy ? {} : merge(
     {
       packages = [{
-        template = "${path.module}/templates/haproxy/${local.yml_packages}.tpl",
-        vars     = {}
+        template = "${path.module}/templates/${local.yml_packages}.tpl",
+        vars = {
+          package = "haproxy",
+        }
       }]
     },
     var.haproxy_configuration == null ? {} : {
