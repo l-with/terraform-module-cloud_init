@@ -1,12 +1,20 @@
 locals {
+  lnxrouter_needed_packages = [
+    "dnsmasq",
+  ]
   lnxrouter_binary_path           = "/usr/local/bin"
   lnxrouter_service_template_path = "/root"
   lnxrouter = !local.parts_active.lnxrouter ? {} : merge(
     {
-      packages = [{
-        template = "${path.module}/templates/lnxrouter/${local.yml_packages}.tpl",
-        vars     = {}
-      }]
+      packages = [
+        for package in local.lnxrouter_needed_packages :
+        {
+          template = "${path.module}/templates/${local.yml_packages}.tpl",
+          vars = {
+            package = "dnsmasq"
+          }
+        }
+      ]
       runcmd = concat(
         [
           {
