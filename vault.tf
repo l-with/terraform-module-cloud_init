@@ -6,9 +6,12 @@ locals {
   vault_init_public_key_full_path      = "${var.vault_bootstrap_files_path}/vault_init_public.key"
   vault_init_json_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.enc"
   vault_init_json_enc_base64_full_path = "${local.vault_init_json_enc_full_path}.base64"
-  vault_tls_cert_file                  = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : var.vault_storage_raft_leader_client_cert_file
-  vault_tls_key_file                   = var.vault_tls_key_file != null ? var.vault_tls_key_file : var.vault_storage_raft_leader_client_key_file
-  vault_tls_client_ca_file             = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : var.vault_storage_raft_leader_ca_cert_file
+  vault_init_needed_packages = [
+    "openssl",
+  ]
+  vault_tls_cert_file      = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : var.vault_storage_raft_leader_client_cert_file
+  vault_tls_key_file       = var.vault_tls_key_file != null ? var.vault_tls_key_file : var.vault_storage_raft_leader_client_key_file
+  vault_tls_client_ca_file = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : var.vault_storage_raft_leader_ca_cert_file
   vault_listeners = [
     for listener in var.vault_listeners : {
       address            = listener.address,
@@ -107,6 +110,12 @@ locals {
             },
           ],
           !var.vault_init ? [] : [
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_packages.tpl",
+              vars = {
+                packages = join(" ", local.vault_init_needed_packages),
+              }
+            },
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_init.tpl",
               vars = {
