@@ -1,11 +1,15 @@
 locals {
+  certbot_packages = [
+    "software-properties-common",
+    "certbot",
+  ]
   certbot = !local.parts_active.certbot ? {} : {
     runcmd = concat(
       [
         {
           template = "${path.module}/templates/${local.yml_runcmd}_packages.tpl",
           vars = {
-            packages = "software-properties-common certbot"
+            packages = join(" ", local.certbot_packages),
           }
         },
         {
