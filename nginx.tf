@@ -5,8 +5,10 @@ locals {
 locals {
   nginx = !local.parts_active.nginx ? {} : {
     packages = [{
-      template = "${path.module}/templates/nginx/${local.yml_packages}.tpl",
-      vars     = {}
+      template = "${path.module}/templates/${local.yml_packages}.tpl",
+      vars = {
+        package = "nginx"
+      }
     }]
     write_files = concat(
       [
