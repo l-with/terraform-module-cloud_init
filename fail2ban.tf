@@ -1,8 +1,10 @@
 locals {
   fail2ban = !local.parts_active.fail2ban ? {} : {
     packages = [{
-      template = "${path.module}/templates/fail2ban/${local.yml_packages}.tpl",
-      vars     = {}
+      template = "${path.module}/templates/${local.yml_packages}.tpl",
+      vars = {
+        package = "fail2ban"
+      }
     }]
     write_files = concat(
       [
