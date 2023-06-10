@@ -1,2 +1,0 @@
-  - software-properties-common
-  - certbot
