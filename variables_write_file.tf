@@ -5,10 +5,14 @@ variable "write_file" {
 }
 
 variable "write_files" {
-  description = "the files to be written"
+  description = <<EOT
+  the files to be written
+  - encoding of the content can be 'text/plain' (default) or 'base64'
+EOT
   type = list(object({
     file_name = string,
     content   = string,
+    encoding  = optional(string, "text/plain")
     mode      = string,
   }))
   default = []

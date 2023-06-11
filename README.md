@@ -222,6 +222,7 @@ No providers.
 | <a name="module_vault_init_needs_vault_init_public_key"></a> [vault\_init\_needs\_vault\_init\_public\_key](#module\_vault\_init\_needs\_vault\_init\_public\_key) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares"></a> [vault\_init\_vault\_key\_threshold\_less\_than\_or\_equal\_vault\_key\_shares](#module\_vault\_init\_vault\_key\_threshold\_less\_than\_or\_equal\_vault\_key\_shares) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_install_method_binary_needs_vault_version"></a> [vault\_install\_method\_binary\_needs\_vault\_version](#module\_vault\_install\_method\_binary\_needs\_vault\_version) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_write_file_encoding_either_text_plain_or_base64"></a> [write\_file\_encoding\_either\_text\_plain\_or\_base64](#module\_write\_file\_encoding\_either\_text\_plain\_or\_base64) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 
 #### Resources
 
@@ -335,7 +336,7 @@ No resources.
 | <a name="input_vault_version"></a> [vault\_version](#input\_vault\_version) | the vault version to be installed | `string` | `null` | no |
 | <a name="input_wait_until"></a> [wait\_until](#input\_wait\_until) | if cloud-init user data for installing [wait\_until](https://github.com/l-with/wait-until) should be generated | `bool` | `false` | no |
 | <a name="input_write_file"></a> [write\_file](#input\_write\_file) | if files should be written | `bool` | `false` | no |
-| <a name="input_write_files"></a> [write\_files](#input\_write\_files) | the files to be written | <pre>list(object({<br>    file_name = string,<br>    content   = string,<br>    mode      = string,<br>  }))</pre> | `[]` | no |
+| <a name="input_write_files"></a> [write\_files](#input\_write\_files) | the files to be written<br>  - encoding of the content can be 'text/plain' (default) or 'base64' | <pre>list(object({<br>    file_name = string,<br>    content   = string,<br>    encoding  = optional(string, "text/plain")<br>    mode      = string,<br>  }))</pre> | `[]` | no |
 
 #### Outputs
 

@@ -7,7 +7,7 @@ locals {
         vars = {
           write_file_directory = dirname(file.file_name),
           write_file_name      = basename(file.file_name),
-          write_file_content   = file.content,
+          write_file_content   = file.encoding == "base64" ? base64decode(file.content) : file.content,
           write_file_mode      = file.mode,
         }
       }
