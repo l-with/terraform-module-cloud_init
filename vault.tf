@@ -12,6 +12,28 @@ locals {
   vault_tls_cert_file      = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : var.vault_storage_raft_leader_client_cert_file
   vault_tls_key_file       = var.vault_tls_key_file != null ? var.vault_tls_key_file : var.vault_storage_raft_leader_client_key_file
   vault_tls_client_ca_file = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : var.vault_storage_raft_leader_ca_cert_file
+  vault_tls_files = [
+    for vault_tls_file in var.vault_tls_files : {
+      file_name = replace(
+        replace(
+          replace(
+            vault_tls_file.file_name,
+            "$vault_tls_cert_file",
+            var.vault_tls_cert_file == null ? "" : var.vault_tls_cert_file
+          ),
+          "$vault_tls_key_file",
+          var.vault_tls_key_file == null ? "" : var.vault_tls_key_file
+        ),
+        "$vault_tls_client_ca_file",
+        var.vault_tls_client_ca_file == null ? "" : var.vault_tls_client_ca_file
+      )
+      content  = vault_tls_file.content,
+      encoding = vault_tls_file.encoding,
+      owner    = vault_tls_file.owner,
+      group    = vault_tls_file.group,
+      mode     = vault_tls_file.mode,
+    }
+  ]
   vault_listeners = [
     for listener in var.vault_listeners : {
       address            = listener.address,
@@ -102,6 +124,22 @@ locals {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_lets_encrypt.tpl",
               vars     = {}
             },
+          ],
+          [
+            for vault_tls_file in local.vault_tls_files :
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+              vars = {
+                write_file_directory = dirname(vault_tls_file.file_name),
+                write_file_name      = basename(vault_tls_file.file_name),
+                write_file_content   = vault_tls_file.encoding == "base64" ? base64decode(vault_tls_file.content) : vault_tls_file.content,
+                write_file_owner     = vault_tls_file.owner,
+                write_file_group     = vault_tls_file.group,
+                write_file_mode      = vault_tls_file.mode,
+              }
+            }
+          ],
+          [
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
               vars     = {}

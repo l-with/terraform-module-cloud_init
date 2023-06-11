@@ -124,7 +124,18 @@ module "vault_install_method_binary_needs_vault_version" {
   error_message = "error: vault_install_method 'binary' needs vault_version"
 }
 
-module "write_file_encoding_either_text_plain_or_base64" {
+module "vault_tls_file_encoding_either_text_plain_or_base64" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  count = length(var.vault_tls_files)
+
+  use_jq        = true
+  assert        = var.vault_tls_files[count.index].encoding == "text/plain" || var.vault_tls_files[count.index].encoding == "base64"
+  error_message = "error: vault_tls_files encoding is not 'text/plain' or 'base64'"
+}
+
+module "write_files_encoding_either_text_plain_or_base64" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
@@ -132,5 +143,5 @@ module "write_file_encoding_either_text_plain_or_base64" {
 
   use_jq        = true
   assert        = var.write_files[count.index].encoding == "text/plain" || var.write_files[count.index].encoding == "base64"
-  error_message = "error: write_file encoding is not 'text/plain' or 'base64'"
+  error_message = "error: write_files encoding is not 'text/plain' or 'base64'"
 }

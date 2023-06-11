@@ -238,3 +238,24 @@ variable "vault_tls_client_ca_file" {
   type        = string
   default     = null
 }
+
+variable "vault_tls_files" {
+  description = <<EOT
+    the vault tls files
+    - filename can contain the placeholders
+      - $vault_tls_cert_file
+      - $vault_tls_key_file
+      - $vault_tls_client_ca_file
+    which are replace by the corresponding terraform variables
+  - encoding of the content can be 'text/plain' (default) or 'base64'
+EOT
+  type = list(object({
+    file_name = string,
+    content   = string,
+    encoding  = optional(string, "text/plain")
+    owner     = optional(string, "vault")
+    group     = optional(string, "vault")
+    mode      = optional(string, "640")
+  }))
+  default = []
+}
