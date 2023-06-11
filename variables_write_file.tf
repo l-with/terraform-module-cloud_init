@@ -13,7 +13,7 @@ EOT
     file_name = string,
     content   = string,
     encoding  = optional(string, "text/plain")
-    mode      = string,
+    mode      = optional(string, "644")
   }))
   default = []
 }
