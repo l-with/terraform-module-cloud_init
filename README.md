@@ -21,7 +21,8 @@ For instance
 
 If you use [docker_container](#docker_container) then [docker](#docker) is activated automatically.
 
-There are more sophisticated features like `vault_init` in [vault](#vault) that automatically install the needed features for the logic in the `runcmd` for `vault_init`.
+There are more sophisticated features like `vault_init` in [vault](#vault) that automatically installs 
+the needed features for the logic in the `runcmd` section for `vault_init`.
 
 ## Technical aspects
 
