@@ -56,6 +56,14 @@ s. [certbot](https://eff-certbot.readthedocs.io/en/stable/install.html#installat
 
 For input variables: s. [certbot](#input_certbot).
 
+### comment
+
+add comments to cloud-init user data
+
+This can be used to change cloud-init user-data to trigger rebuild without changing relevant data. 
+
+For input variables: s. [comment](#input_comment).
+
 ### croc
 
 s. [croc](https://github.com/schollz/croc#install)
@@ -239,6 +247,8 @@ No resources.
 | <a name="input_certbot_automatic_renewal_cronjob"></a> [certbot\_automatic\_renewal\_cronjob](#input\_certbot\_automatic\_renewal\_cronjob) | the cron job for certbot renewal | `string` | `"test -x /usr/bin/certbot -a \\! -d /run/systemd/system && perl -e 'sleep int(rand(43200))' && certbot -q renew"` | no |
 | <a name="input_certbot_automatic_renewal_post_hooks"></a> [certbot\_automatic\_renewal\_post\_hooks](#input\_certbot\_automatic\_renewal\_post\_hooks) | the certbot automatic renewal post hook scripts | <pre>list(object({<br>    file_name = string<br>    content   = string<br>  }))</pre> | `[]` | no |
 | <a name="input_certbot_dns_hetzner"></a> [certbot\_dns\_hetzner](#input\_certbot\_dns\_hetzner) | if cloud-init user data for installing with certbot-dns-hetzner should be generated | `bool` | `false` | no |
+| <a name="input_comment"></a> [comment](#input\_comment) | if cloud-init user data with comments should be generated | `bool` | `false` | no |
+| <a name="input_comments"></a> [comments](#input\_comments) | the comments to be added to cloud-init user data<br>    this can be used to change cloud-init user-data to trigger rebuild without changing relevant data | `list(string)` | `[]` | no |
 | <a name="input_croc"></a> [croc](#input\_croc) | if cloud-init user data for installing croc should be generated | `bool` | `false` | no |
 | <a name="input_docker"></a> [docker](#input\_docker) | if cloud-init user data for installing docker should be generated | `bool` | `false` | no |
 | <a name="input_docker_container"></a> [docker\_container](#input\_docker\_container) | if cloud-init user data for installing docker containers should be generated | `bool` | `false` | no |

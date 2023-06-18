@@ -123,7 +123,15 @@ locals {
       if(local.parts_active[part] && module.cloud_init_part[part].runcmd != "")
     ],
   )
-  cloud_init_start = "#cloud-config"
+  cloud_init_start = join(
+    "\n",
+    concat(
+      [
+        "#cloud-config",
+      ],
+      var.comment == null ? [] : var.comments
+    )
+  )
 
   cloud_init_package_update             = var.package && var.package_update ? "package_update: true" : ""
   cloud_init_package_upgrade            = var.package && var.package_upgrade ? "package_upgrade: true" : ""
