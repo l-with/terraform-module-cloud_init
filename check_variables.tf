@@ -145,3 +145,12 @@ module "write_files_encoding_either_text_plain_or_base64" {
   assert        = var.write_files[count.index].encoding == "text/plain" || var.write_files[count.index].encoding == "base64"
   error_message = "error: write_files encoding is not 'text/plain' or 'base64'"
 }
+
+module "not_mailcow_dovecot_master_auto_generated_needs_mailcow_dovecot_master_user_and_mailcow_dovecot_master_password" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(!var.mailcow_dovecot_master_auto_generated && (var.mailcow_dovecot_master_user == null || var.mailcow_dovecot_master_password == null))
+  error_message = "error: not mailcow_dovecot_master_auto_generated needs mailcow_dovecot_master_user and mailcow_dovecot_master_password"
+}

@@ -111,11 +111,17 @@ s. [jq](https://stedolan.github.io/jq/)
 
 For input variables: s. [jq](#input_jq).
 
+### mailcow
+
+s. [mailcow](https://docs.mailcow.email)
+
+For input variables: s. [mailcow](#input_mailcow).
+
 ### lineinfile
 
 s. [lineinfile](https://github.com/l-with/lineinfile)
 
-For input variables: s. [lineinfile](#lineinfile).
+For input variables: s. [lineinfile](#input_lineinfile).
 
 ### network
 
@@ -218,6 +224,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_cloud_init_part"></a> [cloud\_init\_part](#module\_cloud\_init\_part) | ./modules/cloud_init_part | n/a |
 | <a name="module_either_rke2_node_1st_or_rke2_node_other"></a> [either\_rke2\_node\_1st\_or\_rke2\_node\_other](#module\_either\_rke2\_node\_1st\_or\_rke2\_node\_other) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_not_mailcow_dovecot_master_auto_generated_needs_mailcow_dovecot_master_user_and_mailcow_dovecot_master_password"></a> [not\_mailcow\_dovecot\_master\_auto\_generated\_needs\_mailcow\_dovecot\_master\_user\_and\_mailcow\_dovecot\_master\_password](#module\_not\_mailcow\_dovecot\_master\_auto\_generated\_needs\_mailcow\_dovecot\_master\_user\_and\_mailcow\_dovecot\_master\_password) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_rke2_node_1st_rke2_role_id"></a> [rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_role\_id](#module\_rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_role\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_rke2_node_1st_rke2_secret_id"></a> [rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_secret\_id](#module\_rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_secret\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_vault_addr"></a> [rke2\_node\_1st\_needs\_vault\_addr](#module\_rke2\_node\_1st\_needs\_vault\_addr) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
@@ -271,8 +278,21 @@ No resources.
 | <a name="input_lnxrouter_arguments"></a> [lnxrouter\_arguments](#input\_lnxrouter\_arguments) | - ip\_address: specifies the interface ($interface in arguments)<br>    - arguments: specifies the command line arguments to start lnxrouter with, $interface will be substituted by the name of the interface bound to the ip\_address (`ifconfig | grep --before-context=1 10.0.0.20 | grep --only-matching "^\w*"`) | <pre>object({<br>    ip_address = optional(string, null)<br>    arguments  = string<br>  })</pre> | `null` | no |
 | <a name="input_lnxrouter_start"></a> [lnxrouter\_start](#input\_lnxrouter\_start) | if lnxrouter should be started | `bool` | `false` | no |
 | <a name="input_mailcow"></a> [mailcow](#input\_mailcow) | if cloud-init user data for installing mailcow should be generated | `bool` | `false` | no |
+| <a name="input_mailcow_acme_out_of_the_box"></a> [mailcow\_acme\_out\_of\_the\_box](#input\_mailcow\_acme\_out\_of\_the\_box) | if the Let's Encrypt certificate is obtained out-of-the-box<br>    The 'acme-mailcow' container will try to obtain a LE certificate.<br>    The certbot cronjob will manage the renewal of the Let's Encrypt certificates. | `bool` | `true` | no |
+| <a name="input_mailcow_acme_staging"></a> [mailcow\_acme\_staging](#input\_mailcow\_acme\_staging) | if ACME staging should be used (s. https://mailcow.github.io/mailcow-dockerized-docs/firststeps-ssl/#test-against-staging-acme-directory) | `bool` | `false` | no |
+| <a name="input_mailcow_additional_san"></a> [mailcow\_additional\_san](#input\_mailcow\_additional\_san) | the additional domains (SSL Certificate Subject Alternative Names) | `string` | `"autodiscover.*,autoconfig.*"` | no |
+| <a name="input_mailcow_api_allow_from"></a> [mailcow\_api\_allow\_from](#input\_mailcow\_api\_allow\_from) | list of IPs to allow API access from | `list(string)` | `[]` | no |
+| <a name="input_mailcow_api_key"></a> [mailcow\_api\_key](#input\_mailcow\_api\_key) | the API key for mailcow read-write access (allowed characters: a-z, A-Z, 0-9, -) | `string` | `null` | no |
+| <a name="input_mailcow_api_key_read_only"></a> [mailcow\_api\_key\_read\_only](#input\_mailcow\_api\_key\_read\_only) | the API key for mailcow read-only access (allowed characters: a-z, A-Z, 0-9, -) | `string` | `null` | no |
+| <a name="input_mailcow_branch"></a> [mailcow\_branch](#input\_mailcow\_branch) | the branch value for mailcow (`MAILCOW_BRANCH`) | `string` | `"master"` | no |
+| <a name="input_mailcow_dovecot_master_auto_generated"></a> [mailcow\_dovecot\_master\_auto\_generated](#input\_mailcow\_dovecot\_master\_auto\_generated) | if the dovecot master user and password should be auto-generated | `bool` | `true` | no |
+| <a name="input_mailcow_dovecot_master_password"></a> [mailcow\_dovecot\_master\_password](#input\_mailcow\_dovecot\_master\_password) | the password for the dovecot master user (DOVECOT\_MASTER\_PASS) if not auto-generated | `string` | `null` | no |
+| <a name="input_mailcow_dovecot_master_user"></a> [mailcow\_dovecot\_master\_user](#input\_mailcow\_dovecot\_master\_user) | the username of the dovecot master user (DOVECOT\_MASTER\_USER) if not auto-generated | `string` | `null` | no |
+| <a name="input_mailcow_hostname"></a> [mailcow\_hostname](#input\_mailcow\_hostname) | the host name for mailcow | `string` | n/a | yes |
 | <a name="input_mailcow_install_path"></a> [mailcow\_install\_path](#input\_mailcow\_install\_path) | the install path for mailcow | `string` | `"/opt/mailcow-dockerized"` | no |
-| <a name="input_mailcow_version"></a> [mailcow\_version](#input\_mailcow\_version) | the branch value for mailcow (`MAILCOW_BRANCH`) | `string` | `"master"` | no |
+| <a name="input_mailcow_submission_port"></a> [mailcow\_submission\_port](#input\_mailcow\_submission\_port) | the SUBMISSION\_PORT in mailcow.conf | `number` | `587` | no |
+| <a name="input_mailcow_timezone"></a> [mailcow\_timezone](#input\_mailcow\_timezone) | the time zone value for mailcow (`MAILCOW_TZ`) | `string` | `"Europe/Berlin"` | no |
+| <a name="input_mailcow_version"></a> [mailcow\_version](#input\_mailcow\_version) | the [version](https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec) to checkout<br>    default is [mailcow\_branch](#input\_mailcow\_branch) (coded in terraform) | `string` | `null` | no |
 | <a name="input_network"></a> [network](#input\_network) | if the network should be configured | `bool` | `false` | no |
 | <a name="input_network_dispatcher_script_path"></a> [network\_dispatcher\_script\_path](#input\_network\_dispatcher\_script\_path) | the path where network dispatcher scripts should placed | `string` | `"/etc/network-dispatcher"` | no |
 | <a name="input_network_dispatcher_scripts"></a> [network\_dispatcher\_scripts](#input\_network\_dispatcher\_scripts) | the network dispatcher scripts to be placed at network\_dispatcher\_script\_path and executed<br>    the string '$public\_interface' can be used as placeholder for the device for internet access<br>    (ip route get 8.8.8.8 \| grep 8.8.8.8 \| cut -d ' ' -f 5) | <pre>list(object({<br>    script_file_name    = string,<br>    script_file_content = string,<br>  }))</pre> | `[]` | no |
