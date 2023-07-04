@@ -28,3 +28,10 @@
   - lineinfile --regexp 'DOVECOT_MASTER_USER=' --line 'DOVECOT_MASTER_USER=${mailcow_dovecot_master_user}' '${mailcow_install_path}/mailcow.conf'
   - lineinfile --regexp 'DOVECOT_MASTER_PASS=' --line 'DOVECOT_MASTER_PASS=${mailcow_dovecot_master_password}' '${mailcow_install_path}/mailcow.conf'
  %{ endif }
+  - docker compose -p ${mailcow_docker_compose_project_name} up -d
+  - >
+    wait_until --delay 30 --retries 60 --check 'grep -e 200' \
+      'curl --silent --no-progress-meter --connect-timeout 10 --retry 60 --retry-delay 30 --write-out "%%{http_code}" --insecure https://${mailcow_hostname}'",
+  - >
+    wait_until --delay 30 --retries 60 --check 'grep -e 200' \
+      'curl --silent --no-progress-meter --connect-timeout 10 --retry 60 --retry-delay 30 --write-out "%%{http_code}" --insecure https://${mailcow_hostname}/api/#/'",

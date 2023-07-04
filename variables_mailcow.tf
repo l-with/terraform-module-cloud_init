@@ -99,3 +99,33 @@ variable "mailcow_dovecot_master_password" {
   type        = string
   default     = null
 }
+
+variable "mailcow_docker_compose_project_name" {
+  description = "the name for the mailcow docker compose project"
+  type        = string
+  default     = "mailcow_dockerized"
+}
+
+variable "mailcow_delete_default_admin_script" {
+  description = "the path for the mailcow delete admin script"
+  type        = string
+  default     = "/root/mailcow_delete_default_admin.sh"
+}
+
+variable "mailcow_set_admin_script" {
+  description = "the path for the mailcow set admin script"
+  type        = string
+  default     = "/root/mailcow_set_admin.sh"
+}
+
+variable "mailcow_admin_user" {
+  description = "the username of the mailcow administrator"
+  type        = string
+  default     = null
+}
+
+variable "mailcow_admin_password" {
+  description = "the password for the mailcow administrator"
+  type        = string
+  default     = null
+}

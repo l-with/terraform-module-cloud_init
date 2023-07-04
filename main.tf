@@ -3,7 +3,7 @@ locals {
     b2                 = var.b2,
     certbot            = var.certbot,
     croc               = var.croc,
-    docker             = var.docker || var.docker_container,
+    docker             = var.docker || var.docker_container || var.mailcow,
     docker_container   = var.docker_container,
     encrypted_packages = var.encrypted_packages,
     fail2ban           = var.fail2ban,
@@ -23,7 +23,7 @@ locals {
     runcmd             = var.runcmd,
     s3cmd              = var.s3cmd,
     vault              = var.vault || var.rke2_node_1st,
-    wait_until         = var.wait_until || var.rke2_node_1st || (var.vault && var.vault_start && var.vault_init),
+    wait_until         = var.wait_until || var.mailcow || var.rke2_node_1st || (var.vault && var.vault_start && var.vault_init),
     write_file         = var.write_file
   }
 }
