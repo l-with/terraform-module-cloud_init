@@ -129,3 +129,15 @@ variable "mailcow_admin_password" {
   type        = string
   default     = null
 }
+
+variable "mailcow_set_rspamd_ui_password_script" {
+  description = "the path for the mailcow set Rspamd UI password script"
+  type        = string
+  default     = "/root/ansible_set_rspamd_ui_password.sh"
+}
+
+variable "mailcow_rspamd_ui_password" {
+  description = "the password for the mailcow Rspamd UI"
+  type        = string
+  default     = null
+}

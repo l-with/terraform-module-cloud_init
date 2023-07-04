@@ -45,7 +45,18 @@ locals {
         vars = {
           write_file_directory = dirname(var.mailcow_set_admin_script),
           write_file_name      = basename(var.mailcow_set_admin_script),
-          write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_set_admin_script.sh.tpl", {}),
+          write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_set_admin.sh.tpl", {}),
+          write_file_owner     = "root"
+          write_file_group     = "root"
+          write_file_mode      = "755",
+        }
+      },
+      {
+        template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+        vars = {
+          write_file_directory = dirname(var.mailcow_set_rspamd_ui_password_script),
+          write_file_name      = basename(var.mailcow_set_rspamd_ui_password_script),
+          write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_set_rspamd_ui_password.sh.tpl", {}),
           write_file_owner     = "root"
           write_file_group     = "root"
           write_file_mode      = "755",
@@ -54,11 +65,13 @@ locals {
       {
         template = "${path.module}/templates/mailcow/${local.yml_runcmd}_admin.tpl",
         vars = {
-          mailcow_install_path                = var.mailcow_install_path,
-          mailcow_delete_default_admin_script = var.mailcow_delete_default_admin_script,
-          mailcow_admin_user                  = var.mailcow_admin_user,
-          mailcow_admin_password              = var.mailcow_admin_password,
-          mailcow_set_admin_script            = var.mailcow_set_admin_script,
+          mailcow_install_path                  = var.mailcow_install_path,
+          mailcow_delete_default_admin_script   = var.mailcow_delete_default_admin_script,
+          mailcow_admin_user                    = var.mailcow_admin_user,
+          mailcow_admin_password                = var.mailcow_admin_password,
+          mailcow_set_admin_script              = var.mailcow_set_admin_script,
+          mailcow_rspamd_ui_password            = var.mailcow_rspamd_ui_password,
+          mailcow_set_rspamd_ui_password_script = var.mailcow_set_rspamd_ui_password_script,
         }
       },
     ]
