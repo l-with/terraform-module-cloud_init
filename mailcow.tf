@@ -1,79 +1,96 @@
 locals {
   mailcow_version = var.mailcow_version != null ? var.mailcow_version : var.mailcow_branch
   mailcow = !var.mailcow ? {} : {
-    runcmd = [
-      {
-        template = "${path.module}/templates/${local.yml_runcmd}_packages.tpl",
-        vars = {
-          packages = "git",
-        }
-      },
-      {
-        template = "${path.module}/templates/mailcow/${local.yml_runcmd}.tpl",
-        vars = {
-          mailcow_install_path                  = var.mailcow_install_path,
-          mailcow_version                       = local.mailcow_version,
-          mailcow_hostname                      = var.mailcow_hostname,
-          mailcow_branch                        = var.mailcow_branch,
-          mailcow_timezone                      = var.mailcow_timezone,
-          mailcow_api_key                       = var.mailcow_api_key,
-          mailcow_api_key_read_only             = var.mailcow_api_key_read_only,
-          mailcow_api_allow_from                = join(",", var.mailcow_api_allow_from),
-          mailcow_submission_port               = var.mailcow_submission_port,
-          mailcow_additional_san                = var.mailcow_additional_san,
-          mailcow_acme_staging                  = var.mailcow_acme_staging,
-          mailcow_acme_out_of_the_box           = var.mailcow_acme_out_of_the_box,
-          mailcow_dovecot_master_auto_generated = var.mailcow_dovecot_master_auto_generated,
-          mailcow_dovecot_master_user           = var.mailcow_dovecot_master_user,
-          mailcow_dovecot_master_password       = var.mailcow_dovecot_master_password,
-          mailcow_docker_compose_project_name   = var.mailcow_docker_compose_project_name,
-        }
-      },
-      {
-        template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
-        vars = {
-          write_file_directory = dirname(var.mailcow_delete_default_admin_script),
-          write_file_name      = basename(var.mailcow_delete_default_admin_script),
-          write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_delete_default_admin.sh.tpl", {}),
-          write_file_owner     = "root"
-          write_file_group     = "root"
-          write_file_mode      = "755",
-        }
-      },
-      {
-        template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
-        vars = {
-          write_file_directory = dirname(var.mailcow_set_admin_script),
-          write_file_name      = basename(var.mailcow_set_admin_script),
-          write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_set_admin.sh.tpl", {}),
-          write_file_owner     = "root"
-          write_file_group     = "root"
-          write_file_mode      = "755",
-        }
-      },
-      {
-        template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
-        vars = {
-          write_file_directory = dirname(var.mailcow_set_rspamd_ui_password_script),
-          write_file_name      = basename(var.mailcow_set_rspamd_ui_password_script),
-          write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_set_rspamd_ui_password.sh.tpl", {}),
-          write_file_owner     = "root"
-          write_file_group     = "root"
-          write_file_mode      = "755",
-        }
-      },
-      {
-        template = "${path.module}/templates/mailcow/${local.yml_runcmd}_admin.tpl",
-        vars = {
-          mailcow_install_path                  = var.mailcow_install_path,
-          mailcow_delete_default_admin_script   = var.mailcow_delete_default_admin_script,
-          mailcow_admin_user                    = var.mailcow_admin_user,
-          mailcow_admin_password                = var.mailcow_admin_password,
-          mailcow_set_admin_script              = var.mailcow_set_admin_script,
-          mailcow_rspamd_ui_password            = var.mailcow_rspamd_ui_password,
-          mailcow_set_rspamd_ui_password_script = var.mailcow_set_rspamd_ui_password_script,
-        }
-      },
-    ]
+    runcmd = concat(
+      [
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_packages.tpl",
+          vars = {
+            packages = "git",
+          }
+        },
+        {
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}.tpl",
+          vars = {
+            mailcow_install_path                  = var.mailcow_install_path,
+            mailcow_version                       = local.mailcow_version,
+            mailcow_hostname                      = var.mailcow_hostname,
+            mailcow_branch                        = var.mailcow_branch,
+            mailcow_timezone                      = var.mailcow_timezone,
+            mailcow_api_key                       = var.mailcow_api_key,
+            mailcow_api_key_read_only             = var.mailcow_api_key_read_only,
+            mailcow_api_allow_from                = join(",", var.mailcow_api_allow_from),
+            mailcow_submission_port               = var.mailcow_submission_port,
+            mailcow_additional_san                = var.mailcow_additional_san,
+            mailcow_acme_staging                  = var.mailcow_acme_staging,
+            mailcow_acme                          = var.mailcow_acme,
+            mailcow_dovecot_master_auto_generated = var.mailcow_dovecot_master_auto_generated,
+            mailcow_dovecot_master_user           = var.mailcow_dovecot_master_user,
+            mailcow_dovecot_master_password       = var.mailcow_dovecot_master_password,
+            mailcow_docker_compose_project_name   = var.mailcow_docker_compose_project_name,
+          }
+        },
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          vars = {
+            write_file_directory = dirname(var.mailcow_delete_default_admin_script),
+            write_file_name      = basename(var.mailcow_delete_default_admin_script),
+            write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_delete_default_admin.sh.tpl", {}),
+            write_file_owner     = "root"
+            write_file_group     = "root"
+            write_file_mode      = "755",
+          }
+        },
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          vars = {
+            write_file_directory = dirname(var.mailcow_set_admin_script),
+            write_file_name      = basename(var.mailcow_set_admin_script),
+            write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_set_admin.sh.tpl", {}),
+            write_file_owner     = "root"
+            write_file_group     = "root"
+            write_file_mode      = "755",
+          }
+        },
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          vars = {
+            write_file_directory = dirname(var.mailcow_set_rspamd_ui_password_script),
+            write_file_name      = basename(var.mailcow_set_rspamd_ui_password_script),
+            write_file_content   = templatefile("${path.module}/templates/mailcow/mailcow_set_rspamd_ui_password.sh.tpl", {}),
+            write_file_owner     = "root"
+            write_file_group     = "root"
+            write_file_mode      = "755",
+          }
+        },
+        {
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_admin.tpl",
+          vars = {
+            mailcow_install_path                  = var.mailcow_install_path,
+            mailcow_delete_default_admin_script   = var.mailcow_delete_default_admin_script,
+            mailcow_admin_user                    = var.mailcow_admin_user,
+            mailcow_admin_password                = var.mailcow_admin_password,
+            mailcow_set_admin_script              = var.mailcow_set_admin_script,
+            mailcow_rspamd_ui_password            = var.mailcow_rspamd_ui_password,
+            mailcow_set_rspamd_ui_password_script = var.mailcow_set_rspamd_ui_password_script,
+          }
+        },
+      ],
+      var.mailcow_acme != "certbot" ? [] : [
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          vars = {
+            write_file_directory = dirname(var.mailcow_certbot_post_hook_script),
+            write_file_name      = basename(var.mailcow_certbot_post_hook_script),
+            write_file_content = templatefile("${path.module}/templates/mailcow/mailcow_certbot_post_hook.sh.tpl", {
+              mailcow_hostname = var.mailcow_hostname,
+            }),
+            write_file_owner = "root"
+            write_file_group = "root"
+            write_file_mode  = "755",
+          }
+        },
+      ]
+    )
   }
 }

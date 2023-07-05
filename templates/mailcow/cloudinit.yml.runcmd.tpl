@@ -21,7 +21,7 @@
 %{ if mailcow_acme_staging }
   - echo 'LE_STAGING=y' >> '${mailcow_install_path}/mailcow.conf'
 %{ endif }
-%{ if !mailcow_acme_out_of_the_box }
+%{ if !(mailcow_acme == "out-of-the-box") }
   - lineinfile --regexp 'SKIP_LETS_ENCRYPT=' --line 'SKIP_LETS_ENCRYPT=y' '${mailcow_install_path}/mailcow.conf'
 %{ endif }
 %{ if !mailcow_dovecot_master_auto_generated }

@@ -72,14 +72,25 @@ variable "mailcow_acme_staging" {
   default     = false
 }
 
-variable "mailcow_acme_out_of_the_box" {
+variable "mailcow_acme" {
   description = <<EOT
+    the way the Let's Encrypt certificate ist obtained:
+    `out-the-box`:  The "acme-mailcow" container will try to obtain a LE certificate.
+    `certbot`: The certbot cronjob will manage Let's Encrypt certificates
     if the Let's Encrypt certificate is obtained out-of-the-box
-    The 'acme-mailcow' container will try to obtain a LE certificate.
-    The certbot cronjob will manage the renewal of the Let's Encrypt certificates.
   EOT
-  type        = bool
-  default     = true
+  type        = string
+  default     = "out-of-the-box"
+  validation {
+    condition     = contains(["out-of-the-box", "certbot"], var.mailcow_acme)
+    error_message = "Supported values are 'out-the-box', 'certbot'."
+  }
+}
+
+variable "mailcow_certbot_post_hook_script" {
+  description = "the full path for the mailcow certbot post-hook script"
+  type        = string
+  default     = "/etc/letsencrypt/renewal-hooks/post/mailcow_certbot_post_hook.sh"
 }
 
 variable "mailcow_dovecot_master_auto_generated" {
@@ -107,13 +118,13 @@ variable "mailcow_docker_compose_project_name" {
 }
 
 variable "mailcow_delete_default_admin_script" {
-  description = "the path for the mailcow delete admin script"
+  description = "the full path for the mailcow delete admin script"
   type        = string
   default     = "/root/mailcow_delete_default_admin.sh"
 }
 
 variable "mailcow_set_admin_script" {
-  description = "the path for the mailcow set admin script"
+  description = "the full path for the mailcow set admin script"
   type        = string
   default     = "/root/mailcow_set_admin.sh"
 }
@@ -131,9 +142,9 @@ variable "mailcow_admin_password" {
 }
 
 variable "mailcow_set_rspamd_ui_password_script" {
-  description = "the path for the mailcow set Rspamd UI password script"
+  description = "the full path for the mailcow set Rspamd UI password script"
   type        = string
-  default     = "/root/ansible_set_rspamd_ui_password.sh"
+  default     = "/root/mailcow_set_rspamd_ui_password.sh"
 }
 
 variable "mailcow_rspamd_ui_password" {
