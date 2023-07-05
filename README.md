@@ -165,7 +165,6 @@ and then puts the created `rke2.yaml` modified
 The [cert-manager](https://github.com/cert-manager/cert-manager) `cert-manager.crds.yaml` 
 is pre-installed as manifest in the 1st node.
 
-
 For input variables: s. [rke2](#input_rke2).
 
 ### runcmd
