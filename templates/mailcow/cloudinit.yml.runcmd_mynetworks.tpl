@@ -1,0 +1,1 @@
+  - lineinfile --regexp 'mynetworks =' --line 'mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 [fe80::]/10 ${mailcow_mynetworks}' '${mailcow_install_path}/mailcow.conf'

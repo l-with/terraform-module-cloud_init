@@ -152,3 +152,18 @@ variable "mailcow_rspamd_ui_password" {
   type        = string
   default     = null
 }
+
+variable "mailcow_greylisting" {
+  description = "if greylisting should be active"
+  type        = bool
+  default     = true
+}
+
+variable "mailcow_mynetworks" {
+  description = <<EOT
+    the list of subnetwork masks to add to `mynetworks` in postfix
+    if subnetwork masks are provided at the beginning `127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 [fe80::]/10` is added (local)
+  EOT
+  type        = list(string)
+  default     = []
+}

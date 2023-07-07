@@ -90,7 +90,24 @@ locals {
             write_file_mode  = "755",
           }
         },
-      ]
+      ],
+      var.mailcow_greylisting ? [] : [
+        {
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_disable_greylist.tpl",
+          vars = {
+            mailcow_install_path = var.mailcow_install_path,
+          }
+        },
+      ],
+      length(var.mailcow_mynetworks) == 0 ? [] : [
+        {
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_mynetworks.tpl",
+          vars = {
+            mailcow_install_path = var.mailcow_install_path,
+            mailcow_mynetworks   = join(" ", var.mailcow_mynetworks),
+          }
+        },
+      ],
     )
   }
 }
