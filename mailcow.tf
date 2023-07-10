@@ -10,7 +10,7 @@ locals {
           }
         },
         {
-          template = "${path.module}/templates/mailcow/${local.yml_runcmd}.tpl",
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_install.tpl",
           vars = {
             mailcow_install_path                  = var.mailcow_install_path,
             mailcow_version                       = local.mailcow_version,
@@ -27,9 +27,41 @@ locals {
             mailcow_dovecot_master_auto_generated = var.mailcow_dovecot_master_auto_generated,
             mailcow_dovecot_master_user           = var.mailcow_dovecot_master_user,
             mailcow_dovecot_master_password       = var.mailcow_dovecot_master_password,
-            mailcow_docker_compose_project_name   = var.mailcow_docker_compose_project_name,
           }
         },
+      ],
+      var.mailcow_acme != "certbot" ? [] : [
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          vars = {
+            write_file_directory = dirname(var.mailcow_certbot_post_hook_script),
+            write_file_name      = basename(var.mailcow_certbot_post_hook_script),
+            write_file_content = templatefile("${path.module}/templates/mailcow/mailcow_certbot_post_hook.sh.tpl", {
+              mailcow_hostname = var.mailcow_hostname,
+            }),
+            write_file_owner = "root"
+            write_file_group = "root"
+            write_file_mode  = "755",
+          }
+        },
+        {
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_certbot_post_hook.tpl",
+          vars = {
+            mailcow_certbot_post_hook_script = var.mailcow_certbot_post_hook_script,
+          }
+        },
+      ],
+      [
+        {
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}.tpl",
+          vars = {
+            mailcow_install_path                = var.mailcow_install_path,
+            mailcow_hostname                    = var.mailcow_hostname,
+            mailcow_docker_compose_project_name = var.mailcow_docker_compose_project_name,
+          }
+        },
+      ],
+      [
         {
           template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
           vars = {
@@ -73,21 +105,6 @@ locals {
             mailcow_set_admin_script              = var.mailcow_set_admin_script,
             mailcow_rspamd_ui_password            = var.mailcow_rspamd_ui_password,
             mailcow_set_rspamd_ui_password_script = var.mailcow_set_rspamd_ui_password_script,
-          }
-        },
-      ],
-      var.mailcow_acme != "certbot" ? [] : [
-        {
-          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
-          vars = {
-            write_file_directory = dirname(var.mailcow_certbot_post_hook_script),
-            write_file_name      = basename(var.mailcow_certbot_post_hook_script),
-            write_file_content = templatefile("${path.module}/templates/mailcow/mailcow_certbot_post_hook.sh.tpl", {
-              mailcow_hostname = var.mailcow_hostname,
-            }),
-            write_file_owner = "root"
-            write_file_group = "root"
-            write_file_mode  = "755",
           }
         },
       ],
