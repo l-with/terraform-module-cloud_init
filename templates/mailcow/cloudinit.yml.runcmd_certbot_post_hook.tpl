@@ -1,1 +1,0 @@
-  - ${mailcow_certbot_post_hook_script}

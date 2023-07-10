@@ -45,9 +45,26 @@ locals {
           }
         },
         {
-          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_certbot_post_hook.tpl",
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_certbot.tpl",
           vars = {
-            mailcow_certbot_post_hook_script = var.mailcow_certbot_post_hook_script,
+            mailcow_hostname = var.mailcow_hostname,
+          }
+        },
+      ],
+      var.mailcow_greylisting ? [] : [
+        {
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_disable_greylist.tpl",
+          vars = {
+            mailcow_install_path = var.mailcow_install_path,
+          }
+        },
+      ],
+      length(var.mailcow_mynetworks) == 0 ? [] : [
+        {
+          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_mynetworks.tpl",
+          vars = {
+            mailcow_install_path = var.mailcow_install_path,
+            mailcow_mynetworks   = join(" ", var.mailcow_mynetworks),
           }
         },
       ],
@@ -105,23 +122,6 @@ locals {
             mailcow_set_admin_script              = var.mailcow_set_admin_script,
             mailcow_rspamd_ui_password            = var.mailcow_rspamd_ui_password,
             mailcow_set_rspamd_ui_password_script = var.mailcow_set_rspamd_ui_password_script,
-          }
-        },
-      ],
-      var.mailcow_greylisting ? [] : [
-        {
-          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_disable_greylist.tpl",
-          vars = {
-            mailcow_install_path = var.mailcow_install_path,
-          }
-        },
-      ],
-      length(var.mailcow_mynetworks) == 0 ? [] : [
-        {
-          template = "${path.module}/templates/mailcow/${local.yml_runcmd}_mynetworks.tpl",
-          vars = {
-            mailcow_install_path = var.mailcow_install_path,
-            mailcow_mynetworks   = join(" ", var.mailcow_mynetworks),
           }
         },
       ],
