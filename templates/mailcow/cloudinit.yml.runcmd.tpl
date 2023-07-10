@@ -5,6 +5,7 @@
   - export MAILCOW_BRANCH=${mailcow_branch}
   - export MAILCOW_TZ=${mailcow_timezone}
   - ./generate_config.sh
+  - cp --preserve '${mailcow_install_path}/mailcow.conf' '${mailcow_install_path}/mailcow.conf.orig'
 %{ if mailcow_api_key != null }
   - lineinfile --insertafter '#API_KEY=' --line 'API_KEY=${mailcow_api_key}' '${mailcow_install_path}/mailcow.conf'
 %{ endif }
@@ -16,7 +17,7 @@
 %{ endif }
   - lineinfile --regexp 'SUBMISSION_PORT=' --line 'SUBMISSION_PORT=${mailcow_submission_port}' '${mailcow_install_path}/mailcow.conf'
   - lineinfile --regexp '- SUBMISSION_PORT=$${SUBMISSION_PORT:-\d+}' --line '        - SUBMISSION_PORT=$${SUBMISSION_PORT:-${mailcow_submission_port}}' '${mailcow_install_path}/docker-compose.yml'
-  - lineinfile --regexp '- "$${SUBMISSION_PORT:-\d+}:\d+"' --line '        - \"$${SUBMISSION_PORT:-${mailcow_submission_port}}:${mailcow_submission_port}\"'
+  - lineinfile --regexp '- "$${SUBMISSION_PORT:-\d+}:\d+"' --line '        - \"$${SUBMISSION_PORT:-${mailcow_submission_port}}:${mailcow_submission_port}\"' '${mailcow_install_path}/mailcow.conf'
   - lineinfile --regexp 'ADDITIONAL_SAN=' --line 'ADDITIONAL_SAN=${mailcow_additional_san}' '${mailcow_install_path}/mailcow.conf'
 %{ if mailcow_acme_staging }
   - echo 'LE_STAGING=y' >> '${mailcow_install_path}/mailcow.conf'
