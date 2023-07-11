@@ -154,12 +154,3 @@ module "not_mailcow_dovecot_master_auto_generated_needs_mailcow_dovecot_master_u
   assert        = !(!var.mailcow_dovecot_master_auto_generated && (var.mailcow_dovecot_master_user == null || var.mailcow_dovecot_master_password == null))
   error_message = "error: not mailcow_dovecot_master_auto_generated needs mailcow_dovecot_master_user and mailcow_dovecot_master_password"
 }
-
-module "mailcow_needs_mailcow_admin_user_and_mailcow_admin_password_and_mailcow_rspamd_ui_password" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
-
-  use_jq        = true
-  assert        = !(var.mailcow && (var.mailcow_admin_user == null || var.mailcow_admin_password == null || var.mailcow_rspamd_ui_password == null))
-  error_message = "error: mailcow needs mailcow_admin_user and mailcow_admin_password and mailcow_rspamd_ui_password"
-}
