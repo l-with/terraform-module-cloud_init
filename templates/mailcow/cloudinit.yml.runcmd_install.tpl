@@ -16,9 +16,11 @@
 %{ if mailcow_api_allow_from != null }
   - lineinfile --insertafter '#API_ALLOW_FROM=' --line 'API_ALLOW_FROM=${mailcow_api_allow_from}' '${mailcow_install_path}/mailcow.conf'
 %{ endif }
+%{ if mailcow_submission_port != null }
   - lineinfile --regexp 'SUBMISSION_PORT=' --line 'SUBMISSION_PORT=${mailcow_submission_port}' '${mailcow_install_path}/mailcow.conf'
   - lineinfile --regexp '- SUBMISSION_PORT=$${SUBMISSION_PORT:-\d+}' --line '        - SUBMISSION_PORT=$${SUBMISSION_PORT:-${mailcow_submission_port}}' '${mailcow_install_path}/docker-compose.yml'
   - lineinfile --regexp '- "$${SUBMISSION_PORT:-\d+}:\d+"' --line '        - \"$${SUBMISSION_PORT:-${mailcow_submission_port}}:${mailcow_submission_port}\"' '${mailcow_install_path}/mailcow.conf'
+%{ endif }
 %{ if mailcow_additional_san != null }
   - lineinfile --regexp 'ADDITIONAL_SAN=' --line 'ADDITIONAL_SAN=${mailcow_additional_san}' '${mailcow_install_path}/mailcow.conf'
 %{ endif }

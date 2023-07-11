@@ -55,9 +55,11 @@ variable "mailcow_api_allow_from" {
 }
 
 variable "mailcow_submission_port" {
-  description = "the SUBMISSION_PORT in mailcow.conf"
+  description = <<EOT
+    the [postfix submission](https://docs.mailcow.email/prerequisite/prerequisite-system/?h=submission#default-ports) port (SUBMISSION_PORT in mailcow.conf)
+  EOT
   type        = number
-  default     = 587
+  default     = null
 }
 
 variable "mailcow_additional_san" {
