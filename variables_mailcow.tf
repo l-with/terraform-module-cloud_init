@@ -61,9 +61,9 @@ variable "mailcow_submission_port" {
 }
 
 variable "mailcow_additional_san" {
-  description = "the additional domains (SSL Certificate Subject Alternative Names)"
+  description = "the additional domains (SSL Certificate Subject Alternative Names), for instance autodiscover.*,autoconfig.*"
   type        = string
-  default     = "autodiscover.*,autoconfig.*"
+  default     = null
 }
 
 variable "mailcow_acme_staging" {
