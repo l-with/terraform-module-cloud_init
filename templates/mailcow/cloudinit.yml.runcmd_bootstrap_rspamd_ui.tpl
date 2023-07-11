@@ -1,0 +1,3 @@
+  - export _MAILCOW_INSTALL_PATH="${mailcow_install_path}"
+  - export _MAILCOW_RSPAMD_UI_PASSWORD="${mailcow_rspamd_ui_password}"
+  - ${mailcow_set_rspamd_ui_password_script}
