@@ -2,8 +2,8 @@
 # set DBUSER, DBPASS, DBNAME
 source $${_MAILCOW_INSTALL_PATH}/mailcow.conf
 
-# delete admin
-docker exec -it $(docker ps -qf name=mysql-mailcow) mysql -u$${DBUSER} -p$${DBPASS} $${DBNAME} -e "DELETE FROM admin WHERE username='$${_MAILCOW_DEFAULT_ADMIN}';"
+# get hashed password
+hashed_mailcow_admin_password=$(docker exec -it $(docker ps -qf name=dovecot-mailcow) doveadm pw -s SSHA256 -p $${_MAILCOW_ADMIN_PASSWORD} | tr -d '\r')
 
-# delete TFA
-docker exec -it $(docker ps -qf name=mysql-mailcow) mysql -u$${DBUSER} -p$${DBPASS} $${DBNAME} -e "DELETE FROM tfa WHERE username='$${_MAILCOW_DEFAULT_ADMIN}';"
+# create changed admin
+docker exec -it $(docker ps -qf name=mysql-mailcow) mysql -u$${DBUSER} -p$${DBPASS} $${DBNAME} -e "INSERT INTO admin (username, password, superadmin, active) VALUES ('$${_MAILCOW_ADMIN_USER}', '$${hashed_mailcow_admin_password}', 1, 1);"
