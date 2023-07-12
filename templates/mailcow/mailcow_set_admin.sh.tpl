@@ -3,7 +3,7 @@
 source $${_MAILCOW_INSTALL_PATH}/mailcow.conf
 
 # get hashed password
-hashed_mailcow_admin_password=$(docker exec --tty --interactive $(docker ps -qf name=dovecot-mailcow) doveadm pw -s SSHA256 -p $${_MAILCOW_ADMIN_PASSWORD} | tr -d '\r')
+hashed_mailcow_admin_password=$(docker exec $(docker ps --quiet --filter name=dovecot-mailcow) doveadm pw -s SSHA256 -p $${_MAILCOW_ADMIN_PASSWORD} | tr -d '\r')
 
 # create changed admin
-docker exec --tty $(docker ps -qf name=mysql-mailcow) mysql -u$${DBUSER} -p$${DBPASS} $${DBNAME} -e "INSERT INTO admin (username, password, superadmin, active) VALUES ('$${_MAILCOW_ADMIN_USER}', '$${hashed_mailcow_admin_password}', 1, 1);"
+docker exec $(docker ps --quiet --filter name=mysql-mailcow) mysql -u$${DBUSER} -p$${DBPASS} $${DBNAME} -e "INSERT INTO admin (username, password, superadmin, active) VALUES ('$${_MAILCOW_ADMIN_USER}', '$${hashed_mailcow_admin_password}', 1, 1);"
