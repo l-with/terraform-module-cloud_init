@@ -6,4 +6,4 @@ source $${_MAILCOW_INSTALL_PATH}/mailcow.conf
 docker exec --tty $(docker ps -qf name=mysql-mailcow) mysql -u$${DBUSER} -p$${DBPASS} $${DBNAME} -e "DELETE FROM admin WHERE username='$${_MAILCOW_DEFAULT_ADMIN}';"
 
 # delete TFA
-docker exec -tty $(docker ps -qf name=mysql-mailcow) mysql -u$${DBUSER} -p$${DBPASS} $${DBNAME} -e "DELETE FROM tfa WHERE username='$${_MAILCOW_DEFAULT_ADMIN}';"
+docker exec --tty $(docker ps -qf name=mysql-mailcow) mysql -u$${DBUSER} -p$${DBPASS} $${DBNAME} -e "DELETE FROM tfa WHERE username='$${_MAILCOW_DEFAULT_ADMIN}';"
