@@ -7,6 +7,9 @@
   - ./generate_config.sh
   - cp --preserve '${mailcow_install_path}/mailcow.conf' '${mailcow_install_path}/mailcow.conf.orig'
   - cp --preserve '${mailcow_install_path}/docker-compose.yml' '${mailcow_install_path}/docker-compose.yml.orig'
+%{ if mailcow_docker_compose_project_name != null }
+  - lineinfile --regexp 'COMPOSE_PROJECT_NAME=' --line 'COMPOSE_PROJECT_NAME=${mailcow_docker_compose_project_name}' '${mailcow_install_path}/mailcow.conf'
+%{ endif }
 %{ if mailcow_api_key != null }
   - lineinfile --insertafter '#API_KEY=' --line 'API_KEY=${mailcow_api_key}' '${mailcow_install_path}/mailcow.conf'
 %{ endif }

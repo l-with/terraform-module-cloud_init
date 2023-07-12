@@ -15,6 +15,7 @@ locals {
             mailcow_install_path                  = var.mailcow_install_path,
             mailcow_version                       = local.mailcow_version,
             mailcow_hostname                      = var.mailcow_hostname,
+            mailcow_docker_compose_project_name   = var.mailcow_docker_compose_project_name,
             mailcow_branch                        = var.mailcow_branch,
             mailcow_timezone                      = var.mailcow_timezone,
             mailcow_api_key                       = var.mailcow_api_key,
@@ -72,9 +73,8 @@ locals {
         {
           template = "${path.module}/templates/mailcow/${local.yml_runcmd}.tpl",
           vars = {
-            mailcow_install_path                = var.mailcow_install_path,
-            mailcow_hostname                    = var.mailcow_hostname,
-            mailcow_docker_compose_project_name = var.mailcow_docker_compose_project_name,
+            mailcow_install_path = var.mailcow_install_path,
+            mailcow_hostname     = var.mailcow_hostname,
           }
         },
       ],

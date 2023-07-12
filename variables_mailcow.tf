@@ -116,7 +116,7 @@ variable "mailcow_dovecot_master_password" {
 variable "mailcow_docker_compose_project_name" {
   description = "the name for the mailcow docker compose project"
   type        = string
-  default     = "mailcow_dockerized"
+  default     = null
 }
 
 variable "mailcow_delete_default_admin_script" {
