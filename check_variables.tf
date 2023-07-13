@@ -146,6 +146,15 @@ module "write_files_encoding_either_text_plain_or_base64" {
   error_message = "error: write_files encoding is not 'text/plain' or 'base64'"
 }
 
+module "mailcow_needs_mailcow_hostname" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.mailcow && var.mailcow_hostname == null)
+  error_message = "error: mailcow needs mailcow_hostname"
+}
+
 module "not_mailcow_dovecot_master_auto_generated_needs_mailcow_dovecot_master_user_and_mailcow_dovecot_master_password" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"

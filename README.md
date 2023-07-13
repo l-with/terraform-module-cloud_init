@@ -229,6 +229,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_cloud_init_part"></a> [cloud\_init\_part](#module\_cloud\_init\_part) | ./modules/cloud_init_part | n/a |
 | <a name="module_either_rke2_node_1st_or_rke2_node_other"></a> [either\_rke2\_node\_1st\_or\_rke2\_node\_other](#module\_either\_rke2\_node\_1st\_or\_rke2\_node\_other) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_mailcow_needs_mailcow_hostname"></a> [mailcow\_needs\_mailcow\_hostname](#module\_mailcow\_needs\_mailcow\_hostname) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_not_mailcow_dovecot_master_auto_generated_needs_mailcow_dovecot_master_user_and_mailcow_dovecot_master_password"></a> [not\_mailcow\_dovecot\_master\_auto\_generated\_needs\_mailcow\_dovecot\_master\_user\_and\_mailcow\_dovecot\_master\_password](#module\_not\_mailcow\_dovecot\_master\_auto\_generated\_needs\_mailcow\_dovecot\_master\_user\_and\_mailcow\_dovecot\_master\_password) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_rke2_node_1st_rke2_role_id"></a> [rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_role\_id](#module\_rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_role\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_1st_needs_rke2_node_1st_rke2_secret_id"></a> [rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_secret\_id](#module\_rke2\_node\_1st\_needs\_rke2\_node\_1st\_rke2\_secret\_id) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
@@ -302,7 +303,7 @@ No resources.
 | <a name="input_mailcow_dovecot_master_password"></a> [mailcow\_dovecot\_master\_password](#input\_mailcow\_dovecot\_master\_password) | the password for the dovecot master user (DOVECOT\_MASTER\_PASS) if not auto-generated | `string` | `null` | no |
 | <a name="input_mailcow_dovecot_master_user"></a> [mailcow\_dovecot\_master\_user](#input\_mailcow\_dovecot\_master\_user) | the username of the dovecot master user (DOVECOT\_MASTER\_USER) if not auto-generated | `string` | `null` | no |
 | <a name="input_mailcow_greylisting"></a> [mailcow\_greylisting](#input\_mailcow\_greylisting) | if greylisting should be active | `bool` | `true` | no |
-| <a name="input_mailcow_hostname"></a> [mailcow\_hostname](#input\_mailcow\_hostname) | the host name for mailcow | `string` | n/a | yes |
+| <a name="input_mailcow_hostname"></a> [mailcow\_hostname](#input\_mailcow\_hostname) | the host name for mailcow | `string` | `null` | no |
 | <a name="input_mailcow_install_path"></a> [mailcow\_install\_path](#input\_mailcow\_install\_path) | the install path for mailcow | `string` | `"/opt/mailcow-dockerized"` | no |
 | <a name="input_mailcow_mynetworks"></a> [mailcow\_mynetworks](#input\_mailcow\_mynetworks) | the list of subnetwork masks to add to `mynetworks` in postfix<br>    if subnetwork masks are provided at the beginning `127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 [fe80::]/10` is added (local) | `list(string)` | `[]` | no |
 | <a name="input_mailcow_rspamd_ui_password"></a> [mailcow\_rspamd\_ui\_password](#input\_mailcow\_rspamd\_ui\_password) | the password for the mailcow Rspamd UI | `string` | `null` | no |

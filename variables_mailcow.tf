@@ -28,6 +28,7 @@ variable "mailcow_install_path" {
 variable "mailcow_hostname" {
   description = "the host name for mailcow"
   type        = string
+  default     = null
 }
 
 variable "mailcow_timezone" {
