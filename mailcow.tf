@@ -1,6 +1,6 @@
 locals {
   mailcow_version = var.mailcow_version != null ? var.mailcow_version : var.mailcow_branch
-  mailcow = !var.mailcow ? {} : {
+  mailcow = !local.parts_active.mailcow ? {} : {
     runcmd = concat(
       [
         {
