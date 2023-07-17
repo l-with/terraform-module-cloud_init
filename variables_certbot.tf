@@ -4,10 +4,10 @@ variable "certbot" {
   default     = false
 }
 
-variable "certbot_dns_hetzner" {
-  description = "if cloud-init user data for installing with certbot-dns-hetzner should be generated"
-  type        = bool
-  default     = false
+variable "certbot_dns_plugins" {
+  description = "the list of certbot plugins to be installed"
+  type        = list(string)
+  default     = []
 }
 
 variable "certbot_automatic_renewal_cron" {

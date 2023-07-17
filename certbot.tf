@@ -27,10 +27,12 @@ locals {
           },
         }
       ],
-      !var.certbot_dns_hetzner ? [] : [
+      length(var.certbot_dns_plugins) == 0 ? [] : [
         {
-          template = "${path.module}/templates/certbot/${local.yml_runcmd}_install_certbot_dns_hetzner.tpl",
-          vars     = {}
+          template = "${path.module}/templates/certbot/${local.yml_runcmd}_install_certbot_dns_plugins.tpl",
+          vars = {
+            certbot_dns_plugins = jsonencode(var.certbot_dns_plugins)
+          }
         },
       ],
       [for certbot_automatic_renewal_post_hook in var.certbot_automatic_renewal_post_hooks :

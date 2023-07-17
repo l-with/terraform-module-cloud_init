@@ -1,8 +1,8 @@
 - path: ${configuration_home}/sites-available/${server_fqdn}_https.conf
   content: |
-    %{ if https_map != null ~}
+%{ if https_map != null ~}
     ${https_map}
-    %{ endif ~}
+%{ endif }
     server {
       server_tokens off;
       ${gnu_add_header}
