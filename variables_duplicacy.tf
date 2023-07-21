@@ -30,7 +30,7 @@ variable "duplicacy_configurations" {
     secret_file_directory            = optional(string, "/opt/duplicacy/secret"),                               // the path where the token and the ssh-key files are created
     onedrive_token_file_name         = optional(string, "one-token.json"),                                      // the filename for `DUPLICACY_ONE_TOKEN`
     ssh_key_file_name                = optional(string, "id"),                                                  // the filename for `DUPLICACY_SSH_KEY_FILE`
-    secret_file_content              = optional(string),                                                        //the content for onedrive_token_file_name or ssh_key_file_name
+    secret_file_content              = optional(string),                                                        // the content for onedrive_token_file_name or ssh_key_file_name
     snapshot_id                      = string,                                                                  // the `<snapshot id>` for `duplicacy init`
     storage_url                      = string,                                                                  // the `<storage url>` for ´duplicacy init`, e.g. the [Duplicacy URI](https://github.com/gilbertchen/duplicacy/wiki/Storage-Backends) of where to store the backups
     init_script_file                 = optional(string, "init"),                                                // the duplicacy init script file
