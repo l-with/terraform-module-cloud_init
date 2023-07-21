@@ -2,6 +2,41 @@ locals {
   duplicacy_command_scripts = [
     "init", "backup", "prune", "restore"
   ]
+  duplicacy_storage_backend_local_disk        = "Local disk"
+  duplicacy_storage_backend_blackblaze_b2     = "Backblaze B2"
+  duplicacy_storage_backend_ssh_sftp_password = "SSH/SFTP Password"
+  duplicacy_storage_backend_ssh_sftp_keyfile  = "SSH/SFTP Keyfile"
+  duplicacy_storage_backend_onedrive          = "Onedrive"
+  duplicacy_storage_backends = [
+    local.duplicacy_storage_backend_local_disk,
+    local.duplicacy_storage_backend_blackblaze_b2,
+    local.duplicacy_storage_backend_ssh_sftp_password,
+    local.duplicacy_storage_backend_ssh_sftp_keyfile,
+    local.duplicacy_storage_backend_onedrive,
+  ]
+  duplicacy_storage_backend_configurations = [
+    for configuration in var.duplicacy_configurations : {
+      storage_backend_env = (configuration.storage_backend == local.duplicacy_storage_backend_blackblaze_b2 ?
+        {
+          DUPLICACY_B2_ID  = configuration.b2_id,
+          DUPLICACY_B2_KEY = configuration.b2_key,
+        }
+        : (configuration.storage_backend == local.duplicacy_storage_backend_ssh_sftp_password ?
+          {
+            DUPLICACY_SSH_PASSWORD = configuration.ssh_password,
+          }
+          : (configuration.storage_backend == local.duplicacy_storage_backend_ssh_sftp_keyfile) ?
+          {
+            DUPLICACY_SSH_KEY_FILE   = configuration.ssh_key_file_name,
+            DUPLICACY_SSH_PASSPHRASE = configuration.ssh_passphrase,
+          }
+          : (configuration.storage_backend == local.duplicacy_storage_backend_onedrive) ?
+          {
+            DUPLICACY_ONE_TOKEN = configuration.onedrive_token_file_name,
+          }
+      : {}))
+    }
+  ]
   duplicacy_command_specific_configurations = [
     for configuration in var.duplicacy_configurations :
     {
@@ -55,7 +90,7 @@ module "duplicacy_script" {
       command                  = script,
       script_file_path         = var.duplicacy_configurations[count.index].script_file_path,
       password                 = var.duplicacy_configurations[count.index].password,
-      storage_backend_env      = var.duplicacy_configurations[count.index].storage_backend_env,
+      storage_backend_env      = local.duplicacy_storage_backend_configurations[count.index].storage_backend_env,
       snapshot_id              = var.duplicacy_configurations[count.index].snapshot_id,
       storage_url              = var.duplicacy_configurations[count.index].storage_url,
       options                  = local.duplicacy_command_specific_configurations[count.index][script].options,
@@ -87,9 +122,37 @@ locals {
             template = "${path.module}/templates/duplicacy/${local.yml_runcmd}_configuration.tpl",
             vars = {
               duplicacy_working_directory = configuration.working_directory,
+              secret_file_directory       = configuration.secret_file_directory,
             },
           }
         ],
+        flatten(
+          [
+            for configuration in var.duplicacy_configurations :
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+              vars = {
+                write_file_directory = configuration.secret_file_directory,
+                write_file_name = (configuration.storage_backend == local.duplicacy_storage_backend_onedrive ?
+                  configuration.onedrive_token_file_name
+                  : (configuration.storage_backend == local.duplicacy_storage_backend_ssh_sftp_keyfile) ?
+                  configuration.ssh_key_file_name
+                : null),
+                write_file_content = configuration.secret_file_content,
+                write_file_mode    = "755"
+                write_file_group   = "root"
+                write_file_owner   = "root"
+              }
+            }
+            if contains(
+              [
+                local.duplicacy_storage_backend_onedrive,
+                local.duplicacy_storage_backend_ssh_sftp_keyfile,
+              ],
+              configuration.storage_backend
+            )
+          ]
+        ),
         flatten(
           [
             for duplicacy_script in module.duplicacy_script :

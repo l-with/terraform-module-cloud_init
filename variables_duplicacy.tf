@@ -22,7 +22,15 @@ variable "duplicacy_configurations" {
     working_directory                = string,                                                                  // the working directory for duplicacy which is the default path for the repository to backup
     password                         = string,                                                                  // the value for `DUPLICACY_PASSWORD`, e.g. the passphrase to encrypt the backups with before they are stored remotely
     script_file_path                 = string,                                                                  // the path where the scripts for `duplicacy init`, `duplicacy backup`, `duplicacy restore` and `duplicacy prune` are created
-    storage_backend_env              = optional(map(string), {}),                                               // the environment variables with values for the storage backend (s. https://github.com/gilbertchen/duplicacy/wiki/Managing-Passwords)
+    storage_backend                  = string,                                                                  // the storage backend, possible values are `Local disk`, `Backblaze B2`, `SSH/SFTP Password`, `SSH/SFTP Keyfile`, `Onedrive`
+    b2_id                            = optional(string),                                                        // the value for `DUPLICACY_B2_ID`
+    b2_key                           = optional(string),                                                        // the value for `DUPLICACY_B2_KEY`
+    ssh_password                     = optional(string),                                                        // the value for `DUPLICACY_SSH_PASSWORD`
+    ssh_passphrase                   = optional(string),                                                        // the value for `DUPLICACY_SSH_PASSPHRASE`
+    secret_file_directory            = optional(string, "/opt/duplicacy/secret"),                               // the path where the token and the ssh-key files are created
+    onedrive_token_file_name         = optional(string, "one-token.json"),                                      // the filename for `DUPLICACY_ONE_TOKEN`
+    ssh_key_file_name                = optional(string, "id"),                                                  // the filename for `DUPLICACY_SSH_KEY_FILE`
+    secret_file_content              = optional(string),                                                        //the content for onedrive_token_file_name or ssh_key_file_name
     snapshot_id                      = string,                                                                  // the `<snapshot id>` for `duplicacy init`
     storage_url                      = string,                                                                  // the `<storage url>` for ´duplicacy init`, e.g. the [Duplicacy URI](https://github.com/gilbertchen/duplicacy/wiki/Storage-Backends) of where to store the backups
     init_script_file                 = optional(string, "init"),                                                // the duplicacy init script file

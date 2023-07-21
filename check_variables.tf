@@ -163,3 +163,14 @@ module "not_mailcow_dovecot_master_auto_generated_needs_mailcow_dovecot_master_u
   assert        = !(!var.mailcow_dovecot_master_auto_generated && (var.mailcow_dovecot_master_user == null || var.mailcow_dovecot_master_password == null))
   error_message = "error: not mailcow_dovecot_master_auto_generated needs mailcow_dovecot_master_user and mailcow_dovecot_master_password"
 }
+
+module "duplicacy_storage_backend_one_of" {
+  count = length(var.duplicacy_configurations)
+
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = (contains(local.duplicacy_storage_backends, var.duplicacy_configurations[count.index].storage_backend))
+  error_message = "error: '${var.duplicacy_configurations[count.index].storage_backend}' not in ${join(", ", local.duplicacy_storage_backends)}"
+}
