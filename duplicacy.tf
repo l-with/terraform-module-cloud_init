@@ -119,10 +119,12 @@ locals {
         [
           for configuration in var.duplicacy_configurations :
           {
-            template = "${path.module}/templates/duplicacy/${local.yml_runcmd}_configuration.tpl",
+            template = "${path.module}/templates/${local.yml_runcmd}_mkdir.tpl",
             vars = {
-              duplicacy_working_directory = configuration.working_directory,
-              secret_file_directory       = configuration.secret_file_directory,
+              directories = jsonencode([
+                configuration.working_directory,
+                configuration.secret_file_directory,
+              ]),
             },
           }
         ],
