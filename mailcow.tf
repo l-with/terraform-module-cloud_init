@@ -137,6 +137,42 @@ locals {
           }
         },
       ],
+      !var.mailcow_configure_backup ? [] : [
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_runcmd_mkdir.tpl",
+          vars = {
+            directories = jsonencode([var.mailcow_backup_path])
+          }
+        },
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          vars = {
+            write_file_directory = dirname(var.mailcow_backup_script),
+            write_file_name      = basename(var.mailcow_backup_script),
+            write_file_content = templatefile("${path.module}/templates/mailcow/mailcow_backup.sh.tpl", {
+              mailcow_backup_path  = var.mailcow_backup_path
+              mailcow_install_path = var.mailcow_install_path,
+            }),
+            write_file_owner = "root"
+            write_file_group = "root"
+            write_file_mode  = "755",
+          }
+        },
+        {
+          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          vars = {
+            write_file_directory = dirname(var.mailcow_restore_script),
+            write_file_name      = basename(var.mailcow_restore_script),
+            write_file_content = templatefile("${path.module}/templates/mailcow/mailcow_restore.sh.tpl", {
+              mailcow_backup_path  = var.mailcow_backup_path
+              mailcow_install_path = var.mailcow_install_path,
+            }),
+            write_file_owner = "root"
+            write_file_group = "root"
+            write_file_mode  = "755",
+          }
+        },
+      ]
     )
   }
 }

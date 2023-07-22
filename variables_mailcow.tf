@@ -170,3 +170,27 @@ variable "mailcow_mynetworks" {
   type        = list(string)
   default     = []
 }
+
+variable "mailcow_configure_backup" {
+  description = "if backup for mailcow should be configured for unattended backup"
+  type        = bool
+  default     = false
+}
+
+variable "mailcow_backup_script" {
+  description = "the full path for the mailcow backup script"
+  type        = string
+  default     = "/opt/mailcow/mailcow-backup.sh"
+}
+
+variable "mailcow_restore_script" {
+  description = "the full path for the mailcow restore script"
+  type        = string
+  default     = "/opt/mailcow/mailcow-restore.sh"
+}
+
+variable "mailcow_backup_path" {
+  description = "the path for the mailcow backup"
+  type        = string
+  default     = "/var/backups/mailcow"
+}
