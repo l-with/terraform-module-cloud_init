@@ -139,7 +139,7 @@ locals {
       ],
       !var.mailcow_configure_backup ? [] : [
         {
-          template = "${path.module}/templates/${local.yml_runcmd}_runcmd_mkdir.tpl",
+          template = "${path.module}/templates/${local.yml_runcmd}_mkdir.tpl",
           vars = {
             directories = jsonencode([var.mailcow_backup_path])
           }
