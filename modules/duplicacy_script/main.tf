@@ -2,8 +2,8 @@ locals {
   vars = [
     for configuration in var.configuration :
     {
-      write_file_directory = configuration.script_file_path,
-      write_file_name      = configuration.script_file,
+      write_file_directory = configuration.script_file_directory,
+      write_file_name      = configuration.script_file_name,
       write_file_content = templatefile(
         "${path.module}/templates/duplicacy_${configuration.command}.tpl",
         merge(
@@ -12,9 +12,9 @@ locals {
             duplicacy_env = {
               DUPLICACY_PASSWORD = configuration.password,
             },
-            duplicacy_env_special      = configuration.storage_backend_env,
-            duplicacy_path             = var.duplicacy_path,
-            duplicacy_script_file_path = configuration.script_file_path,
+            duplicacy_env_special           = configuration.storage_backend_env,
+            duplicacy_path                  = var.duplicacy_path,
+            duplicacy_script_file_directory = configuration.script_file_directory,
           },
           jsondecode(
             configuration.command != "init" ? jsonencode({}) : jsonencode({
@@ -28,6 +28,7 @@ locals {
           ),
           jsondecode(
             configuration.command != "backup" ? jsonencode({}) : jsonencode({
+              duplicacy_log_file = "${configuration.log_file_directory}/${configuration.log_file_name}",
               duplicacy_env_backup = {
                 DUPLICACY_BACKUP_OPTIONS = configuration.options,
               },
@@ -38,6 +39,7 @@ locals {
           ),
           jsondecode(
             configuration.command != "prune" ? jsonencode({}) : jsonencode({
+              duplicacy_log_file = "${configuration.log_file_directory}/${configuration.log_file_name}",
               duplicacy_env_prune = {
                 DUPLICACY_PRUNE_OPTIONS = configuration.options,
               },
@@ -48,6 +50,7 @@ locals {
           ),
           jsondecode(
             configuration.command != "restore" ? jsonencode({}) : jsonencode({
+              duplicacy_log_file = "${configuration.log_file_directory}/${configuration.log_file_name}",
               duplicacy_env_restore = {
                 DUPLICACY_RESTORE_OPTIONS = configuration.options,
               },
@@ -67,7 +70,7 @@ locals {
     [
       for configuration in var.configuration :
       {
-        write_file_directory = configuration.script_file_path,
+        write_file_directory = configuration.script_file_directory,
         write_file_name      = configuration.pre_script_file_name,
         write_file_content   = configuration.pre_script_file_content,
         write_file_owner     = "root",
@@ -78,7 +81,7 @@ locals {
     [
       for configuration in var.configuration :
       {
-        write_file_directory = configuration.script_file_path,
+        write_file_directory = configuration.script_file_directory,
         write_file_name      = configuration.post_script_file_name,
         write_file_content   = configuration.post_script_file_content,
         write_file_owner     = "root",

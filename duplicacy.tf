@@ -42,7 +42,8 @@ locals {
     {
       init = {
         options                  = configuration.init_options,
-        script_file              = configuration.init_script_file,
+        script_file_name         = configuration.init_script_file_name,
+        log_file_name            = null,
         pre_script_file_name     = null
         post_script_file_name    = null
         pre_script_file_content  = null,
@@ -50,7 +51,8 @@ locals {
       }
       backup = {
         options                  = configuration.backup_options,
-        script_file              = configuration.backup_script_file,
+        script_file_name         = configuration.backup_script_file_name,
+        log_file_name            = configuration.backup_log_file_name,
         pre_script_file_name     = configuration.pre_backup_script_file_name,
         post_script_file_name    = configuration.post_backup_script_file_name,
         pre_script_file_content  = configuration.pre_backup_script_file_content,
@@ -58,7 +60,8 @@ locals {
       }
       prune = {
         options                  = configuration.prune_options,
-        script_file              = configuration.prune_script_file,
+        script_file_name         = configuration.prune_script_file_name,
+        log_file_name            = configuration.prune_log_file_name,
         pre_script_file_name     = configuration.pre_prune_script_file_name,
         post_script_file_name    = configuration.post_prune_script_file_name,
         pre_script_file_content  = configuration.pre_prune_script_file_content,
@@ -66,7 +69,8 @@ locals {
       }
       restore = {
         options                  = configuration.restore_options,
-        script_file              = configuration.restore_script_file,
+        script_file_name         = configuration.restore_script_file_name,
+        log_file_name            = configuration.restore_log_file_name,
         pre_script_file_name     = configuration.pre_restore_script_file_name,
         post_script_file_name    = configuration.post_restore_script_file_name,
         pre_script_file_content  = configuration.pre_restore_script_file_content,
@@ -88,13 +92,15 @@ module "duplicacy_script" {
     {
       working_directory        = var.duplicacy_configurations[count.index].working_directory,
       command                  = script,
-      script_file_path         = var.duplicacy_configurations[count.index].script_file_path,
+      script_file_directory    = var.duplicacy_configurations[count.index].script_file_directory,
+      log_file_directory       = var.duplicacy_configurations[count.index].log_file_directory,
       password                 = var.duplicacy_configurations[count.index].password,
       storage_backend_env      = local.duplicacy_storage_backend_configurations[count.index].storage_backend_env,
       snapshot_id              = var.duplicacy_configurations[count.index].snapshot_id,
       storage_url              = var.duplicacy_configurations[count.index].storage_url,
       options                  = local.duplicacy_command_specific_configurations[count.index][script].options,
-      script_file              = local.duplicacy_command_specific_configurations[count.index][script].script_file,
+      script_file_name         = local.duplicacy_command_specific_configurations[count.index][script].script_file_name,
+      log_file_name            = local.duplicacy_command_specific_configurations[count.index][script].log_file_name,
       pre_script_file_name     = local.duplicacy_command_specific_configurations[count.index][script].pre_script_file_name,
       post_script_file_name    = local.duplicacy_command_specific_configurations[count.index][script].post_script_file_name,
       pre_script_file_content  = local.duplicacy_command_specific_configurations[count.index][script].pre_script_file_content,
@@ -124,6 +130,7 @@ locals {
               jsonencoded_directories = jsonencode([
                 configuration.working_directory,
                 configuration.secret_file_directory,
+                //configuration.log_file_directory,
               ]),
             },
           }

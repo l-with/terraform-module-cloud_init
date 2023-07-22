@@ -1,2 +1,0 @@
-  - mkdir --parents ${duplicacy_working_directory}
-  - mkdir --parents ${secret_file_directory}

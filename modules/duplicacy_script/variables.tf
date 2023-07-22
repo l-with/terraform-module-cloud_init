@@ -2,8 +2,10 @@ variable "configuration" {
   type = list(object({
     working_directory        = string,                    // the working directory for duplicacy which is the default path for the repository to backup
     command                  = string,                    // the script (init, backup, prune, restore)
-    script_file_path         = string,                    // the path where the scripts for `duplicacy init`, `duplicacy backup`, `duplicacy restore` and `duplicacy prune` are created
-    script_file              = string,                    // the duplicacy command
+    script_file_directory    = string,                    // the path where the scripts for `duplicacy init`, `duplicacy backup`, `duplicacy restore` and `duplicacy prune` are created
+    script_file_name         = string,                    // the duplicacy command
+    log_file_directory       = string,                    // the path where the log file is created
+    log_file_name            = string,                    // the file name of the log file
     password                 = string,                    // the value for `DUPLICACY_PASSWORD`, e.g. the passphrase to encrypt the backups with before they are stored remotely
     options                  = string,                    // the options for `duplicacy <script>`
     storage_backend_env      = optional(map(string), {}), // the environment variables with values for the storage backend (s. https://github.com/gilbertchen/duplicacy/wiki/Managing-Passwords)
