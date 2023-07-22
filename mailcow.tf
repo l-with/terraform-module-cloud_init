@@ -141,7 +141,7 @@ locals {
         {
           template = "${path.module}/templates/${local.yml_runcmd}_mkdir.tpl",
           vars = {
-            directories = jsonencode([var.mailcow_backup_path])
+            jsonencoded_directories = jsonencode([var.mailcow_backup_path])
           }
         },
         {

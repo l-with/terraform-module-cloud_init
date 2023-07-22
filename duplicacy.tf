@@ -121,7 +121,7 @@ locals {
           {
             template = "${path.module}/templates/${local.yml_runcmd}_mkdir.tpl",
             vars = {
-              directories = jsonencode([
+              jsonencoded_directories = jsonencode([
                 configuration.working_directory,
                 configuration.secret_file_directory,
               ]),
