@@ -299,7 +299,7 @@ No resources.
 | <a name="input_mailcow_api_key"></a> [mailcow\_api\_key](#input\_mailcow\_api\_key) | the API key for mailcow read-write access (allowed characters: a-z, A-Z, 0-9, -) | `string` | `null` | no |
 | <a name="input_mailcow_api_key_read_only"></a> [mailcow\_api\_key\_read\_only](#input\_mailcow\_api\_key\_read\_only) | the API key for mailcow read-only access (allowed characters: a-z, A-Z, 0-9, -) | `string` | `null` | no |
 | <a name="input_mailcow_backup_path"></a> [mailcow\_backup\_path](#input\_mailcow\_backup\_path) | the path for the mailcow backup | `string` | `"/var/backups/mailcow"` | no |
-| <a name="input_mailcow_backup_script"></a> [mailcow\_backup\_script](#input\_mailcow\_backup\_script) | the full path for the mailcow backup script | `string` | `"/opt/mailcow/mailcow-backup.sh"` | no |
+| <a name="input_mailcow_backup_script"></a> [mailcow\_backup\_script](#input\_mailcow\_backup\_script) | the full path for the mailcow backup script | `string` | `"/opt/mailcow/scripts/mailcow-backup.sh"` | no |
 | <a name="input_mailcow_branch"></a> [mailcow\_branch](#input\_mailcow\_branch) | the branch value for mailcow (`MAILCOW_BRANCH`) | `string` | `"master"` | no |
 | <a name="input_mailcow_certbot_post_hook_script"></a> [mailcow\_certbot\_post\_hook\_script](#input\_mailcow\_certbot\_post\_hook\_script) | the full path for the mailcow certbot post-hook script | `string` | `"/etc/letsencrypt/renewal-hooks/post/mailcow_certbot_post_hook.sh"` | no |
 | <a name="input_mailcow_configure_backup"></a> [mailcow\_configure\_backup](#input\_mailcow\_configure\_backup) | if backup for mailcow should be configured for unattended backup | `bool` | `false` | no |
@@ -312,7 +312,7 @@ No resources.
 | <a name="input_mailcow_hostname"></a> [mailcow\_hostname](#input\_mailcow\_hostname) | the host name for mailcow | `string` | `null` | no |
 | <a name="input_mailcow_install_path"></a> [mailcow\_install\_path](#input\_mailcow\_install\_path) | the install path for mailcow | `string` | `"/opt/mailcow-dockerized"` | no |
 | <a name="input_mailcow_mynetworks"></a> [mailcow\_mynetworks](#input\_mailcow\_mynetworks) | the list of subnetwork masks to add to `mynetworks` in postfix<br>    if subnetwork masks are provided at the beginning `127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 [fe80::]/10` is added (local) | `list(string)` | `[]` | no |
-| <a name="input_mailcow_restore_script"></a> [mailcow\_restore\_script](#input\_mailcow\_restore\_script) | the full path for the mailcow restore script | `string` | `"/opt/mailcow/mailcow-restore.sh"` | no |
+| <a name="input_mailcow_restore_script"></a> [mailcow\_restore\_script](#input\_mailcow\_restore\_script) | the full path for the mailcow restore script | `string` | `"/opt/mailcow/scripts/mailcow-restore.sh"` | no |
 | <a name="input_mailcow_rspamd_ui_password"></a> [mailcow\_rspamd\_ui\_password](#input\_mailcow\_rspamd\_ui\_password) | the password for the mailcow Rspamd UI | `string` | `null` | no |
 | <a name="input_mailcow_set_admin_script"></a> [mailcow\_set\_admin\_script](#input\_mailcow\_set\_admin\_script) | the full path for the mailcow set admin script | `string` | `"/root/mailcow_set_admin.sh"` | no |
 | <a name="input_mailcow_set_rspamd_ui_password_script"></a> [mailcow\_set\_rspamd\_ui\_password\_script](#input\_mailcow\_set\_rspamd\_ui\_password\_script) | the full path for the mailcow set Rspamd UI password script | `string` | `"/root/mailcow_set_rspamd_ui_password.sh"` | no |

@@ -180,13 +180,13 @@ variable "mailcow_configure_backup" {
 variable "mailcow_backup_script" {
   description = "the full path for the mailcow backup script"
   type        = string
-  default     = "/opt/mailcow/mailcow-backup.sh"
+  default     = "/opt/mailcow/scripts/mailcow-backup.sh"
 }
 
 variable "mailcow_restore_script" {
   description = "the full path for the mailcow restore script"
   type        = string
-  default     = "/opt/mailcow/mailcow-restore.sh"
+  default     = "/opt/mailcow/scripts/mailcow-restore.sh"
 }
 
 variable "mailcow_backup_path" {
