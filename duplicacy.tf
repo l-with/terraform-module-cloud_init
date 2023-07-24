@@ -27,12 +27,12 @@ locals {
           }
           : (configuration.storage_backend == local.duplicacy_storage_backend_ssh_sftp_keyfile) ?
           {
-            DUPLICACY_SSH_KEY_FILE   = configuration.ssh_key_file_name,
+            DUPLICACY_SSH_KEY_FILE   = "${configuration.secret_file_directory}/${configuration.ssh_key_file_name}",
             DUPLICACY_SSH_PASSPHRASE = configuration.ssh_passphrase,
           }
           : (configuration.storage_backend == local.duplicacy_storage_backend_onedrive) ?
           {
-            DUPLICACY_ONE_TOKEN = configuration.onedrive_token_file_name,
+            DUPLICACY_ONE_TOKEN = "${configuration.secret_file_directory}/${configuration.onedrive_token_file_name}",
           }
       : {}))
     }
