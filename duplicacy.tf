@@ -186,6 +186,15 @@ locals {
             ]
           ]
         ),
+        [
+          for configuration in var.duplicacy_configurations :
+          {
+            template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
+            vars = {
+              runcmd_script = "  - ${configuration.script_file_directory}/${configuration.init_script_file_name}"
+            }
+          }
+        ],
       )
     },
   )
