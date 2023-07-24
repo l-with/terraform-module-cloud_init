@@ -130,7 +130,7 @@ locals {
               jsonencoded_directories = jsonencode([
                 configuration.working_directory,
                 configuration.secret_file_directory,
-                //configuration.log_file_directory,
+                configuration.log_file_directory,
               ]),
             },
           }
