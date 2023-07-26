@@ -7,10 +7,11 @@ locals {
           template = "${path.module}/templates/docker_container/${local.yml_write_files}_service.tpl",
           vars = {
             name        = container.name,
-            description = "docker ${container.name} (${container.image})"
+            description = "docker ${container.name} (${container.image})",
             image       = container.image,
-            ports       = container.ports
-            command     = container.command
+            ports       = container.ports,
+            command     = container.command,
+            environment = jsonencode(container.environment),
           }
         }
       ]
