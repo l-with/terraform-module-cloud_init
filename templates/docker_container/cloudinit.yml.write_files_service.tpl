@@ -7,7 +7,9 @@
 
     [Service]
     Restart=always
-    ExecStart=/usr/bin/docker run --restart ${restart_policy} %{ if ports != null ~}--publish ${ports} %{ endif }-name ${name} ${image} ${command}
+    ExecStartPre=-/usr/bin/docker stop ${name}
+    ExecStartPre=-/usr/bin/docker rm ${name}
+    ExecStart=/usr/bin/docker run --detach --rm ${restart_policy} %{ if ports != null ~}--publish ${ports} %{ endif }-name ${name} ${image} ${command}
     ExecStop=/usr/bin/docker stop ${name}
 
     [Install]
