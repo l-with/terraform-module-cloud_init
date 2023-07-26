@@ -6,12 +6,11 @@ locals {
         {
           template = "${path.module}/templates/docker_container/${local.yml_write_files}_service.tpl",
           vars = {
-            name           = container.name,
-            description    = "docker ${container.name} (${container.image})"
-            image          = container.image,
-            ports          = container.ports
-            command        = container.command
-            restart_policy = container.restart_policy
+            name        = container.name,
+            description = "docker ${container.name} (${container.image})"
+            image       = container.image,
+            ports       = container.ports
+            command     = container.command
           }
         }
       ]
