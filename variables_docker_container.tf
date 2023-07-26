@@ -7,11 +7,10 @@ variable "docker_container" {
 variable "docker_container_list" {
   description = "the docker containers the cloud-init user data should be generated for"
   type = list(object({
-    name           = string, // --name
-    image          = string,
-    ports          = optional(string, null), // --publish
-    command        = string,
-    restart_policy = optional(string, "always"), // --restart
+    name    = string, // --name
+    image   = string,
+    ports   = optional(string, null), // --publish
+    command = string,
   }))
   default   = []
   sensitive = true
