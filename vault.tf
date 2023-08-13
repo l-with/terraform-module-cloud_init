@@ -9,9 +9,24 @@ locals {
   vault_init_needed_packages = [
     "openssl",
   ]
-  vault_tls_cert_file      = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : var.vault_storage_raft_leader_client_cert_file
-  vault_tls_key_file       = var.vault_tls_key_file != null ? var.vault_tls_key_file : var.vault_storage_raft_leader_client_key_file
-  vault_tls_client_ca_file = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : var.vault_storage_raft_leader_ca_cert_file
+  vault_tls_storage_raft_leader_ca_cert_file = (
+    var.vault_tls_storage_raft_leader_ca_cert_file != null
+    ? var.vault_tls_storage_raft_leader_ca_cert_file
+    : "${var.vault_home_path}/tls/client_ca.pem"
+  )
+  vault_tls_storage_raft_leader_client_cert_file = (
+    var.vault_tls_storage_raft_leader_client_cert_file != null
+    ? var.vault_tls_storage_raft_leader_client_cert_file
+    : "${var.vault_home_path}/tls/cert.pem"
+  )
+  vault_tls_storage_raft_leader_client_key_file = (
+    var.vault_tls_storage_raft_leader_client_key_file != null
+    ? var.vault_tls_storage_raft_leader_client_key_file
+    : "${var.vault_home_path}/tls/key.pem"
+  )
+  vault_tls_client_ca_file = var.vault_tls_client_ca_file != null ? var.vault_tls_storage_raft_leader_ca_cert_file : local.vault_tls_storage_raft_leader_ca_cert_file
+  vault_tls_cert_file      = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : local.vault_tls_storage_raft_leader_ca_cert_file
+  vault_tls_key_file       = var.vault_tls_key_file != null ? var.vault_tls_key_file : local.vault_tls_storage_raft_leader_client_cert_file
   vault_tls_files = [
     for vault_tls_file in var.vault_tls_files : {
       file_name = replace(
@@ -32,6 +47,24 @@ locals {
       owner    = vault_tls_file.owner,
       group    = vault_tls_file.group,
       mode     = vault_tls_file.mode,
+    }
+  ]
+  vault_tls_content_file_names = {
+    "cert"                            = local.vault_tls_cert_file,
+    "key"                             = local.vault_tls_key_file,
+    "client_ca"                       = local.vault_tls_client_ca_file,
+    "storage_raft_leader_ca_cert"     = local.vault_tls_storage_raft_leader_ca_cert_file,
+    "storage_raft_leader_client_cert" = local.vault_tls_storage_raft_leader_client_cert_file,
+    "storage_raft_leader_client_key"  = local.vault_tls_storage_raft_leader_client_key_file,
+  }
+  vault_tls_contents = [
+    for vault_tls_content in var.vault_tls_contents : {
+      file_name = local.vault_tls_content_file_names[vault_tls_content.tls_file],
+      content   = vault_tls_content.content,
+      encoding  = vault_tls_content.encoding,
+      owner     = vault_tls_content.owner,
+      group     = vault_tls_content.group,
+      mode      = vault_tls_content.mode,
     }
   ]
   vault_listeners = [
@@ -109,9 +142,9 @@ locals {
                     var.vault_storage_raft_cluster_member_this
                   ])),
                   vault_storage_raft_retry_join_api_port     = var.vault_storage_raft_retry_join_api_port,
-                  vault_storage_raft_leader_ca_cert_file     = var.vault_storage_raft_leader_ca_cert_file,
-                  vault_storage_raft_leader_client_cert_file = var.vault_storage_raft_leader_client_cert_file,
-                  vault_storage_raft_leader_client_key_file  = var.vault_storage_raft_leader_client_key_file,
+                  vault_storage_raft_leader_ca_cert_file     = var.vault_tls_storage_raft_leader_ca_cert_file,
+                  vault_storage_raft_leader_client_cert_file = var.vault_tls_storage_raft_leader_client_cert_file,
+                  vault_storage_raft_leader_client_key_file  = var.vault_tls_storage_raft_leader_client_key_file,
                   vault_raft_leader_tls_servername           = var.vault_raft_leader_tls_servername,
                   vault_disable_mlock                        = var.vault_disable_mlock,
                 }),
@@ -143,6 +176,20 @@ locals {
                 write_file_owner     = vault_tls_file.owner,
                 write_file_group     = vault_tls_file.group,
                 write_file_mode      = vault_tls_file.mode,
+              }
+            }
+          ],
+          [
+            for vault_tls_content in local.vault_tls_contents :
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+              vars = {
+                write_file_directory = dirname(vault_tls_content.file_name),
+                write_file_name      = basename(vault_tls_content.file_name),
+                write_file_content   = vault_tls_content.encoding == "base64" ? base64decode(vault_tls_content.content) : vault_tls_content.content,
+                write_file_owner     = vault_tls_content.owner,
+                write_file_group     = vault_tls_content.group,
+                write_file_mode      = vault_tls_content.mode,
               }
             }
           ],

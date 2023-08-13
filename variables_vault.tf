@@ -188,20 +188,29 @@ variable "vault_storage_raft_retry_join_api_port" {
   default     = 8200
 }
 
-variable "vault_storage_raft_leader_ca_cert_file" {
-  description = "the [leader_ca_cert_file](https://www.vaultproject.io/docs/configuration/storage/raft#leader_ca_cert_file)"
+variable "vault_tls_storage_raft_leader_ca_cert_file" {
+  description = <<EOT
+    the [leader_ca_cert_file](https://www.vaultproject.io/docs/configuration/storage/raft#leader_ca_cert_file)
+    default is [vault_home_path](#input_vault_home_path)/tls/client_ca.pem (coded in terraform)
+  EOT
   type        = string
   default     = null
 }
 
-variable "vault_storage_raft_leader_client_cert_file" {
-  description = "the [leader_client_cert_file](https://www.vaultproject.io/docs/configuration/storage/raft#leader_client_cert_file)"
+variable "vault_tls_storage_raft_leader_client_cert_file" {
+  description = <<EOT
+    the [leader_client_cert_file](https://www.vaultproject.io/docs/configuration/storage/raft#leader_client_cert_file)
+    default is [vault_home_path](#input_vault_home_path)/tls/cert.pem (coded in terraform)
+  EOT
   type        = string
   default     = null
 }
 
-variable "vault_storage_raft_leader_client_key_file" {
-  description = "the [leader_client_key_file](https://www.vaultproject.io/docs/configuration/storage/raft#leader_client_key_file)"
+variable "vault_tls_storage_raft_leader_client_key_file" {
+  description = <<EOT
+    the [leader_client_key_file](https://www.vaultproject.io/docs/configuration/storage/raft#leader_client_key_file)
+    default is [vault_home_path](#input_vault_home_path)/tls/key.pem (coded in terraform)
+  EOT
   type        = string
   default     = null
 }
@@ -241,8 +250,9 @@ variable "vault_tls_client_ca_file" {
 
 variable "vault_tls_files" {
   description = <<EOT
+    DEPRECATED: use vault_tls_contents instead
     the vault tls files
-    - filename can contain the placeholders
+    filename can contain the placeholders
       - $vault_tls_cert_file
       - $vault_tls_key_file
       - $vault_tls_client_ca_file
@@ -258,4 +268,48 @@ EOT
     mode      = optional(string, "640")
   }))
   default = []
+}
+
+variable "vault_tls_contents" {
+  description = <<EOT
+    the vault tls file contents
+    tls_file has to be one of
+      - cert
+      - key
+      - client_ca
+      - storage_raft_leader_ca_cert
+      - storage_raft_leader_client_cert
+      - storage_raft_leader_client_key
+    and the corresponding terraform variable is used as file_name
+  - encoding of the content can be 'text/plain' (default) or 'base64'
+EOT
+  type = list(object({
+    tls_file = optional(string, null),
+    content  = string,
+    encoding = optional(string, "text/plain")
+    owner    = optional(string, "vault")
+    group    = optional(string, "vault")
+    mode     = optional(string, "640")
+  }))
+  default = []
+  validation {
+    condition = !contains(
+      [
+        for tls_content in var.vault_tls_contents :
+        contains(
+          [
+            "cert",
+            "key",
+            "client_ca",
+            "storage_raft_leader_ca_cert",
+            "storage_raft_leader_client_cert",
+            "storage_raft_leader_client_key"
+          ],
+          tls_content.tls_file
+        )
+      ],
+      false
+    )
+    error_message = "Supported values are cert, key, client_ca, storage_raft_leader_ca_cert, storage_raft_leader_client_cert, storage_raft_leader_client_key."
+  }
 }
