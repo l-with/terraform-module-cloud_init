@@ -142,9 +142,9 @@ locals {
                     var.vault_storage_raft_cluster_member_this
                   ])),
                   vault_storage_raft_retry_join_api_port     = var.vault_storage_raft_retry_join_api_port,
-                  vault_storage_raft_leader_ca_cert_file     = var.vault_tls_storage_raft_leader_ca_cert_file,
-                  vault_storage_raft_leader_client_cert_file = var.vault_tls_storage_raft_leader_client_cert_file,
-                  vault_storage_raft_leader_client_key_file  = var.vault_tls_storage_raft_leader_client_key_file,
+                  vault_storage_raft_leader_ca_cert_file     = local.vault_tls_storage_raft_leader_ca_cert_file,
+                  vault_storage_raft_leader_client_cert_file = local.vault_tls_storage_raft_leader_client_cert_file,
+                  vault_storage_raft_leader_client_key_file  = local.vault_tls_storage_raft_leader_client_key_file,
                   vault_raft_leader_tls_servername           = var.vault_raft_leader_tls_servername,
                   vault_disable_mlock                        = var.vault_disable_mlock,
                 }),
