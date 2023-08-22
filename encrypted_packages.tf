@@ -5,10 +5,11 @@ locals {
       {
         template = "${path.module}/templates/encrypted_packages/${local.yml_runcmd}.tpl",
         vars = {
-          url        = package.url
-          api_header = package.api_header
-          secret     = package.secret
-          post_cmd   = package.post_cmd
+          url        = package.url,
+          api_header = package.api_header,
+          secret     = package.secret,
+          name       = package.name,
+          post_cmd   = package.post_cmd,
         }
       }
     ]
