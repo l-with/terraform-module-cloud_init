@@ -5,7 +5,6 @@ locals {
   }
   vault_init_public_key_full_path      = "${var.vault_bootstrap_files_path}/vault_init_public.key"
   vault_init_json_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.enc"
-  vault_init_json_full_path            = "${var.vault_bootstrap_files_path}/vault_init.json"
   vault_init_json_enc_base64_full_path = "${local.vault_init_json_enc_full_path}.base64"
   vault_init_needed_packages = [
     "openssl",
@@ -217,11 +216,10 @@ locals {
                 vault_key_threshold                  = var.vault_key_threshold,
                 vault_bootstrap_files_path           = var.vault_bootstrap_files_path,
                 vault_init_public_key_full_path      = local.vault_init_public_key_full_path,
-                vault_init_json_full_path            = local.vault_init_json_full_path,
                 vault_init_json_enc_full_path        = local.vault_init_json_enc_full_path,
                 vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path,
                 vault_init_json_file_mode            = var.vault_init_json_file_mode,
-                vault_remove_vault_init_json         = (var.vault_remove_vault_init_json && !var.vault_croc_send_vault_init_json) ? "true" : null,
+                vault_remove_vault_init_json         = var.vault_remove_vault_init_json ? "true" : null,
               }
             },
           ],
@@ -229,26 +227,13 @@ locals {
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_croc_send.tpl",
               vars = {
-                vault_init_json_full_path            = local.vault_init_json_full_path,
                 vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path,
                 vault_croc_ports                     = join(",", var.vault_croc_ports),
                 vault_croc_port                      = var.vault_croc_ports[0],
                 vault_croc_code_phrase               = var.vault_croc_code_phrase,
-                vault_remove_vault_init_json         = var.vault_remove_vault_init_json ? "true" : null,
               }
             },
-          ],
-          !var.vault_init || !var.vault_croc_receive_vault_init_json ? [] : [
-            {
-              template = "${path.module}/templates/vault/${local.yml_runcmd}_croc_receive.tpl",
-              vars = {
-                vault_init_json_full_path            = local.vault_init_json_full_path,
-                vault_croc_code_phrase               = var.vault_croc_code_phrase,
-                vault_remove_vault_init_json         = var.vault_remove_vault_init_json ? "true" : null,
-                jsonencoded_vault_croc_receive_relay = jsonencode(var.vault_croc_receive_relay)
-              }
-            },
-          ],
+          ]
         )
       )
     },

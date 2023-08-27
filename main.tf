@@ -2,7 +2,7 @@ locals {
   parts_active = {
     b2                 = var.b2,
     certbot            = var.certbot,
-    croc               = var.croc || var.vault_croc_send_vault_init_json || var.vault_croc_receive_vault_init_json,
+    croc               = var.croc || var.vault_croc_send_vault_init_json,
     docker             = var.docker || var.docker_container || var.mailcow,
     docker_container   = var.docker_container,
     duplicacy          = var.duplicacy,
@@ -12,7 +12,6 @@ locals {
     hetzner            = var.hetzner
     jq                 = var.jq || (var.vault && var.vault_start && var.vault_init),
     gpg                = var.gpg,
-    netcat             = var.netcat || var.vault_croc_receive_vault_init_json,
     mailcow            = var.mailcow,
     lineinfile         = var.lineinfile || var.mailcow || (var.hetzner && var.hetzner_remove_fqdn_resolve),
     terraform          = var.terraform,
@@ -61,7 +60,6 @@ locals {
     mailcow            = local.mailcow,
     lineinfile         = local.lineinfile,
     lnxrouter          = local.lnxrouter,
-    netcat             = local.netcat,
     network            = local.network,
     nginx              = local.nginx,
     packages           = local.packages,
@@ -84,7 +82,6 @@ locals {
     "hetzner",
     "packages",
     "write_file",
-    "netcat",
     "network",
     "croc",
     "docker",
