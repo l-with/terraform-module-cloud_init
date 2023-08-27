@@ -120,9 +120,24 @@ variable "vault_init_public_key" {
 }
 
 variable "vault_croc_send_vault_init_json" {
-  description = "if the encoded vault init json result should be send by croc"
+  description = "if the vault init json result should be send by croc"
   type        = bool
   default     = false
+}
+
+variable "vault_croc_receive_vault_init_json" {
+  description = "if the vault init json result should be received by croc"
+  type        = bool
+  default     = false
+}
+
+variable "vault_croc_receive_relay" {
+  description = "the croc relay the encoded vault init json result should be received from"
+  type = object({
+    address = string,
+    port    = number,
+  })
+  default = null
 }
 
 variable "vault_croc_ports" {
@@ -132,7 +147,7 @@ variable "vault_croc_ports" {
 }
 
 variable "vault_croc_code_phrase" {
-  description = "the croc code-phrase to send and receive the encoded vault init json result"
+  description = "the croc code-phrase to send and receive the vault init json result"
   type        = string
   default     = null
 }

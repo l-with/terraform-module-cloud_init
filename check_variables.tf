@@ -106,13 +106,40 @@ module "vault_init_needs_vault_init_public_key" {
   error_message = "error: vault_init needs vault_init_public_key"
 }
 
-module "vault_croc_send_vault_init_json_needs_vault_croc_code_phrase" {
+module "vault_croc_send_and_receive_vault_init_json_need_vault_croc_code_phrase" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.vault_croc_send_vault_init_json && var.vault_croc_code_phrase == null)
-  error_message = "error: vault_croc_send_vault_init_json needs vault_croc_code_phrase"
+  assert        = !((var.vault_croc_send_vault_init_json || var.vault_croc_receive_vault_init_json) && var.vault_croc_code_phrase == null)
+  error_message = "error: vault_croc_send_vault_init_json and vault_croc_receive_vault_init_json need vault_croc_code_phrase"
+}
+
+module "vault_croc_send_and_receive_vault_init_json_not_together" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_croc_send_vault_init_json && var.vault_croc_receive_vault_init_json)
+  error_message = "error: vault_croc_send_vault_init_json and vault_croc_receive_vault_init_json not together"
+}
+
+module "vault_init_and_vault_croc_receive_vault_init_json_not_together" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_init && var.vault_croc_receive_vault_init_json)
+  error_message = "error: vault_init and vault_croc_receive_vault_init_json not together"
+}
+
+module "vault_croc_receive_vault_init_json_needs_vault_croc_receive_relay" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_croc_receive_vault_init_json && var.vault_croc_receive_relay == null)
+  error_message = "error: vault_croc_receive_vault_init_json needs vault_croc_receive_relay"
 }
 
 module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {
