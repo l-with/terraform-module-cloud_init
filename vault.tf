@@ -9,6 +9,7 @@ locals {
   vault_init_needed_packages = [
     "openssl",
   ]
+  vault_cluster_addr = var.vault_cluster_addr != null ? var.vault_cluster_addr : ""
   vault_tls_storage_raft_leader_ca_cert_file = (
     var.vault_tls_storage_raft_leader_ca_cert_file != null
     ? var.vault_tls_storage_raft_leader_ca_cert_file
@@ -135,7 +136,7 @@ locals {
                   vault_ui                    = var.vault_ui,
                   vault_log_level             = var.vault_log_level,
                   vault_api_addr              = var.vault_api_addr,
-                  vault_cluster_addr          = var.vault_cluster_addr,
+                  vault_cluster_addr          = local.vault_cluster_addr,
                   jsonencoded_vault_listeners = jsonencode(local.vault_listeners),
                   vault_storage_raft_path     = var.vault_storage_raft_path,
                   vault_storage_raft_node_id  = var.vault_storage_raft_node_id,

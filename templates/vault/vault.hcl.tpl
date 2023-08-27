@@ -1,7 +1,9 @@
 ui = ${vault_ui}
 log_level = "${vault_log_level}"
 api_addr = "${vault_api_addr}"
+%{ if vault_cluster_addr != "" ~}
 cluster_addr = "${vault_cluster_addr}"
+%{ endif ~}
 
 %{ for vault_listener in jsondecode(jsonencoded_vault_listeners) ~}
 listener "tcp" {
@@ -13,12 +15,13 @@ listener "tcp" {
 %{ if !vault_listener.tls_disable ~}
     tls_cert_file = "${vault_listener.tls_cert_file}"
     tls_key_file = "${vault_listener.tls_key_file}"
-%{ endif ~}%{ if vault_listener.tls_client_ca_file != null ~}
+%{ if vault_listener.tls_client_ca_file != null ~}
     tls_client_ca_file = "${vault_listener.tls_client_ca_file}"
 %{ endif ~}
+%{ endif ~}
 }
-%{ endfor ~}
 
+%{ endfor ~}
 storage "raft" {
     path    = "${vault_storage_raft_path}"
     node_id = "${vault_storage_raft_node_id}"
