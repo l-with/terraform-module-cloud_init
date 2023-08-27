@@ -9,10 +9,11 @@ locals {
     encrypted_packages = var.encrypted_packages,
     fail2ban           = var.fail2ban,
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other,
+    hetzner            = var.hetzner
     jq                 = var.jq || (var.vault && var.vault_start && var.vault_init),
     gpg                = var.gpg,
     mailcow            = var.mailcow,
-    lineinfile         = var.lineinfile || var.mailcow,
+    lineinfile         = var.lineinfile || var.mailcow || (var.hetzner && var.hetzner_remove_fqdn_resolve),
     terraform          = var.terraform,
     haproxy            = var.haproxy,
     lnxrouter          = var.lnxrouter,
@@ -53,6 +54,7 @@ locals {
     fail2ban           = local.fail2ban,
     gettext_base       = local.gettext_base,
     haproxy            = local.haproxy,
+    hetzner            = local.hetzner,
     jq                 = local.jq,
     gpg                = local.gpg,
     mailcow            = local.mailcow,
@@ -76,6 +78,8 @@ locals {
     part => merge({ write_files = tolist([]), packages = tolist([]), runcmd = tolist([]) }, local.parts_inputs[part])
   }
   parts_sorted = [
+    "lineinfile",
+    "hetzner",
     "packages",
     "write_file",
     "network",
@@ -93,7 +97,6 @@ locals {
     "s3cmd",
     "wait_until",
     "runcmd",
-    "lineinfile",
     "mailcow",
     "duplicacy",
     "haproxy",

@@ -1,0 +1,3 @@
+  - export _hostname=$(hostname)
+  - lineinfile --verbose --regexp '127.0.1.1' --line "127.0.1.1 $_hostname" '/etc/hosts'
+  - unset _hostname
