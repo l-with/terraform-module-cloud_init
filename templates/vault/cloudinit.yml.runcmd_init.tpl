@@ -12,6 +12,7 @@
   - |
     if [ "$VAULT_INITIALIZED" = "false" ]; then
       vault operator init -key-shares ${vault_key_shares} -key-threshold ${vault_key_threshold} -format=json >$VAULT_INIT_JSON
+      chmod ${vault_init_json_file_mode} $VAULT_INIT_JSON
       wait_until --verbose --delay 10 --retries 42 \
         --check 'grep true' 'vault status -format=json | jq .initialized'
       i=0
@@ -26,7 +27,9 @@
       export VAULT_TOKEN=$(cat $VAULT_INIT_JSON | jq .root_token --raw-output)
       vault token revoke $VAULT_TOKEN
       openssl pkeyutl -encrypt -pubin -inkey ${vault_init_public_key_full_path} -in $VAULT_INIT_JSON -out ${vault_init_json_enc_full_path}
+      chmod ${vault_init_json_file_mode} ${vault_init_json_enc_full_path}
       base64 ${vault_init_json_enc_full_path} >${vault_init_json_enc_base64_full_path}
+      chmod ${vault_init_json_file_mode} ${vault_init_json_enc_base64_full_path}
       rm --force $VAULT_INIT_JSON.tgz%{if vault_remove_vault_init_json != null}
       rm --force $VAULT_INIT_JSON%{ endif }
     fi

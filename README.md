@@ -384,6 +384,7 @@ No resources.
 | <a name="input_vault_home_path"></a> [vault\_home\_path](#input\_vault\_home\_path) | the home of the vault specific files and folders | `string` | `"/srv/vault"` | no |
 | <a name="input_vault_init"></a> [vault\_init](#input\_vault\_init) | if vault should be initialized | `bool` | `true` | no |
 | <a name="input_vault_init_addr"></a> [vault\_init\_addr](#input\_vault\_init\_addr) | the vault address used for `vault init` during cloud init | `string` | `null` | no |
+| <a name="input_vault_init_json_file_mode"></a> [vault\_init\_json\_file\_mode](#input\_vault\_init\_json\_file\_mode) | the file mode for the vault init json result files | `string` | `"640"` | no |
 | <a name="input_vault_init_public_key"></a> [vault\_init\_public\_key](#input\_vault\_init\_public\_key) | the public RSA key the output of the vault initialization is encoded with (to be decryptable by the corresponding private key with [rsadecrypt](https://developer.hashicorp.com/terraform/language/functions/rsadecrypt) | `string` | `null` | no |
 | <a name="input_vault_install_method"></a> [vault\_install\_method](#input\_vault\_install\_method) | the install method, supported methods are 'apt', 'binary'<br>  - 'binary' uses vault\_version | `string` | `"apt"` | no |
 | <a name="input_vault_key_shares"></a> [vault\_key\_shares](#input\_vault\_key\_shares) | the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares) | `number` | `1` | no |

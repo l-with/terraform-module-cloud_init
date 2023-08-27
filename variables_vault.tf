@@ -128,6 +128,12 @@ variable "vault_remove_vault_init_json" {
   default     = true
 }
 
+variable "vault_init_json_file_mode" {
+  description = "the file mode for the vault init json result files"
+  type        = string
+  default     = "640"
+}
+
 variable "vault_key_shares" {
   description = "the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares)"
   type        = number

@@ -11,5 +11,6 @@ output "vault" {
     vault_key_threshold                  = var.vault_key_threshold
     vault_init_json_enc_full_path        = local.vault_init_json_enc_full_path,
     vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path,
+    vault_init_json_file_mode            = var.vault_init_json_file_mode,
   }
 }
