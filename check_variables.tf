@@ -106,6 +106,15 @@ module "vault_init_needs_vault_init_public_key" {
   error_message = "error: vault_init needs vault_init_public_key"
 }
 
+module "vault_croc_send_vault_init_json_needs_vault_croc_code_phrase" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_croc_send_vault_init_json && var.vault_croc_code_phrase == null)
+  error_message = "error: vault_croc_send_vault_init_json needs vault_croc_code_phrase"
+}
+
 module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"

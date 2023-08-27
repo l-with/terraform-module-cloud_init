@@ -119,6 +119,24 @@ variable "vault_init_public_key" {
   default     = null
 }
 
+variable "vault_croc_send_vault_init_json" {
+  description = "if the encoded vault init json result should be send by croc"
+  type        = bool
+  default     = false
+}
+
+variable "vault_croc_ports" {
+  description = "the ports for the croc relay"
+  type        = list(number)
+  default     = [9009, 9010]
+}
+
+variable "vault_croc_code_phrase" {
+  description = "the croc code-phrase to send and receive the encoded vault init json result"
+  type        = string
+  default     = null
+}
+
 variable "vault_remove_vault_init_json" {
   description = <<EOT
     if the output of the vault initialization should removed

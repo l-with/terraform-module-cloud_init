@@ -223,6 +223,17 @@ locals {
               }
             },
           ],
+          !var.vault_init || !var.vault_croc_send_vault_init_json ? [] : [
+            {
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_croc_send.tpl",
+              vars = {
+                vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path,
+                vault_croc_ports                     = join(",", var.vault_croc_ports),
+                vault_croc_port                      = var.vault_croc_ports[0],
+                vault_croc_code_phrase               = var.vault_croc_code_phrase,
+              }
+            },
+          ]
         )
       )
     },

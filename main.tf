@@ -2,7 +2,7 @@ locals {
   parts_active = {
     b2                 = var.b2,
     certbot            = var.certbot,
-    croc               = var.croc,
+    croc               = var.croc || var.vault_croc_send_vault_init_json,
     docker             = var.docker || var.docker_container || var.mailcow,
     docker_container   = var.docker_container,
     duplicacy          = var.duplicacy,
