@@ -10,26 +10,34 @@ locals {
     fail2ban           = var.fail2ban,
     gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other,
     hetzner            = var.hetzner
-    jq                 = var.jq || (var.vault && var.vault_start && var.vault_init),
-    gpg                = var.gpg,
-    netcat             = var.netcat,
-    mailcow            = var.mailcow,
-    lineinfile         = var.lineinfile || var.mailcow || (var.hetzner && var.hetzner_remove_fqdn_resolve),
-    terraform          = var.terraform,
-    haproxy            = var.haproxy,
-    lnxrouter          = var.lnxrouter,
-    network            = var.network,
-    nginx              = var.nginx,
-    packages           = var.packages != []
-    python3_pip        = var.python3_pip || var.s3cmd,
-    rke2_node_1st      = var.rke2 && var.rke2_node_1st,
-    rke2_node_other    = var.rke2 && var.rke2_node_other,
-    runcmd             = var.runcmd,
-    s3cmd              = var.s3cmd,
-    vault              = var.vault || var.rke2_node_1st,
+    jq = (
+      var.jq || (
+        var.vault && var.vault_start && (
+          var.vault_init || var.vault_unseal || var.vault_revoke_root_token
+        )
+    )),
+    gpg             = var.gpg,
+    netcat          = var.netcat,
+    mailcow         = var.mailcow,
+    lineinfile      = var.lineinfile || var.mailcow || (var.hetzner && var.hetzner_remove_fqdn_resolve),
+    terraform       = var.terraform,
+    haproxy         = var.haproxy,
+    lnxrouter       = var.lnxrouter,
+    network         = var.network,
+    nginx           = var.nginx,
+    packages        = var.packages != []
+    python3_pip     = var.python3_pip || var.s3cmd,
+    rke2_node_1st   = var.rke2 && var.rke2_node_1st,
+    rke2_node_other = var.rke2 && var.rke2_node_other,
+    runcmd          = var.runcmd,
+    s3cmd           = var.s3cmd,
+    vault           = var.vault || var.rke2_node_1st,
     wait_until = (
-      var.wait_until || var.mailcow || var.rke2_node_1st
-      || (var.vault && var.vault_start && (var.vault_init || var.vault_unseal))
+      var.wait_until || var.mailcow || var.rke2_node_1st || (
+        var.vault && var.vault_start && (
+          var.vault_init || var.vault_unseal || var.vault_spread_vault_init_json
+        )
+      )
     ),
     write_file = var.write_file
   }
