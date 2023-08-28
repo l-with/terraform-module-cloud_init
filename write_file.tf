@@ -1,6 +1,6 @@
 locals {
   write_file = {
-    runcmd = [
+    runcmd = !local.parts_active.write_file ? [] : [
       for index, file in var.write_files :
       {
         template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
