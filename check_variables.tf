@@ -93,7 +93,7 @@ module "vault_init_needs_vault_init_addr" {
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.vault && var.vault_start && var.vault_init && var.vault_init_addr == null)
+  assert        = !(var.vault && var.vault_start && var.vault_init && var.vault_local_addr == null)
   error_message = "error: vault_init needs vault_init_addr"
 }
 
@@ -106,40 +106,22 @@ module "vault_init_needs_vault_init_public_key" {
   error_message = "error: vault_init needs vault_init_public_key"
 }
 
-module "vault_croc_send_and_receive_vault_init_json_need_vault_croc_code_phrase" {
+module "vault_spread_vault_init_json_needs_vault_spread_vault_init_json_id_file" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !((var.vault_croc_send_vault_init_json || var.vault_croc_receive_vault_init_json) && var.vault_croc_code_phrase == null)
-  error_message = "error: vault_croc_send_vault_init_json and vault_croc_receive_vault_init_json need vault_croc_code_phrase"
+  assert        = !(var.vault_spread_vault_init_json && var.vault_spread_vault_init_json_id_file == null)
+  error_message = "error: vault_spread_vault_init_json needs vault_spread_vault_init_json_id_file"
 }
 
-module "vault_croc_send_and_receive_vault_init_json_not_together" {
+module "vault_spread_vault_init_json_and_vault_receive_vault_init_json_not_together" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
   use_jq        = true
-  assert        = !(var.vault_croc_send_vault_init_json && var.vault_croc_receive_vault_init_json)
-  error_message = "error: vault_croc_send_vault_init_json and vault_croc_receive_vault_init_json not together"
-}
-
-module "vault_init_and_vault_croc_receive_vault_init_json_not_together" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
-
-  use_jq        = true
-  assert        = !(var.vault_init && var.vault_croc_receive_vault_init_json)
-  error_message = "error: vault_init and vault_croc_receive_vault_init_json not together"
-}
-
-module "vault_croc_receive_vault_init_json_needs_vault_croc_receive_relay" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
-
-  use_jq        = true
-  assert        = !(var.vault_croc_receive_vault_init_json && var.vault_croc_receive_relay == null)
-  error_message = "error: vault_croc_receive_vault_init_json needs vault_croc_receive_relay"
+  assert        = !(var.vault_spread_vault_init_json && var.vault_receive_vault_init_json)
+  error_message = "error: vault_spread_vault_init_json and vault_receive_vault_init_json not together"
 }
 
 module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {

@@ -101,10 +101,16 @@ variable "vault_init" {
   default     = true
 }
 
-variable "vault_init_addr" {
-  description = "the vault address used for `vault init` during cloud init"
+variable "vault_local_addr" {
+  description = "the vault address used for vault init, vault operator init, vault operator unseal and vault token revoke during cloud init"
   type        = string
   default     = null
+}
+
+variable "vault_unseal" {
+  description = "if vault should be unsealed"
+  type        = bool
+  default     = false
 }
 
 variable "vault_bootstrap_files_path" {
@@ -119,37 +125,22 @@ variable "vault_init_public_key" {
   default     = null
 }
 
-variable "vault_croc_send_vault_init_json" {
-  description = "if the vault init json result should be send by croc"
+variable "vault_spread_vault_init_json" {
+  description = "if the vault init json result should be spread to the cluster"
   type        = bool
   default     = false
 }
 
-variable "vault_croc_receive_vault_init_json" {
-  description = "if the vault init json result should be received by croc"
-  type        = bool
-  default     = false
-}
-
-variable "vault_croc_receive_relay" {
-  description = "the croc relay the encoded vault init json result should be received from"
-  type = object({
-    address = string,
-    port    = number,
-  })
-  default = null
-}
-
-variable "vault_croc_ports" {
-  description = "the ports for the croc relay"
-  type        = list(number)
-  default     = [9009, 9010]
-}
-
-variable "vault_croc_code_phrase" {
-  description = "the croc code-phrase to send and receive the vault init json result"
+variable "vault_spread_vault_init_json_id_file" {
+  description = "the ssh id file used for spreading the vault init json result to the cluster"
   type        = string
   default     = null
+}
+
+variable "vault_receive_vault_init_json" {
+  description = "if the vault init json result should be received"
+  type        = bool
+  default     = false
 }
 
 variable "vault_remove_vault_init_json" {

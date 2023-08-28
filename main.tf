@@ -2,7 +2,7 @@ locals {
   parts_active = {
     b2                 = var.b2,
     certbot            = var.certbot,
-    croc               = var.croc || var.vault_croc_send_vault_init_json || var.vault_croc_receive_vault_init_json,
+    croc               = var.croc,
     docker             = var.docker || var.docker_container || var.mailcow,
     docker_container   = var.docker_container,
     duplicacy          = var.duplicacy,
@@ -12,7 +12,7 @@ locals {
     hetzner            = var.hetzner
     jq                 = var.jq || (var.vault && var.vault_start && var.vault_init),
     gpg                = var.gpg,
-    netcat             = var.netcat || var.vault_croc_receive_vault_init_json,
+    netcat             = var.netcat,
     mailcow            = var.mailcow,
     lineinfile         = var.lineinfile || var.mailcow || (var.hetzner && var.hetzner_remove_fqdn_resolve),
     terraform          = var.terraform,
@@ -27,8 +27,11 @@ locals {
     runcmd             = var.runcmd,
     s3cmd              = var.s3cmd,
     vault              = var.vault || var.rke2_node_1st,
-    wait_until         = var.wait_until || var.mailcow || var.rke2_node_1st || (var.vault && var.vault_start && var.vault_init),
-    write_file         = var.write_file
+    wait_until = (
+      var.wait_until || var.mailcow || var.rke2_node_1st
+      || (var.vault && var.vault_start && (var.vault_init || var.vault_unseal))
+    ),
+    write_file = var.write_file
   }
 }
 
