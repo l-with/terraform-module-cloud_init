@@ -245,8 +245,9 @@ locals {
                 jsonencoded_vault_storage_raft_cluster_members = jsonencode(setsubtract(var.vault_storage_raft_cluster_members, [
                   var.vault_storage_raft_cluster_member_this
                 ])),
-                vault_spread_vault_init_json_id_file = var.vault_spread_vault_init_json_id_file,
-                vault_init_json_full_path            = local.vault_init_json_full_path,
+                vault_spread_vault_init_json_id_file        = var.vault_spread_vault_init_json_id_file,
+                vault_init_json_full_path                   = local.vault_init_json_full_path,
+                vault_remove_spread_vault_init_json_id_file = var.vault_remove_spread_vault_init_json_id_file,
               }
             },
           ],
