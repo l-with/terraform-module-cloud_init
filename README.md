@@ -141,6 +141,12 @@ s. [lineinfile](https://github.com/l-with/lineinfile)
 
 For input variables: s. [lineinfile](#input_lineinfile).
 
+### netcat
+
+s. [netcat](https://sectools.org/tool/netcat/)
+
+For input variables: s. [netcat](#input_netcat).
+
 ### network
 
 for network configurations
@@ -253,7 +259,10 @@ No providers.
 | <a name="module_rke2_node_needs_rke2_node_pre_shared_secret"></a> [rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret](#module\_rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_needs_rke2_node_rke2_node_cert_package_secret"></a> [rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret](#module\_rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
-| <a name="module_vault_croc_send_vault_init_json_needs_vault_croc_code_phrase"></a> [vault\_croc\_send\_vault\_init\_json\_needs\_vault\_croc\_code\_phrase](#module\_vault\_croc\_send\_vault\_init\_json\_needs\_vault\_croc\_code\_phrase) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_vault_croc_receive_vault_init_json_needs_vault_croc_receive_relay"></a> [vault\_croc\_receive\_vault\_init\_json\_needs\_vault\_croc\_receive\_relay](#module\_vault\_croc\_receive\_vault\_init\_json\_needs\_vault\_croc\_receive\_relay) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_vault_croc_send_and_receive_vault_init_json_need_vault_croc_code_phrase"></a> [vault\_croc\_send\_and\_receive\_vault\_init\_json\_need\_vault\_croc\_code\_phrase](#module\_vault\_croc\_send\_and\_receive\_vault\_init\_json\_need\_vault\_croc\_code\_phrase) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_vault_croc_send_and_receive_vault_init_json_not_together"></a> [vault\_croc\_send\_and\_receive\_vault\_init\_json\_not\_together](#module\_vault\_croc\_send\_and\_receive\_vault\_init\_json\_not\_together) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_vault_init_and_vault_croc_receive_vault_init_json_not_together"></a> [vault\_init\_and\_vault\_croc\_receive\_vault\_init\_json\_not\_together](#module\_vault\_init\_and\_vault\_croc\_receive\_vault\_init\_json\_not\_together) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_jq_install_method_binary"></a> [vault\_init\_needs\_jq\_install\_method\_binary](#module\_vault\_init\_needs\_jq\_install\_method\_binary) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_vault_init_addr"></a> [vault\_init\_needs\_vault\_init\_addr](#module\_vault\_init\_needs\_vault\_init\_addr) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_vault_init_public_key"></a> [vault\_init\_needs\_vault\_init\_public\_key](#module\_vault\_init\_needs\_vault\_init\_public\_key) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
@@ -336,6 +345,7 @@ No resources.
 | <a name="input_mailcow_submission_port"></a> [mailcow\_submission\_port](#input\_mailcow\_submission\_port) | the [postfix submission](https://docs.mailcow.email/prerequisite/prerequisite-system/?h=submission#default-ports) port (SUBMISSION\_PORT in mailcow.conf) | `number` | `null` | no |
 | <a name="input_mailcow_timezone"></a> [mailcow\_timezone](#input\_mailcow\_timezone) | the time zone value for mailcow (`MAILCOW_TZ`) | `string` | `"Europe/Berlin"` | no |
 | <a name="input_mailcow_version"></a> [mailcow\_version](#input\_mailcow\_version) | the [version](https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec) to checkout<br>    default is [mailcow\_branch](#input\_mailcow\_branch) (coded in terraform) | `string` | `null` | no |
+| <a name="input_netcat"></a> [netcat](#input\_netcat) | if cloud-init user data for installing netcat should be generated | `bool` | `false` | no |
 | <a name="input_network"></a> [network](#input\_network) | if the network should be configured | `bool` | `false` | no |
 | <a name="input_network_dispatcher_script_path"></a> [network\_dispatcher\_script\_path](#input\_network\_dispatcher\_script\_path) | the path where network dispatcher scripts should placed | `string` | `"/etc/network-dispatcher"` | no |
 | <a name="input_network_dispatcher_scripts"></a> [network\_dispatcher\_scripts](#input\_network\_dispatcher\_scripts) | the network dispatcher scripts to be placed at network\_dispatcher\_script\_path and executed<br>    the string '$public\_interface' can be used as placeholder for the device for internet access<br>    (ip route get 8.8.8.8 \| grep 8.8.8.8 \| cut -d ' ' -f 5) | <pre>list(object({<br>    script_file_name    = string,<br>    script_file_content = string,<br>  }))</pre> | `[]` | no |
@@ -381,9 +391,11 @@ No resources.
 | <a name="input_vault_bootstrap_files_path"></a> [vault\_bootstrap\_files\_path](#input\_vault\_bootstrap\_files\_path) | the path where the files needed for bootstrapping are saved | `string` | `"/root"` | no |
 | <a name="input_vault_cluster_addr"></a> [vault\_cluster\_addr](#input\_vault\_cluster\_addr) | the [cluster\_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address<br>    (ip addr show \| grep 'inet ' \| grep 'scope global' \| cut -d ' ' -f6 \| cut -d '/' -f 1) | `string` | `null` | no |
 | <a name="input_vault_config_path"></a> [vault\_config\_path](#input\_vault\_config\_path) | the path for the vault configuration files | `string` | `"/etc/vault.d"` | no |
-| <a name="input_vault_croc_code_phrase"></a> [vault\_croc\_code\_phrase](#input\_vault\_croc\_code\_phrase) | the croc code-phrase to send and receive the encoded vault init json result | `string` | `null` | no |
+| <a name="input_vault_croc_code_phrase"></a> [vault\_croc\_code\_phrase](#input\_vault\_croc\_code\_phrase) | the croc code-phrase to send and receive the vault init json result | `string` | `null` | no |
 | <a name="input_vault_croc_ports"></a> [vault\_croc\_ports](#input\_vault\_croc\_ports) | the ports for the croc relay | `list(number)` | <pre>[<br>  9009,<br>  9010<br>]</pre> | no |
-| <a name="input_vault_croc_send_vault_init_json"></a> [vault\_croc\_send\_vault\_init\_json](#input\_vault\_croc\_send\_vault\_init\_json) | if the encoded vault init json result should be send by croc | `bool` | `false` | no |
+| <a name="input_vault_croc_receive_relay"></a> [vault\_croc\_receive\_relay](#input\_vault\_croc\_receive\_relay) | the croc relay the encoded vault init json result should be received from | <pre>object({<br>    address = string,<br>    port    = number,<br>  })</pre> | `null` | no |
+| <a name="input_vault_croc_receive_vault_init_json"></a> [vault\_croc\_receive\_vault\_init\_json](#input\_vault\_croc\_receive\_vault\_init\_json) | if the vault init json result should be received by croc | `bool` | `false` | no |
+| <a name="input_vault_croc_send_vault_init_json"></a> [vault\_croc\_send\_vault\_init\_json](#input\_vault\_croc\_send\_vault\_init\_json) | if the vault init json result should be send by croc | `bool` | `false` | no |
 | <a name="input_vault_disable_mlock"></a> [vault\_disable\_mlock](#input\_vault\_disable\_mlock) | the value for [disable\_mlock](https://www.vaultproject.io/docs/configuration#disable_mlock) | `bool` | `true` | no |
 | <a name="input_vault_home_path"></a> [vault\_home\_path](#input\_vault\_home\_path) | the home of the vault specific files and folders | `string` | `"/srv/vault"` | no |
 | <a name="input_vault_init"></a> [vault\_init](#input\_vault\_init) | if vault should be initialized | `bool` | `true` | no |
