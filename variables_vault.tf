@@ -101,6 +101,12 @@ variable "vault_init" {
   default     = true
 }
 
+variable "vault_revoke_root_token" {
+  description = "if the initial root token should be revoked"
+  type        = bool
+  default     = true
+}
+
 variable "vault_local_addr" {
   description = "the vault address used for vault init, vault operator init, vault operator unseal and vault token revoke during cloud init"
   type        = string

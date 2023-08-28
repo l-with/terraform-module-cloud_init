@@ -250,7 +250,7 @@ locals {
               }
             },
           ],
-          !var.vault_init ? [] : [
+          !(var.vault_init && var.vault_revoke_root_token) ? [] : [
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_revoke_root.tpl",
               vars = {
