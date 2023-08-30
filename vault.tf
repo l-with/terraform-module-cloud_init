@@ -10,6 +10,16 @@ locals {
   vault_init_needed_packages = [
     "openssl",
   ]
+  vault_init_with_pgp_keys = (var.vault_init_pgp_public_keys == null ? false : var.vault_init_pgp_public_keys.encrypt_unseal_key_with_pgp_public_keys)
+  vault_pgp_pub_keys = var.vault_init_pgp_public_keys == null ? [] : [
+    for i in range(var.vault_init_pgp_public_keys.num_internal_unseal_keys) :
+    "${var.vault_bootstrap_files_path}/vault${i}.pub"
+  ]
+  vault_pgp_priv_keys = var.vault_init_pgp_public_keys == null ? [] : [
+    for i in range(var.vault_init_pgp_public_keys.num_internal_unseal_keys) :
+    "${var.vault_bootstrap_files_path}/vault${i}"
+  ]
+
   vault_cluster_addr = var.vault_cluster_addr != null ? var.vault_cluster_addr : ""
   vault_tls_storage_raft_leader_ca_cert_file = (
     var.vault_tls_storage_raft_leader_ca_cert_file != null
@@ -209,6 +219,33 @@ locals {
                 packages = join(" ", local.vault_init_needed_packages),
               }
             },
+          ],
+          !(var.vault_init && local.vault_init_with_pgp_keys) ? [] : [
+            for i in range(var.vault_init_pgp_public_keys.num_internal_unseal_keys) :
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+              vars = {
+                write_file_directory = var.vault_bootstrap_files_path,
+                write_file_name      = "vault_gpg_key${i}.conf",
+                write_file_content = templatefile("${path.module}/templates/vault/gpg_key.conf.tpl", {
+                  vault_gpg_key_name = "vault${i}",
+                }),
+                write_file_owner = "root"
+                write_file_group = "root"
+                write_file_mode  = "0644",
+              }
+            }
+          ],
+          !(var.vault_init && local.vault_init_with_pgp_keys) ? [] : [
+            {
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_generate_pgp_public_keys.tpl",
+              vars = {
+                vault_bootstrap_files_path     = var.vault_bootstrap_files_path,
+                vault_num_internal_unseal_keys = var.vault_init_pgp_public_keys.num_internal_unseal_keys,
+              }
+            }
+          ],
+          !var.vault_init ? [] : [
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_init.tpl",
               vars = {
@@ -217,6 +254,8 @@ locals {
                 vault_key_threshold       = var.vault_key_threshold,
                 vault_init_json_full_path = local.vault_init_json_full_path,
                 vault_init_json_file_mode = var.vault_init_json_file_mode,
+                vault_init_with_pgp_keys  = local.vault_init_with_pgp_keys,
+                vault_pgp_pub_keys        = join(",", local.vault_pgp_pub_keys),
               }
             },
           ],
@@ -224,7 +263,10 @@ locals {
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_receive_init.tpl",
               vars = {
-                vault_init_json_full_path = local.vault_init_json_full_path,
+                vault_init_json_full_path       = local.vault_init_json_full_path,
+                vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
+                jsonencoded_vault_pgp_pub_keys  = jsonencode(local.vault_pgp_pub_keys)
+                jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys)
               }
             },
           ],
@@ -235,6 +277,7 @@ locals {
                 vault_local_addr          = var.vault_local_addr,
                 vault_key_threshold       = var.vault_key_threshold,
                 vault_init_json_full_path = local.vault_init_json_full_path,
+                vault_init_with_pgp_keys  = local.vault_init_with_pgp_keys,
               }
             },
           ],
@@ -248,6 +291,10 @@ locals {
                 vault_spread_vault_init_json_id_file        = var.vault_spread_vault_init_json_id_file,
                 vault_init_json_full_path                   = local.vault_init_json_full_path,
                 vault_remove_spread_vault_init_json_id_file = var.vault_remove_spread_vault_init_json_id_file,
+                vault_init_with_pgp_keys                    = local.vault_init_with_pgp_keys,
+                vault_bootstrap_files_path                  = var.vault_bootstrap_files_path,
+                vault_pgp_pub_keys                          = join(" ", local.vault_pgp_pub_keys),
+                vault_pgp_priv_keys                         = join(" ", local.vault_pgp_priv_keys),
               }
             },
           ],

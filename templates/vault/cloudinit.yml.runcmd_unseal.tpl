@@ -4,7 +4,7 @@
   - export VAULT_ADDR=${vault_local_addr}
   - >
     i=0; while [ $i -lt ${vault_key_threshold} ]; do
-      export VAULT_UNSEAL_KEY=$(cat ${vault_init_json_full_path} | jq .unseal_keys_b64[$i] --raw-output)
+      export VAULT_UNSEAL_KEY=$(cat ${vault_init_json_full_path} | jq .unseal_keys_b64[$i] --raw-output%{ if vault_init_with_pgp_keys } | base64 -d |  gpg --decrypt%{ endif ~})
       vault operator unseal $VAULT_UNSEAL_KEY
       i=$((i+1))
     done
