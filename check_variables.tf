@@ -133,6 +133,15 @@ module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {
   error_message = "error: vault_key_threshold <= vault_key_shares"
 }
 
+module "vault_vault_init_pgp_public_keys_num_internal_unseal_keys_less_than_or_equal_vault_key_shares" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.vault_init_pgp_public_keys != null && var.vault_init_pgp_public_keys.num_internal_unseal_keys > var.vault_key_shares)
+  error_message = "error: vault_vault_init_pgp_public_keys.num_internal_unseal_keys > vault_key_shares"
+}
+
 module "vault_init_needs_jq_install_method_binary" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"

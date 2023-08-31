@@ -4,19 +4,21 @@ locals {
     binary = "/usr/local/bin"
   }
   vault_init_public_key_full_path      = "${var.vault_bootstrap_files_path}/vault_init_public.key"
-  vault_init_json_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.enc"
+  vault_init_json_pub_full_path        = "${var.vault_bootstrap_files_path}/vault_init_pub.json"
+  vault_init_json_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.tgz.enc"
   vault_init_json_full_path            = "${var.vault_bootstrap_files_path}/vault_init.json"
   vault_init_json_enc_base64_full_path = "${local.vault_init_json_enc_full_path}.base64"
   vault_init_needed_packages = [
     "openssl",
   ]
-  vault_init_with_pgp_keys = (var.vault_init_pgp_public_keys == null ? false : var.vault_init_pgp_public_keys.encrypt_unseal_key_with_pgp_public_keys)
-  vault_pgp_pub_keys = var.vault_init_pgp_public_keys == null ? [] : [
-    for i in range(var.vault_init_pgp_public_keys.num_internal_unseal_keys) :
+  vault_init_with_pgp_keys       = (var.vault_init_pgp_public_keys == null ? false : true)
+  vault_num_internal_unseal_keys = var.vault_init_pgp_public_keys == null ? 0 : var.vault_init_pgp_public_keys.num_internal_unseal_keys
+  vault_pgp_pub_keys = [
+    for i in range(local.vault_num_internal_unseal_keys) :
     "${var.vault_bootstrap_files_path}/vault${i}.pub"
   ]
-  vault_pgp_priv_keys = var.vault_init_pgp_public_keys == null ? [] : [
-    for i in range(var.vault_init_pgp_public_keys.num_internal_unseal_keys) :
+  vault_pgp_priv_keys = [
+    for i in range(local.vault_num_internal_unseal_keys) :
     "${var.vault_bootstrap_files_path}/vault${i}"
   ]
 
@@ -257,7 +259,7 @@ locals {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_generate_pgp_keys.tpl",
               vars = {
                 vault_bootstrap_files_path     = var.vault_bootstrap_files_path,
-                vault_num_internal_unseal_keys = var.vault_init_pgp_public_keys.num_internal_unseal_keys,
+                vault_num_internal_unseal_keys = local.vault_num_internal_unseal_keys
               }
             }
           ],
@@ -265,13 +267,16 @@ locals {
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_init.tpl",
               vars = {
-                vault_local_addr          = var.vault_local_addr,
-                vault_key_shares          = var.vault_key_shares,
-                vault_key_threshold       = var.vault_key_threshold,
-                vault_init_json_full_path = local.vault_init_json_full_path,
-                vault_init_json_file_mode = var.vault_init_json_file_mode,
-                vault_init_with_pgp_keys  = local.vault_init_with_pgp_keys,
-                vault_pgp_pub_keys        = join(",", local.vault_pgp_pub_keys),
+                vault_local_addr                = var.vault_local_addr,
+                vault_key_shares                = var.vault_key_shares,
+                vault_key_threshold             = var.vault_key_threshold,
+                vault_init_json_full_path       = local.vault_init_json_full_path,
+                vault_init_json_pub_full_path   = local.vault_init_json_pub_full_path,
+                vault_init_json_file_mode       = var.vault_init_json_file_mode,
+                vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
+                vault_num_internal_unseal_keys  = local.vault_num_internal_unseal_keys
+                vault_pgp_pub_keys              = join(",", local.vault_pgp_pub_keys),
+                jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys)
               }
             },
           ],

@@ -107,8 +107,7 @@ variable "vault_init_pgp_public_keys" {
     note: the number of pgp_public_keys plus num_internal_unseal_keys has to match vault_key_shares
   EOT
   type = object({
-    encrypt_unseal_key_with_pgp_public_keys = optional(bool, true),
-    num_internal_unseal_keys                = optional(number, 1),
+    num_internal_unseal_keys = optional(number, 1),
     pgp_external_public_keys = optional(list(object({
       content  = string,
       encoding = optional(string, "text/plain"),
