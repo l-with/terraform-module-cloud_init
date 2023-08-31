@@ -1,5 +1,5 @@
 locals {
-  comment = ["# ${var.part}"]
+  comment = ["## ${var.part}"]
 
   write_files = length(var.write_files) == 0 ? "" : join(
     "\n",

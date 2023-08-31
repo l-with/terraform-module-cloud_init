@@ -178,6 +178,14 @@ locals {
               vars     = {}
             },
           ],
+          length(local.vault_tls_files) == 0 ? [] : [
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
+              vars = {
+                runcmd_script = "  # tls files"
+              }
+            }
+          ],
           [
             for vault_tls_file in local.vault_tls_files :
             {
@@ -189,6 +197,14 @@ locals {
                 write_file_owner     = vault_tls_file.owner,
                 write_file_group     = vault_tls_file.group,
                 write_file_mode      = vault_tls_file.mode,
+              }
+            }
+          ],
+          length(local.vault_tls_contents) == 0 ? [] : [
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
+              vars = {
+                runcmd_script = "  # tls files"
               }
             }
           ],
@@ -238,7 +254,7 @@ locals {
           ],
           !(var.vault_init && local.vault_init_with_pgp_keys) ? [] : [
             {
-              template = "${path.module}/templates/vault/${local.yml_runcmd}_generate_pgp_public_keys.tpl",
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_generate_pgp_keys.tpl",
               vars = {
                 vault_bootstrap_files_path     = var.vault_bootstrap_files_path,
                 vault_num_internal_unseal_keys = var.vault_init_pgp_public_keys.num_internal_unseal_keys,

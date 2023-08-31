@@ -1,3 +1,4 @@
+  # service
   - systemctl daemon-reload
   - systemctl enable vault
   - systemctl start vault

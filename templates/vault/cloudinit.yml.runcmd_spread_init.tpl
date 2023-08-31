@@ -1,3 +1,4 @@
+  # spread init
 %{ for vault_instance in jsondecode(jsonencoded_vault_storage_raft_cluster_members) ~}
   - >
     wait_until --verbose --delay 10 --retries 42 \
