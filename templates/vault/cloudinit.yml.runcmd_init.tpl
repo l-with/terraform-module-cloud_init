@@ -9,7 +9,9 @@
   - cat ${vault_init_json_full_path} | jq 'del(.root_token)' >${vault_init_json_pub_full_path}
   - >
     i=0; while [ $i -lt ${vault_key_shares} ]; do
-      if [ $i -lt ${vault_num_internal_unseal_keys} ]; then
+      if [ $i -ge ${vault_num_internal_unseal_keys} ]; then
+        break;
+      fi;
       export VAULT_UNSEAL_KEY=$(cat ${vault_init_json_full_path} | jq .unseal_keys_b64[$i] --raw-output | base64 -d |  gpg --decrypt | base64);
       cat ${vault_init_json_full_path} | jq '.unseal_keys_b64[$i] = env.VAULT_UNSEAL_KEY' >${vault_init_json_full_path}.$i;
       mv ${vault_init_json_full_path}.$i ${vault_init_json_full_path};
