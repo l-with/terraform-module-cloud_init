@@ -275,7 +275,7 @@ locals {
                 vault_init_json_file_mode       = var.vault_init_json_file_mode,
                 vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
                 vault_num_internal_unseal_keys  = local.vault_num_internal_unseal_keys
-                vault_pgp_pub_keys              = join(",", slice(local.vault_pgp_pub_keys, 0, var.vault_key_threshold)),
+                vault_pgp_pub_keys              = join(",", local.vault_pgp_pub_keys),
                 jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys)
               }
             },
