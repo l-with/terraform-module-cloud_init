@@ -5,7 +5,7 @@ locals {
   }
   vault_init_public_key_full_path      = "${var.vault_bootstrap_files_path}/vault_init_public.key"
   vault_init_json_pub_full_path        = "${var.vault_bootstrap_files_path}/vault_init_pub.json"
-  vault_init_json_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.tgz.enc"
+  vault_init_json_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.enc"
   vault_init_json_full_path            = "${var.vault_bootstrap_files_path}/vault_init.json"
   vault_init_json_enc_base64_full_path = "${local.vault_init_json_enc_full_path}.base64"
   vault_init_needed_packages = [
