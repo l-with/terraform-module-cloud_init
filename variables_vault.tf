@@ -101,6 +101,18 @@ variable "vault_init" {
   default     = true
 }
 
+variable "vault_key_shares" {
+  description = "the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares)"
+  type        = number
+  default     = 1
+}
+
+variable "vault_key_threshold" {
+  description = "the number of key shares required to reconstruct the root key (s. https://developer.hashicorp.com/vault/docs/commands/operator/init#key-threshold)"
+  type        = number
+  default     = 1
+}
+
 variable "vault_init_pgp_public_keys" {
   description = <<EOT
     the definition of the usage of pgp keys for vault init
@@ -183,18 +195,6 @@ variable "vault_init_json_file_mode" {
   description = "the file mode for the vault init json result files"
   type        = string
   default     = "640"
-}
-
-variable "vault_key_shares" {
-  description = "the number of [key shares](https://developer.hashicorp.com/vault/docs/commands/operator/init#key-shares)"
-  type        = number
-  default     = 1
-}
-
-variable "vault_key_threshold" {
-  description = "the number of key shares required to reconstruct the root key (s. https://developer.hashicorp.com/vault/docs/commands/operator/init#key-threshold)"
-  type        = number
-  default     = 1
 }
 
 variable "vault_disable_mlock" {
