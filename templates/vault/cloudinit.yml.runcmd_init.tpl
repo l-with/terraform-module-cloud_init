@@ -12,7 +12,7 @@
       if [ $i -ge ${vault_num_internal_unseal_keys} ]; then
         break;
       fi;
-      export VAULT_UNSEAL_KEY=$(cat ${vault_init_json_full_path} | jq '.unseal_keys_b64 | (env.i | tonumber) as $i | .[$i]' --raw-output | base64 -d |  gpg --decrypt | base64);
+      export VAULT_UNSEAL_KEY=$(cat ${vault_init_json_full_path} | jq '.unseal_keys_b64 | (env.i | tonumber) as $i | .[$i]' --raw-output | base64 -d |  gpg --decrypt);
       cat ${vault_init_json_full_path} | jq '(env.i | tonumber) as $i | .unseal_keys_b64[$i]=env.VAULT_UNSEAL_KEY' >${vault_init_json_full_path}.$i;
       cp ${vault_init_json_full_path}.$i ${vault_init_json_full_path};
       i=$((i+1));
