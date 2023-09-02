@@ -123,6 +123,10 @@ variable "vault_init_pgp_public_keys" {
     pgp_external_public_keys = optional(list(object({
       content  = string,
       encoding = optional(string, "text/plain"),
+      owner    = optional(string, "root")
+      group    = optional(string, "root")
+      mode     = optional(string, "640")
+
     })), [])
   })
   default = null
