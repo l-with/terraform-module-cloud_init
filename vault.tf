@@ -314,6 +314,7 @@ locals {
                 vault_init_with_pgp_keys                    = local.vault_init_with_pgp_keys,
                 vault_bootstrap_files_path                  = var.vault_bootstrap_files_path,
                 vault_pgp_priv_keys                         = join(" ", local.vault_pgp_priv_keys),
+                vault_pgp_pub_keys                          = join(" ", local.vault_pgp_pub_keys),
               }
             },
           ],
