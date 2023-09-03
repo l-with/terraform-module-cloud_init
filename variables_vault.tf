@@ -126,7 +126,6 @@ variable "vault_init_pgp_public_keys" {
       owner    = optional(string, "root")
       group    = optional(string, "root")
       mode     = optional(string, "640")
-
     })), [])
   })
   default = null

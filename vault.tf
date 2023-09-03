@@ -11,9 +11,20 @@ locals {
   vault_init_needed_packages = [
     "openssl",
   ]
-  vault_init_with_pgp_keys       = (var.vault_init_pgp_public_keys == null ? false : true)
+  vault_init_with_pgp_keys = (
+    var.vault_init_pgp_public_keys == null ? false : (
+      var.vault_init_pgp_public_keys.num_internal_unseal_keys > 0 || length(var.vault_init_pgp_public_keys.pgp_external_public_keys) > 0
+    )
+  )
   vault_num_internal_unseal_keys = var.vault_init_pgp_public_keys == null ? 0 : var.vault_init_pgp_public_keys.num_internal_unseal_keys
-  vault_pgp_external_public_keys = var.vault_init_pgp_public_keys == null ? [] : var.vault_init_pgp_public_keys.pgp_external_public_keys
+  vault_pgp_external_public_keys = var.vault_init_pgp_public_keys == null ? [] : [
+    for i, vault_pgp_external_public_key in var.vault_init_pgp_public_keys.pgp_external_public_keys : merge(
+      vault_pgp_external_public_key,
+      {
+        pgp_pub_key = "${var.vault_bootstrap_files_path}/external${i}.pub",
+      }
+    )
+  ]
   vault_internal_pgp_keys = [
     for i in range(local.vault_num_internal_unseal_keys) : {
       gpg_key_conf_file = "${var.vault_bootstrap_files_path}/vault_gpg_key${i}.conf",
@@ -22,14 +33,18 @@ locals {
       pgp_priv_key      = "${var.vault_bootstrap_files_path}/vault${i}",
     }
   ]
-  vault_pgp_pub_keys = [
+  vault_pgp_pub_keys = concat([
     for vault_internal_pgp_key in local.vault_internal_pgp_keys :
     vault_internal_pgp_key.pgp_pub_key
-  ]
+    ], [
+    for vault_pgp_external_public_key in local.vault_pgp_external_public_keys :
+    vault_pgp_external_public_key.pgp_pub_key
+  ])
   vault_pgp_priv_keys = [
     for vault_internal_pgp_key in local.vault_internal_pgp_keys :
     vault_internal_pgp_key.pgp_priv_key
   ]
+  //vault_
   vault_cluster_addr = var.vault_cluster_addr != null ? var.vault_cluster_addr : ""
   vault_tls_storage_raft_leader_ca_cert_file = (
     var.vault_tls_storage_raft_leader_ca_cert_file != null
@@ -122,20 +137,6 @@ locals {
               }
             }
           ],
-          [
-            for i, pgp_external_public_key in local.vault_pgp_external_public_keys :
-            {
-              template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
-              vars = {
-                write_file_directory = dirname(var.vault_bootstrap_files_path),
-                write_file_name      = basename("external${i}.pub"),
-                write_file_content   = pgp_external_public_key.encoding == "base64" ? base64decode(pgp_external_public_key.content) : pgp_external_public_key.content,
-                write_file_owner     = pgp_external_public_key.owner,
-                write_file_group     = pgp_external_public_key.group,
-                write_file_mode      = pgp_external_public_key.mode,
-              }
-            }
-          ]
         ),
       ),
     },
@@ -262,11 +263,11 @@ locals {
               }
             },
           ],
-          !(var.vault_init && local.vault_init_with_pgp_keys && local.vault_num_internal_unseal_keys >= 0) ? [] : [
+          !(var.vault_init && local.vault_init_with_pgp_keys && local.vault_num_internal_unseal_keys > 0) ? [] : [
             {
               template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
               vars = {
-                runcmd_script = "  # gpg internal keys"
+                runcmd_script = "  # pgp internal keys"
               }
             },
           ],
@@ -295,6 +296,28 @@ locals {
                 vault_pgp_pub_key       = vault_internal_pgp_key.pgp_pub_key,
                 vault_gpg_key_name      = vault_internal_pgp_key.gpg_key_name,
                 vault_pgp_priv_key      = vault_internal_pgp_key.pgp_priv_key,
+              }
+            }
+          ],
+          !(var.vault_init && local.vault_init_with_pgp_keys && length(local.vault_pgp_external_public_keys) > 0) ? [] : [
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
+              vars = {
+                runcmd_script = "  # pgp external keys"
+              }
+            },
+          ],
+          !(var.vault_init && local.vault_init_with_pgp_keys) ? [] : [
+            for i, pgp_external_public_key in local.vault_pgp_external_public_keys :
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+              vars = {
+                write_file_directory = dirname(pgp_external_public_key.pgp_pub_key),
+                write_file_name      = basename(pgp_external_public_key.pgp_pub_key),
+                write_file_content   = pgp_external_public_key.encoding == "base64" ? base64decode(pgp_external_public_key.content) : pgp_external_public_key.content,
+                write_file_owner     = pgp_external_public_key.owner,
+                write_file_group     = pgp_external_public_key.group,
+                write_file_mode      = pgp_external_public_key.mode,
               }
             }
           ],
