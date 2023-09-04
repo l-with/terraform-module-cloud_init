@@ -183,5 +183,5 @@ locals {
   )
   cloud_init_base64gzip = base64gzip(local.cloud_init)
   cloud_init_base64     = base64encode(local.cloud_init)
-  cloud_init_gzip       = base64decode(local.cloud_init_base64gzip)
+  cloud_init_gzip       = textdecodebase64(local.cloud_init_base64gzip, "ISO-8859-1")
 }
