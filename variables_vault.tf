@@ -116,7 +116,7 @@ variable "vault_key_threshold" {
 variable "vault_init_pgp_public_keys" {
   description = <<EOT
     the definition of the usage of pgp keys for vault init
-    note: the number of pgp_public_keys plus num_internal_unseal_keys has to match vault_key_shares
+    note: the number of pgp_external_public_keys plus num_internal_unseal_keys has to match vault_key_shares
   EOT
   type = object({
     num_internal_unseal_keys = optional(number, 1),
