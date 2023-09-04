@@ -181,4 +181,7 @@ locals {
       local.cloud_init_runcmd_end
     ],
   )
+  cloud_init_base64gzip = base64gzip(local.cloud_init)
+  cloud_init_base64     = base64encode(local.cloud_init)
+  cloud_init_gzip       = base64decode(local.cloud_init_base64gzip)
 }

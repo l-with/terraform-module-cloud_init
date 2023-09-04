@@ -1,7 +1,15 @@
 output "cloud_init" {
   description = "the cloud-init user data"
-  value       = local.cloud_init
-  sensitive   = true
+  value = (
+    (!var.gzip && !var.base64_encode) ? local.cloud_init : (
+      (var.gzip && !var.base64_encode) ? local.cloud_init_gzip : (
+        (!var.gzip && var.base64_encode) ? local.cloud_init_base64 : (
+          (var.gzip && var.base64_encode) ? local.cloud_init_base64gzip : "not possible"
+        )
+      )
+    )
+  )
+  sensitive = true
 }
 
 output "vault" {
