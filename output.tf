@@ -2,10 +2,8 @@ output "cloud_init" {
   description = "the cloud-init user data"
   value = (
     (!var.gzip && !var.base64_encode) ? local.cloud_init : (
-      (var.gzip && !var.base64_encode) ? local.cloud_init_gzip : (
-        (!var.gzip && var.base64_encode) ? local.cloud_init_base64 : (
-          (var.gzip && var.base64_encode) ? local.cloud_init_base64gzip : "not possible"
-        )
+      (!var.gzip && var.base64_encode) ? local.cloud_init_base64 : (
+        local.cloud_init_base64gzip
       )
     )
   )

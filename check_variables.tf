@@ -210,3 +210,13 @@ module "duplicacy_storage_backend_one_of" {
   assert        = (contains(local.duplicacy_storage_backends, var.duplicacy_configurations[count.index].storage_backend))
   error_message = "error: '${var.duplicacy_configurations[count.index].storage_backend}' not in ${join(", ", local.duplicacy_storage_backends)}"
 }
+
+module "gzip_needs_base64_encode" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  use_jq        = true
+  assert        = !(var.gzip && !var.base64_encode)
+  error_message = "error: gzip needs base64_encode"
+}
+
