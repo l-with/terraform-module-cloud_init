@@ -69,8 +69,7 @@ variable "vault_api_addr" {
 variable "vault_cluster_addr" {
   description = <<EOT
     the [cluster_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)
-    the string '$ipv4_address' can be used as placeholder for the server ipv4-address
-    (ip addr show | grep 'inet ' | grep 'scope global' | cut -d ' ' -f6 | cut -d '/' -f 1)
+    the string '$ipv4_address' can be used as placeholder for the server ipv4-address (determined by variable ipv4_address_command)
   EOT
   type        = string
   default     = null
