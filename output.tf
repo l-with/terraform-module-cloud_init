@@ -22,3 +22,8 @@ output "vault" {
     vault_init_with_pgp_keys             = local.vault_init_with_pgp_keys,
   }
 }
+
+output "ipv4_address_command" {
+  description = "the command to determin the ipv4 address"
+  value = var.ipv4_address_command
+}
