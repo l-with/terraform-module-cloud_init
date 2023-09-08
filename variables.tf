@@ -15,3 +15,9 @@ variable "base64_encode" {
   type        = bool
   default     = false
 }
+
+variable "ipv4_address_command" {
+  description = "the command to determin the ipv4 address"
+  type        = string
+  default     = "ip addr show | grep 'inet ' | grep 'scope global' | cut -d ' ' -f6 | cut -d '/' -f 1"
+}

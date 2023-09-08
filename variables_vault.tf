@@ -83,6 +83,7 @@ variable "vault_listeners" {
       - tls_cert_file is [vault_tls_cert_file](#input_vault_tls_cert_file)
       - tls_key_file is [vault_tls_key_file](#input_vault_tls_key_file)
       - tls_client_ca_file [vault_tls_client_ca_file](#input_vault_tls_client_ca_file)
+    the string '$ipv4_address' can be used as placeholder for the server ipv4-address in address and cluster_adrress
   EOT
   type = list(object({
     address            = string,

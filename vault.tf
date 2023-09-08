@@ -198,6 +198,7 @@ locals {
               vars = {
                 vault_hcl_template_path = var.vault_bootstrap_files_path,
                 vault_config_path       = var.vault_config_path,
+                ipv4_address_command    = var.ipv4_address_command
               }
             },
             {
