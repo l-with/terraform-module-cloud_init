@@ -25,5 +25,5 @@ output "vault" {
 
 output "ipv4_address_command" {
   description = "the command to determin the ipv4 address"
-  value = var.ipv4_address_command
+  value       = var.ipv4_address_command
 }
