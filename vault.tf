@@ -44,8 +44,8 @@ locals {
     for vault_internal_pgp_key in local.vault_internal_pgp_keys :
     vault_internal_pgp_key.pgp_priv_key
   ]
-  //vault_
-  vault_cluster_addr = var.vault_cluster_addr != null ? var.vault_cluster_addr : ""
+  vault_cluster_addr               = var.vault_cluster_addr != null ? var.vault_cluster_addr : ""
+  vault_raft_leader_tls_servername = var.vault_raft_leader_tls_servername != null ? var.vault_raft_leader_tls_servername : ""
   vault_tls_storage_raft_leader_ca_cert_file = (
     var.vault_tls_storage_raft_leader_ca_cert_file != null
     ? var.vault_tls_storage_raft_leader_ca_cert_file
@@ -61,10 +61,9 @@ locals {
     ? var.vault_tls_storage_raft_leader_client_key_file
     : "${var.vault_home_path}/tls/key.pem"
   )
-  vault_raft_leader_tls_servername = var.vault_raft_leader_tls_servername != null ? var.vault_raft_leader_tls_servername : ""
-  vault_tls_client_ca_file         = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : local.vault_tls_storage_raft_leader_ca_cert_file
-  vault_tls_cert_file              = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : local.vault_tls_storage_raft_leader_client_cert_file
-  vault_tls_key_file               = var.vault_tls_key_file != null ? var.vault_tls_key_file : local.vault_tls_storage_raft_leader_client_key_file
+  vault_tls_client_ca_file = var.vault_tls_client_ca_file != null ? var.vault_tls_client_ca_file : local.vault_tls_storage_raft_leader_ca_cert_file
+  vault_tls_cert_file      = var.vault_tls_cert_file != null ? var.vault_tls_cert_file : local.vault_tls_storage_raft_leader_client_cert_file
+  vault_tls_key_file       = var.vault_tls_key_file != null ? var.vault_tls_key_file : local.vault_tls_storage_raft_leader_client_key_file
   vault_tls_files = [
     for vault_tls_file in var.vault_tls_files : {
       file_name = replace(
@@ -253,7 +252,14 @@ locals {
           [
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
-              vars     = {}
+              vars = {
+                vault_tls_cert_file                            = local.vault_tls_cert_file,
+                vault_tls_key_file                             = local.vault_tls_key_file,
+                vault_tls_client_ca_file                       = local.vault_tls_client_ca_file,
+                vault_tls_storage_raft_leader_ca_cert_file     = local.vault_tls_storage_raft_leader_ca_cert_file,
+                vault_tls_storage_raft_leader_client_cert_file = local.vault_tls_storage_raft_leader_client_cert_file,
+                vault_tls_storage_raft_leader_client_key_file  = local.vault_tls_storage_raft_leader_client_key_file,
+              }
             },
           ],
           !var.vault_init ? [] : [
