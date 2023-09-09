@@ -249,17 +249,27 @@ locals {
               }
             }
           ],
+          length(var.vault_chown_files) == 0 ? [] : [
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
+              vars = {
+                runcmd_script = "  # chown file"
+              }
+            }
+          ],
+          [
+            for vault_chown_file in var.vault_chown_files :
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
+              vars = {
+                runcmd_script = "  - chown vault:vault ${vault_chown_file}"
+              }
+            }
+          ],
           [
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
-              vars = {
-                vault_tls_cert_file                            = local.vault_tls_cert_file,
-                vault_tls_key_file                             = local.vault_tls_key_file,
-                vault_tls_client_ca_file                       = local.vault_tls_client_ca_file,
-                vault_tls_storage_raft_leader_ca_cert_file     = local.vault_tls_storage_raft_leader_ca_cert_file,
-                vault_tls_storage_raft_leader_client_cert_file = local.vault_tls_storage_raft_leader_client_cert_file,
-                vault_tls_storage_raft_leader_client_key_file  = local.vault_tls_storage_raft_leader_client_key_file,
-              }
+              vars     = {}
             },
           ],
           !var.vault_init ? [] : [

@@ -361,3 +361,9 @@ EOT
     error_message = "Supported values are cert, key, client_ca, storage_raft_leader_ca_cert, storage_raft_leader_client_cert, storage_raft_leader_client_key."
   }
 }
+
+variable "vault_chown_files" {
+  description = "the list of files to be changed to ownership vault:vault (before starting vault)"
+  type        = list(string)
+  default     = []
+}
