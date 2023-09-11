@@ -185,6 +185,9 @@ locals {
                   vault_storage_raft_leader_client_cert_file = local.vault_tls_storage_raft_leader_client_cert_file,
                   vault_storage_raft_leader_client_key_file  = local.vault_tls_storage_raft_leader_client_key_file,
                   vault_raft_leader_tls_servername           = local.vault_raft_leader_tls_servername,
+                  vault_raft_retry_auto_join                 = var.vault_raft_retry_autojoin == null ? null : var.vault_raft_retry_autojoin.auto_join,
+                  vault_raft_retry_auto_join_scheme          = var.vault_raft_retry_autojoin == null ? null : var.vault_raft_retry_autojoin.auto_join_scheme,
+                  vault_raft_retry_auto_join_port            = var.vault_raft_retry_autojoin == null ? null : var.vault_raft_retry_autojoin.auto_join_port,
                   vault_disable_mlock                        = var.vault_disable_mlock,
                 }),
                 write_file_owner = "vault"

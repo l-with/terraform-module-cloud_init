@@ -36,6 +36,17 @@ storage "raft" {
 %{ endif ~}
     }
 %{ endfor ~}
+%{ if vault_raft_retry_auto_join != null ~}
+    retry_join {
+        auto_join = "${vault_raft_retry_auto_join}"
+%{ if vault_raft_retry_auto_join_scheme != null ~}
+        auto_join_scheme = "${vault_raft_retry_auto_join_scheme}"
+%{ endif ~}
+%{ if vault_raft_retry_auto_join_port != null ~}
+        auto_join_port = ${vault_raft_retry_auto_join_port}
+%{ endif ~}
+    }
+%{ endif ~}
 }
 
 disable_mlock = ${vault_disable_mlock}

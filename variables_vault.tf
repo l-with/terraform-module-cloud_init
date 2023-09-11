@@ -263,6 +263,22 @@ variable "vault_tls_storage_raft_leader_client_key_file" {
   default     = null
 }
 
+variable "vault_raft_retry_autojoin" {
+  description = <<EOT
+    the auto_join values for [retry_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#retry_join-stanza)
+    - [auto_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join)
+    - [auto_join_scheme](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_scheme)
+    - [auto_join_port](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_port)
+  EOT
+  type = object({
+    auto_join = string,
+    auto_join_scheme = optional(string, null),
+    auto_join_port = optional(number, null),
+  })
+  default = null
+}
+
+
 variable "vault_raft_leader_tls_servername" {
   description = "the [leader_tls_servername](https://www.vaultproject.io/docs/configuration/storage/raft#leader_tls_servername)"
   type        = string
