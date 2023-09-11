@@ -271,9 +271,9 @@ variable "vault_raft_retry_autojoin" {
     - [auto_join_port](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_port)
   EOT
   type = object({
-    auto_join = string,
+    auto_join        = string,
     auto_join_scheme = optional(string, null),
-    auto_join_port = optional(number, null),
+    auto_join_port   = optional(number, null),
   })
   default = null
 }
