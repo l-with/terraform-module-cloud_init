@@ -26,3 +26,12 @@ variable "ipv4_address_command" {
   type        = string
   default     = "ip addr show | grep 'inet ' | grep 'scope global' | cut -d ' ' -f6 | cut -d '/' -f 1 | head -n 1"
 }
+
+variable "ip_addresses" {
+  description = "the list of ip address suffixes and the commands to compute them (s. variable ip4_address_command)"
+  type = list(object({
+    ip_address_suffix   = string
+    computation_command = string
+  }))
+  default = []
+}

@@ -198,9 +198,10 @@ locals {
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_vault_hcl.tpl",
               vars = {
-                vault_hcl_template_path = var.vault_bootstrap_files_path,
-                vault_config_path       = var.vault_config_path,
-                ipv4_address_command    = var.ipv4_address_command
+                vault_hcl_template_path  = var.vault_bootstrap_files_path,
+                vault_config_path        = var.vault_config_path,
+                ipv4_address_command     = var.ipv4_address_command
+                jsonencoded_ip_addresses = jsonencode(var.ip_addresses),
               }
             },
             {
