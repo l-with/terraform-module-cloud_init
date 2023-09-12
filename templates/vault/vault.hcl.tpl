@@ -45,6 +45,9 @@ storage "raft" {
 %{ if vault_raft_retry_auto_join_port != null ~}
         auto_join_port = ${vault_raft_retry_auto_join_port}
 %{ endif ~}
+        leader_ca_cert_file = "${vault_storage_raft_leader_ca_cert_file}"
+        leader_client_cert_file = "${vault_storage_raft_leader_client_cert_file}"
+        leader_client_key_file = "${vault_storage_raft_leader_client_key_file}"
     }
 %{ endif ~}
 }
