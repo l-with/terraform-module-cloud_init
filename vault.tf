@@ -270,6 +270,26 @@ locals {
               }
             }
           ],
+          !var.vault_receive_vault_init_json ? [] : [
+            {
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_receive_init.tpl",
+              vars = {
+                vault_init_json_full_path       = local.vault_init_json_full_path,
+                vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
+                jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys)
+              }
+            },
+          ],
+          !var.vault_receive_vault_init_json ? [] : [
+            {
+              template = "${path.module}/templates/vault/${local.yml_runcmd}_receive_init.tpl",
+              vars = {
+                vault_init_json_full_path       = local.vault_init_json_full_path,
+                vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
+                jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys)
+              }
+            },
+          ],
           [
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
@@ -355,16 +375,6 @@ locals {
                 vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
                 vault_num_internal_unseal_keys  = local.vault_num_internal_unseal_keys
                 vault_pgp_pub_keys              = join(",", local.vault_pgp_pub_keys),
-                jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys)
-              }
-            },
-          ],
-          !var.vault_receive_vault_init_json ? [] : [
-            {
-              template = "${path.module}/templates/vault/${local.yml_runcmd}_receive_init.tpl",
-              vars = {
-                vault_init_json_full_path       = local.vault_init_json_full_path,
-                vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
                 jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys)
               }
             },
