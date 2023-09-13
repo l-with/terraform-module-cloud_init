@@ -200,7 +200,7 @@ variable "vault_receive_vault_init_json" {
 variable "vault_fetch_vault_init_json_from" {
   description = "the node the vault init json result should be fetched from"
   type        = string
-  default     = null
+  default     = false
 }
 
 variable "vault_remove_vault_init_json" {
