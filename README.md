@@ -397,6 +397,8 @@ No resources.
 | <a name="input_s3cmd"></a> [s3cmd](#input\_s3cmd) | if cloud-init user data for installing the [S3cmd](https://github.com/s3tools/s3cmd) should be generated | `bool` | `false` | no |
 | <a name="input_terraform"></a> [terraform](#input\_terraform) | if cloud-init user data for installing terraform should be generated | `bool` | `false` | no |
 | <a name="input_terraform_install_method"></a> [terraform\_install\_method](#input\_terraform\_install\_method) | the install method, supported methods are 'apt' | `string` | `"apt"` | no |
+| <a name="input_user"></a> [user](#input\_user) | if cloud-init user data for users should be generated | `bool` | `true` | no |
+| <a name="input_users"></a> [users](#input\_users) | the list of user configurations | <pre>list(object({<br>    name                = string,<br>    groups              = optional(string, null),<br>    sudo                = optional(string, null),<br>    ssh_authorized_keys = optional(list(string), []),<br>    lock_passwd         = optional(bool, true),<br>  }))</pre> | `[]` | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
 | <a name="input_vault_addr"></a> [vault\_addr](#input\_vault\_addr) | the vault address (can be used as default for other features) | `string` | `null` | no |
 | <a name="input_vault_api_addr"></a> [vault\_api\_addr](#input\_vault\_api\_addr) | the [api\_addr](https://www.vaultproject.io/docs/configuration#api_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address | `string` | `null` | no |
@@ -405,7 +407,7 @@ No resources.
 | <a name="input_vault_cluster_addr"></a> [vault\_cluster\_addr](#input\_vault\_cluster\_addr) | the [cluster\_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address (determined by variable ipv4\_address\_command) | `string` | `null` | no |
 | <a name="input_vault_config_path"></a> [vault\_config\_path](#input\_vault\_config\_path) | the path for the vault configuration files | `string` | `"/etc/vault.d"` | no |
 | <a name="input_vault_disable_mlock"></a> [vault\_disable\_mlock](#input\_vault\_disable\_mlock) | the value for [disable\_mlock](https://www.vaultproject.io/docs/configuration#disable_mlock) | `bool` | `true` | no |
-| <a name="input_vault_fetch_vault_init_json_from"></a> [vault\_fetch\_vault\_init\_json\_from](#input\_vault\_fetch\_vault\_init\_json\_from) | the node the vault init json result should be fetched from | `string` | `null` | no |
+| <a name="input_vault_fetch_vault_init_json_from"></a> [vault\_fetch\_vault\_init\_json\_from](#input\_vault\_fetch\_vault\_init\_json\_from) | the node the vault init json result should be fetched from | `string` | `false` | no |
 | <a name="input_vault_fetch_vault_init_json_id_file"></a> [vault\_fetch\_vault\_init\_json\_id\_file](#input\_vault\_fetch\_vault\_init\_json\_id\_file) | the ssh id file used for fetching the vault init json result | `string` | `null` | no |
 | <a name="input_vault_home_path"></a> [vault\_home\_path](#input\_vault\_home\_path) | the home of the vault specific files and folders | `string` | `"/srv/vault"` | no |
 | <a name="input_vault_init"></a> [vault\_init](#input\_vault\_init) | if vault should be initialized | `bool` | `true` | no |

@@ -40,7 +40,7 @@ locals {
       )
     ),
     write_file = var.write_file
-    user = var.user
+    user       = var.user
   }
 }
 
