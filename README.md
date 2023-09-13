@@ -36,6 +36,7 @@ The execution order in cloud-init for these modules is
 
 - init stage
   - write-files
+  - users-group
 - config stage
   - runcmd 
 - final stage
@@ -208,6 +209,12 @@ For input variables: s. [s3cmd](#input_s3cmd).
 s. [terraform](https://developer.hashicorp.com/terraform/downloads)
 
 For input variables: s. [terraform](#input_terraform)
+
+### users 
+
+s. [users](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#users-and-groups)
+
+For input variables: s. [users](#users).
 
 ### vault
 
@@ -398,6 +405,8 @@ No resources.
 | <a name="input_vault_cluster_addr"></a> [vault\_cluster\_addr](#input\_vault\_cluster\_addr) | the [cluster\_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address (determined by variable ipv4\_address\_command) | `string` | `null` | no |
 | <a name="input_vault_config_path"></a> [vault\_config\_path](#input\_vault\_config\_path) | the path for the vault configuration files | `string` | `"/etc/vault.d"` | no |
 | <a name="input_vault_disable_mlock"></a> [vault\_disable\_mlock](#input\_vault\_disable\_mlock) | the value for [disable\_mlock](https://www.vaultproject.io/docs/configuration#disable_mlock) | `bool` | `true` | no |
+| <a name="input_vault_fetch_vault_init_json_from"></a> [vault\_fetch\_vault\_init\_json\_from](#input\_vault\_fetch\_vault\_init\_json\_from) | the node the vault init json result should be fetched from | `string` | `null` | no |
+| <a name="input_vault_fetch_vault_init_json_id_file"></a> [vault\_fetch\_vault\_init\_json\_id\_file](#input\_vault\_fetch\_vault\_init\_json\_id\_file) | the ssh id file used for fetching the vault init json result | `string` | `null` | no |
 | <a name="input_vault_home_path"></a> [vault\_home\_path](#input\_vault\_home\_path) | the home of the vault specific files and folders | `string` | `"/srv/vault"` | no |
 | <a name="input_vault_init"></a> [vault\_init](#input\_vault\_init) | if vault should be initialized | `bool` | `true` | no |
 | <a name="input_vault_init_json_file_mode"></a> [vault\_init\_json\_file\_mode](#input\_vault\_init\_json\_file\_mode) | the file mode for the vault init json result files | `string` | `"640"` | no |
@@ -412,6 +421,7 @@ No resources.
 | <a name="input_vault_raft_leader_tls_servername"></a> [vault\_raft\_leader\_tls\_servername](#input\_vault\_raft\_leader\_tls\_servername) | the [leader\_tls\_servername](https://www.vaultproject.io/docs/configuration/storage/raft#leader_tls_servername) | `string` | `null` | no |
 | <a name="input_vault_raft_retry_autojoin"></a> [vault\_raft\_retry\_autojoin](#input\_vault\_raft\_retry\_autojoin) | the auto\_join values for [retry\_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#retry_join-stanza)<br>    - [auto\_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join)<br>    - [auto\_join\_scheme](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join\_scheme)<br>    - [auto\_join\_port](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join\_port) | <pre>object({<br>    auto_join        = string,<br>    auto_join_scheme = optional(string, null),<br>    auto_join_port   = optional(number, null),<br>  })</pre> | `null` | no |
 | <a name="input_vault_receive_vault_init_json"></a> [vault\_receive\_vault\_init\_json](#input\_vault\_receive\_vault\_init\_json) | if the vault init json result should be received | `bool` | `false` | no |
+| <a name="input_vault_remove_fetch_vault_init_json_id_file"></a> [vault\_remove\_fetch\_vault\_init\_json\_id\_file](#input\_vault\_remove\_fetch\_vault\_init\_json\_id\_file) | if the ssh id file used for fetching the vault init json result should be removed after used | `bool` | `true` | no |
 | <a name="input_vault_remove_spread_vault_init_json_id_file"></a> [vault\_remove\_spread\_vault\_init\_json\_id\_file](#input\_vault\_remove\_spread\_vault\_init\_json\_id\_file) | if the ssh id file used for spreading the vault init json result to the cluster should be removed after used | `bool` | `true` | no |
 | <a name="input_vault_remove_vault_init_json"></a> [vault\_remove\_vault\_init\_json](#input\_vault\_remove\_vault\_init\_json) | if the output of the vault initialization should removed<br>    <span style=\"color:red\">ATTENTION: The output of the vault initialization is highly confidential! It is the root of the secret management in vault!</span>" | `bool` | `true` | no |
 | <a name="input_vault_revoke_root_token"></a> [vault\_revoke\_root\_token](#input\_vault\_revoke\_root\_token) | if the initial root token should be revoked | `bool` | `true` | no |

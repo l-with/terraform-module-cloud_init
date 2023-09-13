@@ -40,6 +40,7 @@ locals {
       )
     ),
     write_file = var.write_file
+    user = var.user
   }
 }
 
@@ -49,9 +50,10 @@ module "cloud_init_part" {
   source = "./modules/cloud_init_part"
 
   part        = each.key
-  packages    = each.value.packages
   write_files = each.value.write_files
+  users       = each.value.users
   runcmd      = each.value.runcmd
+  packages    = each.value.packages
 }
 
 locals {
@@ -85,16 +87,18 @@ locals {
     vault              = local.vault,
     wait_until         = local.wait_until,
     write_file         = local.write_file,
+    user               = local.users,
   }
   active_parts_inputs = {
     for part in keys(local.parts_active) :
-    part => merge({ write_files = tolist([]), packages = tolist([]), runcmd = tolist([]) }, local.parts_inputs[part])
+    part => merge({ write_files = tolist([]), users = tolist([]), packages = tolist([]), runcmd = tolist([]) }, local.parts_inputs[part])
   }
   parts_sorted = [
     "lineinfile",
     "hetzner",
     "packages",
     "write_file",
+    "user",
     "netcat",
     "network",
     "croc",
@@ -139,6 +143,14 @@ locals {
       if(local.parts_active[part] && module.cloud_init_part[part].write_files != "")
     ],
   )
+  cloud_init_users = join(
+    "\n",
+    [
+      for part in local.parts_sorted :
+      module.cloud_init_part[part].users
+      if(local.parts_active[part] && module.cloud_init_part[part].users != "")
+    ],
+  )
   cloud_init_runcmd = join(
     "\n",
     [
@@ -162,6 +174,7 @@ locals {
   cloud_init_package_reboot_if_required = var.package && var.package_reboot_if_required ? "package_reboot_if_required: true" : ""
   cloud_init_write_files_start          = "\nwrite_files:"
   cloud_init_packages_start             = "\npackages:"
+  cloud_init_users_start                = "\nusers:"
   cloud_init_runcmd_start               = "\nruncmd:"
   cloud_init_runcmd_end                 = templatefile("${path.module}/templates/${local.yml_runcmd}_end.tpl", {})
 
@@ -174,6 +187,8 @@ locals {
       local.cloud_init_package_reboot_if_required,
       local.cloud_init_write_files_start,
       local.cloud_init_write_files,
+      local.cloud_init_users_start,
+      local.cloud_init_users,
       local.cloud_init_packages_start,
       local.cloud_init_packages,
       local.cloud_init_runcmd_start,

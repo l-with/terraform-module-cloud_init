@@ -3,6 +3,15 @@ variable "part" {
   type        = string
 }
 
+variable "users" {
+  description = "the parameters for users"
+  type = list(object({
+    template = string,
+    vars     = map(string)
+  }))
+  default = []
+}
+
 variable "packages" {
   description = "the parameters for packages"
   type = list(object({

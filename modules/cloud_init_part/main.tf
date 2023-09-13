@@ -15,6 +15,20 @@ locals {
     ]
   )
 
+  users = length(var.users) == 0 ? "" : join(
+    "\n",
+    local.comment,
+    [
+      for users in var.users :
+      templatefile(
+        users.template,
+        {
+          for var, value in users.vars : var => value
+        }
+      )
+    ]
+  )
+
   rundcmd = length(var.runcmd) == 0 ? "" : join(
     "\n",
     local.comment,
