@@ -3,3 +3,9 @@ variable "golang" {
   type        = bool
   default     = false
 }
+
+variable "golang_tools" {
+  description = "the golang tools to be installed  used as parameter for `go install`"
+  type        = list(string)
+  default     = []
+}
