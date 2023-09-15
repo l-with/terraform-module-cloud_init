@@ -118,6 +118,12 @@ s. [jq](https://stedolan.github.io/jq/)
 
 For input variables: s. [jq](#input_jq).
 
+### golang
+
+s. [golang](https://go.dev)
+
+For input variables: s. [golang](#input_golang).
+
 ### gpg
 
 s. [gpg](https://www.gnupg.org)
@@ -312,6 +318,7 @@ No resources.
 | <a name="input_fail2ban_recidive"></a> [fail2ban\_recidive](#input\_fail2ban\_recidive) | if recidive jail install should be generated | `bool` | `true` | no |
 | <a name="input_fail2ban_sshd"></a> [fail2ban\_sshd](#input\_fail2ban\_sshd) | if sshd jail install should be generated | `bool` | `true` | no |
 | <a name="input_gettext_base"></a> [gettext\_base](#input\_gettext\_base) | if cloud-init user data for installing gettext-base should be generated | `bool` | `false` | no |
+| <a name="input_golang"></a> [golang](#input\_golang) | if cloud-init user data for installing golang should be generated | `bool` | `false` | no |
 | <a name="input_gpg"></a> [gpg](#input\_gpg) | if cloud-init user data for installing gpg should be generated | `bool` | `false` | no |
 | <a name="input_gzip"></a> [gzip](#input\_gzip) | if the cloud-init user data should be packed with gzip | `bool` | `false` | no |
 | <a name="input_haproxy"></a> [haproxy](#input\_haproxy) | if cloud-init user data for installing haproxy should be generated | `bool` | `false` | no |
