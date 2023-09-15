@@ -319,6 +319,7 @@ No resources.
 | <a name="input_fail2ban_sshd"></a> [fail2ban\_sshd](#input\_fail2ban\_sshd) | if sshd jail install should be generated | `bool` | `true` | no |
 | <a name="input_gettext_base"></a> [gettext\_base](#input\_gettext\_base) | if cloud-init user data for installing gettext-base should be generated | `bool` | `false` | no |
 | <a name="input_golang"></a> [golang](#input\_golang) | if cloud-init user data for installing golang should be generated | `bool` | `false` | no |
+| <a name="input_golang_tools"></a> [golang\_tools](#input\_golang\_tools) | the golang tools to be installed  used as parameter for `go install` | `list(string)` | `[]` | no |
 | <a name="input_gpg"></a> [gpg](#input\_gpg) | if cloud-init user data for installing gpg should be generated | `bool` | `false` | no |
 | <a name="input_gzip"></a> [gzip](#input\_gzip) | if the cloud-init user data should be packed with gzip | `bool` | `false` | no |
 | <a name="input_haproxy"></a> [haproxy](#input\_haproxy) | if cloud-init user data for installing haproxy should be generated | `bool` | `false` | no |
