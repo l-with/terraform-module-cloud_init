@@ -71,7 +71,7 @@ locals {
     haproxy            = local.haproxy,
     hetzner            = local.hetzner,
     jq                 = local.jq,
-    golang                = local.golang,
+    golang             = local.golang,
     gpg                = local.gpg,
     mailcow            = local.mailcow,
     lineinfile         = local.lineinfile,
