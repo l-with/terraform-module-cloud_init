@@ -16,6 +16,7 @@ locals {
           var.vault_init || var.vault_unseal || var.vault_revoke_root_token
         )
     )),
+    golang          = var.golang,
     gpg             = var.gpg,
     netcat          = var.netcat,
     mailcow         = var.mailcow,
@@ -70,6 +71,7 @@ locals {
     haproxy            = local.haproxy,
     hetzner            = local.hetzner,
     jq                 = local.jq,
+    golang                = local.golang,
     gpg                = local.gpg,
     mailcow            = local.mailcow,
     lineinfile         = local.lineinfile,
@@ -109,6 +111,7 @@ locals {
     "fail2ban",
     "gettext_base",
     "jq",
+    "golang",
     "gpg",
     "terraform",
     "python3_pip",
