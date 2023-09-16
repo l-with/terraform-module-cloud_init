@@ -22,7 +22,7 @@ locals {
           var.vault_init || var.vault_unseal || var.vault_revoke_root_token
         )
     )),
-    golang = var.golang || var.vault_raft_retry_autojoin != null,
+    golang          = var.golang || var.vault_raft_retry_autojoin != null,
     gpg             = var.gpg,
     netcat          = var.netcat,
     mailcow         = var.mailcow,
