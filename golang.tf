@@ -7,7 +7,7 @@ locals {
       }
       }],
       [
-        for golang_tool in var.golang_tools :
+        for golang_tool in local.golang_tools :
         {
           template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
           vars = {

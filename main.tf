@@ -1,4 +1,10 @@
 locals {
+  golang_tools = toset(
+    concat(
+      var.golang_tools,
+      var.vault_raft_retry_autojoin == null ? [] : ["github.com/hashicorp/go-netaddrs/cmd/netaddrs@latest"],
+    )
+  )
   parts_active = {
     b2                 = var.b2,
     certbot            = var.certbot,
@@ -16,7 +22,7 @@ locals {
           var.vault_init || var.vault_unseal || var.vault_revoke_root_token
         )
     )),
-    golang          = var.golang,
+    golang = var.golang || var.vault_raft_retry_autojoin != null,
     gpg             = var.gpg,
     netcat          = var.netcat,
     mailcow         = var.mailcow,
