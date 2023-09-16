@@ -1,4 +1,4 @@
-  # vault hcl
+  # hcl
   - |
     export ipv4_address=$(${ipv4_address_command})
 %{ for ip_address in jsondecode(jsonencoded_ip_addresses) ~}

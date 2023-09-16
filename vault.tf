@@ -8,6 +8,7 @@ locals {
   vault_init_json_enc_full_path        = "${var.vault_bootstrap_files_path}/vault_init_json.enc"
   vault_init_json_full_path            = "${var.vault_bootstrap_files_path}/vault_init.json"
   vault_init_json_enc_base64_full_path = "${local.vault_init_json_enc_full_path}.base64"
+  vault_cluster_ips_full_path          = "${var.vault_bootstrap_files_path}/vault_cluster_ips"
   vault_init_needed_packages = [
     "openssl",
   ]
@@ -161,7 +162,25 @@ locals {
             }
           },
         ],
+        (var.vault_raft_retry_autojoin == null && length(var.vault_storage_raft_cluster_members) == 0) ? [] : [
+          {
+            template = "${path.module}/templates/vault/${local.yml_runcmd}_cluster_ips.tpl",
+            vars = {
+              vault_raft_retry_auto_join                     = var.vault_raft_retry_autojoin == null ? "" : var.vault_raft_retry_autojoin.auto_join,
+              jsonencoded_vault_storage_raft_cluster_members = jsonencode(var.vault_storage_raft_cluster_members),
+              vault_cluster_ips_full_path                    = local.vault_cluster_ips_full_path
+            }
+          },
+        ],
         !var.vault_start ? [] : concat(
+          [
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
+              vars = {
+                runcmd_script = "  # hcl template"
+              }
+            }
+          ],
           [
             {
               template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
@@ -405,6 +424,7 @@ locals {
                 vault_bootstrap_files_path                  = var.vault_bootstrap_files_path,
                 vault_pgp_priv_keys                         = join(" ", local.vault_pgp_priv_keys),
                 vault_pgp_pub_keys                          = join(" ", local.vault_pgp_pub_keys),
+                vault_cluster_ips_full_path                 = local.vault_cluster_ips_full_path,
               }
             },
           ],

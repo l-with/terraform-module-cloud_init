@@ -296,7 +296,6 @@ variable "vault_raft_retry_autojoin" {
   default = null
 }
 
-
 variable "vault_raft_leader_tls_servername" {
   description = "the [leader_tls_servername](https://www.vaultproject.io/docs/configuration/storage/raft#leader_tls_servername)"
   type        = string
