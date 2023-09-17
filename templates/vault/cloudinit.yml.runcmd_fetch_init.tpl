@@ -4,7 +4,7 @@
   - >
     while read -r vault_cluster_ip; do
       VAULT_ADDR=https://$vault_cluster_ip:${vault_auto_join_port} vault status --format=json >$${vault_cluster_ip}_status.json
-      if $(echo $${vault_cluster_ip}_status.json | jq '.sealed | not'); then
+      if $(cat $${vault_cluster_ip}_status.json | jq '.sealed | not'); then
         export VAULT_CLUSTER_IP=$vault_cluster_ip
         break
       fi
