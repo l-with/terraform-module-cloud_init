@@ -14,7 +14,7 @@
 %{ endif ~}
   - >
     wait_until --verbose --delay 10 --retries 42 \
-      --check 'grep 0' 'scp -i ${vault_fetch_vault_init_json_id_file} -o StrictHostKeyChecking=no root@'$VAULT_CLUSTER_IP':{${vault_init_json_full_path},${vault_pgp_priv_keys},${vault_pgp_pub_keys}} ; echo $?'
+      --check 'grep 0' 'scp -i ${vault_fetch_vault_init_json_id_file} -o StrictHostKeyChecking=no root@'$VAULT_CLUSTER_IP':{${vault_init_json_full_path},${vault_pgp_priv_keys},${vault_pgp_pub_keys}} ${vault_bootstrap_files_path}; echo $?'
 %{ if vault_remove_fetch_vault_init_json_id_file ~}
   - rm --force ${vault_fetch_vault_init_json_id_file}
 %{ endif ~}

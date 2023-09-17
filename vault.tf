@@ -313,6 +313,7 @@ locals {
                 vault_fetch_vault_init_json_id_file        = var.vault_fetch_vault_init_json_id_file,
                 vault_remove_fetch_vault_init_json_id_file = var.vault_remove_fetch_vault_init_json_id_file,
                 vault_init_json_full_path                  = local.vault_init_json_full_path,
+                vault_bootstrap_files_path                 = var.vault_bootstrap_files_path,
                 vault_pgp_priv_keys                        = join(",", local.vault_pgp_priv_keys),
                 vault_pgp_pub_keys                         = join(",", local.vault_pgp_pub_keys),
               }
