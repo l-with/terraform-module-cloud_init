@@ -12,10 +12,10 @@ EOT
   type = list(object({
     file_name = string,
     content   = string,
-    encoding  = optional(string, "text/plain")
-    owner     = optional(string, "root")
-    group     = optional(string, "root")
-    mode      = optional(string, "644")
+    encoding  = optional(string, "text/plain"),
+    owner     = optional(string, "root"),
+    group     = optional(string, "root"),
+    mode      = optional(string, "644"),
   }))
   default = []
 }

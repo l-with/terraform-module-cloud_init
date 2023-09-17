@@ -31,6 +31,7 @@ locals {
     rke2_node_1st   = var.rke2 && var.rke2_node_1st,
     rke2_node_other = var.rke2 && var.rke2_node_other,
     runcmd          = var.runcmd,
+    tool            = var.tool,
     s3cmd           = var.s3cmd,
     vault           = var.vault || var.rke2_node_1st,
     wait_until = (
@@ -86,6 +87,7 @@ locals {
     runcmd             = local.runcmd,
     s3cmd              = local.s3cmd,
     terraform          = local.terraform,
+    tool               = local.tool,
     vault              = local.vault,
     wait_until         = local.wait_until,
     write_file         = local.write_file,
@@ -100,6 +102,7 @@ locals {
     "hetzner",
     "packages",
     "write_file",
+    "tool",
     "user",
     "netcat",
     "network",

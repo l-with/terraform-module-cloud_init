@@ -216,6 +216,12 @@ s. [terraform](https://developer.hashicorp.com/terraform/downloads)
 
 For input variables: s. [terraform](#input_terraform)
 
+### tool
+
+generic installing of tools
+
+For input variables: s. [tool](#tool).
+
 ### users 
 
 s. [users](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#users-and-groups)
