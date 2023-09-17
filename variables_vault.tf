@@ -179,6 +179,18 @@ variable "vault_remove_spread_vault_init_json_id_file" {
   default     = true
 }
 
+variable "vault_fetch_vault_init_json" {
+  description = "if the vault init json result should be fetched from the cluster"
+  type        = string
+  default     = false
+}
+
+variable "vault_fetch_vault_init_json_from" {
+  description = "the node the vault init json result should be fetched from"
+  type        = string
+  default     = null
+}
+
 variable "vault_fetch_vault_init_json_id_file" {
   description = "the ssh id file used for fetching the vault init json result"
   type        = string
@@ -194,12 +206,6 @@ variable "vault_remove_fetch_vault_init_json_id_file" {
 variable "vault_receive_vault_init_json" {
   description = "if the vault init json result should be received"
   type        = bool
-  default     = false
-}
-
-variable "vault_fetch_vault_init_json_from" {
-  description = "the node the vault init json result should be fetched from"
-  type        = string
   default     = false
 }
 
