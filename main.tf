@@ -1,12 +1,4 @@
 locals {
-  golang_tools = toset(
-    concat(
-      var.golang_tools,
-      var.vault_raft_retry_autojoin == null ? [] : [
-        "github.com/hashicorp/go-discover/cmd/discover@latest"
-      ],
-    )
-  )
   parts_active = {
     b2                 = var.b2,
     certbot            = var.certbot,
