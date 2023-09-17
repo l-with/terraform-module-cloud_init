@@ -254,6 +254,22 @@ variable "vault_storage_raft_retry_join_api_port" {
   default     = 8200
 }
 
+variable "vault_raft_retry_autojoin" {
+  description = <<EOT
+    the auto_join values for [retry_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#retry_join-stanza)
+    - [auto_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join)
+    - [auto_join_scheme](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_scheme)
+    - [auto_join_port](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_port)
+    [discover](https://github.com/hashicorp/go-discover) has to be installed for vault_spread_vault_init_json
+  EOT
+  type = object({
+    auto_join        = string,
+    auto_join_scheme = optional(string, null),
+    auto_join_port   = optional(number, null),
+  })
+  default = null
+}
+
 variable "vault_tls_storage_raft_leader_ca_cert_file" {
   description = <<EOT
     the [leader_ca_cert_file](https://www.vaultproject.io/docs/configuration/storage/raft#leader_ca_cert_file)
@@ -279,21 +295,6 @@ variable "vault_tls_storage_raft_leader_client_key_file" {
   EOT
   type        = string
   default     = null
-}
-
-variable "vault_raft_retry_autojoin" {
-  description = <<EOT
-    the auto_join values for [retry_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#retry_join-stanza)
-    - [auto_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join)
-    - [auto_join_scheme](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_scheme)
-    - [auto_join_port](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_port)
-  EOT
-  type = object({
-    auto_join        = string,
-    auto_join_scheme = optional(string, null),
-    auto_join_port   = optional(number, null),
-  })
-  default = null
 }
 
 variable "vault_raft_leader_tls_servername" {
