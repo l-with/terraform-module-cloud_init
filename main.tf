@@ -1,4 +1,8 @@
 locals {
+  python3_pip_modules = concat(
+    var.python3_pip_modules,
+    !local.parts_active.certbot ? [] : var.certbot_dns_plugins,
+  )
   parts_active = {
     b2                 = var.b2,
     certbot            = var.certbot,
@@ -26,8 +30,8 @@ locals {
     lnxrouter       = var.lnxrouter,
     network         = var.network,
     nginx           = var.nginx,
-    packages        = var.packages != []
-    python3_pip     = var.python3_pip || var.s3cmd,
+    packages        = var.package,
+    python3_pip     = var.python3_pip || var.s3cmd || var.certbot,
     rke2_node_1st   = var.rke2 && var.rke2_node_1st,
     rke2_node_other = var.rke2 && var.rke2_node_other,
     runcmd          = var.runcmd,

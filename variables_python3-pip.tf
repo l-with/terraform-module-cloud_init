@@ -3,3 +3,9 @@ variable "python3_pip" {
   type        = bool
   default     = false
 }
+
+variable "python3_pip_modules" {
+  description = "the python modules to be installed"
+  type        = list(string)
+  default     = []
+}

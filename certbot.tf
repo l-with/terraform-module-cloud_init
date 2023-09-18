@@ -1,17 +1,13 @@
 locals {
-  certbot_packages = [
-    "software-properties-common",
-    "certbot",
-  ]
+  certbot_python3_pip_modules = concat(
+    [
+      "certbot",
+    ],
+    var.certbot_dns_plugins,
+  )
   certbot = !local.parts_active.certbot ? {} : {
     runcmd = concat(
       [
-        {
-          template = "${path.module}/templates/${local.yml_runcmd}_packages.tpl",
-          vars = {
-            packages = join(" ", local.certbot_packages),
-          }
-        },
         {
           template = "${path.module}/templates//${local.yml_runcmd}_write_file.tpl",
           vars = {
@@ -26,14 +22,6 @@ locals {
             write_file_mode  = "644"
           },
         }
-      ],
-      length(var.certbot_dns_plugins) == 0 ? [] : [
-        {
-          template = "${path.module}/templates/certbot/${local.yml_runcmd}_install_certbot_dns_plugins.tpl",
-          vars = {
-            certbot_dns_plugins = jsonencode(var.certbot_dns_plugins)
-          }
-        },
       ],
       [for certbot_automatic_renewal_post_hook in var.certbot_automatic_renewal_post_hooks :
         {
