@@ -167,6 +167,12 @@ variable "vault_spread_vault_init_json" {
   default     = false
 }
 
+variable "vault_receive_vault_init_json" {
+  description = "if the vault init json result should be received from spreading"
+  type        = bool
+  default     = false
+}
+
 variable "vault_spread_vault_init_json_id_file" {
   description = "the ssh id file used for spreading the vault init json result to the cluster"
   type        = string
@@ -182,6 +188,12 @@ variable "vault_remove_spread_vault_init_json_id_file" {
 variable "vault_fetch_vault_init_json" {
   description = "if the vault init json result should be fetched from the cluster"
   type        = string
+  default     = false
+}
+
+variable "vault_provide_vault_init_json" {
+  description = "if the vault init json result should be provided for fetching"
+  type        = bool
   default     = false
 }
 
@@ -201,12 +213,6 @@ variable "vault_remove_fetch_vault_init_json_id_file" {
   description = "if the ssh id file used for fetching the vault init json result should be removed after used"
   type        = bool
   default     = true
-}
-
-variable "vault_receive_vault_init_json" {
-  description = "if the vault init json result should be received"
-  type        = bool
-  default     = false
 }
 
 variable "vault_remove_vault_init_json" {
@@ -266,12 +272,14 @@ variable "vault_raft_retry_autojoin" {
     - [auto_join](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join)
     - [auto_join_scheme](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_scheme)
     - [auto_join_port](https://developer.hashicorp.com/vault/docs/configuration/storage/raft#auto_join_port)
+    - computation_command_template: template to compute the node ip matching the ip of another node
     [discover](https://github.com/hashicorp/go-discover) has to be installed for vault_spread_vault_init_json
   EOT
   type = object({
-    auto_join        = string,
-    auto_join_scheme = optional(string, null),
-    auto_join_port   = optional(number, null),
+    auto_join                       = string,
+    auto_join_scheme                = optional(string, null),
+    auto_join_port                  = optional(number, null),
+    ip_computation_command_template = optional(string, "ip route get $ip | grep $ip | sed -E 's/.*src (\\S*) .*/\\1/'"),
   })
   default = null
 }
