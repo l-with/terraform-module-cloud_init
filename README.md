@@ -391,6 +391,7 @@ No resources.
 | <a name="input_package_upgrade"></a> [package\_upgrade](#input\_package\_upgrade) | if cloud-init user data for package\_upgrade should be generated | `bool` | `true` | no |
 | <a name="input_packages"></a> [packages](#input\_packages) | the list of packages to be installed | `list(string)` | `[]` | no |
 | <a name="input_python3_pip"></a> [python3\_pip](#input\_python3\_pip) | if cloud-init user data for installing python3-pip should be generated | `bool` | `false` | no |
+| <a name="input_python3_pip_modules"></a> [python3\_pip\_modules](#input\_python3\_pip\_modules) | the python modules to be installed | `list(string)` | `[]` | no |
 | <a name="input_rke2"></a> [rke2](#input\_rke2) | if cloud-init user data for the rke2 should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_1st"></a> [rke2\_node\_1st](#input\_rke2\_node\_1st) | if cloud-init user data for the rke2 1st node should be generated | `bool` | `false` | no |
 | <a name="input_rke2_node_1st_cert_manager_crd_version"></a> [rke2\_node\_1st\_cert\_manager\_crd\_version](#input\_rke2\_node\_1st\_cert\_manager\_crd\_version) | the version of cert-manager CRDs to be installed | `string` | `"1.11.0"` | no |
