@@ -300,42 +300,6 @@ locals {
               }
             },
           ],
-          !var.vault_fetch_vault_init_json ? [] : concat(
-            [
-              {
-                template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
-                vars = {
-                  write_file_directory = dirname(local.vault_ip_computation_command_full_path),
-                  write_file_name      = basename("${local.vault_ip_computation_command_full_path}.tpl"),
-                  write_file_content   = var.vault_raft_retry_autojoin.ip_computation_command_template,
-                  write_file_owner     = "root"
-                  write_file_group     = "root"
-                  write_file_mode      = "0644",
-                }
-              }
-            ],
-            [
-              {
-                template = "${path.module}/templates/vault/${local.yml_runcmd}_fetch_init.tpl",
-                vars = {
-                  vault_cluster_ips_full_path = local.vault_cluster_ips_full_path,
-                  vault_auto_join_port = (
-                    var.vault_raft_retry_autojoin.auto_join_port == null ? 8200
-                    : var.vault_raft_retry_autojoin.auto_join_port
-                  ),
-                  vault_cacert                               = local.vault_tls_client_ca_file,
-                  vault_fetch_vault_init_json_from           = var.vault_fetch_vault_init_json_from,
-                  vault_fetch_vault_init_json_id_file        = var.vault_fetch_vault_init_json_id_file,
-                  vault_remove_fetch_vault_init_json_id_file = var.vault_remove_fetch_vault_init_json_id_file,
-                  vault_init_json_full_path                  = local.vault_init_json_full_path,
-                  vault_bootstrap_files_path                 = var.vault_bootstrap_files_path,
-                  vault_pgp_priv_keys                        = join(",", local.vault_pgp_priv_keys),
-                  vault_pgp_pub_keys                         = join(",", local.vault_pgp_pub_keys),
-                  vault_ip_computation_command_full_path     = local.vault_ip_computation_command_full_path,
-                }
-              },
-            ],
-          ),
           [
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_service.tpl",
@@ -471,7 +435,6 @@ locals {
                 vault_init_json_enc_full_path        = local.vault_init_json_enc_full_path,
                 vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path,
                 vault_init_json_file_mode            = var.vault_init_json_file_mode,
-                vault_provide_vault_init_json        = var.vault_provide_vault_init_json,
                 vault_remove_vault_init_json         = var.vault_remove_vault_init_json ? "true" : null,
               }
             },

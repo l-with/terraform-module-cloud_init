@@ -115,24 +115,6 @@ module "vault_spread_vault_init_json_needs_vault_spread_vault_init_json_id_file"
   error_message = "error: vault_spread_vault_init_json needs vault_spread_vault_init_json_id_file"
 }
 
-module "vault_fetch_vault_init_json_needs_vault_fertch_vault_init_json_id_file" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
-
-  use_jq        = true
-  assert        = !(var.vault_fetch_vault_init_json && var.vault_fetch_vault_init_json_id_file == null)
-  error_message = "error: vault_fetch_vault_init_json needs vault_fetch_vault_init_json_id_file"
-}
-
-module "vault_fetch_vault_init_json_and_vault_receive_vault_init_json_not_together" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
-
-  use_jq        = true
-  assert        = !(var.vault_spread_vault_init_json && var.vault_receive_vault_init_json)
-  error_message = "error: vault_spread_vault_init_json and vault_receive_vault_init_json not together"
-}
-
 module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
