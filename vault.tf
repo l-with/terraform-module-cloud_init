@@ -116,6 +116,9 @@ locals {
       tls_client_ca_file = listener.tls_client_ca_file != null ? listener.tls_client_ca_file : local.vault_tls_client_ca_file,
     }
   ]
+  vault_user  = "vault"
+  vault_group = "vault"
+
   vault = !local.parts_active.vault ? {} : merge(
     !var.vault_start ? {} : {
       write_files = concat(
@@ -210,9 +213,9 @@ locals {
                   vault_raft_retry_auto_join_port            = var.vault_raft_retry_autojoin == null ? null : var.vault_raft_retry_autojoin.auto_join_port,
                   vault_disable_mlock                        = var.vault_disable_mlock,
                 }),
-                write_file_owner = "vault"
-                write_file_group = "vault"
-                write_file_mode  = "0644",
+                write_file_owner = local.vault_user
+                write_file_group = local.vault_group
+                write_file_mode  = "0444",
               }
             },
             {
@@ -222,6 +225,9 @@ locals {
                 vault_config_path        = var.vault_config_path,
                 ipv4_address_command     = var.ipv4_address_command
                 jsonencoded_ip_addresses = jsonencode(var.ip_addresses),
+                write_file_owner         = local.vault_user
+                write_file_group         = local.vault_group
+                write_file_mode          = "0444",
               }
             },
             {
