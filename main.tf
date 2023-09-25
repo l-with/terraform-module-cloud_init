@@ -41,7 +41,7 @@ locals {
     wait_until = (
       var.wait_until || var.mailcow || var.rke2_node_1st || (
         var.vault && var.vault_start && (
-          var.vault_init || var.vault_unseal || var.vault_spread_vault_init_json
+          var.vault_init || var.vault_unseal || var.vault_spread_vault_init_json || var.vault_receive_vault_init_json
         )
       )
     ),
