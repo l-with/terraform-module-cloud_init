@@ -11,6 +11,7 @@ variable "users" {
     groups              = optional(string, null),
     sudo                = optional(string, null),
     ssh_authorized_keys = optional(list(string), []),
+    passwd              = optional(string, null),
     lock_passwd         = optional(bool, true),
   }))
   default = []

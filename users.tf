@@ -18,6 +18,7 @@ locals {
             groups                          = user.groups,
             sudo                            = user.sudo,
             jsonencoded_ssh_authorized_keys = jsonencode(user.ssh_authorized_keys),
+            passwd                          = user.passwd,
             lock_passwd                     = user.lock_passwd,
           }
         }

@@ -11,6 +11,9 @@
       - ${ssh_authorized_key}
 %{ endfor ~}
 %{ endif ~}
+%{ if passwd != null ~}
+    passwd: ${passwd}
+%{ endif ~}
 %{ if lock_passwd != null ~}
     lock_passwd: ${lock_passwd}
 %{ endif ~}
