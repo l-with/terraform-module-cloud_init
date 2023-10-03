@@ -279,6 +279,7 @@ No providers.
 | <a name="module_rke2_node_needs_rke2_node_pre_shared_secret"></a> [rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret](#module\_rke2\_node\_needs\_rke2\_node\_pre\_shared\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_needs_rke2_node_rke2_node_cert_package_secret"></a> [rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret](#module\_rke2\_node\_needs\_rke2\_node\_rke2\_node\_cert\_package\_secret) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_rke2_node_other_needs_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip](#module\_rke2\_node\_other\_needs\_rke2\_node\_other\_node\_1st\_ip) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_terraform_install_method_binary_needs_terraform_version"></a> [terraform\_install\_method\_binary\_needs\_terraform\_version](#module\_terraform\_install\_method\_binary\_needs\_terraform\_version) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_jq_install_method_binary"></a> [vault\_init\_needs\_jq\_install\_method\_binary](#module\_vault\_init\_needs\_jq\_install\_method\_binary) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_vault_init_addr"></a> [vault\_init\_needs\_vault\_init\_addr](#module\_vault\_init\_needs\_vault\_init\_addr) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_vault_init_needs_vault_init_public_key"></a> [vault\_init\_needs\_vault\_init\_public\_key](#module\_vault\_init\_needs\_vault\_init\_public\_key) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
@@ -410,7 +411,8 @@ No resources.
 | <a name="input_runcmd_scripts"></a> [runcmd\_scripts](#input\_runcmd\_scripts) | the runcmd scripts to be executed | `list(string)` | `[]` | no |
 | <a name="input_s3cmd"></a> [s3cmd](#input\_s3cmd) | if cloud-init user data for installing the [S3cmd](https://github.com/s3tools/s3cmd) should be generated | `bool` | `false` | no |
 | <a name="input_terraform"></a> [terraform](#input\_terraform) | if cloud-init user data for installing terraform should be generated | `bool` | `false` | no |
-| <a name="input_terraform_install_method"></a> [terraform\_install\_method](#input\_terraform\_install\_method) | the install method, supported methods are 'apt' | `string` | `"apt"` | no |
+| <a name="input_terraform_install_method"></a> [terraform\_install\_method](#input\_terraform\_install\_method) | the install method, supported methods are 'apt', 'binary'<br>  - 'binary' uses terraform\_version | `string` | `"apt"` | no |
+| <a name="input_terraform_version"></a> [terraform\_version](#input\_terraform\_version) | the terraform version to be installed | `string` | `null` | no |
 | <a name="input_tool"></a> [tool](#input\_tool) | if cloud-init user data for installing tools should be generated | `bool` | `false` | no |
 | <a name="input_tools"></a> [tools](#input\_tools) | the list of tools that should be installed | <pre>list(object({<br>    name      = string,<br>    url       = string,<br>    dest_path = optional(string, "/usr/local/bin"),<br>  }))</pre> | `[]` | no |
 | <a name="input_user"></a> [user](#input\_user) | if cloud-init user data for users should be generated | `bool` | `true` | no |
