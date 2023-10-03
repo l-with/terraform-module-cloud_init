@@ -97,6 +97,17 @@ module "rke2_node_other_needs_rke2_node_other_node_1st_ip" {
   error_message = "error: rke2_node_other needs rke2_node_other_node_1st_ip"
 }
 
+module "terraform_install_method_binary_needs_terraform_version" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  count = (var.terraform && var.terraform_install_method == "binary") ? 1 : 0
+
+  use_jq        = true
+  assert        = !(var.terraform_install_method == "binary" && var.terraform_version == null)
+  error_message = "error: terraform_install_method 'binary' needs terraform_version"
+}
+
 module "vault_start_needs_vault_api_addr" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"

@@ -8,7 +8,9 @@ locals {
       runcmd = !local.parts_active.terraform ? [] : [
         {
           template = "${path.module}/templates/terraform/${local.yml_runcmd}_${var.terraform_install_method}_install.tpl",
-          vars     = {}
+          vars = {
+            terraform_version = var.terraform_version, // ignored for terraform_install_method 'apt'
+          }
         },
       ],
     },
