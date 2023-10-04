@@ -1,6 +1,6 @@
 locals {
-  docker_service_file_full_path            = "/etc/systemd/system/docker.service"
-  docker_socket_file_full_path             = "/etc/systemd/system/docker.socket"
+  docker_service_file_full_path = "/etc/systemd/system/docker.service"
+  docker_socket_file_full_path  = "/etc/systemd/system/docker.socket"
 
   docker = !local.parts_active.docker ? {} : {
     runcmd = concat(

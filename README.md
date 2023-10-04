@@ -271,7 +271,8 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_cloud_init_part"></a> [cloud\_init\_part](#module\_cloud\_init\_part) | ./modules/cloud_init_part | n/a |
-| <a name="module_docker_install_method_binary_needs_vault_version"></a> [docker\_install\_method\_binary\_needs\_vault\_version](#module\_docker\_install\_method\_binary\_needs\_vault\_version) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_containerd_install_method_binary_needs_containerd_version"></a> [containerd\_install\_method\_binary\_needs\_containerd\_version](#module\_containerd\_install\_method\_binary\_needs\_containerd\_version) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
+| <a name="module_docker_install_method_binary_needs_docker_version"></a> [docker\_install\_method\_binary\_needs\_docker\_version](#module\_docker\_install\_method\_binary\_needs\_docker\_version) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_duplicacy_script"></a> [duplicacy\_script](#module\_duplicacy\_script) | ./modules/duplicacy_script | n/a |
 | <a name="module_duplicacy_storage_backend_one_of"></a> [duplicacy\_storage\_backend\_one\_of](#module\_duplicacy\_storage\_backend\_one\_of) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
 | <a name="module_either_rke2_node_1st_or_rke2_node_other"></a> [either\_rke2\_node\_1st\_or\_rke2\_node\_other](#module\_either\_rke2\_node\_1st\_or\_rke2\_node\_other) | rhythmictech/errorcheck/terraform | ~> 1.3.0 |
@@ -316,11 +317,14 @@ No resources.
 | <a name="input_certbot_dns_plugins"></a> [certbot\_dns\_plugins](#input\_certbot\_dns\_plugins) | the list of certbot plugins to be installed | `list(string)` | `[]` | no |
 | <a name="input_comment"></a> [comment](#input\_comment) | if cloud-init user data with comments should be generated | `bool` | `false` | no |
 | <a name="input_comments"></a> [comments](#input\_comments) | the comments to be added to cloud-init user data<br>    this can be used to change cloud-init user-data to trigger rebuild without changing relevant data | `list(string)` | `[]` | no |
+| <a name="input_containerd"></a> [containerd](#input\_containerd) | if cloud-init user data for installing containerd should be generated | `bool` | `false` | no |
+| <a name="input_containerd_install_method"></a> [containerd\_install\_method](#input\_containerd\_install\_method) | the install method, supported methods are 'binary'<br>  - 'binary' uses containerd\_version | `string` | `"binary"` | no |
+| <a name="input_containerd_version"></a> [containerd\_version](#input\_containerd\_version) | the containerd version to be installed | `string` | `null` | no |
 | <a name="input_croc"></a> [croc](#input\_croc) | if cloud-init user data for installing croc should be generated | `bool` | `false` | no |
 | <a name="input_docker"></a> [docker](#input\_docker) | if cloud-init user data for installing docker should be generated | `bool` | `false` | no |
 | <a name="input_docker_container"></a> [docker\_container](#input\_docker\_container) | if cloud-init user data for installing docker containers should be generated | `bool` | `false` | no |
 | <a name="input_docker_container_list"></a> [docker\_container\_list](#input\_docker\_container\_list) | the docker containers the cloud-init user data should be generated for | <pre>list(object({<br>    name        = string, // --name<br>    image       = string,<br>    ports       = optional(string, null), // --publish<br>    command     = string,<br>    environment = optional(map(string), {}),<br>  }))</pre> | `[]` | no |
-| <a name="input_docker_install_method"></a> [docker\_install\_method](#input\_docker\_install\_method) | the install method, supported methods are 'apt', 'binary'<br>  - 'binary' uses docker\_version | `string` | `"apt"` | no |
+| <a name="input_docker_install_method"></a> [docker\_install\_method](#input\_docker\_install\_method) | the install method, supported methods are 'apt', 'binary'<br>  - 'binary' uses docker\_version and activates containerd installation | `string` | `"apt"` | no |
 | <a name="input_docker_manipulate_iptables"></a> [docker\_manipulate\_iptables](#input\_docker\_manipulate\_iptables) | if docker manipulate ip-tables should _not_ be generated for cloud-init user data for docker | `bool` | `true` | no |
 | <a name="input_docker_version"></a> [docker\_version](#input\_docker\_version) | the docker version to be installed | `string` | `null` | no |
 | <a name="input_duplicacy"></a> [duplicacy](#input\_duplicacy) | if cloud-init user data for installing duplicacy should be generated | `bool` | `false` | no |
