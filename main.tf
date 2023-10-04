@@ -48,6 +48,7 @@ locals {
     ),
     write_file = var.write_file
     user       = var.user
+    zypper     = var.zypper
   }
 }
 
@@ -98,6 +99,7 @@ locals {
     wait_until         = local.wait_until,
     write_file         = local.write_file,
     user               = local.users,
+    zypper             = local.zypper,
   }
   active_parts_inputs = {
     for part in keys(local.parts_active) :
@@ -107,6 +109,7 @@ locals {
     "lineinfile",
     "hetzner",
     "packages",
+    "zypper",
     "write_file",
     "tool",
     "user",

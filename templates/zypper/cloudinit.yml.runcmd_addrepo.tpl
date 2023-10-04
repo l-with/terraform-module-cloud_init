@@ -1,0 +1,1 @@
+  - zypper addrepo ${uri} ${alias}

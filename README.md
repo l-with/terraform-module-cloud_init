@@ -252,6 +252,12 @@ generic writing of files
 
 For input variables: s. [write_file](#write_file).
 
+### zypper
+
+s. [zypper](https://en.opensuse.org/Portal:Zypper)
+
+For input variables: s. [zypper](#zypper).
+
 ## terraform
 
 <!-- BEGIN_TF_DOCS -->
