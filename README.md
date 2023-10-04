@@ -483,6 +483,8 @@ No resources.
 | <a name="input_wait_until"></a> [wait\_until](#input\_wait\_until) | if cloud-init user data for installing [wait\_until](https://github.com/l-with/wait-until) should be generated | `bool` | `false` | no |
 | <a name="input_write_file"></a> [write\_file](#input\_write\_file) | if files should be written | `bool` | `false` | no |
 | <a name="input_write_files"></a> [write\_files](#input\_write\_files) | the files to be written<br>  - encoding of the content can be 'text/plain' (default) or 'base64' | <pre>list(object({<br>    file_name = string,<br>    content   = string,<br>    encoding  = optional(string, "text/plain"),<br>    owner     = optional(string, "root"),<br>    group     = optional(string, "root"),<br>    mode      = optional(string, "644"),<br>  }))</pre> | `[]` | no |
+| <a name="input_zypper"></a> [zypper](#input\_zypper) | if cloud-init user data for adding zypper repositories should be generated | `bool` | `false` | no |
+| <a name="input_zypper_repositories"></a> [zypper\_repositories](#input\_zypper\_repositories) | the zypper repositories that should be added | <pre>list(object({<br>    uri   = string,<br>    alias = string,<br>  }))</pre> | <pre>[<br>  {<br>    "alias": "opensuse-oss-leap-15.5",<br>    "uri": "http://download.opensuse.org/distribution/leap/15.5/repo/oss/"<br>  }<br>]</pre> | no |
 
 #### Outputs
 
