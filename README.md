@@ -66,6 +66,12 @@ This can be used to change cloud-init user-data to trigger rebuild without chang
 
 For input variables: s. [comment](#input_comment).
 
+### containerd
+
+s. [containerd](https://github.com/containerd/containerd/blob/main/docs/getting-started.md)
+
+For input variables: s. [containerd](#input_containerd).
+
 ### croc
 
 s. [croc](https://github.com/schollz/croc#install)

@@ -274,7 +274,7 @@ module "gzip_needs_base64_encode" {
   error_message = "error: gzip needs base64_encode"
 }
 
-module "docker_install_method_binary_needs_vault_version" {
+module "docker_install_method_binary_needs_docker_version" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
@@ -283,5 +283,16 @@ module "docker_install_method_binary_needs_vault_version" {
   use_jq        = true
   assert        = !(var.docker_install_method == "binary" && var.docker_version == null)
   error_message = "error: docker_install_method 'binary' needs docker_version"
+}
+
+module "containerd_install_method_binary_needs_containerd_version" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  count = (((var.docker && var.docker_install_method == "binary") || var.containerd) && var.containerd_install_method == "binary") ? 1 : 0
+
+  use_jq        = true
+  assert        = !(var.containerd_install_method == "binary" && var.containerd_version == null)
+  error_message = "error: containerd_install_method 'binary' needs containerd_version"
 }
 

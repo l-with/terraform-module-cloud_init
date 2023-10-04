@@ -1,0 +1,3 @@
+  - systemctl daemon-reload
+  - systemctl enable containerd.service
+  - systemctl start containerd.service

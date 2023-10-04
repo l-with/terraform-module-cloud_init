@@ -1,4 +1,3 @@
-  # service
   - systemctl daemon-reload
   - systemctl enable docker.socket
   - systemctl enable docker.service

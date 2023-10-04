@@ -7,7 +7,7 @@ variable "docker" {
 variable "docker_install_method" {
   description = <<EOT
   the install method, supported methods are 'apt', 'binary'
-  - 'binary' uses docker_version
+  - 'binary' uses docker_version and activates containerd installation
 EOT
   type        = string
   default     = "apt"

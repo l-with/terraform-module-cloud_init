@@ -1,6 +1,6 @@
 locals {
-  docker_service_file_full_path = "/etc/systemd/system/multi-user.target.wants/docker.service"
-  docker_socket_file_full_path  = "/etc/systemd/system/sockets.target.wants/docker.socket"
+  docker_service_file_full_path            = "/etc/systemd/system/docker.service"
+  docker_socket_file_full_path             = "/etc/systemd/system/docker.socket"
 
   docker = !local.parts_active.docker ? {} : {
     runcmd = concat(
@@ -16,7 +16,7 @@ locals {
         {
           template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
           vars = {
-            runcmd_script = "  # service, socket"
+            runcmd_script = "  # systemd service, socket"
           }
         },
         {

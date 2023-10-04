@@ -7,6 +7,7 @@ locals {
     b2                 = var.b2,
     certbot            = var.certbot,
     croc               = var.croc,
+    containerd         = var.containerd || (var.docker && var.docker_install_method == "binary"),
     docker             = var.docker || var.docker_container || var.mailcow,
     docker_container   = var.docker_container,
     duplicacy          = var.duplicacy,
@@ -67,6 +68,7 @@ locals {
     b2                 = local.b2,
     certbot            = local.certbot,
     croc               = local.croc,
+    containerd         = local.containerd,
     docker             = local.docker,
     docker_container   = local.docker_container,
     duplicacy          = local.duplicacy,
@@ -111,6 +113,7 @@ locals {
     "netcat",
     "network",
     "croc",
+    "containerd",
     "docker",
     "docker_container",
     "certbot",
@@ -190,21 +193,37 @@ locals {
 
   cloud_init = join(
     "\n",
-    [
-      local.cloud_init_start,
-      local.cloud_init_package_update,
-      local.cloud_init_package_upgrade,
-      local.cloud_init_package_reboot_if_required,
-      local.cloud_init_write_files_start,
-      local.cloud_init_write_files,
-      local.cloud_init_users_start,
-      local.cloud_init_users,
-      local.cloud_init_packages_start,
-      local.cloud_init_packages,
-      local.cloud_init_runcmd_start,
-      local.cloud_init_runcmd,
-      local.cloud_init_runcmd_end
-    ],
+    concat(
+      [
+        local.cloud_init_start,
+      ],
+      local.cloud_init_package_update == "" ? [] : [
+        local.cloud_init_package_update,
+      ],
+      local.cloud_init_package_upgrade == "" ? [] : [
+        local.cloud_init_package_upgrade,
+      ],
+      local.cloud_init_package_reboot_if_required == "" ? [] : [
+        local.cloud_init_package_reboot_if_required,
+      ],
+      local.cloud_init_write_files == "" ? [] : [
+        local.cloud_init_write_files_start,
+        local.cloud_init_write_files,
+      ],
+      local.cloud_init_users == "" ? [] : [
+        local.cloud_init_users_start,
+        local.cloud_init_users,
+      ],
+      local.cloud_init_packages == "" ? [] : [
+        local.cloud_init_packages_start,
+        local.cloud_init_packages,
+      ],
+      local.cloud_init_runcmd == "" ? [] : [
+        local.cloud_init_runcmd_start,
+        local.cloud_init_runcmd,
+        local.cloud_init_runcmd_end
+      ],
+    ),
   )
   cloud_init_base64gzip = base64gzip(local.cloud_init)
   cloud_init_base64     = base64encode(local.cloud_init)
