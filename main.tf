@@ -221,9 +221,13 @@ locals {
         local.cloud_init_packages_start,
         local.cloud_init_packages,
       ],
-      local.cloud_init_runcmd == "" ? [] : [
+      [
         local.cloud_init_runcmd_start,
+      ],
+      local.cloud_init_runcmd == "" ? [] : [
         local.cloud_init_runcmd,
+      ],
+      [
         local.cloud_init_runcmd_end
       ],
     ),
