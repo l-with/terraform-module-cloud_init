@@ -20,10 +20,14 @@ output "vault" {
     vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path,
     vault_init_json_file_mode            = var.vault_init_json_file_mode,
     vault_init_with_pgp_keys             = local.vault_init_with_pgp_keys,
+    vault_internal_pgp_pub_keys = [
+      for vault_internal_pgp_key in local.vault_internal_pgp_keys :
+      vault_internal_pgp_key.pgp_pub_key
+    ]
   }
 }
 
 output "ipv4_address_command" {
-  description = "the command to determin the ipv4 address"
+  description = "the command to determine the ipv4 address"
   value       = var.ipv4_address_command
 }
