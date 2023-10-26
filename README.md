@@ -491,6 +491,6 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_cloud_init"></a> [cloud\_init](#output\_cloud\_init) | the cloud-init user data |
-| <a name="output_ipv4_address_command"></a> [ipv4\_address\_command](#output\_ipv4\_address\_command) | the command to determin the ipv4 address |
+| <a name="output_ipv4_address_command"></a> [ipv4\_address\_command](#output\_ipv4\_address\_command) | the command to determine the ipv4 address |
 | <a name="output_vault"></a> [vault](#output\_vault) | the relevant results from vault install and init |
 <!-- END_TF_DOCS -->
