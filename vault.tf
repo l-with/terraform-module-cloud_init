@@ -301,6 +301,7 @@ locals {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_receive_init.tpl",
               vars = {
                 vault_init_json_full_path       = local.vault_init_json_full_path,
+                vault_init_json_pub_full_path   = local.vault_init_json_pub_full_path,
                 vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
                 jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys),
               }
@@ -415,6 +416,7 @@ locals {
                 ])),
                 vault_spread_vault_init_json_id_file        = var.vault_spread_vault_init_json_id_file,
                 vault_init_json_full_path                   = local.vault_init_json_full_path,
+                vault_init_json_pub_full_path               = local.vault_init_json_pub_full_path,
                 vault_remove_spread_vault_init_json_id_file = var.vault_remove_spread_vault_init_json_id_file,
                 vault_bootstrap_files_path                  = var.vault_bootstrap_files_path,
                 vault_pgp_priv_keys                         = join(" ", local.vault_pgp_priv_keys),
