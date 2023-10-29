@@ -385,3 +385,12 @@ variable "vault_chown_files" {
   type        = list(string)
   default     = []
 }
+
+variable "vault_helper_cmd_http_address" {
+  description = <<EOT
+    the vault address (http) for the helper cmds
+    (if null the helper cmds are not installed)
+  EOT
+  type        = string
+  default     = null
+}
