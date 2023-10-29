@@ -166,13 +166,14 @@ locals {
             }
           },
         ],
-        var.vault_helper_cmd_http_address == null ? [] : concat([
-          {
-            template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
-            vars = {
-              runcmd_script = "  # helper cmds"
+        var.vault_helper_cmd_http_address == null ? [] : concat(
+          [
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_runcmd.tpl",
+              vars = {
+                runcmd_script = "  # helper cmds"
+              }
             }
-          }
           ],
           [
             {
@@ -181,14 +182,32 @@ locals {
                 write_file_directory = "/usr/local/bin",
                 write_file_name      = "vault_status",
                 write_file_content = templatefile("${path.module}/templates/vault/vault_status.tpl", {
-                  vault_helper_cmd_http_address = var.vault_helper_cmd_http_address
+                  vault_helper_cmd_http_address = var.vault_helper_cmd_http_address,
                 }),
                 write_file_owner = "root"
                 write_file_group = "root"
                 write_file_mode  = "0755",
               }
             },
-        ]),
+          ],
+          [
+            for vault_endpoint in ["health", "leader", "seal-status", "seal-backend-status"] :
+            {
+              template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+              vars = {
+                write_file_directory = "/usr/local/bin",
+                write_file_name      = "vault_${vault_endpoint}",
+                write_file_content = templatefile("${path.module}/templates/vault/vault_api_endpoint.tpl", {
+                  vault_helper_cmd_http_address = var.vault_helper_cmd_http_address,
+                  vault_endpoint                = vault_endpoint,
+                }),
+                write_file_owner = "root"
+                write_file_group = "root"
+                write_file_mode  = "0755",
+              }
+            }
+          ]
+        ),
         (var.vault_raft_retry_autojoin == null && length(var.vault_storage_raft_cluster_members) == 0) ? [] : [
           {
             template = "${path.module}/templates/vault/${local.yml_runcmd}_cluster_ips.tpl",
