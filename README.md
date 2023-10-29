@@ -444,6 +444,7 @@ No resources.
 | <a name="input_vault_cluster_addr"></a> [vault\_cluster\_addr](#input\_vault\_cluster\_addr) | the [cluster\_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)<br>    the string '$ipv4\_address' can be used as placeholder for the server ipv4-address (determined by variable ipv4\_address\_command) | `string` | `null` | no |
 | <a name="input_vault_config_path"></a> [vault\_config\_path](#input\_vault\_config\_path) | the path for the vault configuration files | `string` | `"/etc/vault.d"` | no |
 | <a name="input_vault_disable_mlock"></a> [vault\_disable\_mlock](#input\_vault\_disable\_mlock) | the value for [disable\_mlock](https://www.vaultproject.io/docs/configuration#disable_mlock) | `bool` | `true` | no |
+| <a name="input_vault_helper_cmd_http_address"></a> [vault\_helper\_cmd\_http\_address](#input\_vault\_helper\_cmd\_http\_address) | the vault address (http) for the helper cmds<br>    (if null the helper cmds are not installed) | `string` | `null` | no |
 | <a name="input_vault_home_path"></a> [vault\_home\_path](#input\_vault\_home\_path) | the home of the vault specific files and folders | `string` | `"/srv/vault"` | no |
 | <a name="input_vault_init"></a> [vault\_init](#input\_vault\_init) | if vault should be initialized | `bool` | `true` | no |
 | <a name="input_vault_init_json_file_mode"></a> [vault\_init\_json\_file\_mode](#input\_vault\_init\_json\_file\_mode) | the file mode for the vault init json result files | `string` | `"640"` | no |
