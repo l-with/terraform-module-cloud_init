@@ -185,7 +185,7 @@ locals {
                 }),
                 write_file_owner = "root"
                 write_file_group = "root"
-                write_file_mode  = "0666",
+                write_file_mode  = "0755",
               }
             },
         ]),
