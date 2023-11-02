@@ -3,4 +3,5 @@
   - debian="apt-get --yes"
   - sles="zypper --non-interactive"
   - opensuse_leap="zypper --non-interactive"
-  - $${!_OS_ID} install ${packages}
+  - eval cmd=\$$_OS_ID
+  - $cmd install ${packages}
