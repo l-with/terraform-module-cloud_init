@@ -3,7 +3,7 @@ locals {
     runcmd = [{
       template = "${path.module}/templates/${local.yml_runcmd}_packages.tpl",
       vars = {
-        packages = "gpg"
+        packages = "gpg" // same with zypper
       }
     }]
   }
