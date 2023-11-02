@@ -1,4 +1,4 @@
-  - _OS_ID=$(cat /etc/os-release | grep ^ID= | sed 's/ID="//' | sed 's/"//')
+  - _OS_ID=$(cat /etc/os-release | grep ^ID= | sed 's/ID=//' | sed 's/"//g')
   - ubuntu="apt-get --yes"
   - debian="apt-get --yes"
   - sles="zypper --non-interactive"
