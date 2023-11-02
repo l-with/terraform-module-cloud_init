@@ -228,6 +228,12 @@ generic installing of tools
 
 For input variables: s. [tool](#tool).
 
+### unzip
+
+s. [unzip](#unzip)
+
+For input variables: s. [unzip](#unzip).
+
 ### users 
 
 s. [users](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#users-and-groups)
