@@ -3,7 +3,7 @@ locals {
     runcmd = concat([{
       template = "${path.module}/templates/${local.yml_runcmd}_packages.tpl",
       vars = {
-        packages = "golang"
+        packages = "golang" // same with zypper
       }
       }],
       [
