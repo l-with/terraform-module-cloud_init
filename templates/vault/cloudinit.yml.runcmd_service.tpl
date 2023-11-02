@@ -1,5 +1,4 @@
   # service
-  - chown vault:vault
   - systemctl daemon-reload
   - systemctl enable vault
   - systemctl start vault
