@@ -5,8 +5,6 @@
   - |
     export ip_address_${ip_address.ip_address_suffix}=$(${ip_address.computation_command})
 %{ endfor ~}
-  - mkdir --parent ${vault_config_path}
-  - chown ${write_file_owner}:${write_file_group} ${vault_config_path}
   - envsubst < ${vault_hcl_template_path}/vault.hcl > ${vault_config_path}/vault.hcl
   - chmod ${write_file_mode} ${vault_config_path}/vault.hcl
   - chown ${write_file_owner}:${write_file_group} ${vault_config_path}/vault.hcl

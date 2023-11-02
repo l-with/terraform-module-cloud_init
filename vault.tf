@@ -156,7 +156,8 @@ locals {
           {
             template = "${path.module}/templates/vault/${local.yml_runcmd}_${var.vault_install_method}_install.tpl",
             vars = {
-              vault_version = var.vault_version, // ignored for vault_install_method 'apt'
+              vault_version     = var.vault_version,     // ignored for vault_install_method 'apt'
+              vault_config_path = var.vault_config_path, // ignored for vault_install_method 'apt'
             }
           },
           {
