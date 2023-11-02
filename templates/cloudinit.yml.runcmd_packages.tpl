@@ -1,6 +1,6 @@
-  - _OS_ID=$(cat /etc/os-release | grep ^ID= | sed 's/ID=//' | sed 's/"//g')
+  - _OS_ID=$(cat /etc/os-release | grep ^ID= | sed 's/ID=//' | sed 's/"//g' | sed 's/-/_/g')
   - ubuntu="apt-get --yes"
   - debian="apt-get --yes"
   - sles="zypper --non-interactive"
-  - opensuse-leap="zypper --non-interactive"
+  - opensuse_leap="zypper --non-interactive"
   - $${!_OS_ID} install ${packages}
