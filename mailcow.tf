@@ -6,7 +6,7 @@ locals {
         {
           template = "${path.module}/templates/${local.yml_runcmd}_packages.tpl",
           vars = {
-            packages = "git",
+            packages = "git", // same with zypper
           }
         },
         {
