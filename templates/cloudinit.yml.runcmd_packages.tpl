@@ -1,1 +1,6 @@
-  - apt-get install ${packages} -y
+  - _OS_ID=$(cat /etc/os-release | grep ^ID= | sed 's/ID="//' | sed 's/"//')
+  - ubuntu="apt-get --yes"
+  - debian="apt-get --yes"
+  - sles="zypper --non-interactive"
+  - opensuse-leap="zypper --non-interactive"
+  - $${!_OS_ID} install ${packages}

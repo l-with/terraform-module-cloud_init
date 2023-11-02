@@ -35,3 +35,18 @@ variable "ip_addresses" {
   }))
   default = []
 }
+
+/*
+variable "package_manager" {
+  description = <<EOT
+  the default package manager to be used for installing,
+  supported values are 'apt', 'zypper'
+EOT
+  type        = string
+  default     = null
+  validation {
+    condition     = var.package_manager == null || contains(["apt", "zypper"], var.package_manager)
+    error_message = "Supported values are 'apt', 'zypper'."
+  }
+}
+*/

@@ -13,7 +13,7 @@ locals {
     duplicacy          = var.duplicacy,
     encrypted_packages = var.encrypted_packages,
     fail2ban           = var.fail2ban,
-    gettext_base       = var.gettext_base || var.rke2_node_1st || var.rke2_node_other,
+    gettext_base       = var.gettext_base,
     hetzner            = var.hetzner
     jq = (
       var.jq || (
@@ -37,6 +37,7 @@ locals {
     rke2_node_other = var.rke2 && var.rke2_node_other,
     runcmd          = var.runcmd,
     tool            = var.tool,
+    unzip           = var.unzip || ( var.vault && var.vault_install_method == "binary")
     s3cmd           = var.s3cmd,
     vault           = var.vault || var.rke2_node_1st,
     wait_until = (
@@ -95,10 +96,11 @@ locals {
     s3cmd              = local.s3cmd,
     terraform          = local.terraform,
     tool               = local.tool,
+    user               = local.users,
+    unzip              = local.unzip,
     vault              = local.vault,
     wait_until         = local.wait_until,
     write_file         = local.write_file,
-    user               = local.users,
     zypper             = local.zypper,
   }
   active_parts_inputs = {
@@ -110,6 +112,7 @@ locals {
     "hetzner",
     "packages",
     "zypper",
+    "unzip",
     "write_file",
     "tool",
     "user",
