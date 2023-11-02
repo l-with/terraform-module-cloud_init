@@ -37,7 +37,7 @@ locals {
     rke2_node_other = var.rke2 && var.rke2_node_other,
     runcmd          = var.runcmd,
     tool            = var.tool,
-    unzip           = var.unzip || ( var.vault && var.vault_install_method == "binary")
+    unzip           = var.unzip || (var.vault && var.vault_install_method == "binary")
     s3cmd           = var.s3cmd,
     vault           = var.vault || var.rke2_node_1st,
     wait_until = (

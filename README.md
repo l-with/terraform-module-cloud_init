@@ -440,6 +440,8 @@ No resources.
 | <a name="input_terraform_version"></a> [terraform\_version](#input\_terraform\_version) | the terraform version to be installed | `string` | `null` | no |
 | <a name="input_tool"></a> [tool](#input\_tool) | if cloud-init user data for installing tools should be generated | `bool` | `false` | no |
 | <a name="input_tools"></a> [tools](#input\_tools) | the list of tools that should be installed | <pre>list(object({<br>    name      = string,<br>    url       = string,<br>    dest_path = optional(string, "/usr/local/bin"),<br>  }))</pre> | `[]` | no |
+| <a name="input_unzip"></a> [unzip](#input\_unzip) | if cloud-init user data for installing unzip should be generated | `bool` | `false` | no |
+| <a name="input_unzip_install_method"></a> [unzip\_install\_method](#input\_unzip\_install\_method) | the install method, supported methods are 'apt', 'zypper' | `string` | `"apt"` | no |
 | <a name="input_user"></a> [user](#input\_user) | if cloud-init user data for users should be generated | `bool` | `true` | no |
 | <a name="input_users"></a> [users](#input\_users) | the list of user configurations | <pre>list(object({<br>    name                = string,<br>    groups              = optional(string, null),<br>    sudo                = optional(string, null),<br>    ssh_authorized_keys = optional(list(string), []),<br>    passwd              = optional(string, null),<br>    lock_passwd         = optional(bool, true),<br>  }))</pre> | `[]` | no |
 | <a name="input_vault"></a> [vault](#input\_vault) | if cloud-init user data for installing vault should be generated | `bool` | `false` | no |
