@@ -3,6 +3,7 @@ locals {
     apt    = "/usr/bin",
     binary = "/usr/local/bin"
   }
+  vault_zipped_binary_url                = replace(var.vault_zipped_binary_url, "$${vault_version}", var.vault_version)
   vault_init_public_key_full_path        = "${var.vault_bootstrap_files_path}/vault_init_public.key"
   vault_init_json_pub_full_path          = "${var.vault_bootstrap_files_path}/vault_init_pub.json"
   vault_init_json_enc_full_path          = "${var.vault_bootstrap_files_path}/vault_init_json.enc"
@@ -156,8 +157,9 @@ locals {
           {
             template = "${path.module}/templates/vault/${local.yml_runcmd}_${var.vault_install_method}_install.tpl",
             vars = {
-              vault_version     = var.vault_version,     // ignored for vault_install_method 'apt'
-              vault_config_path = var.vault_config_path, // ignored for vault_install_method 'apt'
+              vault_version           = var.vault_version,             // ignored for vault_install_method 'apt'
+              vault_config_path       = var.vault_config_path,         // ignored for vault_install_method 'apt'
+              vault_zipped_binary_url = local.vault_zipped_binary_url, // ignored for vault_install_method 'apt'
             }
           },
           {

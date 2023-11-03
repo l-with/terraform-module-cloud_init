@@ -17,6 +17,16 @@ EOT
   }
 }
 
+variable "vault_zipped_binary_url" {
+  description = <<EOT
+    the download url for vault install method 'binary'
+     - $${vault_version} is replaced by the value for vault_version
+     - the download has to be a zip file containing the vault binary
+  EOT
+  type = string
+  default = "https://releases.hashicorp.com/vault/$${vault_version}/vault_$${vault_version}_linux_amd64.zip"
+}
+
 variable "vault_version" {
   description = "the vault version to be installed"
   type        = string
