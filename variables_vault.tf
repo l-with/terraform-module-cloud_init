@@ -23,8 +23,8 @@ variable "vault_zipped_binary_url" {
      - $${vault_version} is replaced by the value for vault_version
      - the download has to be a zip file containing the vault binary
   EOT
-  type = string
-  default = "https://releases.hashicorp.com/vault/$${vault_version}/vault_$${vault_version}_linux_amd64.zip"
+  type        = string
+  default     = "https://releases.hashicorp.com/vault/$${vault_version}/vault_$${vault_version}_linux_amd64.zip"
 }
 
 variable "vault_version" {
