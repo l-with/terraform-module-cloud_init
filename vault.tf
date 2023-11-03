@@ -3,7 +3,7 @@ locals {
     apt    = "/usr/bin",
     binary = "/usr/local/bin"
   }
-  vault_zipped_binary_url                = replace(var.vault_zipped_binary_url, "$${vault_version}", var.vault_version)
+  vault_zipped_binary_url                = var.vault_version == null ? var.vault_zipped_binary_url : replace(var.vault_zipped_binary_url, "$${vault_version}", var.vault_version)
   vault_init_public_key_full_path        = "${var.vault_bootstrap_files_path}/vault_init_public.key"
   vault_init_json_pub_full_path          = "${var.vault_bootstrap_files_path}/vault_init_pub.json"
   vault_init_json_enc_full_path          = "${var.vault_bootstrap_files_path}/vault_init_json.enc"
