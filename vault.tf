@@ -24,28 +24,28 @@ locals {
     for i, vault_pgp_external_public_key in var.vault_init_pgp_public_keys.pgp_external_public_keys : merge(
       vault_pgp_external_public_key,
       {
-        pgp_pub_key = "${var.vault_bootstrap_files_path}/external${i}.pub",
+        pgp_pub_key_full_path = "${var.vault_bootstrap_files_path}/external${i}.pub",
       }
     )
   ]
   vault_internal_pgp_keys = [
     for i in range(local.vault_num_internal_unseal_keys) : {
-      gpg_key_conf_file = "${var.vault_bootstrap_files_path}/vault_gpg_key${i}.conf",
-      gpg_key_name      = "vault${i}",
-      pgp_pub_key       = "${var.vault_bootstrap_files_path}/vault${i}.pub",
-      pgp_priv_key      = "${var.vault_bootstrap_files_path}/vault${i}",
+      gpg_key_conf_file_full_path = "${var.vault_bootstrap_files_path}/vault_gpg_key${i}.conf",
+      gpg_key_name                = "vault${i}",
+      pgp_pub_key_full_path       = "${var.vault_bootstrap_files_path}/vault${i}.pub",
+      pgp_priv_key_full_path      = "${var.vault_bootstrap_files_path}/vault${i}",
     }
   ]
-  vault_pgp_pub_keys = concat([
+  vault_pgp_pub_key_full_paths = concat([
     for vault_internal_pgp_key in local.vault_internal_pgp_keys :
-    vault_internal_pgp_key.pgp_pub_key
+    vault_internal_pgp_key.pgp_pub_key_full_path
     ], [
     for vault_pgp_external_public_key in local.vault_pgp_external_public_keys :
-    vault_pgp_external_public_key.pgp_pub_key
+    vault_pgp_external_public_key.pgp_pub_key_full_path
   ])
-  vault_pgp_priv_keys = [
+  vault_pgp_priv_key_full_paths = [
     for vault_internal_pgp_key in local.vault_internal_pgp_keys :
-    vault_internal_pgp_key.pgp_priv_key
+    vault_internal_pgp_key.pgp_priv_key_full_path
   ]
   vault_cluster_addr               = var.vault_cluster_addr != null ? var.vault_cluster_addr : ""
   vault_raft_leader_tls_servername = var.vault_raft_leader_tls_servername != null ? var.vault_raft_leader_tls_servername : ""
@@ -348,7 +348,7 @@ locals {
                 vault_init_json_full_path       = local.vault_init_json_full_path,
                 vault_init_json_pub_full_path   = local.vault_init_json_pub_full_path,
                 vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
-                jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys),
+                jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_key_full_paths),
               }
             },
           ],
@@ -379,8 +379,8 @@ locals {
             {
               template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
               vars = {
-                write_file_directory = dirname(vault_internal_pgp_key.gpg_key_conf_file),
-                write_file_name      = basename(vault_internal_pgp_key.gpg_key_conf_file),
+                write_file_directory = dirname(vault_internal_pgp_key.gpg_key_conf_file_full_path),
+                write_file_name      = basename(vault_internal_pgp_key.gpg_key_conf_file_full_path),
                 write_file_content = templatefile("${path.module}/templates/vault/gpg_key.conf.tpl", {
                   vault_gpg_key_name = vault_internal_pgp_key.gpg_key_name,
                 }),
@@ -395,10 +395,10 @@ locals {
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_generate_pgp_key.tpl",
               vars = {
-                vault_gpg_key_conf_file = vault_internal_pgp_key.gpg_key_conf_file,
-                vault_pgp_pub_key       = vault_internal_pgp_key.pgp_pub_key,
-                vault_gpg_key_name      = vault_internal_pgp_key.gpg_key_name,
-                vault_pgp_priv_key      = vault_internal_pgp_key.pgp_priv_key,
+                vault_gpg_key_conf_file_full_path = vault_internal_pgp_key.gpg_key_conf_file_full_path,
+                vault_pgp_pub_key_full_path       = vault_internal_pgp_key.pgp_pub_key_full_path,
+                vault_gpg_key_name                = vault_internal_pgp_key.gpg_key_name,
+                vault_pgp_priv_key_full_path      = vault_internal_pgp_key.pgp_priv_key_full_path,
               }
             }
           ],
@@ -415,8 +415,8 @@ locals {
             {
               template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
               vars = {
-                write_file_directory = dirname(pgp_external_public_key.pgp_pub_key),
-                write_file_name      = basename(pgp_external_public_key.pgp_pub_key),
+                write_file_directory = dirname(pgp_external_public_key.pgp_pub_key_full_path),
+                write_file_name      = basename(pgp_external_public_key.pgp_pub_key_full_path),
                 write_file_content   = pgp_external_public_key.encoding == "base64" ? base64decode(pgp_external_public_key.content) : pgp_external_public_key.content,
                 write_file_owner     = pgp_external_public_key.owner,
                 write_file_group     = pgp_external_public_key.group,
@@ -428,16 +428,15 @@ locals {
             {
               template = "${path.module}/templates/vault/${local.yml_runcmd}_init.tpl",
               vars = {
-                vault_local_addr                = var.vault_local_addr,
-                vault_key_shares                = var.vault_key_shares,
-                vault_key_threshold             = var.vault_key_threshold,
-                vault_init_json_full_path       = local.vault_init_json_full_path,
-                vault_init_json_pub_full_path   = local.vault_init_json_pub_full_path,
-                vault_init_json_file_mode       = var.vault_init_json_file_mode,
-                vault_init_with_pgp_keys        = local.vault_init_with_pgp_keys,
-                vault_num_internal_unseal_keys  = local.vault_num_internal_unseal_keys
-                vault_pgp_pub_keys              = join(",", local.vault_pgp_pub_keys),
-                jsonencoded_vault_pgp_priv_keys = jsonencode(local.vault_pgp_priv_keys)
+                vault_local_addr               = var.vault_local_addr,
+                vault_key_shares               = var.vault_key_shares,
+                vault_key_threshold            = var.vault_key_threshold,
+                vault_init_json_full_path      = local.vault_init_json_full_path,
+                vault_init_json_pub_full_path  = local.vault_init_json_pub_full_path,
+                vault_init_json_file_mode      = var.vault_init_json_file_mode,
+                vault_init_with_pgp_keys       = local.vault_init_with_pgp_keys,
+                vault_num_internal_unseal_keys = local.vault_num_internal_unseal_keys
+                vault_pgp_pub_keys             = join(",", local.vault_pgp_pub_key_full_paths),
               }
             },
           ],
@@ -464,8 +463,8 @@ locals {
                 vault_init_json_pub_full_path               = local.vault_init_json_pub_full_path,
                 vault_remove_spread_vault_init_json_id_file = var.vault_remove_spread_vault_init_json_id_file,
                 vault_bootstrap_files_path                  = var.vault_bootstrap_files_path,
-                vault_pgp_priv_keys                         = join(" ", local.vault_pgp_priv_keys),
-                vault_pgp_pub_keys                          = join(" ", local.vault_pgp_pub_keys),
+                vault_pgp_priv_keys                         = join(" ", local.vault_pgp_priv_key_full_paths),
+                vault_pgp_pub_keys                          = join(" ", local.vault_pgp_pub_key_full_paths),
                 vault_cluster_ips_full_path                 = local.vault_cluster_ips_full_path,
               }
             },
