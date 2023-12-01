@@ -195,6 +195,15 @@ variable "vault_remove_spread_vault_init_json_id_file" {
   default     = true
 }
 
+variable "vault_secure_init_json" {
+  description = <<EOT
+    if the output of the vault initialization should secured
+    <span style=\"color:red\">ATTENTION: The output of the vault initialization is highly confidential! It is the root of the secret management in vault!</span>"
+  EOT
+  type        = bool
+  default     = true
+}
+
 variable "vault_remove_vault_init_json" {
   description = <<EOT
     if the output of the vault initialization should removed

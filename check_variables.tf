@@ -130,15 +130,15 @@ module "vault_init_needs_vault_init_addr" {
   error_message = "error: vault_init needs vault_init_addr"
 }
 
-module "vault_init_needs_vault_init_public_key" {
+module "vault_secure_init_json_needs_vault_init_public_key" {
   source  = "rhythmictech/errorcheck/terraform"
   version = "~> 1.3.0"
 
-  count = (var.vault && var.vault_start && var.vault_init) ? 1 : 0
+  count = (var.vault_secure_init_json) ? 1 : 0
 
   use_jq        = true
-  assert        = !(var.vault && var.vault_start && var.vault_init && var.vault_init_public_key == null)
-  error_message = "error: vault_init needs vault_init_public_key"
+  assert        = !(var.vault_secure_init_json && var.vault_init_public_key == null)
+  error_message = "error: vault_secure_init_json needs vault_init_public_key"
 }
 
 module "vault_spread_vault_init_json_needs_vault_spread_vault_init_json_id_file" {
