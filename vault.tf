@@ -132,7 +132,7 @@ locals {
             }
           },
         ],
-        !var.vault_init ? [] : concat(
+        !var.vault_spread_vault_init_json && !var.vault_receive_vault_init_json ? [] : concat(
           [
             {
               template = "${path.module}/templates/vault/${local.yml_write_files}_vault_init_public_key.tpl",
