@@ -339,6 +339,8 @@ No resources.
 | <a name="input_containerd_install_method"></a> [containerd\_install\_method](#input\_containerd\_install\_method) | the install method, supported methods are 'binary'<br>  - 'binary' uses containerd\_version | `string` | `"binary"` | no |
 | <a name="input_containerd_version"></a> [containerd\_version](#input\_containerd\_version) | the containerd version to be installed | `string` | `null` | no |
 | <a name="input_croc"></a> [croc](#input\_croc) | if cloud-init user data for installing croc should be generated | `bool` | `false` | no |
+| <a name="input_digitalocean"></a> [digitalocean](#input\_digitalocean) | if cloud-init user data for making changes on a Digitalocean Droplet should be generated | `bool` | `false` | no |
+| <a name="input_digitalocean_restart_journald"></a> [digitalocean\_restart\_journald](#input\_digitalocean\_restart\_journald) | if the journald should be restarted (fixes missing logs) | `bool` | `true` | no |
 | <a name="input_docker"></a> [docker](#input\_docker) | if cloud-init user data for installing docker should be generated | `bool` | `false` | no |
 | <a name="input_docker_container"></a> [docker\_container](#input\_docker\_container) | if cloud-init user data for installing docker containers should be generated | `bool` | `false` | no |
 | <a name="input_docker_container_list"></a> [docker\_container\_list](#input\_docker\_container\_list) | the docker containers the cloud-init user data should be generated for | <pre>list(object({<br>    name        = string, // --name<br>    image       = string,<br>    ports       = optional(string, null), // --publish<br>    command     = string,<br>    environment = optional(map(string), {}),<br>  }))</pre> | `[]` | no |
