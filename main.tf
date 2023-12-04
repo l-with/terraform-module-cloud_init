@@ -8,13 +8,14 @@ locals {
     certbot            = var.certbot,
     croc               = var.croc,
     containerd         = var.containerd || (var.docker && var.docker_install_method == "binary"),
+    digitalocean       = var.digitalocean,
     docker             = var.docker || var.docker_container || var.mailcow,
     docker_container   = var.docker_container,
     duplicacy          = var.duplicacy,
     encrypted_packages = var.encrypted_packages,
     fail2ban           = var.fail2ban,
     gettext_base       = var.gettext_base,
-    hetzner            = var.hetzner
+    hetzner            = var.hetzner,
     jq = (
       var.jq || (
         var.vault && var.vault_start && (
@@ -71,6 +72,7 @@ locals {
     certbot            = local.certbot,
     croc               = local.croc,
     containerd         = local.containerd,
+    digitalocean       = local.digitalocean,
     docker             = local.docker,
     docker_container   = local.docker_container,
     duplicacy          = local.duplicacy,
@@ -110,6 +112,7 @@ locals {
   parts_sorted = [
     "lineinfile",
     "hetzner",
+    "digitalocean",
     "packages",
     "zypper",
     "unzip",

@@ -78,6 +78,12 @@ s. [croc](https://github.com/schollz/croc#install)
 
 For input variables: s. [croc](#input_croc).
 
+### digitalocean
+
+s. [digitalocean](https://www.digitalocean.com)
+
+For input variables: s. [digitalocean](#input_digitalocean).
+
 ### docker
 
 s. [docker](https://docs.docker.com/engine/install/ubuntu/)
