@@ -4,19 +4,13 @@ variable "mailcow" {
   default     = false
 }
 
-variable "mailcow_branch" {
-  description = "the branch value for mailcow (`MAILCOW_BRANCH`)"
-  type        = string
-  default     = "master"
-}
-
 variable "mailcow_version" {
   description = <<EOT
     the [version](https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec) to checkout
-    default is [mailcow_branch](#input_mailcow_branch) (coded in terraform)
+    and the value for `MAILCOW_BRANCH` (can be also be a tag)
   EOT
   type        = string
-  default     = null
+  default     = "master"
 }
 
 variable "mailcow_install_path" {

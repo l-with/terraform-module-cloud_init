@@ -1,5 +1,5 @@
 locals {
-  mailcow_version = var.mailcow_version != null ? var.mailcow_version : var.mailcow_branch
+  mailcow_version = var.mailcow_version
   mailcow = !local.parts_active.mailcow ? {} : {
     runcmd = concat(
       [
@@ -16,7 +16,6 @@ locals {
             mailcow_version                       = local.mailcow_version,
             mailcow_hostname                      = var.mailcow_hostname,
             mailcow_docker_compose_project_name   = var.mailcow_docker_compose_project_name,
-            mailcow_branch                        = var.mailcow_branch,
             mailcow_timezone                      = var.mailcow_timezone,
             mailcow_api_key                       = var.mailcow_api_key,
             mailcow_api_key_read_only             = var.mailcow_api_key_read_only,
