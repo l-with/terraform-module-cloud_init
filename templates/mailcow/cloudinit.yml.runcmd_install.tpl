@@ -1,7 +1,7 @@
   - mkdir -p ${mailcow_install_path}
   - cd ${mailcow_install_path}
   - git clone https://github.com/mailcow/mailcow-dockerized.git ${mailcow_install_path}
-  - git checkout tags/version ${mailcow_version}
+  - git checkout tags/${mailcow_version}
   - export MAILCOW_HOSTNAME=${mailcow_hostname}
   - export MAILCOW_BRANCH=${mailcow_branch}
   - export MAILCOW_TZ=${mailcow_timezone}
