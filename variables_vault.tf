@@ -69,7 +69,13 @@ variable "vault_log_level" {
 
 variable "vault_api_addr" {
   description = <<EOT
-    the [api_addr](https://www.vaultproject.io/docs/configuration#api_addr)
+    the [api_addr](https://www.vaultproject.io/docs/configuration#api_addr):
+
+    Specifies the address (full URL) to advertise to other Vault servers in the cluster for client redirection.
+    This value is also used for plugin backends.
+    This can also be provided via the environment variable VAULT_API_ADDR.
+    In general this should be set as a full URL that points to the value of the listener address.
+
     the string '$ipv4_address' can be used as placeholder for the server ipv4-address
   EOT
   type        = string
@@ -79,6 +85,10 @@ variable "vault_api_addr" {
 variable "vault_cluster_addr" {
   description = <<EOT
     the [cluster_addr](https://www.vaultproject.io/docs/configuration#cluster_addr)
+
+    Specifies the address to advertise to other Vault servers in the cluster for request forwarding.
+    This is a full URL, like api_addr, but Vault will ignore the scheme (all cluster members always use TLS with a private key/certificate).
+
     the string '$ipv4_address' can be used as placeholder for the server ipv4-address (determined by variable ipv4_address_command)
   EOT
   type        = string
