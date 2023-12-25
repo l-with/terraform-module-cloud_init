@@ -9,8 +9,10 @@
   - export SKIP_BRANCH=${mailcow_skip_branch}
   - ./generate_config.sh
   - export mailcow_git_commit_date=$(git show -s --format=%ci $git_version_commit)
-  - lineinfile --regexp MAILCOW_GIT_VERSION --line '  $MAILCOW_GIT_VERSION="${mailcow_version}";' data/web/inc/app_info.inc.php
-  - lineinfile --regexp MAILCOW_GIT_COMMIT_DATE --line "  \$MAILCOW_GIT_COMMIT_DATE=\"$mailcow_git_commit_date\";" data/web/inc/app_info.inc.php
+  - >
+    lineinfile --regexp MAILCOW_GIT_VERSION --line '  $MAILCOW_GIT_VERSION="${mailcow_version}";' data/web/inc/app_info.inc.php
+  - >
+    lineinfile --regexp MAILCOW_GIT_COMMIT_DATE --line "  \$MAILCOW_GIT_COMMIT_DATE=\"$mailcow_git_commit_date\";" data/web/inc/app_info.inc.php
   - cp --preserve '${mailcow_install_path}/mailcow.conf' '${mailcow_install_path}/mailcow.conf.orig'
   - cp --preserve '${mailcow_install_path}/docker-compose.yml' '${mailcow_install_path}/docker-compose.yml.orig'
 %{ if mailcow_docker_compose_project_name != null ~}
