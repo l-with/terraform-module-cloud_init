@@ -15,7 +15,7 @@ locals {
           vars = {
             mailcow_install_path                  = var.mailcow_install_path,
             mailcow_version                       = local.mailcow_version,
-            mailcow_skip_branch                   = local.mailcow_skip_branch ? "y": "n",
+            mailcow_skip_branch                   = local.mailcow_skip_branch ? "y" : "n",
             mailcow_branch                        = var.mailcow_branch,
             mailcow_hostname                      = var.mailcow_hostname,
             mailcow_docker_compose_project_name   = var.mailcow_docker_compose_project_name,
