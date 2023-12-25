@@ -6,6 +6,7 @@
   - export MAILCOW_HOSTNAME=${mailcow_hostname}
   - export MAILCOW_BRANCH=${mailcow_branch}
   - export MAILCOW_TZ=${mailcow_timezone}
+  - export SKIP_BRANCH=${mailcow_skip_branch}
   - ./generate_config.sh
   - cp --preserve '${mailcow_install_path}/mailcow.conf' '${mailcow_install_path}/mailcow.conf.orig'
   - cp --preserve '${mailcow_install_path}/docker-compose.yml' '${mailcow_install_path}/docker-compose.yml.orig'
