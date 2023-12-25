@@ -8,7 +8,7 @@
   - export MAILCOW_TZ=${mailcow_timezone}
   - export SKIP_BRANCH=${mailcow_skip_branch}
   - ./generate_config.sh
-  - export mailcow_git_commit_date=$(git show -s --format=%ci $git_version_commit)
+  - export mailcow_git_commit_date=$(git show -s --format=%ci $mailcow_git_commit)
   - >
     lineinfile --regexp MAILCOW_GIT_VERSION --line '  $MAILCOW_GIT_VERSION="${mailcow_version}";' data/web/inc/app_info.inc.php
   - >
