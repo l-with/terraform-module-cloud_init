@@ -30,6 +30,7 @@ locals {
             mailcow_dovecot_master_auto_generated = var.mailcow_dovecot_master_auto_generated,
             mailcow_dovecot_master_user           = var.mailcow_dovecot_master_user,
             mailcow_dovecot_master_password       = var.mailcow_dovecot_master_password,
+            mailcow_allow_admin_email_login       = var.mailcow_allow_admin_email_login,
           }
         },
       ],

@@ -126,6 +126,12 @@ variable "mailcow_delete_default_admin_script" {
   default     = "/root/mailcow_delete_default_admin.sh"
 }
 
+variable "mailcow_allow_admin_email_login" {
+  description = "allows admins and domain admins to directly log into SOGo as a mailbox user, without knowing the users password"
+  type        = boolean
+  default     = false
+}
+
 variable "mailcow_set_admin_script" {
   description = "the full path for the mailcow set admin script"
   type        = string

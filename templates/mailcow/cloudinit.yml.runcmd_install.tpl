@@ -45,3 +45,6 @@
   - lineinfile --regexp 'DOVECOT_MASTER_USER=' --line 'DOVECOT_MASTER_USER=${mailcow_dovecot_master_user}' '${mailcow_install_path}/mailcow.conf'
   - lineinfile --regexp 'DOVECOT_MASTER_PASS=' --line 'DOVECOT_MASTER_PASS=${mailcow_dovecot_master_password}' '${mailcow_install_path}/mailcow.conf'
 %{ endif ~}
+%{ if mailcow_allow_admin_email_login ~}
+  - lineinfile --regexp 'ALLOW_ADMIN_EMAIL_LOGIN=' --line 'ALLOW_ADMIN_EMAIL_LOGIN=y' '${mailcow_install_path}/mailcow.conf'
+%{ endif ~}
