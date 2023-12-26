@@ -380,7 +380,7 @@ No resources.
 | <a name="input_mailcow_additional_san"></a> [mailcow\_additional\_san](#input\_mailcow\_additional\_san) | the additional domains (SSL Certificate Subject Alternative Names), for instance autodiscover.*,autoconfig.* | `string` | `null` | no |
 | <a name="input_mailcow_admin_password"></a> [mailcow\_admin\_password](#input\_mailcow\_admin\_password) | the password for the mailcow administrator | `string` | `null` | no |
 | <a name="input_mailcow_admin_user"></a> [mailcow\_admin\_user](#input\_mailcow\_admin\_user) | the username of the mailcow administrator | `string` | `null` | no |
-| <a name="input_mailcow_allow_admin_email_login"></a> [mailcow\_allow\_admin\_email\_login](#input\_mailcow\_allow\_admin\_email\_login) | allows admins and domain admins to directly log into SOGo as a mailbox user, without knowing the users password | `boolean` | `false` | no |
+| <a name="input_mailcow_allow_admin_email_login"></a> [mailcow\_allow\_admin\_email\_login](#input\_mailcow\_allow\_admin\_email\_login) | allows admins and domain admins to directly log into SOGo as a mailbox user, without knowing the users password | `bool` | `false` | no |
 | <a name="input_mailcow_api_allow_from"></a> [mailcow\_api\_allow\_from](#input\_mailcow\_api\_allow\_from) | list of IPs to allow API access from | `list(string)` | `[]` | no |
 | <a name="input_mailcow_api_key"></a> [mailcow\_api\_key](#input\_mailcow\_api\_key) | the API key for mailcow read-write access (allowed characters: a-z, A-Z, 0-9, -) | `string` | `null` | no |
 | <a name="input_mailcow_api_key_read_only"></a> [mailcow\_api\_key\_read\_only](#input\_mailcow\_api\_key\_read\_only) | the API key for mailcow read-only access (allowed characters: a-z, A-Z, 0-9, -) | `string` | `null` | no |
