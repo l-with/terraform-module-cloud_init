@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # set DBUSER, DBPASS, DBNAME
-source $${_MAILCOW_INSTALL_PATH}/mailcow.conf
+set -a && source $${_MAILCOW_INSTALL_PATH}/mailcow.conf && set +a
 
 # delete admin
 echo delete admin
