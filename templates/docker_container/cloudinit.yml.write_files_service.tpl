@@ -6,13 +6,10 @@
     After=docker.service
 
     [Service]
-%{ for key, value in jsondecode(environment) ~}
-    Environment="${key}=${value}"
-%{ endfor ~}
     Restart=always
     ExecStartPre=-/usr/bin/docker stop ${name}
     ExecStartPre=-/usr/bin/docker rm ${name}
-    ExecStart=/usr/bin/docker run --rm %{ if ports != null ~}--publish ${ports} %{ endif }--name ${name} ${image} ${command}
+    ExecStart=/usr/bin/docker run --rm %{ for key, value in jsondecode(environment) ~}--env '${key}=${value}' %{ endfor }%{ if ports != null ~}--publish ${ports} %{ endif }--name ${name} ${image} ${command}
     ExecStop=/usr/bin/docker stop ${name}
 
     [Install]
