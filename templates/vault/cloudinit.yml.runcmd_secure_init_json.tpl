@@ -6,4 +6,7 @@
   - rm --force ${vault_init_json_enc_full_path}
 %{if vault_remove_vault_init_json != null ~}
   - rm --force ${vault_init_json_full_path}
+%{ if vault_init_with_pgp_keys ~}
+  - rm --force ${vault_init_json_full_path}.orig
+%{ endif ~}
 %{ endif ~}

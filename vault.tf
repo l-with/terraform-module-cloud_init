@@ -487,6 +487,7 @@ locals {
                 vault_init_json_enc_full_path        = local.vault_init_json_enc_full_path,
                 vault_init_json_enc_base64_full_path = local.vault_init_json_enc_base64_full_path,
                 vault_init_json_file_mode            = var.vault_init_json_file_mode,
+                vault_init_with_pgp_keys             = local.vault_init_with_pgp_keys,
                 vault_remove_vault_init_json         = var.vault_remove_vault_init_json ? "true" : null,
               }
             },

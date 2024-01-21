@@ -6,6 +6,7 @@
     wait_until --verbose --delay 10 --retries 42 \
       --check 'grep true' 'vault status -format=json | jq .initialized'
 %{ if vault_init_with_pgp_keys ~}
+  - cp ${vault_init_json_full_path} ${vault_init_json_full_path}.orig
   - cat ${vault_init_json_full_path} | jq 'del(.root_token)' >${vault_init_json_pub_full_path}
   - cat ${vault_init_json_full_path} | jq 'del(.unseal_keys_hex)' >${vault_init_json_full_path}._
   - mv ${vault_init_json_full_path}._ ${vault_init_json_full_path};
