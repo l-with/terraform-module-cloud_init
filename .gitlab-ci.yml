@@ -1,0 +1,14 @@
+include:
+  template: Terraform-Module.gitlab-ci.yml
+
+default:
+  image:
+    name: lwith/gitlab-devops:latest
+
+stages:
+  - validate
+  - deploy
+  - test
+
+variables:
+  TERRAFORM_MODULE_SYSTEM: default
