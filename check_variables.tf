@@ -137,7 +137,7 @@ module "vault_secure_init_json_needs_vault_init_public_key" {
   count = (var.vault && var.vault_secure_init_json) ? 1 : 0
 
   use_jq        = true
-  assert        = !(var.vault && var.vault_secure_init_json && var.vault_init_public_key == null)
+  assert        = !(var.vault && var.vault_init && var.vault_secure_init_json && var.vault_init_public_key == null)
   error_message = "error: vault_secure_init_json needs vault_init_public_key"
 }
 
