@@ -67,8 +67,8 @@ locals {
         {
           template = "${path.module}/templates/mailcow/${local.yml_runcmd}_add_ip_whitelist.tpl",
           vars = {
-            mailcow_install_path = var.mailcow_install_path,
-            mailcow_rspamd_ip_whitelist   = join("\n", var.mailcow_rspamd_ip_whitelist),
+            mailcow_install_path        = var.mailcow_install_path,
+            mailcow_rspamd_ip_whitelist = join("\n", var.mailcow_rspamd_ip_whitelist),
           }
         },
       ],
