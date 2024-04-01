@@ -168,6 +168,12 @@ variable "mailcow_greylisting" {
   default     = true
 }
 
+variable "mailcow_rspamd_ip_whitelist" {
+  description = "the list of ip adresses to be added to rspamd"
+  type        = list(string)
+  default     = []
+}
+
 variable "mailcow_mynetworks" {
   description = <<EOT
     the list of subnetwork masks to add to `mynetworks` in postfix

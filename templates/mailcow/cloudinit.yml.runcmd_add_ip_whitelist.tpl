@@ -1,0 +1,1 @@
+  - echo "${mailcow_rspamd_ip_whitelist}" >> '${mailcow_install_path}/data/conf/rspamd/custom/ip_wl.map'
