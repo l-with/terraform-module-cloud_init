@@ -1,1 +1,1 @@
-  - echo 'enable = false' >> '${mailcow_install_path}/data/conf/rspamd/local.d/greylist.conf"'
+  - echo 'enable = false' >> '${mailcow_install_path}/data/conf/rspamd/local.d/greylist.conf'
