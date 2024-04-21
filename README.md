@@ -443,6 +443,7 @@ No resources.
 | <a name="input_rke2_node_other_node_1st_ip"></a> [rke2\_node\_other\_node\_1st\_ip](#input\_rke2\_node\_other\_node\_1st\_ip) | the ip of the 1st node for cloud-init user data for rke2 other nodes | `string` | `null` | no |
 | <a name="input_rke2_node_pre_shared_secret"></a> [rke2\_node\_pre\_shared\_secret](#input\_rke2\_node\_pre\_shared\_secret) | the pre shared secret for `/etc/rancher/rke2/config.yaml` | `string` | `null` | no |
 | <a name="input_runcmd"></a> [runcmd](#input\_runcmd) | if runcmd scripts should be configured | `bool` | `false` | no |
+| <a name="input_runcmd_done_file"></a> [runcmd\_done\_file](#input\_runcmd\_done\_file) | the file created when runcmd is done | `string` | `"/root/cloud_init_runcmd_done"` | no |
 | <a name="input_runcmd_scripts"></a> [runcmd\_scripts](#input\_runcmd\_scripts) | the runcmd scripts to be executed | `list(string)` | `[]` | no |
 | <a name="input_s3cmd"></a> [s3cmd](#input\_s3cmd) | if cloud-init user data for installing the [S3cmd](https://github.com/s3tools/s3cmd) should be generated | `bool` | `false` | no |
 | <a name="input_terraform"></a> [terraform](#input\_terraform) | if cloud-init user data for installing terraform should be generated | `bool` | `false` | no |
@@ -513,5 +514,6 @@ No resources.
 |------|-------------|
 | <a name="output_cloud_init"></a> [cloud\_init](#output\_cloud\_init) | the cloud-init user data |
 | <a name="output_ipv4_address_command"></a> [ipv4\_address\_command](#output\_ipv4\_address\_command) | the command to determine the ipv4 address |
+| <a name="output_runcmd_done_file"></a> [runcmd\_done\_file](#output\_runcmd\_done\_file) | the file created when runcmd is done |
 | <a name="output_vault"></a> [vault](#output\_vault) | the relevant results from vault install and init |
 <!-- END_TF_DOCS -->
