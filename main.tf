@@ -198,7 +198,12 @@ locals {
   cloud_init_packages_start             = "\npackages:"
   cloud_init_users_start                = "\nusers:"
   cloud_init_runcmd_start               = "\nruncmd:"
-  cloud_init_runcmd_end                 = templatefile("${path.module}/templates/${local.yml_runcmd}_end.tpl", {})
+  cloud_init_runcmd_end = templatefile(
+    "${path.module}/templates/${local.yml_runcmd}_end.tpl",
+    {
+      runcmd_done_file = var.runcmd_done_file
+    }
+  )
 
   cloud_init = join(
     "\n",

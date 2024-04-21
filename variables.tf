@@ -36,6 +36,12 @@ variable "ip_addresses" {
   default = []
 }
 
+variable "runcmd_done_file" {
+  description = "the file created when runcmd is done"
+  type        = string
+  default     = "/root/cloud_init_runcmd_done"
+}
+
 /*
 variable "package_manager" {
   description = <<EOT

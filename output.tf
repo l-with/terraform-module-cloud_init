@@ -30,3 +30,8 @@ output "ipv4_address_command" {
   description = "the command to determine the ipv4 address"
   value       = var.ipv4_address_command
 }
+
+output "runcmd_done_file" {
+  description = "the file created when runcmd is done"
+  value       = var.runcmd_done_file
+}

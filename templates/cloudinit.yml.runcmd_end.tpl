@@ -1,2 +1,2 @@
 # end
-  - touch /root/cloud-init-worked
+  - touch ${runcmd_done_file}
