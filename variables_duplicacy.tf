@@ -33,7 +33,7 @@ variable "duplicacy_configurations" {
     ssh_key_file_name                = optional(string, "id"),                                                  // the filename for `DUPLICACY_SSH_KEY_FILE`
     secret_file_content              = optional(string),                                                        // the content for onedrive_token_file_name or ssh_key_file_name
     snapshot_id                      = string,                                                                  // the `<snapshot id>` for `duplicacy init`
-    storage_url                      = string,                                                                  // the `<storage url>` for ´duplicacy init`, e.g. the [Duplicacy URI](https://github.com/gilbertchen/duplicacy/wiki/Storage-Backends) of where to store the backups
+    storage_url                      = string,                                                                  // the `<storage url>` for `duplicacy init`, e.g. the [Duplicacy URI](https://github.com/gilbertchen/duplicacy/wiki/Storage-Backends) of where to store the backups
     init_script_file_name            = optional(string, "init"),                                                // the duplicacy init script file name
     backup_script_file_name          = optional(string, "backup"),                                              // the duplicacy backup script file name
     prune_script_file_name           = optional(string, "prune"),                                               // the duplicacy prune script file name
