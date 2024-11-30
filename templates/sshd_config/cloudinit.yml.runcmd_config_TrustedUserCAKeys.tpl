@@ -1,0 +1,1 @@
+  - echo 'TrustedUserCAKeys ${sshd_config_trusted_user_ca_keys_file_name}' >>'${sshd_config_file}'

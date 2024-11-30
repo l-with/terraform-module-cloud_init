@@ -222,6 +222,12 @@ s. [S3cmd](https://github.com/s3tools/s3cmd)
 
 For input variables: s. [s3cmd](#input_s3cmd).
 
+### sshd_config
+
+s. [sshd_config](https://www.ssh.com/academy/ssh/sshd_config)
+
+For input variables: s. [sshd_config](#input_sshd_config).
+
 ### terraform
 
 s. [terraform](https://developer.hashicorp.com/terraform/downloads)
@@ -446,6 +452,10 @@ No resources.
 | <a name="input_runcmd_done_file"></a> [runcmd\_done\_file](#input\_runcmd\_done\_file) | the file created when runcmd is done | `string` | `"/root/cloud_init_runcmd_done"` | no |
 | <a name="input_runcmd_scripts"></a> [runcmd\_scripts](#input\_runcmd\_scripts) | the runcmd scripts to be executed | `list(string)` | `[]` | no |
 | <a name="input_s3cmd"></a> [s3cmd](#input\_s3cmd) | if cloud-init user data for installing the [S3cmd](https://github.com/s3tools/s3cmd) should be generated | `bool` | `false` | no |
+| <a name="input_sshd_config"></a> [sshd\_config](#input\_sshd\_config) | if cloud-init user data for managing sshd config should be generated | `bool` | `false` | no |
+| <a name="input_sshd_config_passwordauthentication"></a> [sshd\_config\_passwordauthentication](#input\_sshd\_config\_passwordauthentication) | value for [`PasswordAuthentication`](https://man.openbsd.org/sshd_config#PasswordAuthentication) in /etc/sshd\_config | `bool` | `false` | no |
+| <a name="input_sshd_config_remove_authorized_keys"></a> [sshd\_config\_remove\_authorized\_keys](#input\_sshd\_config\_remove\_authorized\_keys) | if the file `/root/.ssh/authorized_keys` should be deleted | `bool` | `false` | no |
+| <a name="input_sshd_config_trusted_user_ca_keys"></a> [sshd\_config\_trusted\_user\_ca\_keys](#input\_sshd\_config\_trusted\_user\_ca\_keys) | content of `/etc/ssh/trusted-user-ca-keys.pem` as value for [`TrustedUserCAKeys`](https://man.openbsd.org/sshd_config#TrustedUserCAKeys) | `string` | `null` | no |
 | <a name="input_terraform"></a> [terraform](#input\_terraform) | if cloud-init user data for installing terraform should be generated | `bool` | `false` | no |
 | <a name="input_terraform_install_method"></a> [terraform\_install\_method](#input\_terraform\_install\_method) | the install method, supported methods are 'apt', 'binary'<br>  - 'binary' uses terraform\_version | `string` | `"apt"` | no |
 | <a name="input_terraform_version"></a> [terraform\_version](#input\_terraform\_version) | the terraform version to be installed | `string` | `null` | no |
