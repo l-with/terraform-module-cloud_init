@@ -1,0 +1,1 @@
+  - lineinfile --regexp 'PasswordAuthentication' --line 'PasswordAuthentication ${sshd_config_passwordauthentication}' '${sshd_config_file}'
