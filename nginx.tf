@@ -85,6 +85,10 @@ locals {
           }
         }
       ],
+      [{
+        template = "${path.module}/templates/nginx/${local.yml_runcmd}_restart_nginx.tpl",
+        vars     = {}
+      }],
     )
   }
 }
