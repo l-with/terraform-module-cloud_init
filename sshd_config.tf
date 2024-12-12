@@ -35,7 +35,7 @@ locals {
       [
         {
           template = "${path.module}/templates/sshd_config/${local.yml_runcmd}_restart_sshd.tpl",
-          vars = {}
+          vars     = {}
         }
       ]
     )
