@@ -31,6 +31,12 @@ locals {
             sshd_config_trusted_user_ca_keys_file_name = local.sshd_config_trusted_user_ca_keys_file_name
           }
         }
+      ],
+      [
+        {
+          template = "${path.module}/templates/sshd_config/${local.yml_runcmd}_restart_sshd.tpl",
+          vars = {}
+        }
       ]
     )
   }
