@@ -296,3 +296,26 @@ module "containerd_install_method_binary_needs_containerd_version" {
   error_message = "error: containerd_install_method 'binary' needs containerd_version"
 }
 
+module "users_attribute" {
+  source  = "rhythmictech/errorcheck/terraform"
+  version = "~> 1.3.0"
+
+  count = var.user ? 1 : 0
+
+  use_jq = true
+  assert = length(concat([
+    for index, user in var.users :
+    setsubtract(
+      keys(user),
+      [
+        "name",
+        "groups",
+        "sudo",
+        "ssh_authorized_keys",
+        "passwd",
+        "lock_passwd",
+      ]
+    )
+  ])) == 0
+  error_message = "error: unknown attribute for user"
+}
