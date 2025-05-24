@@ -16,6 +16,7 @@ locals {
     fail2ban           = var.fail2ban,
     gettext_base       = var.gettext_base,
     hetzner            = var.hetzner,
+    hostname_fqdn      = var.hostname_fqdn,
     jq = (
       var.jq || (
         var.vault && var.vault_start && (
@@ -193,7 +194,8 @@ locals {
       var.comment == null ? [] : var.comments
     )
   )
-
+  cloud_init_hostname                   = var.hostname_fqdn && var.hostname != null ? "hostname: ${var.hostname}" : ""
+  cloud_init_fqdn                       = var.hostname_fqdn && var.fqdn != null ? "fqdn: ${var.fqdn}" : ""
   cloud_init_package_update             = var.package && var.package_update ? "package_update: true" : ""
   cloud_init_package_upgrade            = var.package && var.package_upgrade ? "package_upgrade: true" : ""
   cloud_init_package_reboot_if_required = var.package && var.package_reboot_if_required ? "package_reboot_if_required: true" : ""
@@ -213,6 +215,12 @@ locals {
     concat(
       [
         local.cloud_init_start,
+      ],
+      local.cloud_init_hostname == "" ? [] : [
+        local.cloud_init_hostname,
+      ],
+      local.cloud_init_fqdn == "" ? [] : [
+        local.cloud_init_fqdn,
       ],
       local.cloud_init_package_update == "" ? [] : [
         local.cloud_init_package_update,
