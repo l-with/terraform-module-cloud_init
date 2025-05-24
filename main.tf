@@ -195,6 +195,8 @@ locals {
   )
   cloud_init_hostname                   = var.hostname_fqdn && var.hostname != null ? "hostname: ${var.hostname}" : ""
   cloud_init_fqdn                       = var.hostname_fqdn && var.fqdn != null ? "fqdn: ${var.fqdn}" : ""
+  cloud_init_create_hostname_file       = var.hostname_fqdn && var.create_hostname_file != null ? "create_hostname_file: ${var.create_hostname_file}" : ""
+  cloud_init_prefer_fqdn_over_hostname  = var.prefer_fqdn_over_hostname && var.prefer_fqdn_over_hostname != null ? "prefer_fqdn_over_hostname: ${var.prefer_fqdn_over_hostname}" : ""
   cloud_init_package_update             = var.package && var.package_update ? "package_update: true" : ""
   cloud_init_package_upgrade            = var.package && var.package_upgrade ? "package_upgrade: true" : ""
   cloud_init_package_reboot_if_required = var.package && var.package_reboot_if_required ? "package_reboot_if_required: true" : ""
@@ -220,6 +222,12 @@ locals {
       ],
       local.cloud_init_fqdn == "" ? [] : [
         local.cloud_init_fqdn,
+      ],
+      local.cloud_init_create_hostname_file == "" ? [] : [
+        local.cloud_init_create_hostname_file,
+      ],
+      local.cloud_init_prefer_fqdn_over_hostname == "" ? [] : [
+        local.cloud_init_prefer_fqdn_over_hostname,
       ],
       local.cloud_init_package_update == "" ? [] : [
         local.cloud_init_package_update,

@@ -5,13 +5,26 @@ variable "hostname_fqdn" {
 }
 
 variable "hostname" {
-  description = "the hostname"
+  description = "the value for 'hostname'"
   type        = string
   default     = null
 }
 
 variable "fqdn" {
-  description = "the FQDN"
+  description = "the value for 'fqdn'"
   type        = string
+  default     = null
+}
+
+
+variable "create_hostname_file" {
+  description = "the value for 'create_hostname_file'"
+  type        = bool
+  default     = null
+}
+
+variable "prefer_fqdn_over_hostname" {
+  description = "the value for 'prefer_fqdn_over_hostname'"
+  type        = bool
   default     = null
 }
