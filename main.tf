@@ -16,7 +16,6 @@ locals {
     fail2ban           = var.fail2ban,
     gettext_base       = var.gettext_base,
     hetzner            = var.hetzner,
-    hostname_fqdn      = var.hostname_fqdn,
     jq = (
       var.jq || (
         var.vault && var.vault_start && (
