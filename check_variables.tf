@@ -1,6 +1,6 @@
 module "either_rke2_node_1st_or_rke2_node_other" {
   source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
-  
+
   count = (var.rke2_node_1st || var.rke2_node_other) ? 1 : 0
 
   use_jq        = true
