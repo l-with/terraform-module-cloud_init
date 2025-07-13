@@ -6,14 +6,14 @@ variable "docker" {
 
 variable "docker_install_method" {
   description = <<EOT
-  the install method, supported methods are 'apt', 'binary'
+  the install method, supported methods are 'apt', 'dockers-apt', 'binary'
   - 'binary' uses docker_version and activates containerd installation
 EOT
   type        = string
   default     = "apt"
   validation {
-    condition     = contains(["apt", "binary"], var.docker_install_method)
-    error_message = "Supported values are 'apt', 'binary'."
+    condition     = contains(["apt", "dockers-apt", "binary"], var.docker_install_method)
+    error_message = "Supported values are 'apt', 'dockers-apt', 'binary'."
   }
 }
 
