@@ -1,7 +1,6 @@
 module "either_rke2_node_1st_or_rke2_node_other" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
-
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
+  
   count = (var.rke2_node_1st || var.rke2_node_other) ? 1 : 0
 
   use_jq        = true
@@ -10,8 +9,7 @@ module "either_rke2_node_1st_or_rke2_node_other" {
 }
 
 module "rke2_node_needs_rke2_node_cert_package_url" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.rke2_node_1st || var.rke2_node_other) ? 1 : 0
 
@@ -21,8 +19,7 @@ module "rke2_node_needs_rke2_node_cert_package_url" {
 }
 
 module "rke2_node_needs_encrypted_package_api_header" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.rke2_node_1st || var.rke2_node_other) ? 1 : 0
 
@@ -32,8 +29,7 @@ module "rke2_node_needs_encrypted_package_api_header" {
 }
 
 module "rke2_node_needs_rke2_node_rke2_node_cert_package_secret" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.rke2_node_1st || var.rke2_node_other) ? 1 : 0
 
@@ -43,8 +39,7 @@ module "rke2_node_needs_rke2_node_rke2_node_cert_package_secret" {
 }
 
 module "rke2_node_needs_rke2_node_pre_shared_secret" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.rke2_node_1st || var.rke2_node_other) ? 1 : 0
 
@@ -54,8 +49,7 @@ module "rke2_node_needs_rke2_node_pre_shared_secret" {
 }
 
 module "rke2_node_1st_needs_rke2_node_1st_rke2_role_id" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = var.rke2_node_1st ? 1 : 0
 
@@ -65,8 +59,7 @@ module "rke2_node_1st_needs_rke2_node_1st_rke2_role_id" {
 }
 
 module "rke2_node_1st_needs_rke2_node_1st_rke2_secret_id" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = var.rke2_node_1st ? 1 : 0
 
@@ -76,8 +69,7 @@ module "rke2_node_1st_needs_rke2_node_1st_rke2_secret_id" {
 }
 
 module "rke2_node_1st_needs_vault_addr" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = var.rke2_node_1st ? 1 : 0
 
@@ -87,8 +79,9 @@ module "rke2_node_1st_needs_vault_addr" {
 }
 
 module "rke2_node_other_needs_rke2_node_other_node_1st_ip" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = var.rke2_node_other ? 1 : 0
 
@@ -98,8 +91,9 @@ module "rke2_node_other_needs_rke2_node_other_node_1st_ip" {
 }
 
 module "terraform_install_method_binary_needs_terraform_version" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.terraform && var.terraform_install_method == "binary") ? 1 : 0
 
@@ -109,8 +103,9 @@ module "terraform_install_method_binary_needs_terraform_version" {
 }
 
 module "vault_start_needs_vault_api_addr" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.vault && var.vault_start) ? 1 : 0
 
@@ -120,8 +115,9 @@ module "vault_start_needs_vault_api_addr" {
 }
 
 module "vault_init_needs_vault_init_addr" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.vault && var.vault_start && var.vault_init) ? 1 : 0
 
@@ -131,8 +127,9 @@ module "vault_init_needs_vault_init_addr" {
 }
 
 module "vault_secure_init_json_needs_vault_init_public_key" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.vault && var.vault_secure_init_json) ? 1 : 0
 
@@ -142,8 +139,9 @@ module "vault_secure_init_json_needs_vault_init_public_key" {
 }
 
 module "vault_spread_vault_init_json_needs_vault_spread_vault_init_json_id_file" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.vault && var.vault_start && var.vault_init && var.vault_spread_vault_init_json) ? 1 : 0
 
@@ -153,8 +151,9 @@ module "vault_spread_vault_init_json_needs_vault_spread_vault_init_json_id_file"
 }
 
 module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.vault && var.vault_start && var.vault_init) ? 1 : 0
 
@@ -164,8 +163,9 @@ module "vault_init_vault_key_threshold_less_than_or_equal_vault_key_shares" {
 }
 
 module "vault_vault_init_pgp_public_keys_num_internal_unseal_keys_less_than_or_equal_vault_key_shares" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = var.vault_init_pgp_public_keys != null ? 1 : 0
 
@@ -175,8 +175,9 @@ module "vault_vault_init_pgp_public_keys_num_internal_unseal_keys_less_than_or_e
 }
 
 module "vault_init_pgp_public_keys_needs_vault_vault_init_pgp_public_keys_num_internal_unseal_keys_plus_length_of_pgp_external_public_keys_equals_vault_key_shares" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = var.vault_init_pgp_public_keys != null ? 1 : 0
 
@@ -186,8 +187,9 @@ module "vault_init_pgp_public_keys_needs_vault_vault_init_pgp_public_keys_num_in
 }
 
 module "vault_init_needs_jq_install_method_binary" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.vault && var.vault_start && var.vault_init) ? 1 : 0
 
@@ -197,8 +199,9 @@ module "vault_init_needs_jq_install_method_binary" {
 }
 
 module "vault_install_method_binary_needs_vault_version" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.vault && var.vault_install_method == "binary") ? 1 : 0
 
@@ -208,8 +211,9 @@ module "vault_install_method_binary_needs_vault_version" {
 }
 
 module "vault_tls_file_encoding_either_text_plain_or_base64" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = length(var.vault_tls_files)
 
@@ -219,8 +223,9 @@ module "vault_tls_file_encoding_either_text_plain_or_base64" {
 }
 
 module "write_files_encoding_either_text_plain_or_base64" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = length(var.write_files)
 
@@ -230,8 +235,9 @@ module "write_files_encoding_either_text_plain_or_base64" {
 }
 
 module "mailcow_needs_mailcow_hostname" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = var.mailcow ? 1 : 0
 
@@ -241,8 +247,9 @@ module "mailcow_needs_mailcow_hostname" {
 }
 
 module "not_mailcow_dovecot_master_auto_generated_needs_mailcow_dovecot_master_user_and_mailcow_dovecot_master_password" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = !var.mailcow_dovecot_master_auto_generated ? 1 : 0
 
@@ -252,11 +259,11 @@ module "not_mailcow_dovecot_master_auto_generated_needs_mailcow_dovecot_master_u
 }
 
 module "duplicacy_storage_backend_one_of" {
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
+
   count = var.duplicacy ? length(var.duplicacy_configurations) : 0
-
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
-
 
   use_jq        = true
   assert        = (contains(local.duplicacy_storage_backends, var.duplicacy_configurations[count.index].storage_backend))
@@ -264,8 +271,9 @@ module "duplicacy_storage_backend_one_of" {
 }
 
 module "gzip_needs_base64_encode" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = var.gzip ? 1 : 0
 
@@ -275,8 +283,9 @@ module "gzip_needs_base64_encode" {
 }
 
 module "docker_install_method_binary_needs_docker_version" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (var.docker && var.docker_install_method == "binary") ? 1 : 0
 
@@ -286,8 +295,9 @@ module "docker_install_method_binary_needs_docker_version" {
 }
 
 module "containerd_install_method_binary_needs_containerd_version" {
-  source  = "rhythmictech/errorcheck/terraform"
-  version = "~> 1.3.0"
+  //source  = "rhythmictech/errorcheck/terraform"
+  //version = "~> 1.3.0"
+  source = "github.com/rhythmictech/terraform-terraform-errorcheck?ref=v1.3.0"
 
   count = (((var.docker && var.docker_install_method == "binary") || var.containerd) && var.containerd_install_method == "binary") ? 1 : 0
 
