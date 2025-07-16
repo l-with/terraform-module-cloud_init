@@ -41,17 +41,24 @@ locals {
             write_file_mode      = 644,
           }
         },
+      ],
+      !(!var.docker_manipulate_iptables || var.docker_registry_mirror != null) ? [] : [
         {
-          template = "${path.module}/templates/docker/${local.yml_runcmd}_service.tpl",
-          vars     = {}
+          template = "${path.module}/templates/${local.yml_runcmd}_write_file.tpl",
+          vars = {
+            write_file_directory = dirname(var.docker_daemon_json_full_path),
+            write_file_name      = basename(var.docker_daemon_json_full_path),
+            write_file_content = templatefile("${path.module}/templates/docker/daemon.json.tpl", {
+              docker_manipulate_iptables = var.docker_manipulate_iptables,
+              docker_registry_mirror     = var.docker_registry_mirror,
+              docker_insecure_registry   = startswith(var.docker_registry_mirror, "https://") ? null : trimprefix(var.docker_registry_mirror, "http://"),
+            }),
+            write_file_owner = "root",
+            write_file_group = "root",
+            write_file_mode  = 644,
+          }
         },
       ]
     )
-    write_files = var.docker_manipulate_iptables ? [] : [
-      {
-        template = "${path.module}/templates/docker/${local.yml_write_files}_daemon_json.tpl",
-        vars     = {}
-      }
-    ],
   }
 }

@@ -23,8 +23,20 @@ variable "docker_version" {
   default     = null
 }
 
+variable "docker_daemon_json_full_path" {
+  description = "the full path of the docker daemon.json file"
+  type        = string
+  default     = "/etc/docker/daemon.json"
+}
+
 variable "docker_manipulate_iptables" {
   description = "if docker manipulate ip-tables should _not_ be generated for cloud-init user data for docker"
   type        = bool
   default     = true
+}
+
+variable "docker_registry_mirror" {
+  description = "docker registry mirror to be configured"
+  type        = string
+  default     = null
 }
