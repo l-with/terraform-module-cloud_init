@@ -13,6 +13,7 @@ variable "users" {
     ssh_authorized_keys = optional(list(string), []),
     passwd              = optional(string, null),
     lock_passwd         = optional(bool, true),
+    shell               = optional(string, null)
   }))
   default = []
 }

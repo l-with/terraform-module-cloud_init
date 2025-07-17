@@ -17,3 +17,6 @@
 %{ if lock_passwd != null ~}
     lock_passwd: ${lock_passwd}
 %{ endif ~}
+%{ if shell != null ~}
+    shell: ${shell}
+%{ endif ~}
