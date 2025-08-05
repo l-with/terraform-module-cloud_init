@@ -29,6 +29,7 @@ locals {
     lineinfile      = var.lineinfile || var.mailcow || (var.hetzner && var.hetzner_remove_fqdn_resolve) || var.sshd_config,
     sshd_config     = var.sshd_config,
     terraform       = var.terraform,
+    caddy           = var.caddy,
     haproxy         = var.haproxy,
     lnxrouter       = var.lnxrouter,
     network         = var.network,
@@ -70,6 +71,7 @@ module "cloud_init_part" {
 locals {
   parts_inputs = {
     b2                 = local.b2,
+    caddy              = local.caddy,
     certbot            = local.certbot,
     croc               = local.croc,
     containerd         = local.containerd,
@@ -142,6 +144,7 @@ locals {
     "runcmd",
     "mailcow",
     "duplicacy",
+    "caddy",
     "haproxy",
     "lnxrouter",
     "nginx",
