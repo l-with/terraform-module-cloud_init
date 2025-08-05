@@ -3,3 +3,9 @@ variable "caddy" {
   type        = bool
   default     = false
 }
+
+variable "caddy_configuration" {
+  description = "the caddy configuration"
+  type = string
+  default = null
+}
