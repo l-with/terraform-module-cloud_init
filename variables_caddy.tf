@@ -6,6 +6,6 @@ variable "caddy" {
 
 variable "caddy_configuration" {
   description = "the caddy configuration"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }

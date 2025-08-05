@@ -1,5 +1,5 @@
 locals {
-    caddy = !local.parts_active.caddy ? {} : merge(
+  caddy = !local.parts_active.caddy ? {} : merge(
     {
       packages = [{
         template = "${path.module}/templates/${local.yml_packages}.tpl",
