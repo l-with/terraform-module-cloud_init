@@ -12,6 +12,10 @@ locals {
       runcmd = concat(
         var.caddy_configuration == null ? [] : [
           {
+            template = "${path.module}/templates/caddy/${local.yml_runcmd}_install.tpl",
+            vars     = {}
+          },
+          {
             template = "${path.module}/templates/caddy/${local.yml_runcmd}_write_file.tpl"
             vars = {
               write_file_directory = "/etc/caddy"
@@ -21,10 +25,6 @@ locals {
                 caddy_configuration = var.caddy_configuration
               })
             }
-          },
-          {
-            template = "${path.module}/templates/caddy/${local.yml_runcmd}_install.tpl",
-            vars     = {}
           },
           {
             template = "${path.module}/templates/caddy/${local.yml_runcmd}_restart.tpl",
