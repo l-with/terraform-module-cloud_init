@@ -24,7 +24,7 @@ locals {
           },
           {
             template = "${path.module}/templates/caddy/${local.yml_runcmd}_install.tpl",
-            vars = {}
+            vars     = {}
           },
           {
             template = "${path.module}/templates/caddy/${local.yml_runcmd}_restart.tpl",
