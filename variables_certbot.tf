@@ -22,6 +22,24 @@ variable "certbot_automatic_renewal_cronjob" {
   default     = "test -x /usr/bin/certbot -a \\! -d /run/systemd/system && perl -e 'sleep int(rand(43200))' && certbot -q renew"
 }
 
+variable "certbot_automatic_renewal_pre_hooks" {
+  description = "the certbot automatic renewal pre hook scripts"
+  type = list(object({
+    file_name = string
+    content   = string
+  }))
+  default = []
+}
+
+variable "certbot_automatic_renewal_deploy_hooks" {
+  description = "the certbot automatic renewal deploy hook scripts"
+  type = list(object({
+    file_name = string
+    content   = string
+  }))
+  default = []
+}
+
 variable "certbot_automatic_renewal_post_hooks" {
   description = "the certbot automatic renewal post hook scripts"
   type = list(object({
