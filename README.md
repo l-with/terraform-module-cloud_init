@@ -1,10 +1,10 @@
 # Terraform Modul cloud_init
 
-Terraform module to template cloud-init user data
+Terraform module to template cloud-init user data for installation of various tools
 
 ## Disclaimer
 
-currently only tested with Ubuntu Focal Fossa and Jammy Jellyfish
+currently only tested with Ubuntu Focal Fossa, Jammy Jellyfish and Noble Numbat
 
 ## Motivation
 
