@@ -27,6 +27,10 @@ locals {
             }
           },
           {
+            template = "${path.module}/templates/caddy/${local.yml_runcmd}_lets_encrypt.tpl",
+            vars     = {}
+          },
+          {
             template = "${path.module}/templates/caddy/${local.yml_runcmd}_restart.tpl",
             vars     = {}
           }
